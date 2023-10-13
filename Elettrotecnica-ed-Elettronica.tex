@@ -42,7 +42,7 @@
 
 \clearpage
 
-\section{Introduzione: Elementi di Fisica}
+\section{Introduzione: Equazioni di Maxwell}
 
 \subsection{Forza Elettrica}
 Le prime analisi documentate sugli effetti elettrici risalgono agli antichi greci, da cui deriva il nome "electron"; $\eta\lambda\varepsilon\kappa\tau\rho o\nu$ in greco. Letteralmente significa ambra, poiché 
@@ -726,7 +726,7 @@ armature non si annulano solo nella zona tra le due, dove il campo totale è dop
         \draw[->,very thick](0.35,0.125)--(0.9,0.125)node[above]{$\vec{E}_+$};
         \draw[->,very thick](1.1,0.125)--(1.75,0.125)node[above]{$\vec{E}_+$};
         \draw[->,very thick](0.15,0.125)--(-0.5,0.125)node[above]{$\vec{E}_+$};
-        \draw[<-,very thick](0.35,-0.125)--(0.9,-0.125)node[below]{$\vec{E}_-$};
+        \draw[->,very thick](0.35,-0.125)--(0.9,-0.125)node[below]{$\vec{E}_-$};
         \draw[<-,very thick](1.1,-0.125)--(1.75,-0.125)node[below]{$\vec{E}_-$};
         \draw[<-,very thick](0.15,-0.125)--(-0.5,-0.125)node[below]{$\vec{E}_-$};
     \end{tikzpicture}
@@ -893,8 +893,304 @@ Quest'equazione rappresenta la terza legge di Maxwell.
 
 \subsubsection{IV Legge di Maxwell}
 
-\subsection{Onde Elettromagnetiche}
+Rispetto ad un campo elettrico, un campo magnetico, generato da un magnete permanente o indotto da una corrente, presenta delle differenza considerevoli. Considerando un 
+magnete permanetne, si definiscono nord e sud magentico le zone di comportamento del materiale, non è presenta una divisione netta tra le due zone poiché questo comportamento 
+dpende da andamenenti microscopici. Il nord magnetico è la zona del mezzo dove escono linee di forza, mentre il 
+sud magnetico è la zona del materiale dove entrano linee di forza. Queste linee di forza si propagano nel mezzo, senza interruzione di continuità:
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[-,very thick](0,0)--(0.5,0)node[above]{$S$}--(1,0)--(1,2)--(0.5,2)node[below right]{$N$}--(0,2)--(0,0);
+
+        \draw[->,very thick]plot[smooth, domain=0.75:1.75](\x,{2+(0.25-(\x-1.25)^2)^0.5});
+        \draw[<-,very thick]plot[smooth, domain=-0.75:0.25](\x,{2+(0.25-(\x+0.25)^2)^0.5});
+        \draw[<-,very thick]plot[smooth, domain=0.75:1.75](\x,{-(0.25-(\x-1.25)^2)^0.5});
+        \draw[->,very thick]plot[smooth, domain=-0.75:0.25](\x,{-(0.25-(\x+0.25)^2)^0.5});
+
+        \draw[->,dashed,very thick](0.25,0)--(0.25,1)--(0.25,2);
+        \draw[->,dashed,very thick](0.75,0)--(0.75,1)--(0.75,2);
+
+        \draw[->, very thick](1.75,2)--(1.75,1)--(1.75,0);
+        \draw[->, very thick](-0.75,2)--(-0.75,1)--(-0.75,0);
+        
+    \end{tikzpicture}
+\end{center}
+
+Di conseguenza, per ogni superficie chiusa attraversata da un campo magnetico, il numero delle linee di forza entrante è pari al numero delle linee di forza uscenti, quindi 
+il flusso del campo del campo magnetico $\vec{B}$ è nullo. Per il teorema della divergenza si può esprimere come:
+
+\begin{equation}
+    \displaystyle\oint_{S}\vec{B}\cdot\hat{n}dS=\int_{\tau}\nabla\cdot\vec{B}d\tau=0
+\end{equation}
+
+Di conseguenza non può esistere un monoplo magnetico, a differenza del campo elettrico, le cui sorgenti possono esistere singolarmente. Un campo la cui divergenza è nulla 
+viene chiamato campo solenoidale. In forma locale si esprime la quarta ed ultima equazione di Maxwell:
+\begin{equation}
+    \nabla\cdot\vec{B}=0
+\end{equation}
+
+\subsection{Equazioni di Maxwell ed Grandezze Fisiche}
+
+Vengono riportata in forma locale le quattro equazioni di Maxwell, precedentemente ricavate:
+\begin{equation*}
+    \begin{cases}
+        \nabla\times\vec{E}=-\displaystyle\frac{\partial \vec{B}}{\partial t}\\
+        \nabla\times\vec{B}=\mu_0\left(\vec{J}+\displaystyle\frac{\partial \vec{D}}{\partial t}\right)\\
+        \nabla\cdot\vec{D}=\rho_Q\\
+        \nabla\cdot\vec{B}=0
+    \end{cases}
+\end{equation*}
+Possono anche essere espresse in forma integrale, oppure considerando i campi di spostamento elettrico nel vuoto $\vec{D}=\varepsilon_0\vec{E}$ e di induzione magnetica nel 
+vuoto $\vec{B}=\mu_0\vec{H}$. Non sempre questi campi si trovano nel vuoto, per cui si definiscono le costanti di permettività dielttrica relativa al mezzo $\varepsilon_r>1$ 
+e di perambilità magnetica relativa al mezzo $\mu_r>1$. Quando vengono usate le costanti di perambilità e permettività per un mezzo diverso dal vuoto si considera $\varepsilon=\varepsilon_0\cdot\varepsilon_r$ 
+e $\mu=\mu_0\cdot\mu_r$. Maggiore è la costante dielettrica relativa, più il materiale si dice dielettrico. 
+
+Per determinare le grandezze fisiche dei campi analizzati, si considera la circuitazione del campo magnetico:
+\begin{gather*}
+    \displaystyle\oint_{\lambda}\vec{H}\cdot d\vec{\lambda}=i_c\to[H]=\displaystyle\frac{A}{m}
+\end{gather*}
+Per cui risulta che il campo magnetico si misura in Ampere per 
+metro, si considera Ampere-spire, quando la corrente è concatenata più volte per la presenza di spiere sovrapposte tra di loro. Il rotore del campo magnetico $\vec{H}$ 
+corrisponde ad una derivata spaziale, per cui si misura in Ampere su metro quadro:
+\begin{equation*}
+    [\nabla\times\vec{H}]=\displaystyle\frac{A}{m^2}
+\end{equation*}
+
+Per definire il vettore di induzione magnetica $\vec{B}$ si considera la terza equazione di Maxwell in forma integrale:
+\begin{equation*}
+    \displaystyle\left[\oint_{\lambda}\vec{E}\cdot d\vec\lambda=-\frac{d\Phi_S(\vec{B})}{dt}\right]\to\frac{N\cdot m}{A\cdot s}=\frac{[B]\cdot m^2}{s}\to[B]=\frac{N}{A\cdot m}:=T
+\end{equation*}
+Viene definita la grandezza fisica Tesla $T$ per quantificare l'intensità del campo di induzione magnetica $\vec{B}$. Ora è possibile definire la grandezza della permeabilità 
+magnetica:
+\begin{equation*}
+    \displaystyle\left[\mu_0=\frac{{B}}{{H}}\right]\to\frac{N}{A\cdot m}\cdot\frac{m}{A}=\frac{N}{A^2}:=\frac{H}{m}
+\end{equation*}
+Viene definita la grandezza Henry $H$ come Newton per metro su Ampere quadro, servirà in seguito a quantificare l'auto e mutua induttanza. 
+
+Un vettore di intensità di corrente $\vec{J}$ può esistere solo in un mezzo conduttivo, rappresenta l'unico elemento riferito al mezzo nelle equazioni di Maxwell. La corrente 
+si muove nello stesso verso del vettore $\vec{J}$, ma trattandosi di uno scalare non fornisce informazioni aggiuntive sulla grandezza, poiché la direzione di una corrente è 
+solo una convenzione, e le sue proprietà non cambierebbo, fluisse nel verso opposto. Una corrente si misura con un amperometro montato in serie su di un circuito, la freccia 
+della corrente indica solamente la direzione dell'amperometro. Inoltre la freccia della corrente indica una differenza di potenziale, dal potenziale più basso a quello 
+più alto. All'interno di un materiale conduttore le cariche non si muovono spontanemanete, per cui deve essere presente un campo elettro-motore $\vec{E}_m$ esterno che imprime 
+una differenza di potenziale o tenzione sul mezzo $\Delta V=v$. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \node[sum](sum)at(0,0){$A$};
+        \draw[->,very thick](-0.5,0)--(sum.180);
+        \draw[->, very thick](sum.0)node[above right]{$i$}--(0.5,0);
+   
+        \draw[-,ultra thick](0.6,-0.1)--(0.6,0.1)--(1.5,0.1)--(1.5,-0.1)--(0.6,-0.1);
+        \draw[->,very thick](0.8,0.2)--(1.2,0.2)node[above left]{$\vec{J}$};
+        \draw[<-,very thick](0.8,-0.2)--(1.2,-0.2)node[below left]{$v$};
+    \end{tikzpicture}
+\end{center}
+
+Per i materiali di corrente, il campo elettrico impresso è uguale alla vettore di intensità di corrente moltiplicato per un coefficiente, relativo al materiale considerato, 
+chiamato resistività elettrica. Poiché il materiale internamente impedisce ad alcune cariche di fluire, per cui rallenta la nube elettronica che scorre nel mezzo, viene 
+definita la grandezza fisica ohm $\Omega$ per misurare questa resistività:
+\begin{equation*}
+    \displaystyle\left[\vec{E}=\rho_{e}\vec{J}\right]\to\frac{N}{A\cdot s}\frac{m^2}{A}=\frac{N\cdot m^2}{A^2\cdot s}:=\Omega\cdot m
+\end{equation*}
+La presenza della resistività rappresenta la maggiore differenza tra lo studio dei campi e lo studio dei circuiti. 
+
+\clearpage
+
+\section{Elettro-Magnetismo}
+
+\subsection{Onde Elettro-Magnetiche}
+All'interno delle equazioni di Maxwell sono presenti dei componenti incrociati del campo elettrico $\vec{E}$ e del campo magnetico $\vec{B}$, per cui descrivono un fenomeno 
+che si autosostiene, ovvero si propaga. Per determinare in che modo questo campo elettro-magnetico si propaga nello spazio, si considerano le necessarie ipotesi per poter 
+descrivere semplicemente le sue proprietà. Da notare che le proprietà di questo campo si mantengono anche senza le ipotesi che considereremo. Per ottenere queste proprietà 
+è sufficiente considerare solo le equazioni del rotore di Maxwell. Si studia la situazione nel vuoto, senza la presenza di conduttori, per cui la corrente di conduzione $\vec{J}$ 
+è nulla e la densità di carica $\rho_Q$ è nulla: 
+\begin{equation*}
+    \begin{cases}
+        \nabla\times\vec{E}=-\displaystyle\frac{\partial \vec{B}}{\partial t}\\
+        \nabla\times\vec{B}=\mu_0\varepsilon_0\displaystyle\frac{\partial \vec{E}}{\partial t}
+    \end{cases}
+\end{equation*}
+
+Per ipotesi il campo elettrico è presente solo sulla coordinata $x$ e la variazione del campo elettrico sulle $x$ rispetto alla coordinata $z$ è nulla. Le ulteriori ipotesi 
+verrano discusse solo quando saranno rilevanti:
+\begin{align*}
+    &1)\vec{E}(x,y,z,t)=E_x(x,y,z,t)\hat{x}\\
+    &2)\displaystyle\frac{\partial E_x}{\partial z}=0
+\end{align*}
+
+Dalla prima ipotesi segue che il rotore del campo elettrico ha un'unica componente $z$, per cui, per il principio di indentità dei polinomi e per la terza l'equazione di Maxwell, 
+anche il campo magnetico $\vec{B}$ varia solo sulla coordinata $z$: 
+\begin{gather*}
+    \nabla\times\vec{E}=
+    \begin{vmatrix}
+        \hat{x} &\hat{y}&\hat{z}\\
+        \displaystyle\frac{\partial}{\partial x}&\displaystyle\frac{\partial}{\partial y}&\displaystyle\frac{\partial}{\partial z}\\
+        E_x&0&0
+    \end{vmatrix}=
+    \displaystyle\cancelto{0}{\frac{\partial E_x}{\partial y}}\hat{y}-\frac{\partial E_x}{\partial y}\hat{z}=-\frac{\partial \vec{B}}{\partial t}\\
+    \displaystyle\frac{\partial B_x}{\partial t}=\frac{\partial B_y}{\partial t}=0\\
+    \displaystyle\frac{\partial E_x}{\partial y}=\frac{\partial B_z}{\partial t}
+\end{gather*}
+
+Per la seconda equazione di Maxwell, considerando solo la componente $x$ del rotore, sempre per il principio di identità dei polinomi si ottiene:
+\begin{gather*}
+    \nabla\times\vec{B}=\mu_0\varepsilon_0\displaystyle\frac{\partial E_x}{\partial t}\hat{x}\\
+    \left(\displaystyle\frac{\partial B_z}{\partial y}-\frac{\partial B_y}{\partial z}\right)=\mu_0\varepsilon_0\frac{\partial E_x}{\partial t}
+\end{gather*}
+Si definiscono due funzioni con versori diversi ortogonali, poiché non colloquiano tra di loro. 
+
+Si mettano a sistema i risultati ottenuti:
+\begin{equation*}
+    \begin{cases}
+        \displaystyle\frac{\partial E_x}{\partial y}=\frac{\partial B_z}{\partial t}\\
+        \displaystyle\frac{\partial B_z}{\partial y}-\frac{\partial B_y}{\partial z}=\mu_0\varepsilon_0\frac{\partial E_x}{\partial t}
+    \end{cases}
+\end{equation*}
+Si deriva rispetto al tempo la seconda equazione e invertendo l'ordine di derivazione si ottiene:
+\begin{gather*}
+    \displaystyle\frac{\partial^2B_z}{\partial y\partial t}-\frac{\partial^2B_y}{\partial z\partial t}=\mu_0\varepsilon_0\frac{\partial^2E_z}{\partial t^2}\\
+    \displaystyle\frac{\partial}{\partial y}\frac{\partial B_z}{\partial t}-\frac{\partial}{\partial z}\cancelto{0}{\frac{\partial B_y}{\partial t}}=\mu_0\varepsilon_0\frac{\partial^2E_x}{\partial t^2}\\
+    \displaystyle\frac{\partial^2E_x}{\partial y^2}=\mu_0\varepsilon_0\frac{\partial^2E_x}{\partial t^2}
+\end{gather*}
+Quest'equazione ottenuta descrive il comportamento di un'onda. Per ipotesi l'onda si propaga solo sulla coordinata $y$, e si considera sempre per ipotesi solamente l'onda 
+diretta e si esclude quella riflessa. Le soluzioni di questo tipo di equazione d'onda sono tutte le possibili funzioni, che presentano come argomento le coordinate su cui 
+l'onda si propaga, in questo caso $y$. Come argomento della soluzione si considera la traslazione dell'onda nello spazio e si inserisce il fattore correttivo $ct$, dove 
+$c$ è la velocità di propagazione dell'onga:
+\begin{equation*}
+    Sol:=\{f(y-ct)+g(y+ct):t\geq0\}
+\end{equation*}  
+Per ipotesi si esclude la funzione riflessa $g$. Si sceglie la funzione più semplice come soluzione dell'onda diretta, una funzione sinusoidale. Non si può considerare $y-ct$ 
+come argomento della funzione sinusoidale, poiché l'argomento deve essere monodimensionale. Si considera la relazione tra l'argomento $\alpha$, misurato in radianti e la 
+variabile $y$, in metri. Viene defintia $\lambda$ lunghezza d'onda, e rappresenta la distanza tra due punti uguali dell'onda: 
+\begin{equation*}
+    \displaystyle\frac{y}{\alpha}=\frac{\lambda}{2\pi}\to\alpha=\frac{2\pi y}{\lambda}
+\end{equation*}
+Questo valore viene chimato numero d'onda. Si considera l'ampiezza massima $E_{max}$, per cui il campo elettrico si esprime come:
+\begin{equation}
+    E_x=E_{max}sin\left(\displaystyle\frac{2\pi (y-ct)}{\lambda}\right)
+\end{equation}
+
+Inserendo questa funzione d'onda nell'equazione d'onda precedentemente si ottiene:
+\begin{gather*}
+    \displaystyle\frac{\partial^2}{\partial y^2}\left(E_{max}sin\left(\displaystyle\frac{2\pi (y-ct)}{\lambda}\right)\right)=\mu_0\varepsilon_0\frac{\partial^2}{\partial t^2}\left(E_{max}sin\left(\displaystyle\frac{2\pi (y-ct)}{\lambda}\right)\right)\\
+    \displaystyle E_{max}\frac{4\pi^2}{\lambda^2}sin\left(\frac{2\pi (y-ct)}{\lambda}\right)=\mu_0\varepsilon_0E_{max}\frac{4\pi^2c^2}{\lambda^2}sin\left(\frac{2\pi (y-ct)}{\lambda}\right)\\
+    1=\mu_0\varepsilon_0c^2
+\end{gather*}
+\begin{equation}
+    c=\displaystyle\frac{1}{\sqrt{\mu_0\varepsilon_0}}
+\end{equation}
+La velocità di propagazione dell'onda elettro-magnetica nel vuoto, corrisponde alla velocità della luce nel vuoto. Questa velocità sarà sempre minore se il campo attraversa 
+un mezzo diverso dal vuoto, a causa delle costanti di permettività e permeabilità relative, per cui la velocità appena ottenuta rappresenta la massima velocità raggiungibile 
+da questo tipo di onde. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](0,0)--(2,0)node[above]{$y$};
+        \draw[->,very thick](0,0)--(0,1)node[right]{$z$};
+        \draw[->,very thick](0,0)--(-0.5,-0.5)node[above left]{$x$};
+
+        \draw[->,very thick](0,0)--(0,0.5)node[left]{$B_z$};
+        \draw[->,very thick](0,0)--(-0.25,-0.25)node[right]{$E_x$};
+        \draw[-,very thick]plot[smooth, domain=0:2](\x,{0.5*sin(4*\x r)});
+    \end{tikzpicture}
+\end{center}
 
 \subsection{Energia e Potenza}
+
+Si considerano diverse situazione per ricavare l'energia e la potenza del campo elettrico e magnetico.
+
+Dato un materiale condutore, si esprime la forza elettrica come la carica $q$ traspostata che interagisce con un certo campo elettrico $\vec{E}$, per cui si può esprimere 
+la potenza come:
+\begin{equation*}
+    P=\vec{F}\cdot\vec{u}=q\vec{E}\cdot\vec{u}=\rho_Q\tau\vec{E}\cdot\vec{u}
+\end{equation*}
+Per un materiale conduttore il vettore intensità di carica corrisponde a $\vec{J}=\rho_Q\vec{u}$, per cui la potenza in un materiale conduttore si ricava tramite:
+\begin{equation*}
+    P=\tau\vec{E}\cdot\vec{J}
+\end{equation*}
+Si definisce la densità di potenza $P_\tau$ come la potenza $P$ generata in un certo volume $\tau$: 
+\begin{equation}
+    P_{\tau}=\displaystyle\frac{P}{\tau}=\vec{E}\cdot\vec{J}\,\left[\frac{W}{m^2}\right]
+\end{equation}
+
+
+Dato un materiale dielettrico nel continuo, dotato di una certa densità di carica $\rho_Q$. Per ricavare l'energia prodatta dal campo elettrico, si considera l'integrale 
+di linea, poiché potrebbe essere presente un campo elettro-motore non conservativo, su un tratto $\lambda$ del materiale:
+\begin{equation*}
+    \mathscr{E}=\displaystyle\int_{\lambda}\vec{F}\cdot d\vec{\lambda}=q\int_{\lambda}\vec{E}\cdot d\vec{\lambda}
+\end{equation*}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[-,ultra thick](0,0)node[below right]{$d\lambda$}--(2,0)--(2,0.5)node[above right]{$\tau$}--(0,0.5)--(0,0);
+        \draw[->,very thick](-0.5,0.25)--(-0.1,0.25)node[above left]{$\vec{E}+d\vec{E}$};
+        \draw[->,very thick](2.1,0.25)--(2.5,0.25)node[above left]{$\vec{E}$};
+
+        \draw[->,very thick](-0.5,-0.2)--(2.5,-0.2)node[above]{$\lambda$};
+    \end{tikzpicture}
+\end{center}
+
+Si considera un volumetto interno al materiale di lunghezza $d\lambda$, e si considera il campo elettrico unidirezionale, solo sulla coordinata curvilinea definita dal 
+percorso $\lambda$. Per la prima equazione di Maxwell:
+\begin{equation*}
+    \nabla\cdot\varepsilon_0\vec{E}=\varepsilon_0\displaystyle\frac{\partial E_{\lambda}}{\partial\lambda}=\rho_Q
+\end{equation*}
+La carica $q$ corrisponde all'integrale della densità di carica sul volume $\tau$ del materiale considerato:
+\begin{equation*}
+    \mathscr{E}=\displaystyle\int_{\tau}\varepsilon_0\frac{\partial E_{\lambda}}{\partial\lambda}d\tau\cdot\int_{\lambda}\vec{E}\cdot d\vec{\lambda}
+\end{equation*}
+Si considera il differenziale totale dell'energia rispetto al volume $\tau$ ed alla coordinata $\lambda$:
+\begin{equation*}
+    d\mathscr{E}=\displaystyle\frac{\partial \mathscr{E}}{\partial \tau}d\tau+\frac{\partial\mathscr{E}}{\partial \lambda}d\lambda
+\end{equation*}
+Sostituendo l'integrale precedentemente ottenuto si ottiene:
+\begin{gather*}
+    d\mathscr{E}=d\left(\displaystyle\int_{\tau}\varepsilon_0\frac{\partial E_{\lambda}}{\partial\lambda}d\tau\cdot\int_{\lambda}\vec{E}\cdot d\vec{\lambda}\right)=\frac{\partial \mathscr{E}}{\partial \tau}d\tau+\frac{\partial\mathscr{E}}{\partial \lambda}d\lambda\\
+    \displaystyle\varepsilon_0\frac{\partial E_{\lambda}}{\partial\lambda}d\tau\cdot Ed\lambda=\frac{\partial \mathscr{E}}{\partial \tau}d\tau+\frac{\partial\mathscr{E}}{\partial \lambda}d\lambda\\
+    \displaystyle\frac{\partial E_{\lambda}}{\partial \lambda}d\lambda=dE\to\vec{E}\cdot d\vec{E}=EdE\\
+    d\mathscr{E}=\varepsilon_0EdEd\tau\\
+    \frac{d\mathscr{E}}{d\tau}=d\mathscr{E}_{\tau}=\varepsilon_0\vec{E}\cdot d\vec{E}\\
+\end{gather*}
+Per cui integrando entrambe le parti si ottiene la densità energetica o energia totale per unità di volume:
+\begin{equation*}
+    \mathscr{E}_\tau=\varepsilon_0\displaystyle\int_{0}^E\vec{E}\cdot d\vec{E}=\frac{1}{2}\varepsilon_0E^2
+\end{equation*}
+Si può esprimere come:
+\begin{equation}
+    \mathscr{E}_{\tau}=\displaystyle\frac{1}{2}\vec{E}\cdot\vec{D}\,\left[\frac{J}{m^3}\right]
+\end{equation}
+
+
+Dato un materiale magnetico, la densità di potenza precedentemente calcoalta può essere espressa come:
+\begin{equation*}
+    P_\tau=\vec{E}\cdot\vec{J}\to dP=EJd\tau\to P=\displaystyle\int_{\tau}EJd\lambda dS=\int_{S}EdS\cdot\int_{\lambda}Jd\lambda
+\end{equation*}
+Si possono separare gli integrali poiché il campo elettrico dipende solo dalla superficie, mentre il vettore densità di carica dal percorso. L'integrale del campo elettrico 
+su una superficie $S$ corrisponde alla differenza di potenziale $v$, mentre l'integrale dell'intensità di corrente su un percorso $\lambda$ corrisponde alla corrente passante 
+in quel percorso: 
+\begin{equation}
+    P=v\cdot i
+\end{equation}
+
+Questa situazione avviene all'interno di un toro, un solido di forma come una ciambella, dove il campo magnetico è ortogonale al campo elettrico generato, la superficie $S$ 
+è una sezione del cilindro ravvolto su sé stesso per creare il toro, dove calcolo il flusso, ed il percorso $\lambda$ è una circonferenza passante per il toro. 
+
+La potenza si può esprimere, in questa situazione favorevole, come:
+\begin{equation*}
+    P=\displaystyle\frac{\partial \phi(\vec{B})}{\partial t}\oint_{\lambda}\vec{H}\cdot d\vec{\lambda}
+\end{equation*}
+Poiché il percorso, il campo magnetio ed il campo di induzione magnetica sono paralleli si ottiene la seguente formula:
+\begin{gather*}
+    P=\displaystyle\frac{dBS}{dt}H\lambda=\frac{dB}{dt}H\tau\\
+    P_{\tau}=\displaystyle\frac{dB}{dt}H=\frac{d\mathscr{E}_{tot}}{dt}\\
+    d\mathscr{E}_{tot}=HdB=\mu_0HdH\\
+    \mathscr{E}_{tot}=\displaystyle\mu_0\int_0^HHdH=\frac{1}{2}\mu_0H^2
+\end{gather*}
+Questa può essere espressa come:
+\begin{equation}
+    \mathscr{E}=\displaystyle\frac{1}{2}\vec{H}\cdot\vec{B}
+\end{equation}
+
+
 
 \end{document}
