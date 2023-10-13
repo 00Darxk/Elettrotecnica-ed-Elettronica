@@ -228,11 +228,11 @@ Per il principio di indentità dei polinomi risulta:
 
 Si considera l'operatore differenziale vettoriale nabla: 
 \begin{equation*}
-    \vec{\nabla}:=\left(\displaystyle\frac{\partial}{\partial x},\,\frac{\partial}{\partial y},\,\frac{\partial}{\partial z}\right)
+    {\nabla}:=\left(\displaystyle\frac{\partial}{\partial x},\,\frac{\partial}{\partial y},\,\frac{\partial}{\partial z}\right)
 \end{equation*}
 Per cui è possibile esprimere la relazione tra il potenziale elettrico ed il campo elettrico considerando l'operazione di gradiente su un campo scalare $\vec{\nabla}V$: 
 \begin{equation}
-    \vec{E}=-\vec{\nabla}V
+    \vec{E}=-{\nabla}V
 \end{equation}
 La capacità di un campo di ammettere un potenziale è una condizione sufficiente della conservatività di un campo vettoriale. Un'altra condizione sufficiente dipende dal 
 risultato della circuitazione del campo, ovvero l'integrale di linea su un qualsiasi percorso chiuso $\lambda$ del campo $\vec{E}$. Se la circuitazione del campo è nulla, 
@@ -246,17 +246,17 @@ Se il campo non è conservativo, implica che il campo è variabile per cui la ci
 Oltre all'operazione di gradiente su un campo scalare, se si considera un campo vettoriale $\vec{a}(x,y,z)$, si possono definire altre due operazioni: la divergenza ed il 
 rotore. La divergenze è definita come il prodotto scalare tra l'operatore nabla ed il campo $\vec{a}$:
 \begin{gather*}
-    \vec{\nabla}\cdot\vec{a}=\displaystyle\left(\frac{\partial}{\partial x}\hat{x}+\frac{\partial}{\partial y}\hat{y}+\frac{\partial}{\partial z}\hat z\right)\cdot\left(a_x\hat{x}+a_y\hat{y}+a_z\hat{z}\right)\\
+    {\nabla}\cdot\vec{a}=\displaystyle\left(\frac{\partial}{\partial x}\hat{x}+\frac{\partial}{\partial y}\hat{y}+\frac{\partial}{\partial z}\hat z\right)\cdot\left(a_x\hat{x}+a_y\hat{y}+a_z\hat{z}\right)\\
     \displaystyle\frac{\partial a_x}{\partial x}\cancelto{1}{\hat{x}\cdot\hat{x}}+\frac{\partial a_y}{\partial x}\cancelto{0}{\hat{y}\cdot\hat{x}}+\frac{\partial a_z}{\partial x}\cancelto{0}{\hat{z}\cdot\hat{x}}+
     \frac{\partial a_x}{\partial y}\cancelto{0}{\hat{x}\cdot\hat{y}}+\frac{\partial a_y}{\partial y}\cancelto{1}{\hat{y}\cdot\hat{y}}+\frac{\partial a_z}{\partial y}\cancelto{0}{\hat{z}\cdot\hat{y}}+
     \frac{\partial a_x}{\partial z}\cancelto{0}{\hat{x}\cdot\hat{z}}+\frac{\partial a_y}{\partial z}\cancelto{0}{\hat{y}\cdot\hat{z}}+\frac{\partial a_z}{\partial z}\cancelto{1}{\hat{z}\cdot\hat{z}}
 \end{gather*}
 \begin{equation}
-    \vec{\nabla}\cdot\vec{a}=\displaystyle\frac{\partial a_x}{\partial x}+\frac{\partial a_y}{\partial y}+\frac{\partial a_z}{\partial z}
+    {\nabla}\cdot\vec{a}=\displaystyle\frac{\partial a_x}{\partial x}+\frac{\partial a_y}{\partial y}+\frac{\partial a_z}{\partial z}
 \end{equation}
 Il rotore è definito come il prodotto vettoriale tra l'operatore nabla ed il campo $\vec{a}$:
 \begin{gather*}
-    \vec{\nabla}\times\vec{a}=
+    {\nabla}\times\vec{a}=
     \begin{vmatrix}
         \hat{x} & \hat{y} & \hat{z} \\
         \displaystyle\frac{\partial}{\partial x} & \displaystyle\frac{\partial}{\partial y} & \displaystyle\frac{\partial}{\partial z}\\
@@ -276,7 +276,7 @@ Il rotore è definito come il prodotto vettoriale tra l'operatore nabla ed il ca
     \end{vmatrix}\hat{z}
 \end{gather*}
 \begin{equation}
-    \vec{\nabla}\times\vec{a}=\left(\displaystyle\frac{\partial a_z}{\partial y}-\frac{\partial a_y}{\partial z}\right)\hat{x}-\left(\frac{\partial a_x}{\partial z}-\frac{\partial a_z}{\partial x}\right)\hat{y}+\left(\frac{\partial a_y}{\partial x}-\frac{\partial a_x}{\partial y}\right)\hat{z}
+    {\nabla}\times\vec{a}=\left(\displaystyle\frac{\partial a_z}{\partial y}-\frac{\partial a_y}{\partial z}\right)\hat{x}-\left(\frac{\partial a_x}{\partial z}-\frac{\partial a_z}{\partial x}\right)\hat{y}+\left(\frac{\partial a_y}{\partial x}-\frac{\partial a_x}{\partial y}\right)\hat{z}
 \end{equation}
 
 \subsubsection{Teorema di Gauss}
@@ -316,7 +316,7 @@ $\Phi_S(\vec{v})\approx\sum_{i=1}^N\vec{v}\cdot\hat{n}_iS_i$. Al diminuire della
 determinare esattamente l'infinitesimo di flusso attraverso l'intera superficie: $\Phi_{dS}(\vec{v})=\vec{v}\cdot\hat{n}dS=d\Phi_{S}(\vec{v})$. In caso le suddivisioni 
 siano finite, il flusso viene calcolato tramite una sommatoria, altrimenti per suddivisioni infinite si considera un integrale chiuso sulla superficie totale $S$:
 \begin{equation}
-    \displaystyle\Phi_S(\vec{v})=\oint_{S}\vec{v}\cdot\hat{n}dS
+    \displaystyle\Phi_S(\vec{v})=\int_{S}\vec{v}\cdot\hat{n}dS
 \end{equation}
 
 
@@ -354,7 +354,7 @@ Ciò implica che il campo elettrico ammette l'esistenza di sorgenti singole. Inf
 escono attraverso la superficie, mentre se la carica si trovasse all'esterno della superficie, tutte le linee di campo entranti sarebbero necessariamente anche uscenti, ed il 
 flusso totale sarebbe dato dalla somma del flusso entrante e del flusso uscente risultando nullo. 
 
-\subsubsection{I Legge di Maxwell}
+\subsubsection{Teorema della Divergenza e I Legge di Maxwell}
 
 Il flusso attraverso una superficie chiusa è dato dalla somma del flusso per ogni faccia della superficie. Considerando un cubo infinitesimo con faccie parallele ai piani 
 cartesiani ed un campo elettrico $\vec{E}$ passante per quel cubo, si calcola il flusso totale sommando il flusso sulle sue sei faccie. 
@@ -421,32 +421,32 @@ Il flusso totale attraverso il cubo infinitesimo risulta quindi essere:
 Si cosidera il volume del cubo infinitesimo $d\tau=dxdydz$, mentre la superficie infinitesime che racchiude il volume $dS$. Il flusso attraverso il cubo equivale alla 
 divergenza del campo elettrico: 
 \begin{equation*}
-    \Phi_{dS}(\vec{E})=\vec{\nabla}\cdot\vec{E}d\tau=d\Phi_S(\vec{E})
+    \Phi_{dS}(\vec{E})={\nabla}\cdot\vec{E}d\tau=d\Phi_S(\vec{E})
 \end{equation*}
 Per cui è possibile determinare il flusso di un campo elettrico (stazionario) $\vec{E}$ attraverso una superficie chiusa $S$, consideranro l'integrale sul volume 
 racchiuso dalla superficie $\tau$ della divergenza del campo. Ciò viene chiamato teorema della divergenza. 
 \begin{equation}
-    \displaystyle\oint_S\vec{E}\cdot\hat{n}dS=\oint_{\tau}\vec{\nabla}\cdot\vec{E}d\tau
+    \displaystyle\oint_S\vec{E}\cdot\hat{n}dS=\int_{\tau}{\nabla}\cdot\vec{E}d\tau
 \end{equation} 
 Per il teroema di Gauss il flusso di un campo elettrico $\vec{E}$ attraverso una qualsiasi superficie chiusa $S$ è dato dal rapporto delle carica totale $Q$ interna alla superficie 
 e la permettività dielettrica nel vuoto $\varepsilon_0$. Dato un mezzo con densità uniforme di carica $\rho_Q$, la carica totale può essere espressa come l'integrale sull'intero 
 volume della densità: 
 \begin{equation*}
-    Q=\displaystyle\oint_{\tau}\rho_Qd\tau
+    Q=\displaystyle\int_{\tau}\rho_Qd\tau
 \end{equation*}  
 Per il teorema di Gauss e per il teorema della divergenza:
 \begin{gather*}
-    \displaystyle\oint_{\tau}\vec{\nabla}\cdot \vec{E}d\tau=\oint_{\tau}\frac{\rho_Q}{\varepsilon_0}d\tau\\
-    \vec{\nabla}\cdot\vec{E}=\displaystyle\frac{\rho_Q}{\varepsilon_0}
+    \displaystyle\int_{\tau}{\nabla}\cdot \vec{E}d\tau=\int_{\tau}\frac{\rho_Q}{\varepsilon_0}d\tau\\
+    {\nabla}\cdot\vec{E}=\displaystyle\frac{\rho_Q}{\varepsilon_0}
 \end{gather*}
 
 Viene definito vettore dello spostamento elettrico nel vuoto $\vec{D}:=\varepsilon_0\vec{E}$, per cui si può esprimere l'equazione precedente come:
 \begin{equation}
-    \vec{\nabla}\cdot\vec{D}=\rho_Q\,\displaystyle\left[\frac{Q}{m^3}\right]
+    {\nabla}\cdot\vec{D}=\rho_Q\,\displaystyle\left[\frac{C}{m^3}\right]
 \end{equation}
 Questa è la prima legge di Maxwell in forma locale. 
 
-\subsubsection{II Legge di Maxwell}
+\subsubsection{Teorma del Rotore}
 
 In un campo elettrico conservativo, la circuitazione lungo un qualsiasi percorso chiuso è nulla. Poiché il campo elettrico equivale all'inverso del gradiente del 
 potenziale ed il potenziale è lavoro per unità di carica di un campo conservativo, su un percorso chiuso il lavoro è nullo, quindi anche la circuitazione. Esistono invece 
@@ -458,7 +458,7 @@ Considerando una superficie quadrata infinitesima attraversata da un campo elett
 quattro lati infinitesimi, come il prodotto scalare tra il campo elettrico e lo spostamento $d\vec{\lambda}$. Per convenzione si considera una circuitazione positiva in senso 
 antiorario. 
 \begin{center}
-    \begin{tikzpicture}
+    \begin{tikzpicture}[scale=2]
         \draw[-, very thick](0,0)node[left]{$P_1$}--(1,0)node[right]{$P_2$}--(1,1)node[right]{$P_3$}--(0,1)node[left]{$P_4$}--(0,0);
         \draw[->,very thick](0,0)--(0.5,0);
         \draw[->,very thick](1,0)--(1,0.5);
@@ -503,21 +503,398 @@ La circuitazione totale equivale alla componente del rotore del campo elettrico 
 Poiché la circuitazione è uno scalare, per conservare solo questa componente si considera il prodotto scalare tra il rotore del campo elettrico ed il versore giacitura. 
 Considerando il differenziale della superficie $dS=dxdy$, la circuitazione totale su una superficie infinetesimale è:
 \begin{equation*}
-    \Gamma_{d\lambda}=\vec{E}\cdot d\vec{\lambda}=(\vec{\nabla}\times\vec{E})\cdot \hat{n}dS=d\Gamma_\lambda
+    \Gamma_{d\lambda}=\vec{E}\cdot d\vec{\lambda}=({\nabla}\times\vec{E})\cdot \hat{n}dS=d\Gamma_\lambda
 \end{equation*}
 Integrando quest'ultima equazione si ottiene che la circuitazione per un qualsiasi percorso chiuso $\lambda$ di un campo elettrico (stazionario) $\vec{E}$ è esattamente il 
 flusso del rotore del campo elettrico attraverso la superficie $S$ descritta dal quel percorso $\lambda$. Questo rappresenta il teorema del rotore: 
 \begin{equation}
-    \displaystyle\oint_{\lambda}\vec{E}\cdot d\vec{\lambda}=\oint_S(\vec{\nabla}\times\vec{E})\cdot\hat{n}dS
+    \displaystyle\oint_{\lambda}\vec{E}\cdot d\vec{\lambda}=\int_S({\nabla}\times\vec{E})\cdot\hat{n}dS
 \end{equation}
 
-Per il teroema della circuitazione ed il teorema del rotore, per tutti i campi conservativi, il rotore di un campo elettrico è nullo, condizione necessaria affinché un campo 
+Per il teorema della circuitazione ed il teorema del rotore, per tutti i campi conservativi, il rotore di un campo elettrico è nullo, condizione necessaria affinché un campo 
 vettoriale sia conservativo: 
 \begin{equation}
-    \vec{\nabla}\times\vec{E}=\vec0
+    {\nabla}\times\vec{E}=\vec0
 \end{equation}
-Quest'equazione rappresenta la seconda equazione di Maxwell in forma stazionaria.
 
 \subsection{Corrente e Magnetismo}
+
+La corrente è una grandezza fisica che rappresenta un flusso di cariche, convenzionalmente positive, che si muovono dentro un mezzo. Nel SI viene misurata in Ampere $A$. 
+La corrente può essere definita in duo modi:  
+
+
+I) Si può considerare la corrente come la somma algebrica di cariche $\Delta Q$ che passano attraverso una superficie, sezione del 
+mezzo dove fluiscono, in un intervallo di tempo $\Delta Q$, ovvero la velocità in cui il flusso di cariche si muove attraverso la data superficie. Questa rappresenta solo 
+un'approssimazione della corrente effettiva, viene chiamata corrente media: $i_m=\displaystyle\frac{\Delta Q}{\Delta t}$. Per ottenere la corrente effettiva, si considera il 
+limite per l'intervallo di tempo di osservazione $\Delta t\to0$, in questo modo si considera la corrente istantanea, ovvero la variazione di carica istantanea:
+\begin{equation}
+    i:=\lim_{\Delta t\to0}\displaystyle\frac{\Delta Q}{\Delta t}=\frac{dQ}{dt}\,\left[\frac{C}{s}\right]=[A]
+\end{equation}  
+
+II) Si può formulare la corrente considerando il concetto del mezzo continuo, visione della fisica classica secondo cui il materiale è continuo. Questa visione è paradossale 
+poiché a livello microscopico è stato osservato che diverse grandezze non sono continue, ma per i fini prefissati non si incontra questo paradosso. Si considera un volume 
+continuo con una certa densità di carica $\rho_Q$, e in moto con una certa velocità $\vec{v}$. La corrente allora corriponde alla portata attraverso una certa superficie $S$, 
+ovvero corrisponde al flusso del vettore $\rho_Q\vec{v}$ attraverso la superficie $S$: 
+\begin{equation}
+    i:=\displaystyle\int_S\rho_Q\vec{v}\cdot\hat{n}dS
+\end{equation}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[-,very thick](0,0)--(1,0)--(1.5,0.5)--(1.5,1.5)--(0.5,1.5)--(0,1)--(0,0);
+        \draw[-,very thick](1,0)--(1,1)node[above left]{$\rho_Q$}--(0,1);
+        \draw[-,very thick](1,1)--(1.5,1.5);
+
+        \draw[->,very thick](1.25,0.75)--(3,0.75)node[above left]{$\vec{v}$};
+
+        \draw[-,very thick](3,0.25)--(3.75,1)--(4.75,1)--(4,0.25)--(3,0.25);
+        \draw[->,very thick](3.875,0.595)--(3.375,1.095)node[above right]{$\hat{n}$};
+        \filldraw[black](3.875,0.595)circle(0.5pt);
+        \filldraw[black](1.25,0.75)circle(0.5pt);
+    \end{tikzpicture}
+\end{center}
+
+Il vettore $\rho_Q\vec{v}$ corrisponde al vettore densità di corrente $\vec{J}\displaystyle\left[\frac{C}{m^2s}\right]$, che rappresenta la corrente in forma vettoriale. 
+
+
+
+Come una cairca è in grado di generare un campo elettrico, una corrente è in grado di generare un campo magnetico. Nei magneti permanenti la corrente generatrice di campo 
+dipende dal moviemtno degli elettroni all'interno del materiale. 
+
+Si considera un mezzo filiforme, ovvero monodimensionale, composto di materiale conduttore, tipicamente un qualche 
+metallo, dove gli elettroni sono liberi di muoversi all'interno. Si considera che un effetto esterno non definito abbia causato uno spostamento degli elettroni all'interno del filo, 
+può essere dobuto all'avvicinamento di una carica negativa, spostando gli elettroni in un'altra zona del filo. Ciò crea due zone nel filo, una carica positivamente, l'altra 
+carica negativamente, questa differenza di potenziale interna al filo si rappresenta come una corrente di spostamento di cariche $i$, in una certa direzione. 
+
+Ampere ha sperimentalmente dimostrato che intorno al filo si può misurare un campo di forze, formato da linee di campo concentriche con il filo come centro. Il vero di questo 
+campo si ottiene mediante la regola della mano destra: se la corrente si muove dall'alto verso il basso, allora il campo ha verso orario, altrimenti ha verso antiorario. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[<-, very thick]plot[smooth, domain=0.707:1.414](\x,{0.5*(0.5-(\x-0.707)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-1.414:-0.707](\x,{-0.5*(0.5-(\x+0.707)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-1.414:0.707](\x,{1/6*(4.5-(\x-0.707)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-0.707:1.414](\x,{-1/6*(4.5-(\x+0.707)^2)^0.5});
+
+        \draw[<-, very thick]plot[smooth, domain=0.5:1](\x,{0.5*(0.25-(\x-0.5)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-1:-0.5](\x,{-0.5*(0.25-(\x+0.5)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-1:0.5](\x,{1/6*(2.25-(\x-0.5)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-0.5:1](\x,{-1/6*(2.25-(\x+0.5)^2)^0.5});
+
+        \draw[<-, very thick]plot[smooth, domain=0.25:0.5](\x,{0.5*(0.0625-(\x-0.25)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-0.5:-0.25](\x,{-0.5*(0.0625-(\x+0.25)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-0.5:0.25](\x,{1/6*(0.5625-(\x-0.25)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-0.25:0.5](\x,{-1/6*(0.5625-(\x+0.25)^2)^0.5});
+
+        \draw[|-|, thick](0,-1)--(0,1);
+        \draw[->, very thick](0,0)--(0,0.5)node[right]{$i$};
+        \filldraw[black](0,0)circle(0.5pt);
+    \end{tikzpicture}
+\end{center}
+
+Il campo generato dalla corrente è il campo magnetico $\vec{H}$. Le circonferenza generate sono il luogo dei punti dello spazio tangenti al campo $\vec{H}$ 
+in quel punto. La circuitazione del campo $\vec{H}$ su una sua circonferenza corrisponde alla corrente concatenata $i_c$ moltiplicata per un fattore $n$, poiché potrebbero essere presenti multiple 
+correnti passanti all'intrerno di quel percorso $\lambda$: 
+\begin{equation*}
+    \displaystyle\oint_{\lambda}\vec{H}\cdot d\vec{\lambda}=(n)i_c
+\end{equation*}
+
+Per il teorema della circuitazione:
+\begin{equation*}
+    \displaystyle\oint_{\lambda}\vec{H}\cdot d\vec{\lambda}=\int_S(\nabla\times\vec{H})\cdot\hat{n}dS=i_c
+\end{equation*}
+
+La corrente passante per il filo può essere espressa come il flusso della densità di carica attraverso la sezione $S'$ del materiale filiforme, questo flusso corrisponde allo 
+stesso flusso per la superficie individuata dalla circonferenza $\lambda$, poiché in mezzi non metallici, ovvero conduttori, i contributi si annullano:
+\begin{equation}
+    \displaystyle\int_S(\nabla\times\vec{H})\cdot\hat{n}dS=\int_{S'}\vec{J}\cdot\hat{n}dS=\int_S\vec{J}\cdot\hat{n}dS
+\end{equation}
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[-,very thick]plot[smooth, domain=-1:1](\x,{(1-(\x)^2)^0.5});
+        \draw[->,very thick]plot[smooth, domain=-1:1](\x,{-(1-(\x)^2)^0.5});
+        \node[right]at(1,0){$\vec{H}$};
+        \node[left]at(1,0){$S$};
+
+        \draw[-, very thick]plot[smooth, domain=-0.25:0.25](\x,{(0.0625-(\x)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-0.25:0.25](\x,{-(0.0625-(\x)^2)^0.5});
+        \node[right]at(0,0){$i$}node[above]{$S'$};
+        \filldraw[black](0,0)circle(0.5pt);
+    \end{tikzpicture}
+\end{center}
+
+Questa relazione tra rotore del campo magentico e vettore densità di carica viene chiamato teorema di Ampere, ed in forma locale si presenta come:
+\begin{equation*}
+    \nabla\times\vec{H}=\vec{J}
+\end{equation*}
+Considerando il vettore di induzione magnetica $\vec{B}=\mu_0\vec{H}$, dove $\mu_0$ è la costante di permabilità magnetica nel vuoto:
+\begin{equation*}
+    \mu_0=4\pi\cdot10^{-7}
+\end{equation*}
+Si esprime il teorema di Ampere in forma locale come:
+\begin{equation}
+    \nabla\times\vec{B}=\mu_0\vec{J}
+\end{equation}
+A questo risultato ottenuto da Ampere verrà aggiunto il fattore di corrente di spostamento di Maxwell. 
+
+\subsubsection{Teorema di Ampere-Maxwell e II Legge di Maxwell}
+Il teorema da Ampere da solo descrive una situazione paradossale, per cui l'intervento di Maxwell perfezionò l'analisi compiuta da Ampere. 
+
+Per descrivere il paradosso contenuto nel teorema di Ampere si considera un filo dove scorre una certa corrente $i$. Il filo è reciso in una sezione e vengono poste due 
+lamine metalliche ad ambo le parti della sezione tagliata. Maxwell osservò sperimentalmente che la corrente continuna a fluire nel resto del filo, per cui deve essere 
+necessariamente presente qualcosa nella zona di vuoto tra il filo capace di muovere le cariche, per cui paradossalemente la corrente attraversa il vuoto, ma è stato descritto 
+precedentemente come sia impossibile per la corrente fluire per un mezzo non conduttore come il vuoto. 
+
+Per spiegare il paradosso, si considera che la corrente deposita sulla lamina cariche positive, mentre la corrente dall'altra parte del vuoto preleva cariche positive dalla lamina, 
+quindi le due lamine sono una carica positivamente, mentre l'altra carica negativamente. La carica delle due lamine può essere spiegata per un effetto induttivo, ma fisicamente 
+la corrente preleva e deposita cariche positive sulle due maglie metalliche. 
+
+
+La corrente che passa attraverso il filo può essere espressa come il flusso del campo magnetico generato attraverso una cerchio di raggio $r$ e centrato nel filo:
+\begin{equation*}
+    i=\int_S{\vec{H}}\cdot\hat{n}dS
+\end{equation*} 
+
+Si considera inoltre un volume di base la superficie su cui si è effettuato l'operazione di flusso, che racchiude la maglia attaccata alla porzione del filo considerata. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[-,very thick](-0.75,0)--(0.25,0)node[above left]{$+$};
+        \draw[-,ultra thick](0.25,-0.25)--(0.25,0.25);
+        \draw[-, very thick](1,0)node[above right]{$-$}--(2,0);
+        \draw[-,ultra thick](1,-0.25)--(1,0.25);
+        
+        \draw[->,very thick](-0.25,0)node[above]{$i$}--(0,0);
+        \draw[->,very thick](1.25,0)--(1.5,0)node[above]{$i$};
+        \draw[dashed](0,0)--(0,0.75)node[below right]{$r$};
+
+        \node[right]at(0.5,-0.25){$\vec{H}$};
+        \node[above left]at(0.75,0.5){$\tau$};
+
+        \draw[->,very thick]plot[smooth, domain=0:0.5](\x,{-0.25-(0.25-(\x)^2)^0.5});
+        \draw[-,very thick]plot[smooth, domain=-0.5:0](\x,{+0.25+(0.25-(\x)^2)^0.5});
+        \draw[-,very thick]plot[smooth, domain=-0.5:0](\x,{+0.25-2*(0.25-(\x)^2)^0.5});
+        \draw[-,very thick]plot[smooth, domain=0:0.5](\x,{-0.25+2*(0.25-(\x)^2)^0.5});
+        \draw[-,very thick]plot[smooth, domain=0:0.75](\x,{(0.5625-(\x)^2)^0.5});
+        \draw[-,very thick]plot[smooth, domain=0:0.75](\x,{-(0.5625-(\x)^2)^0.5});
+    \end{tikzpicture}
+\end{center}
+
+La corrente poiché è continua dovrebbe trovarsi anche tra le due armature, ma nel volume individuato il campo magnetico è nullo, per cui non è presente un flusso di cariche. 
+Per spiegare questo paradosso si considera la corrente come variazione di carica per unità di tempo: $i=\displaystyle\frac{dQ}{dt}$. Sull'armatura considerata si accumulano 
+cariche, percui è presenta una variazione di carica nel tempo. L'armatura carica produce quindi un campo elettrico, individuabile tramite il teorema di Gauss, considerando un 
+cubo avente due faccie parallele alla lamina. Se la lamina è succifientemente estesa, il campo elettrico $\vec{E}$ generato è sempre ortogonale alle due faccie parallele 
+alla lamina, e costante su tutta la superficie. Per simmetria la lamina genera due campi di modulo e direzione uguale e verso opposto:
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[-, thick](0,0)--(1,0)--(1.5,0.5)--(1.5,1.5)--(0.5,1.5)--(0,1)--(0,0);
+        \draw[-, thick](0,0)--(0.5,0.5)--(0.5,1.5);
+        \draw[-, thick](0.5,0.5)--(1.5,0.5);
+        \draw[-, thick](0,1)--(1,1)--(1.5,1.5);
+        \draw[-, thick](1,1)--(1,0);
+        \draw[-,very thick](0.45,0)--(0.95,0.5)node[above left]{$+$}--(0.95,1.5)node[above right]{$S$}--(0.45,1)--(0.45,0);
+
+        \filldraw[black](0.7,0.75)circle(0.5pt);
+        \draw[->,very thick](0.7,0.75)--(1.75,0.75)node[above]{$\vec{E}_+$};
+        \draw[->,very thick](0.7,0.75)--(-0.25,0.75)node[above]{$\vec{E}_+$};
+    \end{tikzpicture}
+\end{center}
+
+Il flusso totale passante per la superficie chiusa $S$ corrisponde a:
+\begin{equation*}
+    \Phi_{S_{tot}}(\vec{E})=\displaystyle\oint_{S_{tot}}\vec{E}\cdot\hat{n}dS=\int_{2S}EdS=2ES
+\end{equation*}
+Per il teorema di Gauss lo stesso flusso corrisponde al rapporto tra le carica del interna alla superficie e la permettività dielettrica nel vuoto:
+\begin{equation*}
+    2ES=\displaystyle\frac{Q}{\varepsilon_0}
+\end{equation*}
+
+Si considera con un processo analogo anche l'armatura carica negativamente, poiché su entrambe le armature è presenta la stessa carica in modulo, i campi generati dalla due 
+armature non si annulano solo nella zona tra le due, dove il campo totale è doppio. 
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[-,very thick](-0.75,0)--(0.25,0)node[above left]{$+$};
+        \draw[-,ultra thick](0.25,-0.25)--(0.25,0.25);
+        \draw[-, very thick](1,0)node[above right]{$-$}--(2,0);
+        \draw[-,ultra thick](1,-0.25)--(1,0.25);
+
+        \draw[->,very thick](-0.25,0)node[above]{$i$}--(0,0);
+        \draw[->,very thick](1.25,0)--(1.5,0)node[above]{$i$};
+
+        \draw[->,very thick](0.35,0.125)--(0.9,0.125)node[above]{$\vec{E}_+$};
+        \draw[->,very thick](1.1,0.125)--(1.75,0.125)node[above]{$\vec{E}_+$};
+        \draw[->,very thick](0.15,0.125)--(-0.5,0.125)node[above]{$\vec{E}_+$};
+        \draw[<-,very thick](0.35,-0.125)--(0.9,-0.125)node[below]{$\vec{E}_-$};
+        \draw[<-,very thick](1.1,-0.125)--(1.75,-0.125)node[below]{$\vec{E}_-$};
+        \draw[<-,very thick](0.15,-0.125)--(-0.5,-0.125)node[below]{$\vec{E}_-$};
+    \end{tikzpicture}
+\end{center}
+
+Si esprime la carica presente sulle armature considerando la densità superficiale di carica $\delta_Q$, per cui il campo totale (interno) generato dalle maglie risulta essere:
+\begin{gather*}
+    2ES=\displaystyle\frac{\delta_QS}{\varepsilon_0}\\
+    E_{tot}=2E=\displaystyle\frac{\delta_Q}{\varepsilon_0}
+\end{gather*}
+
+
+Si esprime la quantità di carica presente sulle armature mediante la densità volumetrica di carica $\rho_Q$:
+\begin{equation*}
+    i=\displaystyle\frac{dQ}{dt}=\frac{d}{dt}\int_{\tau}\rho_Qd\tau
+\end{equation*}
+Per la prima equazione di Maxwell, e per il teorema della divergenza: 
+\begin{equation*}
+    i=\displaystyle\frac{d}{dt}\int_{\tau}\nabla\cdot\varepsilon_0\vec{E}d\tau=\frac{d}{dt}\oint_{S_{tot}}\varepsilon_0\vec{E}\cdot\hat{n}dS
+\end{equation*}
+Poiché il campo elettrico è sempre ortogonale alle armature, il flusso per l'intera superficie è uguale al flusso attraverso le sole armature $S_A$, per cui la superficie 
+di integrazione diventa aperta:
+\begin{equation*}
+    i=\displaystyle\frac{d}{dt}\int_{S_A}\varepsilon_0\vec{E}\cdot\hat{n}dS
+\end{equation*}
+Poiché non si deriva per la stessa variabile di integrazione, si può invertire l'ordine delle operzaioni, considerano la derivata parziale rispetto al tempo, invece di una 
+derivata totale, poiché il campo è una funzione multivariabile:
+\begin{equation*}
+    i=\displaystyle\int_{S_A}\varepsilon_0\frac{\partial \vec{E}}{\partial t}\cdot\hat{n}dS
+\end{equation*}
+
+Si esprime questa corrente, chiamata corrente di spostamento, mediante il flusso di un nuovo vettore di intensità di corrente $\vec{J}_S$:
+\begin{equation*}
+    i_S=\displaystyle\int_{S_A}\varepsilon_0\frac{\partial \vec{E}}{\partial t}\cdot\hat{n}dS=\int_{S_A}\vec{J}_S\cdot\hat{n}dS
+\end{equation*}
+Viene definita la corrente di spostamento di Maxwell in forma locale:
+\begin{equation}
+    \vec{J}_S=\displaystyle\varepsilon_0\frac{\partial \vec{E}}{\partial t}=\frac{\partial \vec{D}}{\partial t}
+\end{equation}
+
+Per la continuità delle correnti in un mezzo conduttore fluisce $\vec{J}$, mentre nel vuoto scorre $\vec{J}_S$, poiché ai due capi del filo la corrente è la stessa, necessariamente 
+la corrente nel mezzo e la corrente di spostamento devono essere uguali $\vec{J}=\vec{J}_S$. Se non è presenta una variazione di campo elettrico, entrambe i vettori 
+di intensità di corrente diventano nulli e non fluisce corrente nè nel filo nè nel vuoto.  
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[-,very thick](-0.75,0)--(0.25,0)node[above left]{$+$};
+        \draw[-,ultra thick](0.25,-0.25)--(0.25,0.25);
+        \draw[-, very thick](1,0)node[above right]{$-$}--(2,0);
+        \draw[-,ultra thick](1,-0.25)--(1,0.25);
+
+        \draw[->,very thick](-0.25,0)node[above]{$i$}--(0,0);
+        \draw[->,very thick](1.25,0)--(1.5,0)node[above]{$i$};
+        \draw[->,very thick](0.35,0)--(0.9,0)node[above]{$i_S$};
+    \end{tikzpicture}
+\end{center}
+
+Con aggiunta la corrente di spostamento di Maxwell, il teorema di Ampere-Maxwell, o seconda equazione di Maxwell, in forma integrale diventa:
+\begin{equation*}
+    \oint_{\lambda}\vec{H}\cdot d\vec{\lambda}=i_c+i_S
+\end{equation*}
+Per il teorema del rotore:
+\begin{gather*}
+    \displaystyle\oint_{\lambda}\vec{H}\cdot d\vec{\lambda}=\int_S(\nabla\times\vec{H})\cdot\hat{n}dS=i_c+i_S=\int_S(\vec{J}+\vec{J}_S)\cdot\hat{n}dS\\
+    \nabla\times\vec{H}=\vec{J}+\vec{J}_S
+\end{gather*}
+In forma locale, si esprime mediante il rotore campo di induzione magnetica $\vec{B}$:
+\begin{equation}
+    \nabla\times\vec{B}=\mu_0\left(\vec{J}+\varepsilon_0\displaystyle\frac{\partial \vec{E}}{\partial t}\right)
+\end{equation}
+
+\subsection{Campo Elettro-Motore}
+
+Il campo elettro-motore è un tipo di campo fondamentale in elettronica ed elettronica, può essere generato da conversioni energetiche, tramite induzione magnetica o un'operazione 
+ibrida tra le due, come una turbina che ruota meccanicamente, insieme ad un campo magnetico per generare un campo elettro-motore che genera elettriticà. Un campo elettro-motore 
+genera una differenza di potenziale o tensione, ma non è garantito che queste due grandezze coincidino. 
+
+A differenza del campo elettrico, non è un campo conservativo: $\nabla\times\vec{E}_m\neq0$. Il lavoro per unità di carica del campo elettro-motrice, equivale alla 
+forza elettro-motrice, ma non corrisponde alla grandezza fisica forza:
+\begin{equation*}
+    \displaystyle\int_{\lambda}\vec{E}_m\cdot d\vec{\lambda}=f.e.m.
+\end{equation*}
+Poiché non è un campo conservativo, cambiando il percorso $\lambda$ su cui viene spinta la carica di prova, cambierà la forza elettro-motrice generata. 
+
+
+
+Si considera una situazione dove sono presenti due cariche a contatto, una positiva, l'altra negativa. Quando sono a contatto il campo elettro-statico complessivo generato 
+dalle cariche è nullo, mentre se vengono separate mediante un campo elettro-motore $\vec{E}_m$, sarà generato anche un campo elettro-statico $\vec{E}_S$ opposto del precedente: 
+$\vec{E}_m=^*-\vec{E}_S$. Questa relazione di equvialenza tra i due campi non è generale, poiché uno è un campo conservativo, mentre l'altro non conservativo. Il campo 
+elettro-statico è presente solo se un campo elettro-motore ha separato le due cariche. 
+La forza elettro motrice generata, per un certo percorso $\lambda$ è:
+\begin{equation*}
+    \displaystyle\int_{\lambda}\vec{E}_m\cdot d\vec{\lambda}=-\int_{\lambda}\vec{E}_s\cdot d\vec{\lambda}
+\end{equation*}
+Il percorso $\lambda$ è definito dal campo elettro-motore, la conservatività di $\vec{E}_s$ è quindi irrilevante in queste condizioni. Poiché il suo lavoro per unità di carica 
+è opposto alla forza elettro motrice per un certo percorso $\lambda$, cambia anch'esso in base a questo percorso. Dato che il campo elettro-statico corrisponde all'opposto del 
+gradiente del potenziale $V$, si considera solo la componente di coordinata curvilinea $\lambda$: 
+\begin{equation*}
+    \displaystyle\int_{\lambda}\vec{E}_m\cdot d\vec{\lambda}=\int_{\lambda}\frac{\partial V}{\partial\lambda}\cancelto{1}{\hat{\lambda}\cdot\hat{\lambda}}d\vec{\lambda}=\Delta V_{\lambda}
+\end{equation*}
+
+Quindi la forza elettro-motrice per un certo percorso $\lambda$ è uguale alla differenza di potenziale tra l'inizio e la fine del percorso creato dal campo elettro-motore. 
+ 
+
+
+Una batteria è un oggetto che, mantenendo separate cariche positive e negative mediante reazioni chimiche all'interno, è in grado di generare una differenza di potenziale 
+ed un campo elettrico-stazionario tra i due morsetti, punti di accesso di materiale conduttore, necessasari per poter usufruire della differenza di potenziale generata. 
+
+Per misurare una differenza di potenziale si usa un volmetro, uno strumento che presenta due puntali, uno positivo ed uno negativo, resitituisce la differenza tra il potenziale 
+al puntale positivo ed il puntale negativo $V_+-V_-$. Il segno della differenza di potenziale fornisce informazione sulla carica dei morsetti della batteria. Se i due morsetti 
+vengono coperti con un materiale isolante come la plastica, il campo elettro-statico non ne influisce, ma il volmetro registra una tensione nulla. Per cui per misurare una 
+differenza di potenziale sono necessarie delle porte di accesso di materiali conduttori, dello strumento di misura e dell'oggetto, per poter misurare il campo elettro-statico. 
+
+
+Il campo elettro-statico è immagine del campo elettro-motrice con una proprietà, fino a quando non cambia il percorso. La conservatività del campo elettro-statico permette 
+di esprimere il rotore del campo elettro-motore come:
+\begin{equation*}
+    \nabla\times\vec{E}_m=\nabla\times\vec{E}_m+\nabla\times\vec{E}_s
+\end{equation*}
+
+\subsubsection{Teorema di Faraday-Neumann-Lenz e III Legge di Maxwell}
+
+Faraday studiò le interazioni tra il campo magnetico e la corrente. Nei suoi esperimenti usò una spira di materiale conduttore, attraversata ortogonalmente da un campo magnetico 
+variabile nel tempo $\vec{H}(t)=\mu_0\vec{B}(t)$, all'interno del percorso descritto dalla spira. Faraday osservò che variando il campo magnetico, all'interno della spira 
+cominciava a scorrere una corrente variabile nel tempo, ovvero un flusso di cariche. Questo flusso viene generato da un campo elettro-motore $\vec{E}_m$, indotto dal campo 
+magnetico $\vec{H}(t)$. Sulla spira compare una forza elettro motrice uniformemente distribuita, poiché la corrente è uguale in ogni punto della spira. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[|-|, very thick](-0.15,-0.25)--(0.25,-0.25)--(0.75,0.25)--(-0.25,0.25)--(-0.75,-0.25)--(-0.35,-0.25);
+        \draw[->, very thick](0.25,-0.25)--(0.5,0)node[right]{$i(t)$};
+
+        \draw[->, very thick](0,-0.75)--(0,0.75)node[above right]{$\vec{H}(t)$};
+        \filldraw[black](0,0)circle(0.5pt);
+
+        \draw[->,very thick]plot[smooth, domain=0.1:0.5](\x,{(1-(\x-1.1)^2)^0.5});
+        \draw[<-,very thick]plot[smooth, domain=-0.5:-0.1](\x,{(1-(\x+1.1)^2)^0.5});
+        \draw[-,very thick]plot[smooth, domain=0.1:0.5](\x,{-(1-(\x-1.1)^2)^0.5});
+        \draw[-,very thick]plot[smooth, domain=-0.5:-0.1](\x,{-(1-(\x+1.1)^2)^0.5});
+    \end{tikzpicture}
+\end{center}
+
+Grazie ad osservazioni sperimentali si è dimostrato che la corrente è direttamente proporzionale all'inverso della variazione del campo di induzione magnetica: 
+$i(t)\propto\vec{B}(t)$, per cui si oppone al cambiamento del campo. Questo effetto venne formalizzato da Faraday, Neumann e Lenz, per esprimere la corrente generata 
+si considera la circuitazione del campo elettrico indotto. Spesso si taglia il filo per indicare la differenza di potenziale descritta dalla circuitazione, rimasta invariata, 
+quindi il percorso attraversato è aperto: 
+\begin{equation*}
+    \displaystyle\int_{\lambda}\vec{E}\cdot d\vec{\lambda}=-\frac{d\Phi(\vec{B})}{dt}=-\int_S\frac{\partial \vec{B}}{\partial t}\cdot\hat{n}dS
+\end{equation*}
+Dove $S$ rappresenta qualsiasi superficie con cui si concatena il campo $\vec{B}$ individuata dal percorso $\lambda$. Per il teorema del rotore:
+\begin{equation}
+    \displaystyle\int_S(\nabla\times\vec{E})\cdot\hat{n}dS=-\int_S\frac{\partial \vec{B}}{\partial t}\cdot\hat{n}dS
+\end{equation}
+In forma locale si presenta come:
+\begin{equation*}
+    \nabla\times\vec{E}=\displaystyle-\frac{\partial \vec{B}}{\partial t}
+\end{equation*}
+Poiché si parla di rotore, si può esprimere il campo elettrico come la somma del campo elettro-motore indotto e del campo elettro-statico tra la differenza di potenziale, 
+anche se la loro somma è nulla, dato che il campo elettro-statio è irrotazionale:
+\begin{equation}
+    \nabla\times\vec{E}_m+\nabla\times\vec{E}_s=-\displaystyle\frac{\partial \vec{B}}{\partial t}
+\end{equation} 
+Quest'equazione rappresenta la terza legge di Maxwell. 
+
+\subsubsection{IV Legge di Maxwell}
+
+\subsection{Onde Elettromagnetiche}
+
+\subsection{Energia e Potenza}
 
 \end{document}
