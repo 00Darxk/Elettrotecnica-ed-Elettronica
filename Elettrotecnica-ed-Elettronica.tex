@@ -10,7 +10,7 @@
 \usepackage{mathrsfs}  
 \usepackage{lmodern}
 \usepackage{braket}
-\usepackage{hyperref}
+\usepackage{bookmark}
 
 \hypersetup{
     colorlinks=true,
@@ -900,7 +900,7 @@ sud magnetico è la zona del materiale dove entrano linee di forza. Queste linee
 
 \begin{center}
     \begin{tikzpicture}[scale=2]
-        \draw[-,very thick](0,0)--(0.5,0)node[above]{$S$}--(1,0)--(1,2)--(0.5,2)node[below right]{$N$}--(0,2)--(0,0);
+        \draw[-,very thick](0,0)--(0.5,0)node[above]{$S$}--(1,0)--(1,2)--(0.5,2)node[below]{$N$}--(0,2)--(0,0);
 
         \draw[->,very thick]plot[smooth, domain=0.75:1.75](\x,{2+(0.25-(\x-1.25)^2)^0.5});
         \draw[<-,very thick]plot[smooth, domain=-0.75:0.25](\x,{2+(0.25-(\x+0.25)^2)^0.5});
@@ -929,7 +929,7 @@ viene chiamato campo solenoidale. In forma locale si esprime la quarta ed ultima
     \nabla\cdot\vec{B}=0
 \end{equation}
 
-\subsection{Equazioni di Maxwell ed Grandezze Fisiche}
+\subsection{Equazioni di Maxwell e Grandezze Fisiche}
 
 Vengono riportata in forma locale le quattro equazioni di Maxwell, precedentemente ricavate:
 \begin{equation*}
@@ -969,10 +969,12 @@ Viene definita la grandezza Henry $H$ come Newton per metro su Ampere quadro, se
 
 Un vettore di intensità di corrente $\vec{J}$ può esistere solo in un mezzo conduttivo, rappresenta l'unico elemento riferito al mezzo nelle equazioni di Maxwell. La corrente 
 si muove nello stesso verso del vettore $\vec{J}$, ma trattandosi di uno scalare non fornisce informazioni aggiuntive sulla grandezza, poiché la direzione di una corrente è 
-solo una convenzione, e le sue proprietà non cambierebbo, fluisse nel verso opposto. Una corrente si misura con un amperometro montato in serie su di un circuito, la freccia 
-della corrente indica solamente la direzione dell'amperometro. Inoltre la freccia della corrente indica una differenza di potenziale, dal potenziale più basso a quello 
-più alto. All'interno di un materiale conduttore le cariche non si muovono spontanemanete, per cui deve essere presente un campo elettro-motore $\vec{E}_m$ esterno che imprime 
-una differenza di potenziale o tenzione sul mezzo $\Delta V=v$. 
+solo una convenzione, e le sue proprietà non cambierebbo se fluisse nel verso opposto. Una corrente si misura con un amperometro montato in serie su di un circuito, la freccia 
+della corrente indica solamente la direzione dell'amperometro. Inoltre il verso della corrente indica una differenza di potenziale, dal potenziale più basso a quello 
+più alto. All'interno di un materiale conduttore le cariche non si muovono spontanemanete, per cui affinché sia presente una differenza di potenziale $\Delta V=v$, deve essere 
+presenta un campo elettro-statico $\vec{E}$, dovuto ad un campo elettro-motore $\vec{E}_m$. La direzione verso il potenziale più basso, ovvero il minimo del campo scalare 
+potenziale è individuato dal gradiende $\nabla V$. Il gradiente è un vettore che indica il punto di minimo, per cui la direzione del vettore densità di corrente $\vec{J}$ 
+dipende dall'opposto del gradiente del potenziale, ovvero dal campo elettrico: $\vec{J}\propto-\nabla V\propto=\vec{E}$. 
 
 \begin{center}
     \begin{tikzpicture}[scale=2]
@@ -986,17 +988,13 @@ una differenza di potenziale o tenzione sul mezzo $\Delta V=v$.
     \end{tikzpicture}
 \end{center}
 
-Per i materiali di corrente, il campo elettrico impresso è uguale alla vettore di intensità di corrente moltiplicato per un coefficiente, relativo al materiale considerato, 
-chiamato resistività elettrica. Poiché il materiale internamente impedisce ad alcune cariche di fluire, per cui rallenta la nube elettronica che scorre nel mezzo, viene 
-definita la grandezza fisica ohm $\Omega$ per misurare questa resistività:
+Per i materiali di corrente, il campo elettrico impresso è uguale alla vettore di intensità di corrente moltiplicato per un fattore $\rho_e$, chiamato resistività elettrica, 
+relativo al materiale considerato, chiamato resistività elettrica. Poiché il materiale internamente impedisce ad alcune cariche di fluire, per cui rallenta la nube elettronica 
+che scorre nel mezzo, viene definita la grandezza fisica ohm $\Omega$ per misurare questa resistività:
 \begin{equation*}
     \displaystyle\left[\vec{E}=\rho_{e}\vec{J}\right]\to\frac{N}{A\cdot s}\frac{m^2}{A}=\frac{N\cdot m^2}{A^2\cdot s}:=\Omega\cdot m
 \end{equation*}
-La presenza della resistività rappresenta la maggiore differenza tra lo studio dei campi e lo studio dei circuiti. 
-
-\clearpage
-
-\section{Elettro-Magnetismo}
+La presenza della resistività rappresenta la maggiore differenza tra lo studio dei campi e lo studio dei circuiti.  
 
 \subsection{Onde Elettro-Magnetiche}
 All'interno delle equazioni di Maxwell sono presenti dei componenti incrociati del campo elettrico $\vec{E}$ e del campo magnetico $\vec{B}$, per cui descrivono un fenomeno 
@@ -1161,7 +1159,7 @@ Si può esprimere come:
 \end{equation}
 
 
-Dato un materiale magnetico, la densità di potenza precedentemente calcoalta può essere espressa come:
+Dato un materiale magnetico, la densità di potenza precedentemente calcolata può essere\\espressa come:
 \begin{equation*}
     P_\tau=\vec{E}\cdot\vec{J}\to dP=EJd\tau\to P=\displaystyle\int_{\tau}EJd\lambda dS=\int_{S}EdS\cdot\int_{\lambda}Jd\lambda
 \end{equation*}
@@ -1191,6 +1189,347 @@ Questa può essere espressa come:
     \mathscr{E}=\displaystyle\frac{1}{2}\vec{H}\cdot\vec{B}
 \end{equation}
 
+\clearpage
 
+\section{Modello Circuitale}
+
+Quando si studia la propagazione dei campi elettro-magnetici all'interno di materiali e circuiti, si considerano le leggi cositutive del mezzo materiale:
+\begin{equation}
+    \begin{cases}
+        \vec{D}=\varepsilon\vec{D}\\
+        \vec{B}=\mu\vec{H}\\
+        \vec{J}=\sigma(\vec{E}+\vec{E}_m)+\vec{J}_m
+    \end{cases}
+\end{equation}
+Dove $\vec{J}_m$ è la corrente indotta da un campo elettro-motore. Si ottiene quest'ultima formula, considerando la relazione tra campo elettrico e densità di corrente mediante 
+resistività: $\vec{E}=\rho_e\vec{J}$. Il fattore $\sigma$ corrisponde all'inverso della resistività, per si esprime la corrente di conduzione dovuta al campo elettro-statico 
+$\vec{E}$ dovuto al campo elettro-motore $\vec{E}_m$:  
+\begin{gather*}
+    \vec{J}=\sigma\vec{E}=\sigma(\vec{E}+\vec{E}_m)\\
+\end{gather*}
+Non si esclude se sia presente una corrente dovuta ad una conversione energetica, come un campo elettro-motore:
+\begin{equation*}
+    \vec{J}=\sigma(\vec{E}+\vec{E}_m)+\vec{J}_m
+\end{equation*}
+La costante $\sigma$ si può misurare in siemens $S$ per metro:
+\begin{equation*}
+    [\sigma]=\displaystyle\left[\frac{1}{\rho_e}\right]=\frac{1}{\Omega\cdot m}=\frac{S}{m}
+\end{equation*}
+
+Il modello circuitale viene definito tramite osservazione sperimentali, per produrre un modello matematico, con cui è possible simulare rappresentazioni fisiche non realizzabili 
+o distanti dall'elettro-magnetismo. Questo modello così creato è un'approsimmazione dei fenomeni fisici in atto all'interno del circuito, ma sotto certe condizioni può 
+descrivere con considerevole precisione gli andamenti del campo elettro-magnetico. 
+
+\subsection{Principi Cardinali di Kirchoff}
+
+I principi di Kirchoff descrivono l'andamento dell'elettro-magnetismo a regime stazionario, ovvero ogni grandezza fisica $x$ è invariante nel tempo
+$\displaystyle\frac{\partial }{\partial t}x(t)=0$, ciò rappresenta una visione galileiana della fisica, per cui non descrive a pieno i fenomeni fisici. 
+
+In questa situazione, si considerano le equazioni di Maxwell inerenti al rotore:
+\begin{equation*}
+    \begin{cases}
+        \nabla\times\vec{E}=\vec0\\
+        \nabla\times\vec{H}=\vec{J}
+    \end{cases}
+\end{equation*}
+
+
+In forma integrale, si considera la circuitazione del campo elettrico su un qualsiasi percorso chiuso $\lambda$:
+\begin{equation*}
+    \displaystyle\oint_{\lambda}\vec{E}\cdot d\vec{\lambda}=0
+\end{equation*}
+Si separa il percorso $\lambda$ in $n$ diverse sezioni $\lambda_k$. La direzione su ogni sezione identifica sia la sezione di percorso $\lambda_k$ che il potenziale $v_k$ tra 
+l'inizio e la fine del percorso $\lambda_k$. Questi potenziali vengono misurati senza mai cambiare il verso del volmetro usato. 
+
+Il percorso chiuso $\lambda$ corrisponde all'unione di tutti i $n$ percorsi $\lambda_k$:
+\begin{equation*}
+    \lambda=\cup_{k=1}^n\lambda_k
+\end{equation*}
+Per cui la circuitazione su tutto il percorso chiuso corrisponde alla somma di ogni integrale di circuitazione su ogni sezione del percorso $\lambda$. L'integrale di circuitazione 
+del campo elettrico $\vec{E}$ su un certo percorso $\lambda_k$ corrisponde all'opposto potenziale tra l'inizio e la fine del percorso:
+\begin{gather*}
+    -\int_{\lambda_k}\vec{E}\cdot d\vec{\lambda}=v_k\\
+    \displaystyle\sum_{k=1}^n\left(-\int_{\lambda_k}\vec{E}\cdot d\vec{\lambda}\right)=\sum_{k=1}^nv_k
+\end{gather*}
+Poiché si trova in una situazione a regime stazionario, la circuitazione su un percorso chiuso cel campo elettrico è nullo, per cui la somma dei potenziali su ogni sezione 
+del percorso chiuso è nulla:
+\begin{equation}
+    \displaystyle\sum_{k=1}^nv_k=0
+\end{equation}
+Quest'equazione si identifica come secondo principio di Kirchoff, o principio di Kirchoff alle tensioni. 
+Se non si cambia mai il verso del volmetro, non sarà necessario cambiare il segno del potenziale $v_k$ nella sommatoria. Se il verso non fosse uguale per ogni potenziale, 
+bisognerebbe considerare per ogni potenziale $v_k$ il suo segno nella somma algebrica. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick]plot[smooth, domain=0:1.414](\x,{(0.5-(1/2*\x)^2)^0.5});
+        \draw[->,very thick]plot[smooth, domain=-1.414:0](\x,{(0.5-(1/2*\x)^2)^0.5});
+        \draw[<-,very thick]plot[smooth, domain=0:1.414](\x,{-(0.5-(1/2*\x)^2)^0.5});
+        \draw[<-,very thick]plot[smooth, domain=-1.414:0](\x,{-(0.5-(1/2*\x)^2)^0.5});
+
+
+        \filldraw[black](0.71,0.612)circle(1pt);
+        \node[above]at(0,0.707){$\lambda_1$};
+        \node[below]at(0,0.707){$v_1$};
+
+        \filldraw[black](0.71,-0.612)circle(1pt);
+        \node[below]at(0,-0.707){$\lambda_3$};
+        \node[above]at(0,-0.707){$v_3$};
+
+        \filldraw[black](-0.71,0.612)circle(1pt);
+        \node[right]at(1.414,0){$\lambda_2$};
+        \node[left]at(1.414,0){$v_2$};
+
+        \filldraw[black](-0.71,-0.612)circle(1pt);
+        \node[left]at(-1.414,0){$\lambda_4$};
+        \node[right]at(-1.414,0){$v_4$};
+    \end{tikzpicture}
+\end{center}
+
+Per ricavare il primo principio di Kirchoff si considera la divergenza del rotore del campo magnetico $\vec{H}$:
+\begin{gather*}
+    \nabla\times(\nabla\times\vec{H})=\nabla\cdot\vec{J}\\
+    \displaystyle\nabla\cdot\left(\displaystyle\left(\frac{\partial H_z}{\partial y}-\frac{\partial H_y}{\partial z}\right)\hat{x}-\left(\frac{\partial H_x}{\partial z}-\frac{\partial H_z}{\partial x}\right)\hat{y}+\left(\frac{\partial H_y}{\partial x}-\frac{\partial H_x}{\partial y}\right)\hat{z}\right)\\
+    \displaystyle\frac{\partial^2H_z}{\partial x\partial y}-\frac{\partial^2H_y}{\partial x\partial z}-\frac{\partial^2H_x}{\partial x\partial z}+\frac{\partial^2H_z}{\partial x\partial y}+\frac{\partial^2 H_y}{\partial x\partial z}-\frac{\partial^2H_x}{\partial y\partial z}=0\\
+    \nabla\cdot\vec{J}=0
+\end{gather*}
+Per cui la densità di corrente è solenoidale a regime stazionario. Tramite l'inverso del teorema della divergenza, si ottiene, considerando il volume $\tau$ ricoperto da una 
+qualsiasi superficie chiusa $S$:
+\begin{equation*}
+    \displaystyle\int_{\tau}\nabla\cdot\vec{J}d\tau=\oint_{S}\vec{J}\cdot\hat{n}dS=0
+\end{equation*}
+
+Scomponendo la superficie $S$ in $n$ superfici esterne $S_k$, si può esprimere il flusso della densità di carica attravero $S$ come la somma dei flussi di $\vec{J}$ attraverso 
+le superfici esterne $S_k$:
+\begin{equation*}
+    \displaystyle\oint_{S}\vec{J}\cdot\hat{n}dS=\sum_{k=1}^n\int_{S_k}\vec{J}\cdot\hat{n}dS=0
+\end{equation*}
+Il flusso della densità di corrente attraverso una superficie $S_k$ equivale alla corrente passante per quella superficie $i_k$. Poiché la somma dei flussi è nulla, allora 
+necessariamente anche la somma delle correnti attraverso ogni superficie $S_k$, sezione della superficie chiusa $S$, deve essere nulla:
+\begin{equation}
+    \displaystyle\sum_{k=1}^ni_k=0
+\end{equation}
+Quest'equazione corrisponde al primo principio di Kirchoff. Una corrente può essere sia entrante che uscente in base al verso dell'amperometro, per cui sarebbe necessario 
+specificarne il verso all'interno della somma algebrica. Per rappresentare il primo principio con una sommatoria semplice si misurano tutte le correnti nello stesso verso, 
+per cui si esprime come la somma delle correnti entranti nella superficie chiusa $S$, alcune delle quali sono di segno negativo, corrispondenti alle correnti uscenti dalla 
+superficie. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[-, very thick]plot[smooth, domain=-1:1](\x, {(1-(\x)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-1:1](\x, {-(1-(\x)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=0.5:1](\x,{(0.25-(\x-0.5)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-1:-0.5](\x,{-(0.25-(\x+0.5)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-1:0.5](\x,{1/3*(2.25-(\x-0.5)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-0.5:1](\x,{-1/3*(2.25-(\x+0.5)^2)^0.5});
+        \draw[-, very thick]plot[smooth, domain=-0.5:0](\x,{1/2*(-1+(9-36*(\x)^2)^0.5)});
+        \draw[-, very thick]plot[smooth, domain=0:0.5](\x,{1/2*(1-(9-36*(\x)^2)^0.5)});
+        \draw[-,very thick]plot[smooth, domain=0:0.5](\x,{(0.25-(\x)^2)^0.5+0.5});
+        \draw[-,very thick]plot[smooth, domain=-0.5:0](\x,{-(0.25-(\x)^2)^0.5-0.5});
+        
+        \draw[<-,very thick](0,1)--(0,1.5)node[right]{$\vec{J}$};
+        \draw[<-,very thick](0,-1)--(0,-1.5)node[right]{$\vec{J}$};
+        \draw[<-, very thick](1,0)--(1.5,0)node[above]{$\vec{J}$};
+        \draw[<-, very thick](-1,0)--(-1.5,0)node[above]{$\vec{J}$};
+
+        \node[below]at(0,0){$S$};
+    \end{tikzpicture}
+\end{center}
+
+Queste leggi vengono anche espresse rispetto a maglie e nodi, elementi particolari, favorevoli, dei circuiti. Queste leggi inoltre possono essere usufruite dagli strumenti di 
+misura. 
+
+\subsection{Modello Circuitale a Parametri Concentrati}
+
+Nel tempo il campo elettro-magnetico si propaga come un'onda, poiché i campi sono accoppiati nelle quattro equazioni, ma ciò non avviene a regime stazionario. Poiché le leggi di 
+Kirchoff sono approssimazioni, si vuole determinare la precisione di date leggi. Si considera un canale, guida d'onda, passante per due punti $A$ e $B$. distanti $d$, 
+attraversato da un flusso di cariche. Sono presenti due osservatori in $A$ e $B$, che misurano la corrente sinusoidale, entrambi aventi lo zero temporale comune. Viene 
+espressa la velocità di propagazione dell'onda con $c$. Viene osservato che l'onda sinusoidale partita da $A$, viene misurata da $B$ con un certo ritardo $\tau$. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[|-|,very thick](0,0)node[above right]{$A$}--(2,0)node[above left]{$B$};
+        \draw[->,very thick](-0.5,-0.25)--(0,-0.25)node[below]{$x_A=0$}--(2,-0.25)node[below]{$x_B=d$}--(2.5,-0.25)node[above right]{$x$};
+
+        \draw[->,very thick](0,-2)--(0,-1)node[right]{$i_A$};
+        \draw[->,very thick](-0.25,-1.5)--(1.8,-1.5)node[above]{$t$};
+        \draw[-,very thick]plot[smooth, domain=0:1.57](\x,{1/2*sin(4*\x r)-1.5});
+
+        \draw[->,very thick](2,-2)--(2,-1)node[right]{$i_B$};
+        \draw[->,very thick](1.75,-1.5)--(4,-1.5)node[above]{$t$};
+        \draw[-,very thick]plot[smooth, domain=2.2:3.77](\x,{1/2*sin(4*(\x-2.2) r)-1.5});
+        \node[below]at(2.2,-1.5){$\tau$};
+    \end{tikzpicture}
+\end{center}
+
+
+Si suppone che l'onda non si attenui, per cui l'ampiezza in $A$ è uguale all'ampiezza in $B$: 
+\begin{equation*}
+    \begin{cases}
+        i_A(t)=I\sin(\omega t)\\
+        i_B(t)=I\sin(\omega(t-\tau))
+    \end{cases}
+\end{equation*}
+
+Poiché gli operatori interni alla funzione sinusoidale sono adimensionali, bisogna esprimere la correlazione tra l'angolo in radianti $\alpha$ e l'intervallo di tempo $t$. 
+Si identifica l'intervallo di tempo in cui avviene una riproduzione completa dell'onda $T$, in radianti $2\pi$. Per cui si considera la relazione:
+\begin{equation*}
+    t:\alpha=T:2\pi\to\displaystyle\alpha=\frac{2\pi}{T}t
+\end{equation*}
+La pulsazione $T$ dell'onda sinusoidale corrisponde al fattore ${2\pi}/T$, misurato in radianti al secondo:
+\begin{equation*}
+    \omega=\displaystyle\frac{2\pi}{T}\,\left[\frac{\mbox{rad}}{s}\right]
+\end{equation*}
+Si considera un ciclo, una singola riproduzione della sinusoide. Per determinare quante volte si ripete in un intervallo di tempo si considera la grandezza fisica frequenza:
+\begin{equation*}
+    f=\displaystyle\frac{1}{T}
+\end{equation*}
+Consdierando una qualsiasi superficie chiusa che contiene il canale $AB$, la densità elettrica è prima entrante in $A$ e poi uscente in $B$, per cui la divergenza di $\vec J$ 
+è nulla.
+
+
+Il sistema si dice sia quasi-stazionario se il lettore $A$ legge la stessa corrente del lettore $B$, ovvero è presente un errore accettabile o trascurabile. 
+Per cui le due correnti sono approsimativamente congruenti:
+\begin{gather*}
+    i_A\cong i_B\\
+    I\sin\displaystyle\left(\frac{2\pi}{T}t\right)\cong I\sin\left(\frac{2\pi}{T}t-\frac{2\pi}{T}\tau\right)\\
+    \tau=\displaystyle\frac{d}{c}\to \displaystyle 2\pi f\frac{d}{c}=2\pi d\frac{f}{c}=\frac{2\pi d}{\lambda}\\
+    \tau\to 0\iff \lambda>>d
+\end{gather*}
+L'errore è trascurabile se la lunghezza d'onda è considerevolmente maggiore della distanza tra il trasmettitore ed il ricevitore. 
+L'uso del modello adatto dipende dal valore delle grandezze trattate, in elettrotecnica si studiano frequenze nell'
+ordine dei $GHz$, per cui si considerano modelli di circuiti adimensionali, nei quali, dal punto di vista euclidiano, tutti i punti coincidono. In questo modo si possono 
+trattare i campi in un ambiente quasi-stazionario, quindi usando le leggi di Kirchoff; poiché ancora non disponiamo di modelli di calcolo abbastanza avanzati per poter 
+descrivere sistemi elettro-magnetici molto complessi che richiedono l'uso delle equazioni di campo. 
+
+Si può rappresentare quest'approssimazione 
+nei termini dei tempi o degli spazi, oppure tramite la velocità come $c\to\infty$, per 
+esplicitare l'impossibilità fisica di questa situazione, considerando la formula per la velocità di propagazione delle onde elettro-magnetiche attraverso un mezzo materiale, 
+ciò si ottiene solo se il prodotto tra la permettività e la permabilità è nullo: $\mu\cdot\varepsilon=0$. In base a quale delle costanti è nulla si determinano diverse 
+regioni, caratterizzate da diverse propietà fisiche. Un circuito è formato da varie regioni collegate l'una tra l'altra. La denominazione di queste regioni è arbitraria:
+
+\subsubsection{Regione N}
+Si considera la regione nulla, una regione di vuoto circuitale, diversa dal vuoto fisico, dove le costanti di permettività e permeabilità sono entrambe nulla, per cui ci si 
+trova in uno stato di quasi-stazionarietà elettro-magnetica. Inoltre la costante $\sigma$ è anch'essa nulla. In questa situazione di vuoto, le equazioni costitutive del mezzo 
+assumono tutte valori nulli. Dalle equazioni di Maxwell risulta che il campo elettrico è sempre conservativo $\nabla\times\vec{E}=0$, e la densità elettrica è solenoidale $\nabla\cdot\vec{J}=0$. 
+Ciò permette di scegliere arbitrariamente due punti per poter definire una differenza di potenziale. 
+
+\begin{equation*}
+    \begin{cases}
+        \vec{D}=\varepsilon\vec{D}=0\\
+        \vec{B}=\mu\vec{H}=0\\
+        \vec{J}=\sigma(\vec{E}+\vec{E}_m)+\vec{J}_m=0
+    \end{cases}
+\end{equation*}
+
+\subsubsection{Regione EQP}
+Si considera il duale di una regione, una regione che presenta delle proprietà opposte rispetto ad un'altra regione. La regione di equipotenzialtità, o conduttore perfetto o 
+corto circuito ideale è la regione duale della regione nulla. Presenta anch'essa la quasi-stazionarietà del campo elettro-magnetico, ma la resistività elettrica è nulla, per 
+cui $\sigma\to\infty$, di conseguenza il campo elettrico è nullo $\vec{E}=0$ ed la densità di corrente impressa è nulla $\vec{J}_m=0$ La terza legge costitutiva del mezzo da luogo 
+ad una forma indeterminata, per cui il valore della densità di corrente, non nullo e finito, non può essere determinato mediante le equazioni di Maxwell. Sapendo con quali 
+regioni è collegata sarebbe possibile determinare la densità di corrente attraverso questa regione. Inoltre poiché il campo elettrico è nullo non può essere presenta una 
+differenza di potenziale. 
+
+\begin{equation*}
+    \begin{cases}
+        \vec{D}=\varepsilon\vec{D}=0\\
+        \vec{B}=\mu\vec{H}=0\\
+        \vec{J}=\sigma(\vec{E}+\vec{E}_m)+\vec{J}_m=\infty\cdot0\to\vec{J}=?
+    \end{cases}
+\end{equation*}
+
+\subsubsection{Regione C}
+
+Nella regione di condensatore ideale, è presente uno stato di quasi-stazionarietà magnetica $\vec{B}=0$ ed il fattore $\sigma=0$. Il campo elettro-motore è nullo $\vec{E}_m=0$ 
+e la densità di corrente indotta è nulla $\vec{J}_m=0$. La permettività elettrica assume un valore non nullo. 
+
+\begin{equation*}
+    \begin{cases}
+        \vec{D}=\varepsilon\vec{D}\neq0\\
+        \vec{B}=\mu\vec{H}=0\\
+        \vec{J}=\sigma(\vec{E}+\vec{E}_m)+\vec{J}_m=0
+    \end{cases}
+\end{equation*}
+
+Per le equazioni di Maxwell si ottiene che il campo elettrio in questa regione è conservativo $\nabla\times\vec{E}=0$, e il rotore del campo magnetico dipende dal solo campo 
+di spostamento elettrico $\nabla\times\vec{H}=\displaystyle\frac{\partial H}{\partial t}$. In questa regione è presente un materiale puramente dielettrico, verrà in seguito 
+identificata come un condensatore, caratterizzato dalla grandezza fisica capacità $C$, il rapporto tra la carica compresa in una sezione di spazio e la differenza di potenziale 
+tra l'ingresso e l'uscita del condensatore:
+\begin{equation*}
+    C=\displaystyle\frac{Q}{v}\,\left[\frac{A\cdot s}{V}\right]
+\end{equation*}
+
+\subsubsection{Regione LM}
+
+La regione di induttore ideale, si trova in uno stato di quasi-stazionarietà elettrica $\varepsilon=0$, la permeabilità è non nulla, ed il valore $\sigma\to\infty$, per 
+ottenere una forma indeterminata nelle leggi costitutive del mezzo. Rappresenta 
+il duale del condensatore ideale. Il campo elettro-motore è nullo $\vec{E}_m=0$, la densità di corrente di induzione è nulla $\vec{J}_m=0$. Il campo elettrico $\vec{E}$ è tale 
+da presentare valori finiti per densità di corrente, ma non ricavabili dalle equazioni di Maxwell, poiché si presenta in forma indeterminata nelle leggi costitutive del mezzo. 
+Si ricava da Maxwell che il rotore del campo elettrico è pari al rotore del campo elettrico indotto, una particolare classe di campi elettro-motori generati all'interno di 
+fenomeni elettrici, $\nabla\times\vec{E}=\nabla\times\vec{E}_i$. 
+Poiché $\mu\neq0$, si ha $\nabla\times\vec{E}_i=\displaystyle-\frac{\partial B}{\partial t}$, mentre il rotore del campo magnetico è pari alla densità di corrente 
+$\nabla\times\vec{H}=\vec{J}$, per cui i campi sono disaccoppiati. 
+
+\begin{equation*}
+    \begin{cases}
+        \vec{D}=\varepsilon\vec{D}=0\\
+        \vec{B}=\mu\vec{H}\neq0\\
+        \vec{J}=\sigma(\vec{E}+\vec{E}_m)+\vec{J}_m=\infty\cdot0\to\vec{J}=?
+    \end{cases}
+\end{equation*}
+
+Questa regione identifica un materiale puramente magnetico che non può condurre, ma può indurre un campo magnetico, tale regione verrà in seguito identificato con l'induttore, 
+definito dalla grandezza fisica induttanza $L$. 
+
+\subsubsection{Regione R}
+
+Questa regione descrive il resistore ideale in uno stato di quasi-stazionarietà elettro-magnetica $\mu=0$, $\varepsilon=0$. Dove la resisività elettrica è non nulla e finita 
+$\sigma\neq0$, il campo elettro-motore e la densità di corrente indotta sono entrambi nulli $\vec{E}_m=0$, $\vec{J}_m=0$.
+
+\begin{equation*}
+    \begin{cases}
+        \vec{D}=\varepsilon\vec{D}=0\\
+        \vec{B}=\mu\vec{H}=0\\
+        \vec{J}=\sigma(\vec{E}+\vec{E}_m)+\vec{J}_m=\sigma\vec{E}
+    \end{cases}
+\end{equation*}
+
+Rappresenta un materiale in cui il mezzo è resistivo puro. In questo materiale, il campo elettrico è conservativo $\nabla\times\vec{E}=0$ e la densità di corrente è solenoidale 
+$\nabla\cdot\vec{J}=0$. Questa regione verrà identificata dal parametro concentrato resistenza $R$. 
+
+\subsubsection{Regione FEM}
+
+In questa regione, generatore ideale di forza elettro motrice, è presenta una quasi-stazionarietà elettro-magnetica $\mu=0$ e $\varepsilon=0$. La resistività elettrica è nulla, 
+$\sigma\to\infty$, il campo elettro-motore è non nullo e finito, per cui è presente un campo elettro-statico $\vec{E}_s=\vec{E}_m$, poiché il campo elettrico indotto è nullo 
+$\vec{E}=0$ per $\mu=0$. Mentre la densità di corrente indotta è nulla $\vec{J}_m=0$. 
+
+\begin{equation*}
+    \begin{cases}
+        \vec{D}=\varepsilon\vec{D}=0\\
+        \vec{B}=\mu\vec{H}=0\\
+        \vec{J}=\sigma(\vec{E}+\vec{E}_m)+\vec{J}_m=\infty\cdot0\to\vec{J}=?
+    \end{cases}
+\end{equation*}
+
+La regione rappresenta un materiale dove è presente una pura forza elettro-motrice $\nabla\times\vec{E}\neq0$, e la densità di corrente è solenoidale $\nabla\cdot\vec{J}$. 
+Questa regione genera corrente, ma avendo conducibilità nulla, non la attraversa, invece fluisce nelle regioni collegate. 
+Verrà identificata da un parametro concentrato, la tensione erogata.
+
+\subsubsection{Region IG}
+
+Questa regione rappresenta un generatore ideale di corrente, in uno stato di quasi-stazionarietà elettro-magnetica $\mu=0$ e $\varepsilon=0$. La resistività elettrica è infinita 
+$\sigma\to\infty$, il campo elettro-motore è nullo $\vec{E}_m=0$, e la densità di corrente idotta è non nulla e definita $\vec{J}_m=0$. 
+
+\begin{equation*}
+    \begin{cases}
+        \vec{D}=\varepsilon\vec{D}=0\\
+        \vec{B}=\mu\vec{H}=0\\
+        \vec{J}=\sigma(\vec{E}+\vec{E}_m)+\vec{J}_m=\vec{J}_m
+    \end{cases}
+\end{equation*}
+
+Poiché la resistività elettrica tende ad infinito, il valore del campo elettrico $\vec{E}$ è indeterminato e non può essere ricavato mediante le equazioni di Maxwell. In 
+questa situazione, il campo elettrico è conservativo $\nabla\times\vec{E}=0$ e la densità di corrente è solenoidale $\nabla\cdot\vec{J}=0$. Rappresenta un materiale in cui il mezzo genera una corrente, verrò 
+in seguito identificato dal parametro concentrato corrente erogata.
 
 \end{document}
