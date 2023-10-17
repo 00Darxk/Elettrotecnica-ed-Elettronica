@@ -19,7 +19,10 @@
 
 \renewcommand{\contentsname}{Indice}
 
-\tikzset{sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
 \numberwithin{equation}{subsection}
 
 \title{Appunti di Elettrotecnica ed Elettronica}
@@ -42,7 +45,7 @@
 
 \clearpage
 
-\section{Introduzione: Equazioni di Maxwell}
+\section{Nozioni di Base sull'Elettro-Magnetismo}
 
 \subsection{Forza Elettrica}
 Le prime analisi documentate sugli effetti elettrici risalgono agli antichi greci, da cui deriva il nome "electron"; $\eta\lambda\varepsilon\kappa\tau\rho o\nu$ in greco. Letteralmente significa ambra, poiché 
@@ -1191,7 +1194,7 @@ Questa può essere espressa come:
 
 \clearpage
 
-\section{Modello Circuitale}
+\section{Circuiti}
 
 Quando si studia la propagazione dei campi elettro-magnetici all'interno di materiali e circuiti, si considerano le leggi cositutive del mezzo materiale:
 \begin{equation}
@@ -1352,11 +1355,11 @@ espressa la velocità di propagazione dell'onda con $c$. Viene osservato che l'o
         \draw[->,very thick](-0.5,-0.25)--(0,-0.25)node[below]{$x_A=0$}--(2,-0.25)node[below]{$x_B=d$}--(2.5,-0.25)node[above right]{$x$};
 
         \draw[->,very thick](0,-2)--(0,-1)node[right]{$i_A$};
-        \draw[->,very thick](-0.25,-1.5)--(1.8,-1.5)node[above]{$t$};
+        \draw[->,very thick](-0.25,-1.5)--(1.7,-1.5)node[above]{$t$};
         \draw[-,very thick]plot[smooth, domain=0:1.57](\x,{1/2*sin(4*\x r)-1.5});
 
         \draw[->,very thick](2,-2)--(2,-1)node[right]{$i_B$};
-        \draw[->,very thick](1.75,-1.5)--(4,-1.5)node[above]{$t$};
+        \draw[->,very thick](1.8,-1.5)--(4,-1.5)node[above]{$t$};
         \draw[-,very thick]plot[smooth, domain=2.2:3.77](\x,{1/2*sin(4*(\x-2.2) r)-1.5});
         \node[below]at(2.2,-1.5){$\tau$};
     \end{tikzpicture}
@@ -1406,7 +1409,8 @@ Si può rappresentare quest'approssimazione
 nei termini dei tempi o degli spazi, oppure tramite la velocità come $c\to\infty$, per 
 esplicitare l'impossibilità fisica di questa situazione, considerando la formula per la velocità di propagazione delle onde elettro-magnetiche attraverso un mezzo materiale, 
 ciò si ottiene solo se il prodotto tra la permettività e la permabilità è nullo: $\mu\cdot\varepsilon=0$. In base a quale delle costanti è nulla si determinano diverse 
-regioni, caratterizzate da diverse propietà fisiche. Un circuito è formato da varie regioni collegate l'una tra l'altra. La denominazione di queste regioni è arbitraria:
+regioni, caratterizzate da diverse propietà fisiche. Un circuito è formato da varie regioni collegate l'una tra l'altra, come fosse un mosaico. 
+La denominazione di queste regioni che ne segue è arbitraria:
 
 \subsubsection{Regione N}
 Si considera la regione nulla, una regione di vuoto circuitale, diversa dal vuoto fisico, dove le costanti di permettività e permeabilità sono entrambe nulla, per cui ci si 
@@ -1531,5 +1535,258 @@ $\sigma\to\infty$, il campo elettro-motore è nullo $\vec{E}_m=0$, e la densità
 Poiché la resistività elettrica tende ad infinito, il valore del campo elettrico $\vec{E}$ è indeterminato e non può essere ricavato mediante le equazioni di Maxwell. In 
 questa situazione, il campo elettrico è conservativo $\nabla\times\vec{E}=0$ e la densità di corrente è solenoidale $\nabla\cdot\vec{J}=0$. Rappresenta un materiale in cui il mezzo genera una corrente, verrò 
 in seguito identificato dal parametro concentrato corrente erogata.
+
+\subsection{Bipolo/Multipolo e Porta/Multiporta}
+
+Introducendo parametri concentrati è possibile ricomporre il problema della quasi-stazionarietà. 
+
+Un bipolo viene definito come una o più regioni che colloquiano dall'esterno tra due poli. Un polo viene sempre identificato con una regione di equipotenzialtità. Poiché in 
+queste regioni non è presente una differenza di potenziale, tra due di queste regioni è possibile esista $v$. In elettrotecnica si riferisce ai poli con il termine morsetti, 
+rappresentano un ingresso ad una regione. Una porta viene definita come una o più regioni dove la corrente di entrata di uscita sono uguali $\nabla\cdot\vec{J}=0$.
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \node[block](c){};
+        \draw[->,very thick](-1.5,0)--(-1,0)node[above]{$i$};
+        \draw[-,very thick](-1,0)--(c.180);
+        \draw[->,very thick](c.0)--(1,0)node[above]{$i$};
+        \draw[-,very thick](1,0)--(1.5,0);
+    \end{tikzpicture}
+\end{center}
+Questa struttura a bipoli non è accessibile all'interno, le proprietà e le caratteristiche interne vengono definite a priori, e non possono essere ricavate dalle leggi 
+dell'elettro-magnetismo. Dall'esterno si osserva solo un campo elettro-statico $\vec{E}_s$. Le informazioni note di un bipolo sono dovute ai parametri concentrati. 
+
+Viene definito un multipolo come una o più regioni aaccessibile da una sequenza di morsetti. Viene definita multiporta un moltipolo con un numero pari di morsetti i quali 
+a coppie rispettano le condizioni di una porta. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \node[lblock](c)at(-0.25,0){};
+        \draw[->,very thick](-1.5,0)--(-1,0);
+        \draw[-,very thick](-1,0)--(-0.5,0);
+        \draw[->,very thick](-1.5,0.25)--(-1,0.25);
+        \draw[-,very thick](-1,0.25)--(-0.5,0.25);
+        \draw[->,very thick](-1.5,0.5)--(-1,0.5);
+        \draw[-,very thick](-1,0.5)node[above]{$i$}--(-0.5,0.5);
+        \draw[->,very thick](-1.5,-0.25)--(-1,-0.25);
+        \draw[-,very thick](-1,-0.25)--(-0.5,-0.25);
+        \draw[->,very thick](-1.5,-0.5)--(-1,-0.5);
+        \draw[-,very thick](-1,-0.5)--(-0.5,-0.5);
+    \end{tikzpicture}
+\end{center}
+
+Per convenzione si considerano le correnti sempre entranti, ovvero si considera costante il verso dell'amperometro, per cui le correnti uscenti si indicano con il segno 
+opposto. Il verso delle correnti indica solo la direzione di riferimento dell'amperometro, risptto a cui vengono misurate le correnti, che possono essere concordi, per cui 
+si trovano con segno positivo, o discordi, quindi si rappresentano con segno negativo. In questo modo si possono rappresentare tutte le correnti come entranti. Per cui bisogna 
+essere metodici nell'assegnazione dei segni alle grandezze fisiche misurate, poiché cambiano in base al riferimento scelto. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[-,ultra thick](-0.5,-0.5)--(-0.5,0.5)--(0.5,0.5)--(0.5,-0.5)--(-0.5,-0.5);
+
+        \draw[->,very thick](-1.5,0.25)--(-1,0.25)node[above]{$i_1$};
+        \draw[-,very thick](-1,0.25)--(-0.5,0.25);
+        \draw[->,very thick](-1.5,-0.25)--(-1,-0.25)node[below]{$-i_1$};
+        \draw[-,very thick](-1,-0.25)--(-0.5,-0.25);
+
+        \draw[->,very thick](1.5,0.25)--(1,0.25)node[above]{$i_2$};
+        \draw[-,very thick](1,0.25)--(0.5,0.25);
+        \draw[->,very thick](1.5,-0.25)--(1,-0.25)node[below]{$-i_2$};
+        \draw[-,very thick](1,-0.25)--(0.5,-0.25);
+    \end{tikzpicture}
+\end{center}
+
+Dato un dipolo, si esprime il riferimento del volmetro come una freccia che indica il morsetto positivo. La differenza di potenziale si calcola come la differenza tra il 
+morsetto positivo ed il morsetto negativo $v=V_+-V_-$. Si individuano due convenzioni a seconda se il verso della corrente è concorde o discorde al verso del potenziale, questi 
+versi rappresentano i riferimenti usati dagli strumenti di misura. Le modalità di misura cambiano il segno all'interno delle equazioni, queste due convenzioni rappresentano 
+due letture opposte della stessa situazione. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \node[block](c)at(0,0){};
+        \draw[->,very thick](-1.5,0)--(-1,0)node[above]{$i$};
+        \draw[-,very thick](-1,0)--(c.180);
+        \draw[->,very thick](c.0)--(1,0);
+        \draw[-,very thick](1,0)--(1.5,0);
+        \draw[->,very thick](1,-0.5)--(-1,-0.5)node[below]{$v$};
+
+        \node[block](c1)at(3.5,0){};
+        \draw[->,very thick](2,0)--(2.5,0)node[above]{$i$};
+        \draw[-,very thick](2.5,0)--(c1.180);
+        \draw[->,very thick](c1.0)--(4.5,0);
+        \draw[-,very thick](4.5,0)--(5,0);
+        \draw[<-,very thick](4.5,-0.5)node[below]{$v$}--(2.5,-0.5);
+    \end{tikzpicture}
+\end{center}
+
+
+Se la corrente ed il potenziale hanno verso concorde si considera la convenzione dei generatori, se hanno verso discorde rappresentano la convenzione degli utilizzatori, 
+queste convenzioni esprimono solamente come viene effettuata la misura. 
+
+
+Nella convenzione dei generatori, la corrente di cariche positive fluisce dal potenziale più alto al potenziale più basso, per cui è il potenziale concorde che spinge le 
+cariche, prodotto da un campo elettro-motore $\vec{E}_m$, quindi questa regione produce energia. Questo potenziale agisce come una forza elettro motrice, ma non può essere 
+poiché in un regime di quasi-stazionarietà il campo elettrico è conservativo $\nabla\times\vec{E}=0$. 
+
+
+Nella convenzione degli utilizzatori la corrente si muove di moto naturale, per cui la regione non produce ma utilizza energia elettrica prodotta da un'altra zona. Mostra 
+gli effetti imposti dall'esterno sulla regione. Poiché non producono energia, non è presente un campo elettro-motore $\vec{E}_m=0$. 
+
+
+Quando ci si trova in una di queste convenzioni, per determinare se il bipolo è un generatore o un utilizzatore si considera il verso della corrente e del potenziale. Se una 
+di queste due grandezze è negativa, allora la situazione analizzata rappresenta l'altra convenzione. Se entrambe sono negative rappresenta comunque la convenzione, poiché 
+entrambe le grandezze sono l'opposto. Per identificare se sono dei generatori o degli utilizzatori si considera la potenza $P=iv$, se i segni sono discordi la potenza è negativa 
+e la situazione analizzata appartiene all'altra convenzione. 
+
+Per cui se si analizza con una convenzione dei generatori e la potenza è positiva, si tratta di un generatore, se la potenza è negativa, si tratta di un utilizzatore. 
+Analogamente per la convenzione degli utilizzatori, se la potenza è positiva, si tratta di un utilizzatore, se la potenza è negativa, si tratta di un generatore. 
+
+
+
+Si determinano le leggi costitutive e i parametri concentrati dei bipoli. Le uniche regioni che non hanno leggi costitutive del mezzo sono il vuoto ed il suo duale l'
+equipotenziale, poiché l'unico elemento in queste regioni è rispettivamente il volmetro e l'amperometro, che non influiscono sulle leggi costitutive. 
+
+\subsubsection{Condensatore Ideale}
+
+La regione C, viene identificata come il condensatore, una regione di quasi-stazionarietà magnetica, viene identificata come due linee parallele, collegate a morsetti. Viene 
+associato al parametro concentrato capacità $C$, misurata in Farad $F$. Queste grandezze devono essere attribuite a priori, non possono essere determinate sulla base di leggi. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-1.5,0)--(-1,0)node[above]{$i$};
+        \draw[-,very thick](-1,0)--(-0.5,0);
+        \draw[-,ultra thick](-0.5,-0.5)--(-0.5,0.5)node[above]{$+Q$};
+        \draw[-,ultra thick](0,-0.5)--(0,0.5)node[above]{$-Q$};
+        \draw[->,very thick](0,0)--(0.5,0);
+        \draw[-,very thick](0.5,0)--(1,0);
+
+        \draw[->,very thick](-1.5,-0.75)--(1,-0.75)node[above]{$x$};
+        \filldraw[black](-0.5,-0.75)circle(0.5pt);
+        \filldraw[black](0,-0.75)circle(0.5pt);
+        \node[below]at(-0.5,-0.75){$A$};
+        \node[below]at(0,-0.75){$B$};
+        \node[below]at(-0.25,-0.75){$d$};
+        \draw[->,very thick](0,-1)--(-0.5,-1)node[below]{$v$};
+    \end{tikzpicture}
+\end{center}
+
+Si è analizzato precedentemente la situazione di un condensatore a faccie piane e parallele su cui si deposita una carica $+Q$ su una faccia, accumulata per un flusso di 
+cariche positive $i$, e un accumulo di cariche negative $-Q$ sull'altra, poiché la stessa corrente ne sottrae cariche positive. Il campo elettrico generato tra le due 
+faccie del condensatore corrisponde al rapporto tra la densità superficiale $\sigma$ delle lamine e della costante di permettività $\varepsilon$:
+\begin{equation*}
+    E=\displaystyle\frac{\sigma}{\varepsilon}
+\end{equation*}
+Le due faccie si trovano ad una distanza $d$ tra di loro, il campo elettrico è monodimensionale, poiché ha solo componenti sulla direzionee $x$. Il gradiente del potenziale 
+in un caso monodimensionale corrisponde alla derivata rispetto all'unica direzione:
+\begin{equation*}
+    -\nabla V=-\displaystyle\frac{dV}{dx}=E_x
+\end{equation*}
+Si considera in forma integrale, dove i limiti di integrazione corrispondo al potenziale in $A$ ed in $B$, e le coordinate sulle $x$ dei due punti. Si considera per semplicità 
+il punto $A$ cooincidente con l'origine dell'asse $x_A=0$, mentre il punto $B$ corrisponde alla distanza $x_B=d$:
+\begin{equation*}
+    -\displaystyle\int_{A}^BdV=\int_0^dE_xdx
+\end{equation*}
+
+Poiché si misura la densità di carica sulla piastra positiva, il campo elettrico è strettamente positivo, affinché il potenziale sia positivo si impone il volmetro come 
+morsetto positivo sul punto $A$. Quindi il condensatore rappresenta un utilizzatore. Il potenziale risulta:
+\begin{equation*}
+    v=\displaystyle\frac{\sigma}{\varepsilon}d
+\end{equation*}
+
+Il calcolo della capacità dipende dalla geometria del singolo condensatore. Per evitare questo passagio si esprime la densità di carica $\sigma$ rispetto alla quantità 
+accumulata sulla faccia positiva:
+\begin{equation*}
+    \sigma=\displaystyle\frac{Q}{S}\to v=\frac{QS}{\varepsilon}d
+\end{equation*}
+La capacità viene definita come il rapporto tra la carica positiva accumulata e la lettura positiva del volmetro:
+\begin{equation}
+    C:=\displaystyle\frac{Q}{v}=\varepsilon\frac{S}{d}\,[F]
+\end{equation}
+Si può esprimere la grandezza fisica della permittività dielettrica rispetto alla capacità:
+\begin{equation*}
+    [\varepsilon]=\displaystyle\frac{A\cdot s}{V\cdot m}
+\end{equation*} 
+Per cui per una data superficie, la carica accumulata su di essa p pari alla sua capacità per la lettura positiva del volmetro:
+\begin{equation*}
+    Q=Cv
+\end{equation*}
+In questo modo non si ottentono informazioni sulle dimensioni del circuito, ovvero la distanza tra i morsetti. Queste informazioni sono criptate all'interno della regione, 
+non determinabili a posteriori. 
+
+
+Vengono definiti le leggi costitutive del condensatore ideale, rappresentano le realzioni tra il potenziale e la corrente, misurate dall'esterno della regione. 
+Si considera la definizione della corrente come variazione di carica nel tempo:
+\begin{equation*}
+    i=\displaystyle\frac{dQ}{dt}=\frac{d(Cv)}{dt}=\cancelto{0}{v\frac{dC}{dt}}+C\frac{dv}{dt}
+\end{equation*}
+In questo caso il parametro concentrato della capacità è tempo invariante, per cui la sua derivata è nulla. Regioni con parametri concentrati costanti si chiama tempo 
+invariante. In generale non si analizzano i parametri concentrati dei generatori, ma dei bipoli passivi. Per cui, in convenzione degli utilizzatori, la legge costitutiva del 
+mezzo in forma differenziale del condensatore ideale risulta essere:
+\begin{equation}
+    i=\displaystyle C\frac{dv}{dt}
+\end{equation}
+Se ci trovassimo nella convenzione dei generatori, dovremmo cambiare di segno il potenziale. In forma integrale si considerano gli intervalli di integrazione dall'inizio 
+della misura per $t=0$ e alla fine della misura $t$. Il differenziale del potenziale rappresenta il differenziale di una differenza di potenziali, per cui il suo integrale rappresenta la differenza tra il potenziale alla fine della misura ed all'inizio:
+\begin{equation*}
+    \displaystyle\int_{v(0^-)}^{v(t)}dv=\frac{1}{C}\int_{0}^tidt
+\end{equation*}
+Si usa la notazione $0^-$, per comprendere il valore che assume la grandezza all'inizio esatto della misurazione, ma è nella maggior parte dei casi superfluo, poiché la funzione 
+potenziale rispetto al tempo è continua quindi $v(0^-)=v(0^+)$. Si ottiene, risolvendo l'integrale:
+\begin{equation*}
+    v(t)=\displaystyle\int_0^tidt+v(0)
+\end{equation*}
+La componente integrale rappresenta l'evoluzione del potenziale al fluire della corrente all'interno del condensatore, ma risente del valore del potenziale all'inizio della misura, 
+chiamato fattore di memoria. Per cui i bipoli dotati di un fattore che dipende dall'inizio della misurazione vengono chiamati bipoli con memoria, presentano o il potenziale 
+o la corrente in forma differenziale. Se la memoria è nulla, si dice che il bipolo parte scarico, altrimenti si dice carico al valore assunto. In questa rappresentazione non 
+sono limitati gli intervalli di tensioni possibili all'interno del condensatore, ma nella realtà non si può creare un oggetto fisico capace di avere una tensione illimiata. 
+
+La potenza (istantanea) del condensatore ideale è come il potenziale e la corrente dipendente dal tempo:
+\begin{equation*}
+    P(t)=v(t)\cdot i(t)
+\end{equation*}
+In caso siano presenti più correnti, la potenza si ottiene considerando un morsetto di riferimento su cui si calcolano le differenze di potenziali moltiplicate per la 
+corrente passante per quel morsetto. Sommando tutti queste componenti si ottiene la potenza istantanea per quel multipolo. 
+Si esprime mediante la legge costitutiva del condensatore ideale in forma differenziale:
+\begin{equation*}
+    P=vC\displaystyle\frac{dv}{dt}
+\end{equation*}
+Poiché ci troviamo nella convenzione degli utilizzatori, se questa potenza fosse negativa, il condensatore erogherebbe energia elettrica. 
+
+La potenza corrisponde alla derivata rispetto al tempo dell'energia, per cui diventa:
+\begin{gather*}
+    \displaystyle\frac{d\mathscr{E}}{dt}=Cv\frac{dv}{dt}\\
+    d\mathscr{E}=Cvdv
+\end{gather*}
+Poiché questo bipolo ha memoria, la sua evoluzione nel tempo potrebbe assumere valori discordi alla memoria, fisicamente se si collega il condensatore carico ad altre regioni 
+che assorbe il potenziale, questo si scarica, alimentando le regioni collegate. In quel lasso di tempo in cui alimenta un oggetto esterno il condensatore si comporta da 
+generatore. Può generare tramite conversione (bipolo attivo) oppure come un bipolo passivo. La differenza tra bipolo attivo e passivo dipende dall'energia del bipolo. 
+Si può esprimere l'energia del condensatore in forma integrale, definita tra due istanti di tempo. Per convenzione si considera l'inizio dell'intervallo al tempo di 
+costruzione del condensatore, in termini matematici tempo remotissimo $-\infty$, dove l'energia contenuta è nulla, fino ad un certo tempo $t$. Si assume che il potenziale 
+al tempo di costruzione sia nullo, per cui il condensatore è scarico quando viene costruito. 
+\begin{gather*}
+    \displaystyle\int_{\cancelto{0}{\mathscr{E}(-\infty)}}^{\mathscr{E}(t)}d\mathscr{E}=C\int_{\cancelto{0}{v(-\infty)}}^{v(t)}vdv\\
+    \mathscr{E}(t)=C\displaystyle\frac{1}{2}v^2(t)
+\end{gather*}
+La capacità è definita come una grandezza positiva, per cui l'energia è strettamente positiva, ed al massimo nulla per un certo di istante di tempo $t$. Poiché l'energia 
+è sempre positiva il condensatore si comporta come un bipolo passivo. Per cui il condensatore ideale è un bipolo passivo tempo invariante con memoria. 
+
+\subsubsection{Induttore Ideale}
+
+Il bipolo induttore ideale è il duale del condensatore ideale, presenta uno stato di quasi-stazionarietà elettrica. La dualità permette di mantenere la forma delle equazioni 
+e cambiare solamente le grandezze fisiche usate. L'induttanza $L$ è il duale della capacità $C$. 
+Considerando la legge costitutiva del mezzo del condensatore, si ottiene dualmente la legge costitutiva dell'induttore ideale:
+\begin{equation*}
+    i(t)=\displaystyle C\frac{dv(t)}{dt}\to v(t)=L\frac{di(t)}{dt}
+\end{equation*}
+
+Si vuole esprimere il duale della carica per poter esprimere il potenziale come la derivata rispetto al tempo di una certa grandezza. Il duale della carica corrisponde 
+al flusso del campo magnetico, per cui la derivata rispetto al tempo di questo flusso equivale all'opposto una forza elettro motrice, ma poiché ci troviamo nella convenzione 
+degli utilizzatori, si considera di segno positivo:
+\begin{equation*}
+    v=\displaystyle\frac{d\Phi(B)}{dt}
+\end{equation*}
+
+I parametri concentrati vengono definiti tra il rapporto di due grandezze elettro-magnetiche. Viene definito il parametro concentrato mem, rapporto tra la carica ed il flusso, 
+parametro dei mem-sistori, nuovo componente dell'elettrotecnica. 
 
 \end{document}
