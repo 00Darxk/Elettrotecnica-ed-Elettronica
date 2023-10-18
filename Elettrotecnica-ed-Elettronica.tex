@@ -11,6 +11,169 @@
 \usepackage{lmodern}
 \usepackage{braket}
 \usepackage{bookmark}
+\usepackage{circuitikz}
+
+
+% code from the top answer to the question below:
+% https://tex.stackexchange.com/questions/449675/
+\usetikzlibrary{decorations.pathmorphing}
+\pgfkeys{%
+    /pgf/decoration/.cd,
+    3d coil color/.store in=\TDCoilColor, 
+    3d coil color/.initial=black,
+    3d coil color=black,
+    3d coil width/.store in=\TDCoilWidth, 
+    3d coil width/.initial=0.4pt,
+    3d coil width=0.4pt,
+    3d coil dist/.store in=\TDCoilDist, 
+    3d coil dist/.initial=0.6pt,
+    3d coil dist=0.6pt,
+    3d coil opacity/.store in=\TDCoilOpacity, 
+    3d coil opacity/.initial=1,
+    3d coil opacity=1
+}
+
+\makeatletter % https://tex.stackexchange.com/a/219088/121799
+\tikzset{get stroke color/.code={%
+    \expandafter\global% Jump over, now we have \global
+    \expandafter\let% Jump over now we have \global\let
+    \expandafter\pgfsavedstrokecolor% Jump we have \global\let\pgf...
+    \csname\string\color@pgfstrokecolor\endcsname% Finally expand this and put it at the end 
+    },                                           % \global\let\pgf...{} in expanded form 
+    restore stroke color/.code={\pgf@setstrokecolor#1},
+}
+\def\pgfpoint@onthreedcoil#1#2#3{%
+  \pgf@x=#1\pgfdecorationsegmentamplitude%
+  \pgf@x=\pgfdecorationsegmentaspect\pgf@x%
+  \pgf@y=#2\pgfdecorationsegmentamplitude%
+  \pgf@xa=0.083333333333\pgfdecorationsegmentlength%
+  \advance\pgf@x by#3\pgf@xa%
+  \advance\pgf@x by-\initialoffset pt%
+}
+
+% coil decoration
+%
+% Parameters: \pgfdecorationsegmentamplitude, \pgfdecorationsegmentlength,
+
+\pgfdeclaredecoration{3d coil}{initial}
+{ 
+    \state{initial}[width=0.25*\pgfdecorationsegmentlength+\pgfdecorationsegmentaspect*\pgfdecorationsegmentamplitude,
+    next state=coil, persistent precomputation={
+    \tikzset{get stroke color}
+    \pgfmathsetmacro{\initialoffset}{0.25*\pgfdecorationsegmentlength+\pgfdecorationsegmentaspect*\pgfdecorationsegmentamplitude}
+  }]
+  {%
+    \pgfpathmoveto{\pgfpointorigin} 
+    \pgfsetstrokecolor{\TDCoilColor}
+    \pgfsetstrokeopacity{\TDCoilOpacity}
+    \pgfsetlinewidth{1.5*\TDCoilWidth} 
+    \pgfpathcurveto
+    {\pgfpoint@oncoil{0    }{ 0.555}{1}}
+    {\pgfpoint@oncoil{0.445}{ 1    }{2}}
+    {\pgfpoint@oncoil{1    }{ 1    }{3}}
+    \pgfusepath{stroke}
+    \pgfcoordinate{TD@coilast}{\pgfpoint@oncoil{1    }{ 1    }{3}} 
+    }
+  \state{coil}[switch if less than=%
+    1.25\pgfdecorationsegmentlength+%
+    \pgfdecorationsegmentaspect\pgfdecorationsegmentamplitude+%
+    \pgfdecorationsegmentaspect\pgfdecorationsegmentamplitude to last,
+               width=+\pgfdecorationsegmentlength]
+    { % line in the back
+    %
+    \pgfsetstrokecolor{\TDCoilColor}
+    \pgfsetfillcolor{\TDCoilColor}
+    \pgfsetstrokeopacity{\TDCoilOpacity}
+    \pgfpathmoveto{\pgfpointanchor{TD@coilast}{center}}
+    \pgfsetlinewidth{\TDCoilWidth} 
+    \pgfpathcurveto
+    {\pgfpoint@onthreedcoil{1.555}{ 1    }{4}}
+    {\pgfpoint@onthreedcoil{2    }{ 0.555}{5}}
+    {\pgfpoint@onthreedcoil{2    }{ 0    }{6}}
+    \pgfpathcurveto
+    {\pgfpoint@onthreedcoil{2    }{-0.555}{7}}
+    {\pgfpoint@onthreedcoil{1.555}{-1    }{8}}
+    {\pgfpoint@onthreedcoil{1    }{-1    }{9}}
+    \pgfusepath{stroke} 
+    %
+    % white background for front thick part
+    %
+    \pgfsetstrokeopacity{1}
+    \pgfsetstrokecolor{white}
+    \pgfsetfillcolor{white}
+    \pgfsetlinewidth{1.5*\TDCoilWidth+1.5*\TDCoilDist}
+    \pgfpathmoveto{\pgfpoint@onthreedcoil{1    }{ 1    }{3}}
+    \pgfpathmoveto{\pgfpoint@onthreedcoil{1    }{-1    }{9}}
+    % draw forward
+    \pgfpathcurveto
+    {\pgfpoint@onthreedcoil{0.445}{-1    }{10}}
+    {\pgfpoint@onthreedcoil{0    }{-0.555}{11.25}}
+    {\pgfpoint@onthreedcoil{0    }{ 0    }{12.5}}
+    \pgfpathcurveto
+    {\pgfpoint@onthreedcoil{0    }{ 0.555}{13.25}}
+    {\pgfpoint@onthreedcoil{0.445}{ 1    }{14.25}}
+    {\pgfpoint@onthreedcoil{1    }{ 1    }{15}}
+    % draw the curve back
+    \pgfpathcurveto
+    {\pgfpoint@onthreedcoil{0.445}{ 1    }{14}}
+    {\pgfpoint@onthreedcoil{0    }{ 0.555}{12.75}}
+    {\pgfpoint@onthreedcoil{0    }{ 0    }{11.5}}
+    \pgfpathcurveto
+    {\pgfpoint@onthreedcoil{0    }{-0.555}{10.75}}
+    {\pgfpoint@onthreedcoil{0.445}{-1    }{10}}
+    {\pgfpoint@onthreedcoil{1    }{-1    }{9}}
+    \pgfusepath{stroke,fill} 
+    % 
+    % draw the thick foreground path
+    %
+    \pgfsetstrokecolor{\TDCoilColor}
+    \pgfsetfillcolor{\TDCoilColor}
+    \pgfsetstrokeopacity{\TDCoilOpacity}
+    \pgfpathmoveto{\pgfpoint@onthreedcoil{1    }{ 1    }{3}}
+    \pgfsetlinewidth{\TDCoilWidth} 
+    % forward shifted +
+    \pgfpathmoveto{\pgfpoint@onthreedcoil{1    }{-1    }{9}}
+    \pgfpathcurveto
+    {\pgfpoint@onthreedcoil{0.445}{-1    }{10}}
+    {\pgfpoint@onthreedcoil{0    }{-0.555}{11.25}}
+    {\pgfpoint@onthreedcoil{0    }{ 0    }{12.5}}
+    \pgfpathcurveto
+    {\pgfpoint@onthreedcoil{0    }{ 0.555}{13.25}}
+    {\pgfpoint@onthreedcoil{0.445}{ 1    }{14.25}}
+    {\pgfpoint@onthreedcoil{1    }{ 1    }{15}}
+    % draw the curve back shfted -
+    \pgfpathcurveto
+    {\pgfpoint@onthreedcoil{0.445}{ 1    }{14}}
+    {\pgfpoint@onthreedcoil{0    }{ 0.555}{12.75}}
+    {\pgfpoint@onthreedcoil{0    }{ 0    }{11.5}}
+    \pgfpathcurveto
+    {\pgfpoint@onthreedcoil{0    }{-0.555}{10.75}}
+    {\pgfpoint@onthreedcoil{0.445}{-1    }{10}}
+    {\pgfpoint@onthreedcoil{1    }{-1    }{9}}
+    \pgfusepath{stroke,fill} % <- added
+    \pgfcoordinate{TD@coilast}{\pgfpoint@onthreedcoil{1    }{ 1    }{15}} 
+  }
+  \state{last}[width=.25\pgfdecorationsegmentlength+%
+    \pgfdecorationsegmentaspect\pgfdecorationsegmentamplitude+%
+    \pgfdecorationsegmentaspect\pgfdecorationsegmentamplitude,next state=final]
+  {
+    \pgfsetstrokecolor{\TDCoilColor}
+    \pgfsetstrokeopacity{\TDCoilOpacity}
+    \pgfsetlinewidth{\TDCoilWidth}
+    \pgfpathmoveto{\pgfpointanchor{TD@coilast}{center}}
+    \pgfpathcurveto
+    {\pgfpoint@onthreedcoil{1.555}{ 1    }{4}}
+    {\pgfpoint@onthreedcoil{2    }{ 0.555}{5}}
+    {\pgfpoint@onthreedcoil{2    }{ 0    }{6}}
+  }
+  \state{final}
+  {
+    \pgfpathlineto{\pgfpointdecoratedpathlast}
+    \pgfusepath{stroke}
+    \tikzset{restore stroke color/.expand once=\pgfsavedstrokecolor}
+  }
+}
+\makeatother
 
 \hypersetup{
     colorlinks=true,
@@ -28,6 +191,12 @@
 \title{Appunti di Elettrotecnica ed Elettronica}
 \author{Giacomo Sturm}
 \date{AA: 2023/2024 - Ing. Informatica}
+
+
+% cose che ha detto e non so dove inserire: 
+% Viene definito il parametro concentrato mem, rapporto tra la carica ed il flusso, parametro dei mem-sistori, nuovo componente dell'elettrotecnica. (17/10)
+
+
 
 \begin{document}
 
@@ -1194,7 +1363,7 @@ Questa può essere espressa come:
 
 \clearpage
 
-\section{Circuiti}
+\section{Modello Circuitale a Parametri Concentrati}
 
 Quando si studia la propagazione dei campi elettro-magnetici all'interno di materiali e circuiti, si considerano le leggi cositutive del mezzo materiale:
 \begin{equation}
@@ -1205,7 +1374,7 @@ Quando si studia la propagazione dei campi elettro-magnetici all'interno di mate
     \end{cases}
 \end{equation}
 Dove $\vec{J}_m$ è la corrente indotta da un campo elettro-motore. Si ottiene quest'ultima formula, considerando la relazione tra campo elettrico e densità di corrente mediante 
-resistività: $\vec{E}=\rho_e\vec{J}$. Il fattore $\sigma$ corrisponde all'inverso della resistività, per si esprime la corrente di conduzione dovuta al campo elettro-statico 
+resistività: $\vec{E}=\rho_e\vec{J}$. Il fattore $\sigma$ corrisponde all'inverso della resistività e si identifica con la conducibilità, con cui si esprime la corrente di conduzione dovuta al campo elettro-statico 
 $\vec{E}$ dovuto al campo elettro-motore $\vec{E}_m$:  
 \begin{gather*}
     \vec{J}=\sigma\vec{E}=\sigma(\vec{E}+\vec{E}_m)\\
@@ -1221,7 +1390,7 @@ La costante $\sigma$ si può misurare in siemens $S$ per metro:
 
 Il modello circuitale viene definito tramite osservazione sperimentali, per produrre un modello matematico, con cui è possible simulare rappresentazioni fisiche non realizzabili 
 o distanti dall'elettro-magnetismo. Questo modello così creato è un'approsimmazione dei fenomeni fisici in atto all'interno del circuito, ma sotto certe condizioni può 
-descrivere con considerevole precisione gli andamenti del campo elettro-magnetico. 
+descrivere con considerevole precisione gli andamenti del circuito reale. 
 
 \subsection{Principi Cardinali di Kirchoff}
 
@@ -1342,7 +1511,7 @@ superficie.
 Queste leggi vengono anche espresse rispetto a maglie e nodi, elementi particolari, favorevoli, dei circuiti. Queste leggi inoltre possono essere usufruite dagli strumenti di 
 misura. 
 
-\subsection{Modello Circuitale a Parametri Concentrati}
+\subsection{Regioni di un Circuito}
 
 Nel tempo il campo elettro-magnetico si propaga come un'onda, poiché i campi sono accoppiati nelle quattro equazioni, ma ciò non avviene a regime stazionario. Poiché le leggi di 
 Kirchoff sono approssimazioni, si vuole determinare la precisione di date leggi. Si considera un canale, guida d'onda, passante per due punti $A$ e $B$. distanti $d$, 
@@ -1414,7 +1583,7 @@ La denominazione di queste regioni che ne segue è arbitraria:
 
 \subsubsection{Regione N}
 Si considera la regione nulla, una regione di vuoto circuitale, diversa dal vuoto fisico, dove le costanti di permettività e permeabilità sono entrambe nulla, per cui ci si 
-trova in uno stato di quasi-stazionarietà elettro-magnetica. Inoltre la costante $\sigma$ è anch'essa nulla. In questa situazione di vuoto, le equazioni costitutive del mezzo 
+trova in uno stato di quasi-stazionarietà elettro-magnetica. Inoltre la conducibilità è anch'essa nulla. In questa situazione di vuoto, le equazioni costitutive del mezzo 
 assumono tutte valori nulli. Dalle equazioni di Maxwell risulta che il campo elettrico è sempre conservativo $\nabla\times\vec{E}=0$, e la densità elettrica è solenoidale $\nabla\cdot\vec{J}=0$. 
 Ciò permette di scegliere arbitrariamente due punti per poter definire una differenza di potenziale. 
 
@@ -1428,11 +1597,11 @@ Ciò permette di scegliere arbitrariamente due punti per poter definire una diff
 
 \subsubsection{Regione EQP}
 Si considera il duale di una regione, una regione che presenta delle proprietà opposte rispetto ad un'altra regione. La regione di equipotenzialtità, o conduttore perfetto o 
-corto circuito ideale è la regione duale della regione nulla. Presenta anch'essa la quasi-stazionarietà del campo elettro-magnetico, ma la resistività elettrica è nulla, per 
-cui $\sigma\to\infty$, di conseguenza il campo elettrico è nullo $\vec{E}=0$ ed la densità di corrente impressa è nulla $\vec{J}_m=0$ La terza legge costitutiva del mezzo da luogo 
-ad una forma indeterminata, per cui il valore della densità di corrente, non nullo e finito, non può essere determinato mediante le equazioni di Maxwell. Sapendo con quali 
-regioni è collegata sarebbe possibile determinare la densità di corrente attraverso questa regione. Inoltre poiché il campo elettrico è nullo non può essere presenta una 
-differenza di potenziale. 
+corto circuito ideale è la regione duale della regione nulla. Presenta anch'essa la quasi-stazionarietà del campo elettro-magnetico, ma la conducibilità è infinita. Il campo 
+elettrico è nullo $\vec{E}=0$ e la densità di corrente impressa è nulla $\vec{J}_m=0$. La terza legge costitutiva del mezzo da 
+luogo ad una forma indeterminata, per cui il valore della densità di corrente, non nullo e finito, non può essere determinato mediante le equazioni di Maxwell. Sapendo con 
+quali regioni è collegata è possibile determinare la densità di corrente attraverso questa regione. Inoltre poiché il campo elettrico è nullo non può essere presente 
+una differenza di potenziale. 
 
 \begin{equation*}
     \begin{cases}
@@ -1444,7 +1613,7 @@ differenza di potenziale.
 
 \subsubsection{Regione C}
 
-Nella regione di condensatore ideale, è presente uno stato di quasi-stazionarietà magnetica $\vec{B}=0$ ed il fattore $\sigma=0$. Il campo elettro-motore è nullo $\vec{E}_m=0$ 
+Nella regione di condensatore ideale, è presente uno stato di quasi-stazionarietà magnetica $\vec{B}=0$ e la conducibilità è nulla. Il campo elettro-motore è nullo $\vec{E}_m=0$ 
 e la densità di corrente indotta è nulla $\vec{J}_m=0$. La permettività elettrica assume un valore non nullo. 
 
 \begin{equation*}
@@ -1456,19 +1625,15 @@ e la densità di corrente indotta è nulla $\vec{J}_m=0$. La permettività elett
 \end{equation*}
 
 Per le equazioni di Maxwell si ottiene che il campo elettrio in questa regione è conservativo $\nabla\times\vec{E}=0$, e il rotore del campo magnetico dipende dal solo campo 
-di spostamento elettrico $\nabla\times\vec{H}=\displaystyle\frac{\partial H}{\partial t}$. In questa regione è presente un materiale puramente dielettrico, verrà in seguito 
-identificata come un condensatore, caratterizzato dalla grandezza fisica capacità $C$, il rapporto tra la carica compresa in una sezione di spazio e la differenza di potenziale 
-tra l'ingresso e l'uscita del condensatore:
-\begin{equation*}
-    C=\displaystyle\frac{Q}{v}\,\left[\frac{A\cdot s}{V}\right]
-\end{equation*}
+di spostamento elettrico $\nabla\times\vec{H}=\displaystyle\frac{\partial D}{\partial t}$. In questa regione è presente un materiale puramente dielettrico, verrà in seguito 
+identificata come un condensatore, caratterizzato dalla grandezza fisica capacità $C$.
 
 \subsubsection{Regione LM}
 
-La regione di induttore ideale, si trova in uno stato di quasi-stazionarietà elettrica $\varepsilon=0$, la permeabilità è non nulla, ed il valore $\sigma\to\infty$, per 
+La regione di induttore ideale, si trova in uno stato di quasi-stazionarietà elettrica $\varepsilon=0$, la permeabilità è non nulla e conducibilità infinita, per 
 ottenere una forma indeterminata nelle leggi costitutive del mezzo. Rappresenta 
 il duale del condensatore ideale. Il campo elettro-motore è nullo $\vec{E}_m=0$, la densità di corrente di induzione è nulla $\vec{J}_m=0$. Il campo elettrico $\vec{E}$ è tale 
-da presentare valori finiti per densità di corrente, ma non ricavabili dalle equazioni di Maxwell, poiché si presenta in forma indeterminata nelle leggi costitutive del mezzo. 
+da presentare valori sempre finiti di densità di corrente, ma non ricavabili dalle equazioni di Maxwell, poiché si presenta in forma indeterminata nelle leggi costitutive del mezzo. 
 Si ricava da Maxwell che il rotore del campo elettrico è pari al rotore del campo elettrico indotto, una particolare classe di campi elettro-motori generati all'interno di 
 fenomeni elettrici, $\nabla\times\vec{E}=\nabla\times\vec{E}_i$. 
 Poiché $\mu\neq0$, si ha $\nabla\times\vec{E}_i=\displaystyle-\frac{\partial B}{\partial t}$, mentre il rotore del campo magnetico è pari alla densità di corrente 
@@ -1482,13 +1647,13 @@ $\nabla\times\vec{H}=\vec{J}$, per cui i campi sono disaccoppiati.
     \end{cases}
 \end{equation*}
 
-Questa regione identifica un materiale puramente magnetico che non può condurre, ma può indurre un campo magnetico, tale regione verrà in seguito identificato con l'induttore, 
+Questa regione identifica un materiale puramente magnetico che non può condurre, ma può indurre un campo magnetico, tale regione verrà in seguito identificato con l'induttore ideale, 
 definito dalla grandezza fisica induttanza $L$. 
 
 \subsubsection{Regione R}
 
-Questa regione descrive il resistore ideale in uno stato di quasi-stazionarietà elettro-magnetica $\mu=0$, $\varepsilon=0$. Dove la resisività elettrica è non nulla e finita 
-$\sigma\neq0$, il campo elettro-motore e la densità di corrente indotta sono entrambi nulli $\vec{E}_m=0$, $\vec{J}_m=0$.
+Questa regione descrive il resistore ideale in uno stato di quasi-stazionarietà elettro-magnetica $\mu=0$, $\varepsilon=0$. Dove la conducibilità assume valori 
+finiti non nulli $\sigma\neq0$, il campo elettro-motore e la densità di corrente indotta sono entrambi nulli $\vec{E}_m=0$, $\vec{J}_m=0$.
 
 \begin{equation*}
     \begin{cases}
@@ -1503,9 +1668,9 @@ $\nabla\cdot\vec{J}=0$. Questa regione verrà identificata dal parametro concent
 
 \subsubsection{Regione FEM}
 
-In questa regione, generatore ideale di forza elettro motrice, è presenta una quasi-stazionarietà elettro-magnetica $\mu=0$ e $\varepsilon=0$. La resistività elettrica è nulla, 
-$\sigma\to\infty$, il campo elettro-motore è non nullo e finito, per cui è presente un campo elettro-statico $\vec{E}_s=\vec{E}_m$, poiché il campo elettrico indotto è nullo 
-$\vec{E}=0$ per $\mu=0$. Mentre la densità di corrente indotta è nulla $\vec{J}_m=0$. 
+In questa regione, generatore ideale di forza elettro motrice, è presenta una quasi-stazionarietà elettro-magnetica $\mu=0$ e $\varepsilon=0$. La conducibilità tende all'infinito, 
+il campo elettro-motore è non nullo e finito, per cui è presente un campo elettro-statico $\vec{E}_s=\vec{E}_m$, poiché il campo elettrico indotto è nullo $\vec{E}=0$ per 
+$\mu=0$. Mentre la densità di corrente indotta è nulla $\vec{J}_m=0$. 
 
 \begin{equation*}
     \begin{cases}
@@ -1516,13 +1681,13 @@ $\vec{E}=0$ per $\mu=0$. Mentre la densità di corrente indotta è nulla $\vec{J
 \end{equation*}
 
 La regione rappresenta un materiale dove è presente una pura forza elettro-motrice $\nabla\times\vec{E}\neq0$, e la densità di corrente è solenoidale $\nabla\cdot\vec{J}$. 
-Questa regione genera corrente, ma avendo conducibilità nulla, non la attraversa, invece fluisce nelle regioni collegate. 
+Questa regione genera una forza elettro-motrice pura verso l'esterno. 
 Verrà identificata da un parametro concentrato, la tensione erogata.
 
 \subsubsection{Region IG}
 
-Questa regione rappresenta un generatore ideale di corrente, in uno stato di quasi-stazionarietà elettro-magnetica $\mu=0$ e $\varepsilon=0$. La resistività elettrica è infinita 
-$\sigma\to\infty$, il campo elettro-motore è nullo $\vec{E}_m=0$, e la densità di corrente idotta è non nulla e definita $\vec{J}_m=0$. 
+Questa regione rappresenta un generatore ideale di corrente, in uno stato di quasi-stazionarietà elettro-magnetica $\mu=0$ e $\varepsilon=0$. La conducibilità è nulla $\sigma=0$, 
+il campo elettro-motore è nullo $\vec{E}_m=0$, e la densità di corrente idotta è non nulla e definita $\vec{J}_m=0$. 
 
 \begin{equation*}
     \begin{cases}
@@ -1532,11 +1697,12 @@ $\sigma\to\infty$, il campo elettro-motore è nullo $\vec{E}_m=0$, e la densità
     \end{cases}
 \end{equation*}
 
-Poiché la resistività elettrica tende ad infinito, il valore del campo elettrico $\vec{E}$ è indeterminato e non può essere ricavato mediante le equazioni di Maxwell. In 
-questa situazione, il campo elettrico è conservativo $\nabla\times\vec{E}=0$ e la densità di corrente è solenoidale $\nabla\cdot\vec{J}=0$. Rappresenta un materiale in cui il mezzo genera una corrente, verrò 
-in seguito identificato dal parametro concentrato corrente erogata.
+Poiché la conducibilità è nulla, il valore del campo elettrico $\vec{E}$ è indeterminato e non può essere ricavato mediante le equazioni di Maxwell. In 
+questa situazione, il campo elettrico è conservativo $\nabla\times\vec{E}=0$ e la densità di corrente è solenoidale $\nabla\cdot\vec{J}=0$. 
+Questa regione genera corrente, ma avendo conducibilità nulla, non la attraversa, invece fluisce nelle regioni collegate. Rappresenta un materiale in cui il 
+mezzo genera una corrente, verrò in seguito identificato dal parametro concentrato corrente erogata.
 
-\subsection{Bipolo/Multipolo e Porta/Multiporta}
+\subsection{Bipoli e Multipoli}
 
 Introducendo parametri concentrati è possibile ricomporre il problema della quasi-stazionarietà. 
 
@@ -1650,6 +1816,12 @@ equipotenziale, poiché l'unico elemento in queste regioni è rispettivamente il
 
 La regione C, viene identificata come il condensatore, una regione di quasi-stazionarietà magnetica, viene identificata come due linee parallele, collegate a morsetti. Viene 
 associato al parametro concentrato capacità $C$, misurata in Farad $F$. Queste grandezze devono essere attribuite a priori, non possono essere determinate sulla base di leggi. 
+In forma circuitale si rappresenta come:
+\begin{center}
+    \begin{circuitikz}
+        \draw(0,0) to[C=$C$] (2,0);
+    \end{circuitikz}
+\end{center}
 
 \begin{center}
     \begin{tikzpicture}[scale=2]
@@ -1728,10 +1900,10 @@ mezzo in forma differenziale del condensatore ideale risulta essere:
 Se ci trovassimo nella convenzione dei generatori, dovremmo cambiare di segno il potenziale. In forma integrale si considerano gli intervalli di integrazione dall'inizio 
 della misura per $t=0$ e alla fine della misura $t$. Il differenziale del potenziale rappresenta il differenziale di una differenza di potenziali, per cui il suo integrale rappresenta la differenza tra il potenziale alla fine della misura ed all'inizio:
 \begin{equation*}
-    \displaystyle\int_{v(0^-)}^{v(t)}dv=\frac{1}{C}\int_{0}^tidt
+    \displaystyle\int_{v(0^-)}^{v(t)}dv=\frac{1}{C}\int_{0^-}^tidt
 \end{equation*}
 Si usa la notazione $0^-$, per comprendere il valore che assume la grandezza all'inizio esatto della misurazione, ma è nella maggior parte dei casi superfluo, poiché la funzione 
-potenziale rispetto al tempo è continua quindi $v(0^-)=v(0^+)$. Si ottiene, risolvendo l'integrale:
+potenziale rispetto al tempo è (generalmente) continua quindi $v(0^-)=v(0^+)$. Si ottiene, risolvendo l'integrale:
 \begin{equation*}
     v(t)=\displaystyle\int_0^tidt+v(0)
 \end{equation*}
@@ -1773,20 +1945,277 @@ La capacità è definita come una grandezza positiva, per cui l'energia è stret
 \subsubsection{Induttore Ideale}
 
 Il bipolo induttore ideale è il duale del condensatore ideale, presenta uno stato di quasi-stazionarietà elettrica. La dualità permette di mantenere la forma delle equazioni 
-e cambiare solamente le grandezze fisiche usate. L'induttanza $L$ è il duale della capacità $C$. 
-Considerando la legge costitutiva del mezzo del condensatore, si ottiene dualmente la legge costitutiva dell'induttore ideale:
+e cambiare solamente le grandezze fisiche usate. L'induttanza $L$ è il duale della capacità $C$. In generale i parametri concentrati vengono definiti tra il rapporto di due 
+grandezze elettro-magnetiche.Considerando la legge costitutiva del mezzo del condensatore, si ottiene dualmente la legge costitutiva dell'induttore ideale:
 \begin{equation*}
     i(t)=\displaystyle C\frac{dv(t)}{dt}\to v(t)=L\frac{di(t)}{dt}
 \end{equation*}
 
-Si vuole esprimere il duale della carica per poter esprimere il potenziale come la derivata rispetto al tempo di una certa grandezza. Il duale della carica corrisponde 
-al flusso del campo magnetico, per cui la derivata rispetto al tempo di questo flusso equivale all'opposto una forza elettro motrice, ma poiché ci troviamo nella convenzione 
-degli utilizzatori, si considera di segno positivo:
+
+Dato un bipolo induttore ideale si vuole calcolare la sua induttanza, per dimostrate che si tratta del duale del condensatore ideale. Se fosse un multipolo sarebbe 
+associato a diversi parametri di mutua induttanza $M$, tanti quante le coppie di porte. In forma circuitale si rappresenta come:
+\begin{center}
+    \begin{circuitikz}
+        \draw(0,0) to[L=$L$] (2,0);
+    \end{circuitikz}
+\end{center}
+Si considera un filo avvolto in una bobina composta da $N$ spire, ogni spira rappresenta un giro del filo su sé stesso. Si suppone esista una corrente $i$ iniettata dall'esterno. 
+Presenta una conducibilità infinita, per cui la corrente non è vincolata se non dalla legge di Faraday-Neumann-Lenz. Si definisce un percorso chiuso $\lambda$, per semplificare 
+i calcoli poiché il valode della circuitazione non varia, formato da quattro segmenti. Uno di questi coincide con l'asse della bobina, chiamata in questa situazione solenoide, 
+altri due segmenti sono paralelli tra di loro e all'asse $x$. Questo percorso presenta una chiusura all'infinito, ovvero i due segmenti paralleli sono estesi all'infinito 
+matematico, dove sono connessi da un altro segmento, per descrivere un percorso chiuso. La spira viene attraversata da una corrente e produce quindi un campo magnetico $\vec{H}$, 
+all'interndo della spira il campo magnetico è concorde alla direzione dell'asse $y$, mentre all'esterno è discorde. Per cui il campo magnetico è sempre normale alle sezioni del 
+percorso parallele all'asse $x$. Il modulo campo magnetico è inversamente proporzionale alla distanza dal filo $H=\displaystyle\frac{i}{2\pi r}$ per cui sulla chiusura all'infinito 
+il campo magnetico è nullo. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2.5]
+        \draw[decoration={3d coil color=black,3d coil opacity=0.9,aspect=0.45, segment length=3.1mm, amplitude=3mm,3d coil},decorate] (0,1) -- (0,0);
+
+        \draw[-,very thick](0,1)--(-0.4,1);
+        \draw[-,very thick](0,0.098)--(-0.4,0.098);
+        \draw[->,very thick](-1,1)--(-0.5,1)node[above]{$i$};
+        \draw[->,very thick](-0.5,0.098)node[below]{$i$}--(-1,0.098);
+
+        \draw[-,very thick](2,1.2)--(0,1.2)node[above right]{$\lambda$}--(0,-0.1)--(2,-0.1);
+        \draw[->,very thick](0.95,1.2)--(1,1.2);
+        \draw[<-,very thick](0.95,-0.1)--(1,-0.1);
+        \draw[dashed,->, very thick](2,1.2)--(2,0.5)node[right]{$\vec{H}=0$};
+        \draw[dashed,very thick](2,0.5)--(2,-0.1);
+        \draw[->,very thick](1,1.2)--(1,0.8)node[right]{$\vec{H}$};
+        \draw[->,very thick](1,-0.1)--(1,-0.5)node[right]{$\vec{H}$};
+        \draw[->,very thick](0,0.25)--(0,0.75);
+        \node[right]at(0.2,0.5){$\vec{H}$};
+
+    \end{tikzpicture}
+\end{center}
+
+Il campo magnetico è uniformemente distribuito all'interno della superficie $S$ individuata da una spira, per cui si può considerare un qualsiasi percorso che passi parallelamente 
+all'asse della bobina all'interndo di essa. Si calcola la circuitazione in senso orario per questo percorso chiuso:
+\begin{gather*}
+    \displaystyle\oint_{\lambda}\vec{H}\cdot d\vec{\lambda}=\int_{\lambda_{1x}}H\cancelto{0}{-\hat{y}\cdot\hat{x}}dx+\int_{\lambda_{1y}}\cancelto{0}{\vec{H}}\cdot d\vec{y}+\int_{\lambda_{2x}}H\cancelto{0}{-\hat{y}\cdot\hat{x}}dx+\int_{\lambda_{2y}}H\cancelto{1}{\hat{y}\cdot\hat{y}}dy\\
+    \displaystyle\oint_{\lambda}\vec{H}\cdot d\vec{\lambda}=H\int_0^ldy=Hl
+\end{gather*}
+Dove $l$ rappresenta la lunghezza tra la prima e l'ultima spira del solenoide. La circuitazione del campo magnetico attraverso un percorso equivale al 
+flusso della densità di carica attraverso la superficie individuata da quel percorso, ovvero alla corrente concatenata a quel percorso. In questo caso la superficie 
+viene attraversata tante volte quante sono le spire della bobina, per cui il flusso attravrso la superficie corrispondere ad $N$ volte la corrente che passa per una sola spira, 
+poiché la corrente è la stessa per tutte le spire, perché sono elementi collegati in serie. La corrente concatenata è quindi pari ad $N$ volta la corrente che fluisce 
+attraverso la bobina $i_c=N\cdot i$. La circuitazione risulta quindi:
+\begin{gather*}
+    \displaystyle\oint_{\lambda}\vec{H}\cdot d\vec{\lambda}=i_c\to Hl=Ni
+\end{gather*}
+Il campo di induzione magnetica è quindi:
 \begin{equation*}
-    v=\displaystyle\frac{d\Phi(B)}{dt}
+    B=\mu H=\displaystyle\frac{\mu N}{l}i
 \end{equation*}
 
-I parametri concentrati vengono definiti tra il rapporto di due grandezze elettro-magnetiche. Viene definito il parametro concentrato mem, rapporto tra la carica ed il flusso, 
-parametro dei mem-sistori, nuovo componente dell'elettrotecnica. 
+
+Se la corrente fluisse liberamente per la bobina, ci si troverebbe in una situazione di corcocircuito, ma è presente un elemento che limita il valore della corrente, questo 
+elemento è la forza elettro motrice. 
+Se il flusso del campo magnetico, quindi se quest'ultimo è variabile nel tempo, viene generata, ai capi di ciascuna spira, una forza elettro motrice che si oppone alla variazione 
+del flusso, generato dalla corrente. Quindi questa forza elettro motrice generata dalla variazione del flusso si oppone alla corrente, per cui ha verso discorde. Ma nella 
+convenzione degli utilizzatori, si misura la forza contro elettro-motrice, per cui la tensione misurata corrisponde all'opposto di questa forza elettro motrice: 
+\begin{equation*}
+    v=-e
+\end{equation*}
+Per la terza legge di Maxwell:
+\begin{equation*}
+    e=-\displaystyle\frac{d\phi}{dt}
+\end{equation*}
+Dove si indica con $\phi$ il flusso del campo magnetico, per semplicità. Per cui il potenziale misurato tra l'uscita di una spira e l'ingresso della precedente corrisponde a:
+\begin{equation*}
+    v_k=\displaystyle\frac{d\phi}{dt}
+\end{equation*}
+Ma questo valore non corrisponde al valore misurato tra i due morsetti all'inizio ed alla fine della bobina. Per determinare il valore della tensione totale, si considerano 
+tutte le tensioni delle singole spire e la differenza di potenziale totale, viene poi applicato il secondo principio di Kirchoff, rispetto ad un riferimento orario:
+\begin{center}
+    \begin{tikzpicture}[scale=4]
+        \draw[->,very thick](0,0)--(0,0.2)node[right]{$v_N$};
+        \draw[dashed, ->,very thick](0,0.2)--(0,0.4);
+        \draw[->,very thick](0,0.4)--(0,0.6)node[right]{$v_3$};
+        \draw[->,very thick](0,0.6)--(0,0.8)node[right]{$v_2$};
+        \draw[->,very thick](0,0.8)--(0,1)node[above right]{$v_1$};
+        \draw[->,very thick](0.2,0)--(0.2,1)node[right]{$v$};
+        \draw[dashed](0.2,0)--(0,0);
+        \draw[dashed](0.2,1)--(0,1);
+
+        \draw[->,very thick]plot[smooth, domain=0.05:0.15](\x,{0.5+(0.0025-(\x-0.1)^2)^0.5});
+        \draw[-,very thick]plot[smooth, domain=0.05:0.137](\x,{0.5-(0.0025-(\x-0.1)^2)^0.5});
+    \end{tikzpicture}
+\end{center}
+Per cui le letture delle singole tensioni risultano di segno positivo, mentre la lettura totale risulta di sengo negativo, e la loro somma è nulla per il secondo principio. 
+Quindi la lettura totale si può esprimere come la somma delle singole differenze di potenziale tra due spire:
+\begin{equation*}
+    \displaystyle\sum_{k=1}^Nv_k-v=0\to v=\sum_{k=1}^Nv_k=\sum_{k=1}^N\frac{d\phi}{dt}=N\frac{d\phi}{dt}
+\end{equation*}
+
+Si definisce il flusso concatenato con le $N$ spire:
+\begin{equation*}
+    \phi_c=N\phi
+\end{equation*}
+Per cui la differenza di potenziale diventa:
+\begin{equation*}
+    v=N\displaystyle\frac{d\phi}{dt}=\frac{d\phi_c}{dt}
+\end{equation*}
+
+Il flusso per una singola spira si ottiene tramite l'integrale di flusso attraverso la superficie $S$ descritta dalla spira:
+\begin{equation*}
+    \phi=\displaystyle\int_S\vec{B}\cdot\hat{n}dS=\int_S\frac{\mu N i}{l}\cancelto{0}{\hat{y}\cdot\hat{n}}dS=\frac{\mu N S}{l}i\to \phi_c=N\phi=\frac{\mu N^2S}{l}i
+\end{equation*}
+Il potenziale si esprime quindi come:
+\begin{gather*}
+    v=\displaystyle\frac{d}{dt}\left(\frac{\mu N^2S}{l}i\right),\frac{\mu N^2S}{l}=\mbox{cost.}\\
+    v=\displaystyle\frac{\mu N^2S}{l}\frac{di}{dt}
+\end{gather*}
+Si definisce il parametro concentrato induttanza $L$ come:
+\begin{equation*}
+    L:=\displaystyle\frac{\mu N^2S}{l}
+\end{equation*} 
+In questo modo usando l'induttanza, si escludono nella legge costitutiva del mezzo materiale dell'induttore ideale, riferimenti alla geometria del componente. Questa grandezza 
+è duale della capacità. Come gli altri parametri viene assegnata, oppure può essere ricavata considerando l'andamento dell'induttore sul resto del circuito, ma non possono essere 
+determinate le proprietà geometriche dell'induttore data l'induttanza. Come per il condensatore ideale si considerano bipoli a parametri costanti, per cui non è presente 
+un componente derivata del parametro concentrato nella legge costitutiva, ciò è incluso quando si considerano circuiti tempo varianti.
+La legge costitutiva del mezzo materiale dell'induttore ideale in forma differenziale equivale a:
+\begin{equation}
+    v=\displaystyle L\frac{di}{dt}
+\end{equation}
+
+Questo bipolo è con memoria, per cui in forma integrale è presenta un fattore che considera lo stato iniziale della corrente passante attraverso la bobina:
+\begin{equation}
+    i(t)=\displaystyle\frac{1}{L}\int_{0^-}^tv(t)dt-i(0^-)
+\end{equation}
+
+
+
+Per determinare se questo bipolo è passivo si esprime la potenza mediante la formza differenziale della legge costitutiva. Nella convenzione degli utilizzatori, se l'energia 
+è strettamente positiva allora si tratta di un bipolo passivo, altrimenti se non si riesce a dimostrate la passività si deduce che è attivo. Questo processo è analogo 
+anche nella convenzione dei generatori, poiché si può dimostrare solo se è un bipolo è passivo, ed in caso dedurre se si tratti di un bipolo attivo. In questo caso si 
+considera:
+\begin{equation*}
+    P=vi=Li\displaystyle\frac{di}{dt}
+\end{equation*}
+Esprimendo la potenza come derivata dell'energia in funzione del tempo si ottiene:
+\begin{gather*}
+    \displaystyle\frac{d\mathscr{E}}{dt}=Li\frac{di}{dt}\\
+    d\mathscr{E}=Lidi\\
+    \displaystyle\int_{-\infty}^td\mathscr{E}=L\int_{-\infty}^tidi\\
+    \mathscr{E}(t)-\cancelto{0}{\mathscr{E}(-\infty)}=\displaystyle\frac{1}{2}L\left(i^2(t)-\cancelto{0}{i^2(-\infty)}\right)\\
+    \mathscr{E}=\displaystyle\frac{1}{2}Li^2
+\end{gather*}
+L'induttanza è una grandezza strettamente positiva, ed il quadrato della corrente è altrettanto positivo, per cui l'energia è strettamente positiva, quindi l'induttore ideale 
+è un bipolo passivo, ovvero assorbe energia dall'esterno. 
+Mentre la capacità si misura in Farad $F$, l'induttanza si misura in Henry $H$, che vengono definiti come:
+\begin{equation*}
+    [L]=\displaystyle\frac{V\cdot s}{A}=H
+\end{equation*}
+Le grandezze base in elettrotecnica sono l'Amper ed il Volt, per cui tutte le grandezze trattate si esprimono mediante in base a queste due. 
+
+\subsubsection{Resistore Ideale}
+
+Il resistore ideale è un bipolo in uno stato di quasi-stazionarietà elettro-magnetica, con una conducibilità non nulla e finita, per cui si può esprimere il campo 
+elettro-statico $\vec{E}=\vec{E}_s$, poiché in questa regione è stato definito il campo elettro-motore nullo, rispetto al vettore densità di corrente $\vec{J}$.
+In forma circuitale si rappresenta come:
+\begin{center}
+    \begin{circuitikz}
+        \draw(0,0) to[R=$R$] (2,0);
+    \end{circuitikz}
+\end{center}
+
+Si considera una sezione cilindrica di area $S$ e lunghezza $l$ di un filo, con una giacitura $\hat{n}$ entrante. Si pone con l'asse $x$ coassiale con l'asse del filo. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->,very thick](-0.75,0)--(-0.25,0)node[above]{$i$};
+        \draw[->,very thick](0,0)--(0.5,0)node[right]{$\hat{n}$};
+        \filldraw[black](0,0)circle(0.5pt);
+        \draw[->,very thick](0.75,0)--(1.25,0)node[right]{$\vec{J}$};
+        \draw[->,very thick](0.5,0.4)--(1.5,0.4)node[above right]{$\vec{E}$};
+
+        \draw[-,very thick]plot[smooth, domain=-0.1:0.1](\x,{(0.04-4*(\x)^2)^0.5});
+        \draw[-,very thick]plot[smooth, domain=-0.1:0.1](\x,{-(0.04-4*(\x)^2)^0.5});
+        \draw[-,very thick](0,0.2)--(2,0.2);
+        \draw[-,very thick](0,-0.2)--(2,-0.2);
+        \draw[-,very thick]plot[smooth, domain=2:2.1](\x,{(0.04-4*(\x-2)^2)^0.5});
+        \draw[-,very thick]plot[smooth, domain=2:2.1](\x,{-(0.04-4*(\x-2)^2)^0.5});
+
+        \draw[->,very thick](-0.2,-0.4)--(2.5,-0.4)node[above]{$x$};
+        \draw[dashed](0,-0.2)--(0,-0.4)node[below]{$x_A$};
+        \filldraw[black](0,-0.4)circle(0.5pt);
+        \draw[dashed](2,-0.2)--(2,-0.4)node[below]{$x_B$};
+        \filldraw[black](2,-0.4)circle(0.5pt);
+        \node[below]at(1,-0.4){$l$};
+    \end{tikzpicture}
+\end{center}
+
+Poiché il filo è monodimensionale, il gradiente del potenziale corrisponde alla sola derivata rispetto alla coordinata $x$, per cui si può esprimere il campo elettrico come:
+\begin{equation*}
+    -\nabla V=\vec{E}\to\displaystyle-\frac{dV}{dx}=E_x
+\end{equation*}
+Si integra dopo aver separato le variabili sull'intervallo da $A$ a $B$, si considera il punto $A$ sull'origine dell'asse $x$: $x_A=0$, di conseguenza la coordinata del punto 
+$B$ è: $x_B=l$. Poiché ci troviamo nella convenzione degli utilizzatori, la misura del potenziale corrisponde alla differenza tra il potenziale in $A$ meno il potenziale in $B$:
+$v=V_A-V_B$. 
+\begin{equation*}
+    \displaystyle-\int_{V_A}^{V_B}dV=\int_0^lE_xdx\to V_A-V_B=v=E_xl=\rho Jl
+\end{equation*}
+Dove $\rho$ rappresenta la resistività elettrica del materiale. Si considera la densità di corrente uniforme sulla sezione $S$, per cui:
+\begin{equation*}
+    \displaystyle\int_S\vec{J}\cdot\hat{n}dS=J\int_SdS\to JS=i\to J=\frac{i}{S}
+\end{equation*}
+Inserendo questa relazione nell'equazione precedente si ottiene:
+\begin{equation*}
+    v=\displaystyle\frac{\rho l}{S}i
+\end{equation*}
+Si definisce il parametro concentrato resistenza e la sua grandezza fisica ohm $\Omega$ come:
+\begin{equation*}
+    R:=\displaystyle\frac{\rho  l}{S}\,\left[\frac{V}{A}\right]=[\Omega]
+\end{equation*}
+In questo modo si ottiene la legge costitutiva del resistore ideale:
+\begin{equation}
+    v=Ri
+\end{equation}
+
+Considerando gli ohm, si possono esprimere le grandezze della capacità e dell'induttanza rispetto agli ohm:
+\begin{equation*}
+    F=\displaystyle\frac{s}{\Omega},\,\,H=\Omega\cdot s\to \frac{1}{\sqrt{[L\cdot C]}}=s^-1
+\end{equation*}
+Questa grandezza così ottenuta può esprimere sia la frequenza che la pulsazione, verrà in seguito determinata a quale delle due grandezze fisiche corrisponde. 
+Dalla legge costitutiva si può notare come non sia presenta un fattore differenziale, per cui il resistore ideale è un bipolo senza memoria. Per arrivare a questa legge 
+si è considerata la resistività costante, ma in realtà varia in base alla temperatura. La resistività di un materiale ad una data temperatura $T$ in gradi centigradi si esprime 
+come:
+\begin{equation*}
+    \rho_T=\rho\left(1+\alpha\theta^\Delta\right)
+\end{equation*}
+
+Di conseguenza le prestazioni dei parametri concentrati cambiano in base alle temperature su cui opera il circuito, e devono quindi essere raffreddati dall'esterno per mantenere 
+le loro prestazioni. Questo bipolo è passivo, poiché esprimendo la potenza tramite la legge costitutiva, in questa convenzione degli utilizzatori, si ottiene il prodotto 
+tra due grandezze positive:
+\begin{equation*}
+    p=vi=Ri^2
+\end{equation*}
+Quindi l'energia assorbita dal resistore non può che aumentare. Questa energia elettrica assorbita dal resistore, viene trasformata in un'altra forma di energia. Come 
+descritto poco prima, una resistenza provoca un aumento di temperatura, per cui l'energia elettrica viene convertita in energia termica grazie al resistore. Questo fenomeno 
+viene definito effetto Joule. Successivamente questa energia termica può essere convertita in altre forme di energia, ma queste forme, diverse da quella elettrica, non possono 
+essere considerate direttamente in simulazioni di circuiti. Per questo vengono usati i resistori all'interno delle simulazioni dei circuiti per identificare queste 
+conversioni di energia. Da ciò si può dedurre che un resistore, un oggeto che converte energia elettrica in altre forme di energia, è un vettore energetico per l'energia 
+elettrica; inoltre rappresenta il duale passivo del generatore, un oggetto che converte altre forme di energia in energia elettrica. 
+
+
+Considerando ora la potenza di un resistore, essa può essere espressa rispetto al quadrato della corrente $i$ o, mediante la conduttanza $G$, grandezza inversa della resistenza, 
+rispetto al quadrato del potenziale $v$. 
+\begin{equation*}
+    P=Ri^2=Gv^2
+\end{equation*}
+Se si voelsse aumentare l'effetto Joule, ovvero aumentare la potenza del resistore bisognerebbe aumentare o diminuire la resistenza. Poiché entrambe le azioni comporterebbero, 
+senza ulteriori ipotesi l'aumento della potenza e quindi dell'energia convertita. Questo problema si risolve guardando a quale grandezza, tra la corrente e la tensione, 
+viene iniettata dall'esterno all'interno di questa regione, tramite dei generatori di corrente o di tensione. La grandezza che viene iniettata determina quale delle due 
+forme della potenza da applicare per determinarne il suo aumento. Poiché la grandezza inserita dall'esterno rappresenta una variabile indipendente, mentre l'altra 
+grandezza dipende da quest'ultima e dai vari parametri concentrati della regione. Questo problema si può estendere per circuiti più complessi, dove viene risolto tramite 
+il teorema del massimo trasferimento di potenza, che determina il valore che i parametri concentrati devono assumere affinché si ottenga la massima conversione di energia 
+tra circuito ed ambiente esterno.  
+
+
+
+
+
 
 \end{document}
