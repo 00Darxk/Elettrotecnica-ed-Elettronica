@@ -1702,7 +1702,7 @@ questa situazione, il campo elettrico è conservativo $\nabla\times\vec{E}=0$ e 
 Questa regione genera corrente, ma avendo conducibilità nulla, non la attraversa, invece fluisce nelle regioni collegate. Rappresenta un materiale in cui il 
 mezzo genera una corrente, verrò in seguito identificato dal parametro concentrato corrente erogata.
 
-\subsection{Bipoli e Multipoli}
+\subsection{Bipoli Attivi e Passivi}
 
 Introducendo parametri concentrati è possibile ricomporre il problema della quasi-stazionarietà. 
 
@@ -2213,8 +2213,648 @@ grandezza dipende da quest'ultima e dai vari parametri concentrati della regione
 il teorema del massimo trasferimento di potenza, che determina il valore che i parametri concentrati devono assumere affinché si ottenga la massima conversione di energia 
 tra circuito ed ambiente esterno.  
 
+\subsubsection{Generatori Ideali}
+
+Non è possibile dimostrare la passività dei bipoli generatore ideale di corrente e generatore ideale di tensione, per cui questi bipoli sono attivi. Corrente e tensione sono 
+le due grandezze che questi generatori sono in grado di imprimere ai loro morsetti. 
+
+In forma circuitale si rappresenta il generatore di corrente dal simbolo:
+
+\begin{center}
+    \begin{circuitikz}
+        \draw(0,0) to[european current source=$i_g(t)$] (2,0)node[right]{$i(t)$};
+        \draw[<-](2,-0.6)--(0,-0.6)node[midway, below]{$v(t)$};
+    \end{circuitikz}
+\end{center}
+
+La corrente erogata dal generatore $i_g(t)$ corrisponde alla corrente misurata tra i due morsetti $i(t)$. Questa corrente è imposta e immutabile indipendentemente dalla tensione 
+stabilita ai suoi capi, anche se assume valori infiniti. Per cui questi generatori si chiamano anche di potenza infinita, poiché sono in grado di erogare potenza infinita. 
+Gli elementi attivi presentano dei vincoli per essere inseriti in un circuito. All'interno di un generatore di corrente deve fluire necessariamente una corrente, per cui deve 
+essere connesso ad elementi di un circuito, non può essere collegato al vuoto, ciò rappresenta un caso paradossale, poiché si produrrebbe una corrente che non potrebbe fluire. 
+Il vuoto può essere rappresentato da un generatore di corrente che genera corrente nulla, analogamente ad un resistore con resistenza infinita: 
+\begin{center}
+    \begin{circuitikz}
+        \draw(0,0) to[european current source] (2,0)node[above]{$i_g=0\,A$};
+        \draw(0,-1)to[R](2,-1)node[above]{$R=\infty\,\Omega$};
+    \end{circuitikz}
+\end{center}
 
 
+Il duale del generatore di corrente corrisponde al generatore di tensione. Genera una forza elettro motrice $e_g(t)$, che dipende dall'integrale di linea del campo 
+elettro-motore $\vec{E}_{em}$. La differenza di potenziale misurata $v(t)$ ai due capi del generatore corrisponde all'opposto della forza elettro-motrice, poiché misura il 
+campo elettro-statico $\vec{E}_s$ opposto al campo elettro-motore: 
+\begin{gather*}
+    e_g(t)=\displaystyle\int_{\lambda_f}\vec{E}_{em}\cdot d\vec{\lambda}\\
+    v(t)=-\displaystyle\int_{\lambda_s}\vec{E}_s\cdot d\vec{\lambda}
+\end{gather*}
+In forma circuitale si rappresenta dal simbolo:
+\begin{center}
+    \begin{circuitikz}
+        \draw(0,0) to[european voltage source] (2,0)node[right]{$i(t)$};
+        \draw[->](0.5,0.6)--(1.5,0.6)node[midway, above]{$e_g(t)$};
+        \draw[->](2,-0.6)--(0,-0.6)node[midway, below]{$v(t)$};
+    \end{circuitikz}
+\end{center}
+
+
+Poiché il campo elettro-statico è conservatore ha rotore nullo, quindi la circuitazione assume valore uguale per qualsiasi percorso $\lambda_v$, mentre la circuitazione 
+del campo elettro-motore dipende dal percorso $\lambda_f$ definito per erogare la forza elettro-motrice $e_g(t)$. 
+
+La corrente che attraversa il generatore può essere limitata o illimitata, mantenendo costante i valori di tensione tra i due morsetti, per cui anche questo generatore è vincolato. 
+Il generatore di corrente ideale non può essere collegato ad un cortocircuito ideale, poiché si misurerebbe tra i due morsetti una tensione nulla, ma ciò è impossibile, poiché 
+deve necessariamente essere erogata una tensione, ciò non può avvenire in una regione di equipotenzialità. Rappresenterebbe un modello paradossale, dove il valore della 
+tensione misurata assume due valori, uno nullo misurato tra i due morsetti nel cortocircuito, ed uno non nullo definto dal generatore di tensione, equivalente all'opposto 
+della forza elettro-motrice. 
+Può erogare una tensione nulla, in questo caso simula un cortocircuito ideale, analogo ad un resistore con un valore nullo di $0\,\Omega$: 
+\begin{center}
+    \begin{circuitikz}
+        \draw(0,0) to[european voltage source] (2,0)node[above]{$e_g=0\,V$};
+        \draw(0,-1)to[R](2,-1)node[above]{$R=0\,\Omega$};
+    \end{circuitikz}
+\end{center}
+
+I due generatori possono essere rappresentati da vari simboli diversi in forma circuitale, ma si considerano nel nostro caso solo i simboli precedentemente introdotti.  
+
+\subsection{Reti Senza Memoria}
+
+Due bipoli in serie hanno la stessa corrente, mentre due elementi in parallelo hanno la stessa tensione. Queste grandezze sono misurate ai morsetti iniziali e finali, per cui 
+sono misure esterne. 
+Viene definito lato un insieme di bipoli che stanno tra loro in serie o in parallelo, e sono uniti a formare un solo elemento. Questo elemento chiamato lato, ha la proprietà di avere 
+una tensione, in caso siano in parallelo, oppure una corrente, in caso siano in serie. 
+
+Questi bipoli possono essere sia attivi e passivi. In base a questa differenza si definiscono le reti senza memoria, dove sono presenti bipooli attivi e resistori, ovvero tutti 
+gli elementi che non presentano memoria, nelle loro leggi costitutive; mentre le reti con memoria comprendono elementi come gli induttori ed i condensatori, che presentano 
+uno stato iniziale da considerare. Si analizzano per ora solo reti senza memoria, poiché richiedono ulteriori modellazioni matematiche 
+quando vari elementi con memoria sono uniti tra di loro. Elementi omogenei corrispondono ad un elemento equivalente con la stessa unità di misura, mentre tra elementi diversi 
+si ottiene un elemento con grandezze fisiche diverse, per cui è necessario tenerli separati, queste grandezze possono essere uniformate introducendo il concetto di impedenza, 
+ed il suo inverso l'ammettenza, concetti più estesi che verrano discussi successivamente. Si comincia analizzando gli elementi più semplici ovvero i resistori ed i generatori 
+ideali. Le proprietà descritte da questi seplici elementi, descrivono comportamenti di circuiti più complessi, per cui si cercano delle proprietà fondamentali dei circuiti 
+dall'analisi di questi bipoli. Le proprietà fondamentali dei circuiti già analizzate sono i due principi di Kirchoff, queste proprietà non dipendono dal tipo di bipolo trattato, 
+ma sono prorpietà del circuito in quanto tale e corrispondono alle proprietà dei campi. Mentre le leggi costitutive descrivono il comportamento del campo attraverso uno 
+specifico bipolo.   
+
+\subsubsection{Resistori in Serie e Parallelo}
+
+Si considera un lato composto da una serie finita di $n$ resistori con resistenze $R_k$, per cui la corrente passante per ogni resistore è la stessa corrente misurata tra il 
+morsetto in entrata del primo resistore, individuato dal punto $A$, ed in uscita dell'ultimo resistore, individuato dal punto $B$. Questa equivale alla corrente di lato, 
+questo lato avrà anche una tensione, in convenzione degli utilizzatori $v=V_A-V_B$. 
+\begin{center}
+    \begin{circuitikz}
+        \draw(-1,0)node[left]{$A$}to[short, *-](-0.8,0)
+            to[short, i_=$i$](0,0)
+            to[R=$R_1$](2,0)
+            to[R=$R_2$](4,0);
+        \draw[dashed](4,0)--(5,0);
+        \draw(5,0)to[R=$R_n$](7,0)
+            to[short,-*](8,0)node[right]{$B$};
+
+        \draw[->, thick]plot[smooth, domain=4.30:4.70](\x,{-1+(0.04-(\x-4.5)^2)^0.5});
+        \draw[-, thick]plot[smooth, domain=4.30:4.60](\x,{-1-(0.04-(\x-4.5)^2)^0.5});  
+        \draw[dashed](-1,0)--(-1,-2);
+        \draw[dashed](8,0)--(8,-2);
+
+        \draw[->](8,-2)--(-1,-2)node[midway, below]{$v$};
+        \draw[<-](0.5,-0.5)--(1.5,-0.5)node[midway, below]{$v_1$};
+        \draw[<-](2.5,-0.5)--(3.5,-0.5)node[midway, below]{$v_2$};
+        \draw[<-](5.5,-0.5)--(6.5,-0.5)node[midway, below]{$v_n$};
+    \end{circuitikz}
+\end{center}
+
+
+Su ogni elemento si può considerare la differenza di potenziale relativa al solo resistore $R_k$, per ogni resistore. 
+Bisogna cercare percorsi utili al calcolo per i principi di Kirchoff, in questo caso si considera un percorso chiuso composto dal lato e dal volmetro, unico oggetto 
+rappresentato da freccie, ma si trova nel vuoto circuitale.  Se si considera una circuitazione in senso orario, concorde al volmetro nel percorso così definito, si può 
+applicare il principio di Kirchoff alle tensioni. 
+\begin{equation*}
+    v-\displaystyle\sum_{k=1}^nv_k=0\to v=\displaystyle\sum_{k=1}^nv_k
+\end{equation*}
+Per ogni resistore si può considerare la relazione $v_k=R_ki$, la corrente è costante per cui non si indica con il pedice:
+\begin{equation*}
+    v=\displaystyle\sum_{k=1}^nR_ki=i\cdot\sum_{k=1}^nR_k
+\end{equation*}
+
+Al posto della serie di resistori si inserisce un singolo resistore con resistenza $R_s$ pari alla somma algebrica delle resistenza dei singoli resistori. Questa 
+rappresentazione si chiama rappresentazione equivalente, questa equivalenza è valida solo per l'esterno, poiché le singoli tensioni tra i 
+resistori non sono più determinabili da questa rappresentazione, vegono perse le informazioni interne al lato. L'informazione è stata entropicizzata, è stata disordinata, e 
+non può essere determinata senza le infomrazioni precedenti alla rappresentazione equivalente. 
+\begin{equation}
+    v=R_si
+\end{equation}
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)node[left]{$A$} to[short, *-](0.2,0)
+                    to[short, i_=$i$](0.5,0)
+                    to[R=$R_s$](2.5,0)
+                    to[short, -*](3,0)node[right]{$B$};
+        \draw[<-](1,-0.5)--(2,-0.5)node[midway, below]{$v$};
+    \end{circuitikz}
+\end{center}
+
+
+Il caso di resistori montati in parallelo corrisponde al duale dei resistori in serie. Il lato corrisponde ad una serie di $m$ resistori montati in parallelo tra due elementi, 
+per cui la tensione è uguale per ogni resistore $R_k$. All'ingresso di tutta la configurazione del paralleo si inseriscono i morsetti, poiché devono essere esterni. 
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)to[short, *-, i=$i$](1.25,0)
+            to[R=$R_1$](1.25,-3)
+            to[short,-*,i=$i$](0,-3);
+        \draw[-](1.25,0)--(7,0);
+        \draw[-](1.25,-3)--(7,-3);
+        \draw (3,0)to[R=$R_2$](3,-3);
+        \draw (7,0)to[R=$R_m$](7,-3);
+
+        \draw[dashed](4,-1.5)--(5.9,-1.5);
+        \draw[->](0.75,-1)--(0.75,-2)node[midway, left]{$i_1$};
+        \draw[->](2.5,-1)--(2.5,-2)node[midway, left]{$i_2$};
+        \draw[->](6.5,-1)--(6.5,-2)node[midway, left]{$i_m$};
+        \draw[->](0,-2.75)--(0,-0.25)node[midway, left]{$v$};
+
+        \draw[-](1,-3.25)--(1.5,-2.75)--(7.25,-2.75)--(6.75,-3.25)node[midway, right]{$S$}--(1,-3.25);
+    \end{circuitikz}
+\end{center}
+
+Se viene attraversato da una corrente $i$ esterna, la corrente passante per ogni resistore $i_k$ è diversa, e per calcolare la corrente complessiva rispetto a queste singole 
+correnti si considera il principio di Kirchoff alle correnti. Per ottenere informazioni utili si sceglie una superficie $S$ contenente tutte le correnti $i_k$ in modo che 
+siano entranti nella superficie, mentre la corrente $i$ risulta uscente in questa configurazione. Le correnti entranti e quelle uscenti presentano un segno opposto, ed 
+arbitrario per cui la loro somma algebrica risulta nulla:
+
+\begin{equation*}
+    i-\displaystyle\sum_{k=1}^mi_k=0\to i=\sum_{k=1}^mi_k
+\end{equation*}
+Per la legge costitutiva dei resistori si può esprimere la corrente come $i_k=\displaystyle\frac{v}{R_k}$, allora la corrente totale corrisponde a: 
+\begin{equation*}
+    i=\displaystyle\sum_{k=1}^m\frac{v}{R_k}=v\sum_{k=1}^m\frac{1}{R_k}
+\end{equation*}
+
+Si considera $R_p$ la somma algebrica dei reciproci di ogni resistenza per ogni resistore in parallelo, pari alla resistenza equivalente misurata dall'esterno. Per 
+facilitare i calcoli si considera la conduttanza $G_k$, inverso della resistenza, per cui la conduttanza equivalente $G_p$ corrisponde alla somma algebrica delle conduttanze 
+singole dei resistori connessi in parallelo, per ottenere la resistenza equivalente si inverte il valore della conduttanza equivalente $\displaystyle R_p=\frac{1}{G_p}$: 
+\begin{gather*}
+    G_p=\displaystyle\sum_{k=1}^mG_k\to R_p=\displaystyle\frac{1}{G_p}
+\end{gather*} 
+\begin{equation}
+    i=\displaystyle\frac{v}{R_p}
+\end{equation}
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short, *-,i=$i$](0.5,0)
+                    to[R=$R_p$](2.5,0)
+                    to[short, -*](3,0);
+        \draw[<-](1,-0.5)--(2,-0.5)node[midway, below]{$v$};
+    \end{circuitikz}
+\end{center}
+
+Gli strumenti di misura esterni individuano solamente $R_p$, per ottenere l'informazione completa bisogna tornare alla condizione di partenza. 
+
+\subsubsection{Generatori Ideali in Serie e Parallelo}
+
+Generatori di tensione in parallelo o presentano tensione uguale tra di loro, altrimenti ci troviamo in una situazione paradossle, poiché in paralleo non possono essere presenti 
+generatori di tensione con tensioni differenti tra di loro. Analogamente non possono essere legati in serie generatori di corrente in serie, poiché oltre al caso banale si 
+arriva ad una situazione paradossale. 
+
+
+Si considera una serie di $n$ generatori di tensione collegati in serie, che presentano tutti una loro polarità, con una forza elettro motrice $e_{gk}$:  
+\begin{center}
+    \begin{circuitikz}
+        \draw(-1,0)to[short, *-,i_=$i$](0,0)
+            to[european voltage source](2,0)
+            to[european voltage source](4,0);
+        \draw[dashed](4,0)--(5,0);
+        \draw(5,0)to[european voltage source](7,0)
+            to[short,-*](8,0);
+
+        \draw[->, thick]plot[smooth, domain=4.30:4.70](\x,{-1+(0.04-(\x-4.5)^2)^0.5});
+        \draw[-, thick]plot[smooth, domain=4.30:4.60](\x,{-1-(0.04-(\x-4.5)^2)^0.5});  
+        \draw[dashed](-1,0)--(-1,-2);
+        \draw[dashed](8,0)--(8,-2);
+
+        \draw[->](8,-2)--(-1,-2)node[midway, below]{$v$};
+        \draw[<-](0.5,-0.5)--(1.5,-0.5)node[midway, below]{$v_1$};
+        \draw[<-](2.5,-0.5)--(3.5,-0.5)node[midway, below]{$v_2$};
+        \draw[<-](5.5,-0.5)--(6.5,-0.5)node[midway, below]{$v_n$};
+
+        \draw[->](0.5,0.5)--(1.5,0.5)node[midway, above]{$e_{g1}$};
+        \draw[<-](2.5,0.5)--(3.5,0.5)node[midway, above]{$e_{g2}$};
+        \draw[->](5.5,0.5)--(6.5,0.5)node[midway, above]{$e_{gn}$};
+    \end{circuitikz}
+\end{center}
+
+
+La tensione generata si misura nella convenzione degli utilizzatori, per cui potrà essere concorde o discorde al verso della forza elettro-motrice, per il 
+primo principio di Kirchoff si ottiene:
+\begin{equation*}
+    v=\displaystyle\sum_{k=1}^nv_k=\sum_{k=1}^n(\pm)e_{gk}
+\end{equation*}
+I valori numerici, compresi il segno, vengono inseriti nel momento del calcolo della tensione complessiva generata da questo lato. Segue che se sono montati in serie, 
+ed i generatori di tensione sono tali che la tensione complessiva è nulla, ci si trova in una situazione di cortocircuito ideale. La formza elettro-motrice totale 
+corrrisponde alla forza elettro-motrice equivalente $e_{gs}$ misurata dall'esterno. La sua polarità dipende dalla convenzione usata per misurare ogni singola $v_k$
+Se invece fossero montati in paralello, ciò porterebbe ad una situazione paradossale, poiché la tensione tra ogni elemento montato in parallelo è uguale e, escludendo il caso 
+banale dove ogni generatore di tensione genera la stessa tensione, le tensioni generate da ogni generatore non sono necessariemente uguali tra di loro, per cui ciò risulta 
+in un paradosso, poiché la stessa tensione deve sia essere uguale ad un valore arbitrario e uguale al valore di ogni altra tensione generata. 
+
+
+
+Analogamente un lato composto da generatori di corrente montati in serie porterebbe allo stesso paradosso, ignorando il caso banale dove tutte le correnti erogate assumono 
+lo stesso valore. Per cui si considera un lato composto da $m$ generatori di tensione montati in parallelo:
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)to[short, *-, i=$i$](1.25,0)
+            to[european current source=$i_{g1}$](1.25,-3)
+            to[short,-*,i=$i$](0,-3);
+        \draw[-](1.25,0)--(6.5,0);
+        \draw[-](1.25,-3)--(6.5,-3);
+        \draw (3,0)to[european current source=$i_{g2}$](3,-3);
+        \draw (6.5,0)to[european current source=$i_{gm}$](6.5,-3);
+
+        \draw[dashed](3.6,-1.5)--(5.9,-1.5);
+        \draw[->](0,-2.75)--(0,-0.25)node[midway, left]{$v$};
+
+        \draw[-](1,-3.25)--(1.5,-2.75)--(6.75,-2.75)--(6.25,-3.25)node[midway, right]{$S$}--(1,-3.25);
+    \end{circuitikz}
+\end{center}
+
+Per il principio di Kirchoff alle correnti:
+
+\begin{equation*}
+    i=\displaystyle\sum_{k=1}^n(\pm)i_{gk}
+\end{equation*}
+
+
+Si considera una serie di $n$ resistori ed $m$ generatori di tensione, ogni elemento genera una tensione, per cui per il primo principio di Kirchoff si ottiene una somma 
+di due sommatorie: 
+
+\begin{center}
+    \begin{circuitikz}
+        \draw(-1,0)to[short, *-,i_=$i$](0,0)
+            to[european voltage source](2,0);
+        \draw[dashed](2,0)--(3,0);
+        \draw(3,0)to[european voltage source](5,0)
+            to[R=$R_1$](7,0);
+        \draw[dashed](7,0)--(8,0);
+        \draw(8,0)to[R=$R_n$](10,0)
+            to[short,-*](11,0);
+
+        \draw[->, thick]plot[smooth, domain=2.30:2.70](\x,{-1+(0.04-(\x-2.5)^2)^0.5});
+        \draw[-, thick]plot[smooth, domain=2.30:2.60](\x,{-1-(0.04-(\x-2.5)^2)^0.5});  
+        \draw[dashed](-1,0)--(-1,-2);
+        \draw[dashed](11,0)--(11,-2);
+
+        \draw[->](11,-2)--(-1,-2)node[midway, below]{$v$};
+        \draw[<-](0.5,-0.5)--(1.5,-0.5)node[midway, below]{$v_{g1}$};
+        \draw[<-](3.5,-0.5)--(4.5,-0.5)node[midway, below]{$v_{gm}$};
+        \draw[->](0.5,0.5)--(1.5,0.5)node[midway, above]{$e_{g1}$};
+        \draw[<-](3.5,0.5)--(4.5,0.5)node[midway, above]{$e_{gm}$};
+        \draw[<-](5.5,-0.5)--(6.5,-0.5)node[midway, below]{$v_{R1}$};
+        \draw[<-](8.5,-0.5)--(9.5,-0.5)node[midway, below]{$v_{Rn}$};
+    \end{circuitikz}
+\end{center}
+
+
+Equivale a sommare tra di loro la serie dei generatori con la serie dei resistori, per cui il lato corrisponde ad un resistore equivalente posto in serie 
+con un generatore di tensione equivalente, con valori determinati dalla due sommatorie:
+
+\begin{equation*}
+    v=\displaystyle\sum_{k=1}^mv_{gk}+\sum_{j=1}^nv_{Rj}=\sum_{k=1}^m(\pm)e_{gk}+i\sum_{j=1}^nR_j=-e_{gs}+R_si=v_{gs}+v_R
+\end{equation*}
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short, *-, i=$i$](1,0)
+                    to[R=$R_s$](3,0)
+                    to[european voltage source](5,0)
+                    to[short,-*](6,0);
+        \draw[->](2.5,-0.5)--(1.5,-0.5)node[midway, below]{$v_R$};
+        \draw[->](4.5,-0.5)--(3.5,-0.5)node[midway, below]{$v_{gs}$};
+        \draw[<-](4.5,0.5)--(3.5,0.5)node[midway, above]{$e_{gs}$};
+        \draw[<-](0,-1)--(6,-1)node[midway, below]{$v$};
+        \draw[dashed](0,0)--(0,-1);
+        \draw[dashed](6,0)--(6,-1);
+    \end{circuitikz}
+\end{center}
+
+
+Si considera ora un lato composto da $n$ resistori e $m$ generatori di corrente posti in parallelo. 
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)to[short, *-, i=$i$](1.25,0)
+            to[european current source=$i_{g1}$](1.25,-3)
+            to[short,-*,i=$i$](0,-3);
+        \draw[-](1.25,0)--(7.25,0);
+        \draw[-](1.25,-3)--(7.25,-3);
+        \draw (3,0)to[european current source=$i_{gm}$](3,-3);
+        \draw[dashed](1.75,-1.5)--(2.5,-1.5);
+
+        \draw (4.5,0)to[R=$R_1$](4.5,-3);
+        \draw[->](4,-1)--(4,-2)node[midway, left]{$i_1$};
+        \draw[dashed](5.25,-1.5)--(6.25,-1.5);
+        \draw (7.25,0)to[R=$R_n$](7.25,-3);
+        \draw[->](6.75,-1)--(6.75,-2)node[midway, left]{$i_n$};
+
+        \draw[->](0,-2.75)--(0,-0.25)node[midway, left]{$v$};
+
+        \draw[-](1,-3.25)--(1.5,-2.75)--(7.5,-2.75)--(7,-3.25)node[midway, right]{$S$}--(1,-3.25);
+    \end{circuitikz}
+\end{center}
+
+Ciò equivale ad un lato composto da un resistore con una conduttanza equivalente $G_p$ ed un generatore di corrente, con un verso concorde al verso scelto per scrivere le 
+sommatorie, con una corrente equivalente $i_{gp}$ in parallelo tra di loro:
+
+\begin{equation*}
+    i=\displaystyle\sum_{k=1}^mi_{gk}+\sum_{j=1}^ni_{Rj}=i_{gp}+v\sum_{j=1}^n\frac{1}{R_j}=i_{gp}+\frac{v}{R_p}=i_{gp}+iG_p=i_{gp}+i_R
+\end{equation*}
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short,*-,i=$i$](1,0)
+                    to[R=$R_s$](1,-3)
+                    to[short, -*](0,-3);
+        \draw (1,0) to[short] (2.5,0)
+                    to[european current source=$i_{gp}$](2.5,-3)
+                    to[short](1,-3);
+        \draw[->](0.75,-0.5)--(0.75,-2.5)node[midway, left]{$i_R$};
+        \draw[->](0,-2.75)--(0,-0.25)node[midway, left]{$v$};
+    \end{circuitikz}
+\end{center}
+
+Un lato equivale ad un bipolo con leggi costituvie più complesse e può contenere elementi attivi e passivi insieme, ma ha sempre una tensione ed una corrente. 
+
+\subsection{Reti con Memoria}
+
+\subsubsection{Condensatori in Serie e Parallelo}
+
+Si considera un sequenza di $n$ condensatori in serie:
+
+\begin{center}
+    \begin{circuitikz}
+        \draw(-1,0)to[short, *-,i_=$i$](0,0)
+            to[C=$C_1$](2,0)
+            to[C=$C_2$](4,0);
+        \draw[dashed](4,0)--(5,0);
+        \draw(5,0)to[C=$C_n$](7,0)
+            to[short,-*](8,0);
+
+        \draw[->, thick]plot[smooth, domain=4.30:4.70](\x,{-1+(0.04-(\x-4.5)^2)^0.5});
+        \draw[-, thick]plot[smooth, domain=4.30:4.60](\x,{-1-(0.04-(\x-4.5)^2)^0.5});  
+        \draw[dashed](-1,0)--(-1,-2);
+        \draw[dashed](8,0)--(8,-2);
+
+        \draw[->](8,-2)--(-1,-2)node[midway, below]{$v$};
+        \draw[<-](0.5,-0.5)--(1.5,-0.5)node[midway, below]{$v_1$};
+        \draw[<-](2.5,-0.5)--(3.5,-0.5)node[midway, below]{$v_2$};
+        \draw[<-](5.5,-0.5)--(6.5,-0.5)node[midway, below]{$v_n$};
+    \end{circuitikz}
+\end{center}
+
+La situazione dei condensatori in parallelo viene studiata in fisica mediante i campi, adoperando la definizione propria dei condensatori $C=Q/v$. Per attuare un approccio 
+circuitale si considera la legge costitutiva del bipolo con memoria:
+\begin{gather*}
+    i=C\displaystyle\frac{dv}{dt}\\
+    v=\displaystyle\frac{1}{C}\int_{0^-}^tidt+v(0^-)
+\end{gather*}
+Per ottenere lo stesso risultato ottenuto fisicamente, bisogna considerare solo condensatori scarichi, ovvero con memoria nulla. In caso siano carichi si considera un 
+generatore di tensione che genera esattamente una tensione di $v(0^-)$ corrispondente alla memoria del condensatore. In questo modo si introducono informazioni che non 
+esistevano precedentemente, costruendo un circuito applicando il principio di Kirchoff alle tensione sulla relazione $v=v_C+v(0^-)$, dove $v_C$ rappresenta l'evoluzione 
+della tensione allo scorrere della corrente: 
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short, *-, i=$i$](1,0)
+                    to[C=$C$](3,0)
+                    to[european voltage source](5,0)
+                    to[short,-*](6,0);
+        \draw[->](2.5,1)--(1.5,1)node[midway, above]{$v_C$};
+        \draw[->](4.5,1)--(3.5,1)node[midway, above]{$v(0^-)$};
+        \draw[<-](0,-1)--(6,-1)node[midway, below]{$v$};
+        \draw[dashed](0,0)--(0,-1);
+        \draw[dashed](6,0)--(6,-1);
+    \end{circuitikz}
+\end{center}
+
+Per ogni condensatore fluisce una stessa corrente $i$. Si considera lo stesso ragionamento dei resistori in serie, processo analogo per ogni serie di elementi uniformi 
+connessi in serie:
+\begin{equation*}
+    v=\displaystyle\sum_{k=1}^nv_k=\sum_{k=1}^n\left(\frac{1}{C_k}\int_{0^-}^tidt+{v_k(0^-)}\right)
+\end{equation*} 
+La corrente che passa per ogni $k-$esimo condensatore è la stessa, per cui si raccoglie nella sommatoria. L'inverso della capacità si chiama elastanza, ma viene usata 
+raramente. L'integrale della corrente corrisponde alla carica contenuta in un condensatore, corrisponde all'analisi fisica che considera la carica totale contenuta da tutti 
+i condensatori la stessa. 
+\begin{equation*}
+    v=\displaystyle\int_{0^-}^tidt\sum_{k=1}^n\frac{1}{C_k}+\sum_{k=1}^nv_k(0^-)
+\end{equation*}
+Spesso si trascurano le condizioni iniziali; per ipotesi si considera solo il caso dove i condensatori sono scarichi. Si definisce allora la capacità equivalente $C_s$:
+\begin{equation*}
+    \displaystyle\frac{1}{C_s}=\sum_{k=1}^n\frac{1}{C_k}
+\end{equation*}
+
+La legge costitutiva del lato composto da condensatori in serie risulta essere:
+\begin{equation*}
+    v=\displaystyle\frac{1}{C_s}\int_{0^-}^tidt+\sum_{k=1}^nv(0^-)
+\end{equation*}
+Per facilitarne l'analisi si considera il componente tensione iniziale nulla per ogni condensatore:
+\begin{equation}
+    v=\displaystyle\frac{1}{C_s}\int_{0^-}^tidt
+\end{equation}
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short, *-,i_=$i$](0.5,0)
+                    to[C=$C_s$](2.5,0)
+                    to[short, -*](3,0);
+        \draw[<-](1,-0.5)--(2,-0.5)node[midway, below]{$v$};
+    \end{circuitikz}
+\end{center}
+
+Non si considera l'elastanza poiché le grandezze analizzate in questi casi circuitali verrano collegate direttamente alla corrente ed alla tensione tramite le impedenze. 
+I circuiti con bipoli con memoria sono tempo varianti e l'uso delle impedenze ne facilita l'analisi. 
+
+
+
+
+
+Si considera ora un lato composto da $m$ condensatori in parallelo:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)to[short, *-, i=$i$](1.25,0)
+            to[C=$C_1$](1.25,-3)
+            to[short,-*,i=$i$](0,-3);
+        \draw[-](1.25,0)--(7,0);
+        \draw[-](1.25,-3)--(7,-3);
+        \draw (3.5,0)to[C=$C_2$](3.5,-3);
+        \draw (7,0)to[C=$C_m$](7,-3);
+
+        \draw[dashed](4.5,-1.5)--(5.9,-1.5);
+        \draw[->](0.75,-1)--(0.75,-2)node[midway, left]{$i_1$};
+        \draw[->](3,-1)--(3,-2)node[midway, left]{$i_2$};
+        \draw[->](6.5,-1)--(6.5,-2)node[midway, left]{$i_m$};
+        \draw[->](0,-2.75)--(0,-0.25)node[midway, left]{$v$};
+
+        \draw[-](1,-3.25)--(1.5,-2.75)--(7.25,-2.75)--(6.75,-3.25)node[midway, right]{$S$}--(1,-3.25);
+    \end{circuitikz}
+\end{center}
+
+Poiché bisogna analizzare in termini correnti si considera la legge costitutiva in forma locale per ogni condensatore $C_k$:
+\begin{equation*}
+    i_k=C_k\displaystyle\frac{dv}{dt}
+\end{equation*}
+
+La variazione di tensione è la stessa su tutti i condensatori posti in parallelo. Analogamente ai resistori in parallelo si considera una superficie $S$ dove tutte le correnti 
+passanti per i condensatori sono concordi, mentre la corrente esterna è di verso discorde. Su questa superficie si applica il principio di Kirchoff alle correnti, scegliendo 
+arbitrariamente un verso di riferimento poiché la loro è sempre nulla. Per ogni insieme di elementi omogenei montati in parallelo si usa questo stesso ragionamento. 
+Si ottiene quindi:
+\begin{equation*}
+    i-\displaystyle\sum_{k=1}^mi_k=0\to i=\sum_{k=1}^mi_k=\sum_{k=1}^m\left(C_k\frac{dv}{dt}\right)=\frac{dv}{dt}\sum_{k=1}^mC_k
+\end{equation*}
+
+Si definisce capaità equivalente $C_p$ la somma algebrica di tutte le capacità dei condensatori posti in parallelo:
+\begin{equation*}
+    C_p=\displaystyle\sum_{k=1}^nC_k
+\end{equation*}
+
+Per cui la legge costitutiva del mezzo del lato composto da condensatori montati in parallelo si esprime tramite la seguente equazione:
+\begin{equation}
+    i=C_p\displaystyle\frac{dv}{dt}
+\end{equation}
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short, *-,i_=$i$](0.5,0)
+                    to[C=$C_p$](2.5,0)
+                    to[short, -*](3,0);
+        \draw[<-](1,-0.5)--(2,-0.5)node[midway, below]{$v$};
+    \end{circuitikz}
+\end{center}
+
+\subsubsection{Induttori in Serie e Parallelo}
+
+Poiché l'induttore rappresenta il duale del condensatore, si applica lo stesso ragionamento per ottenere i risultati. Negli induttori in serie si arriva alla formula 
+duale per i condensatori in parallelo, mentre per gli induttori in parallelo, la formula duale dei condensatori in serie. 
+Date le leggi costitutive dell'induttore ideale in forma locale ed integrale:
+\begin{gather*}
+    v=L\displaystyle\frac{di}{dt}\\
+    i=\displaystyle\int_{0^-}^tvdt+i(0^-)
+\end{gather*}
+
+
+
+Per un lato composto da $n$ induttori montati in serie si considera la forma locale, e si applica il principio di Kirchoff alle tensioni:
+\begin{center}
+    \begin{circuitikz}
+        \draw(-1,0)to[short, *-,i_=$i$](0,0)
+            to[L=$L_1$](2,0)
+            to[L=$L_2$](4,0);
+        \draw[dashed](4,0)--(5,0);
+        \draw(5,0)to[L=$L_n$](7,0)
+            to[short,-*](8,0);
+
+        \draw[->, thick]plot[smooth, domain=4.30:4.70](\x,{-1+(0.04-(\x-4.5)^2)^0.5});
+        \draw[-, thick]plot[smooth, domain=4.30:4.60](\x,{-1-(0.04-(\x-4.5)^2)^0.5});  
+        \draw[dashed](-1,0)--(-1,-2);
+        \draw[dashed](8,0)--(8,-2);
+
+        \draw[->](8,-2)--(-1,-2)node[midway, below]{$v$};
+        \draw[<-](0.5,-0.5)--(1.5,-0.5)node[midway, below]{$v_1$};
+        \draw[<-](2.5,-0.5)--(3.5,-0.5)node[midway, below]{$v_2$};
+        \draw[<-](5.5,-0.5)--(6.5,-0.5)node[midway, below]{$v_n$};
+    \end{circuitikz}
+\end{center}
+
+\begin{equation*}
+    v-\displaystyle\sum_{k=1}^nv_k=0\to v=\sum_{k=1}^nv_k=\sum_{k=1}^n\left(L_k\frac{di}{dt}\right)=\frac{dv}{dt}\sum_{k=1}^mL_k
+\end{equation*}
+La corrente passante per ogni induttore è la stessa per cui è uguale anche la sua variazione nel tempo. Si definisce l'induttanza equivalente come la somma delle induttanze 
+dei singoli induttori posti in serie:
+
+\begin{equation*}
+    L_s=\displaystyle\sum_{k=1}^nL_k
+\end{equation*}
+
+Si può quindi rappresentare questo lato come un singolo induttore di induttanza $L_s$:
+
+\begin{equation}
+    v=L_s\displaystyle\frac{di}{dt}
+\end{equation}
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short, *-,i_=$i$](0.5,0)
+                    to[L=$L_s$](2.5,0)
+                    to[short, -*](3,0);
+        \draw[<-](1,-0.5)--(2,-0.5)node[midway, below]{$v$};
+    \end{circuitikz}
+\end{center}
+
+
+
+Per un lato composto da $m$ induttori montati in parallelo si considera la forma integrale della legge costitutiva, e si applica il principiod i Kirchoff alle correnti su una 
+superficie $S$, analogamente al caso dei resistori e dei condensatori:
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)to[short, *-, i=$i$](1.25,0)
+            to[L=$L_1$](1.25,-3)
+            to[short,-*,i=$i$](0,-3);
+        \draw[-](1.25,0)--(7,0);
+        \draw[-](1.25,-3)--(7,-3);
+        \draw (3,0)to[L=$L_2$](3,-3);
+        \draw (7,0)to[L=$L_m$](7,-3);
+
+        \draw[dashed](4,-1.5)--(5.9,-1.5);
+        \draw[->](0.75,-1)--(0.75,-2)node[midway, left]{$i_1$};
+        \draw[->](2.5,-1)--(2.5,-2)node[midway, left]{$i_2$};
+        \draw[->](6.5,-1)--(6.5,-2)node[midway, left]{$i_m$};
+        \draw[->](0,-2.75)--(0,-0.25)node[midway, left]{$v$};
+
+        \draw[-](1,-3.25)--(1.5,-2.75)--(7.25,-2.75)--(6.75,-3.25)node[midway, right]{$S$}--(1,-3.25);
+    \end{circuitikz}
+\end{center}
+
+\begin{equation*}
+    i-\displaystyle\sum_{k=1}^mi_k=0\to i=\sum_{k=1}^mi_k=\sum_{k=1}^m\left(\frac{1}{L_k}\int_{0^-}^tvdt+i_k(0^-)\right)=\int_{0^-}^tvdt\sum_{k=1}^m\frac{1}{L_k}+\sum_{k=1}^mi_k(0^-)
+\end{equation*}
+
+Si definisce l'indutanza equivalente come:
+
+\begin{equation*}
+    \displaystyle\frac{1}{L_p}=\sum_{k=1}^n\frac{1}{L_k}
+\end{equation*}
+
+Per cui la legge costitutiva di un lato composto da induttori in parallelo, considerati per semplicità tutti scarichi, corrisponde a:
+\begin{equation}
+    i=\displaystyle\frac{1}{L_p}\int_{0^-}^tvdt
+\end{equation}
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short, *-,i_=$i$](0.5,0)
+                    to[L=$L_p$](2.5,0)
+                    to[short, -*](3,0);
+        \draw[<-](1,-0.5)--(2,-0.5)node[midway, below]{$v$};
+    \end{circuitikz}
+\end{center}
+
+Altrimenti sarebbe necessario inserire un componente generatore ideale di corrente, che eroga una quantità di corrente pari alla memoria complessiva di ogni induttore:
+\begin{gather*}
+    i_p=\displaystyle\sum_{k=1}^mi_k(0^-)\\
+    i_L=\displaystyle\frac{1}{L_p}\int_{0^-}^tvdt\\
+    i=i_L+i_p
+\end{gather*}
+Considerando il principio di Kirchoff alle correnti è possibile costruire il circuito equivalente a quest'espressione:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short,*-,i=$i$](1,0)
+                    to[L=$L_s$](1,-3)
+                    to[short, -*](0,-3);
+        \draw (1,0) to[short] (2.5,0)
+                    to[european current source=$i_p$](2.5,-3)
+                    to[short](1,-3);
+        \draw[->](0.75,-0.5)--(0.75,-2.5)node[midway, left]{$i_L$};
+        \draw[->](0,-2.75)--(0,-0.25)node[midway, left]{$v$};
+    \end{circuitikz}
+\end{center}
 
 
 
