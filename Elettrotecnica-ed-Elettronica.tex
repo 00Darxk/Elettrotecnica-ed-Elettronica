@@ -14,167 +14,6 @@
 \usepackage{circuitikz}
 
 
-% code from the top answer to the question below:
-% https://tex.stackexchange.com/questions/449675/
-\usetikzlibrary{decorations.pathmorphing}
-\pgfkeys{%
-    /pgf/decoration/.cd,
-    3d coil color/.store in=\TDCoilColor, 
-    3d coil color/.initial=black,
-    3d coil color=black,
-    3d coil width/.store in=\TDCoilWidth, 
-    3d coil width/.initial=0.4pt,
-    3d coil width=0.4pt,
-    3d coil dist/.store in=\TDCoilDist, 
-    3d coil dist/.initial=0.6pt,
-    3d coil dist=0.6pt,
-    3d coil opacity/.store in=\TDCoilOpacity, 
-    3d coil opacity/.initial=1,
-    3d coil opacity=1
-}
-
-\makeatletter % https://tex.stackexchange.com/a/219088/121799
-\tikzset{get stroke color/.code={%
-    \expandafter\global% Jump over, now we have \global
-    \expandafter\let% Jump over now we have \global\let
-    \expandafter\pgfsavedstrokecolor% Jump we have \global\let\pgf...
-    \csname\string\color@pgfstrokecolor\endcsname% Finally expand this and put it at the end 
-    },                                           % \global\let\pgf...{} in expanded form 
-    restore stroke color/.code={\pgf@setstrokecolor#1},
-}
-\def\pgfpoint@onthreedcoil#1#2#3{%
-  \pgf@x=#1\pgfdecorationsegmentamplitude%
-  \pgf@x=\pgfdecorationsegmentaspect\pgf@x%
-  \pgf@y=#2\pgfdecorationsegmentamplitude%
-  \pgf@xa=0.083333333333\pgfdecorationsegmentlength%
-  \advance\pgf@x by#3\pgf@xa%
-  \advance\pgf@x by-\initialoffset pt%
-}
-
-% coil decoration
-%
-% Parameters: \pgfdecorationsegmentamplitude, \pgfdecorationsegmentlength,
-
-\pgfdeclaredecoration{3d coil}{initial}
-{ 
-    \state{initial}[width=0.25*\pgfdecorationsegmentlength+\pgfdecorationsegmentaspect*\pgfdecorationsegmentamplitude,
-    next state=coil, persistent precomputation={
-    \tikzset{get stroke color}
-    \pgfmathsetmacro{\initialoffset}{0.25*\pgfdecorationsegmentlength+\pgfdecorationsegmentaspect*\pgfdecorationsegmentamplitude}
-  }]
-  {%
-    \pgfpathmoveto{\pgfpointorigin} 
-    \pgfsetstrokecolor{\TDCoilColor}
-    \pgfsetstrokeopacity{\TDCoilOpacity}
-    \pgfsetlinewidth{1.5*\TDCoilWidth} 
-    \pgfpathcurveto
-    {\pgfpoint@oncoil{0    }{ 0.555}{1}}
-    {\pgfpoint@oncoil{0.445}{ 1    }{2}}
-    {\pgfpoint@oncoil{1    }{ 1    }{3}}
-    \pgfusepath{stroke}
-    \pgfcoordinate{TD@coilast}{\pgfpoint@oncoil{1    }{ 1    }{3}} 
-    }
-  \state{coil}[switch if less than=%
-    1.25\pgfdecorationsegmentlength+%
-    \pgfdecorationsegmentaspect\pgfdecorationsegmentamplitude+%
-    \pgfdecorationsegmentaspect\pgfdecorationsegmentamplitude to last,
-               width=+\pgfdecorationsegmentlength]
-    { % line in the back
-    %
-    \pgfsetstrokecolor{\TDCoilColor}
-    \pgfsetfillcolor{\TDCoilColor}
-    \pgfsetstrokeopacity{\TDCoilOpacity}
-    \pgfpathmoveto{\pgfpointanchor{TD@coilast}{center}}
-    \pgfsetlinewidth{\TDCoilWidth} 
-    \pgfpathcurveto
-    {\pgfpoint@onthreedcoil{1.555}{ 1    }{4}}
-    {\pgfpoint@onthreedcoil{2    }{ 0.555}{5}}
-    {\pgfpoint@onthreedcoil{2    }{ 0    }{6}}
-    \pgfpathcurveto
-    {\pgfpoint@onthreedcoil{2    }{-0.555}{7}}
-    {\pgfpoint@onthreedcoil{1.555}{-1    }{8}}
-    {\pgfpoint@onthreedcoil{1    }{-1    }{9}}
-    \pgfusepath{stroke} 
-    %
-    % white background for front thick part
-    %
-    \pgfsetstrokeopacity{1}
-    \pgfsetstrokecolor{white}
-    \pgfsetfillcolor{white}
-    \pgfsetlinewidth{1.5*\TDCoilWidth+1.5*\TDCoilDist}
-    \pgfpathmoveto{\pgfpoint@onthreedcoil{1    }{ 1    }{3}}
-    \pgfpathmoveto{\pgfpoint@onthreedcoil{1    }{-1    }{9}}
-    % draw forward
-    \pgfpathcurveto
-    {\pgfpoint@onthreedcoil{0.445}{-1    }{10}}
-    {\pgfpoint@onthreedcoil{0    }{-0.555}{11.25}}
-    {\pgfpoint@onthreedcoil{0    }{ 0    }{12.5}}
-    \pgfpathcurveto
-    {\pgfpoint@onthreedcoil{0    }{ 0.555}{13.25}}
-    {\pgfpoint@onthreedcoil{0.445}{ 1    }{14.25}}
-    {\pgfpoint@onthreedcoil{1    }{ 1    }{15}}
-    % draw the curve back
-    \pgfpathcurveto
-    {\pgfpoint@onthreedcoil{0.445}{ 1    }{14}}
-    {\pgfpoint@onthreedcoil{0    }{ 0.555}{12.75}}
-    {\pgfpoint@onthreedcoil{0    }{ 0    }{11.5}}
-    \pgfpathcurveto
-    {\pgfpoint@onthreedcoil{0    }{-0.555}{10.75}}
-    {\pgfpoint@onthreedcoil{0.445}{-1    }{10}}
-    {\pgfpoint@onthreedcoil{1    }{-1    }{9}}
-    \pgfusepath{stroke,fill} 
-    % 
-    % draw the thick foreground path
-    %
-    \pgfsetstrokecolor{\TDCoilColor}
-    \pgfsetfillcolor{\TDCoilColor}
-    \pgfsetstrokeopacity{\TDCoilOpacity}
-    \pgfpathmoveto{\pgfpoint@onthreedcoil{1    }{ 1    }{3}}
-    \pgfsetlinewidth{\TDCoilWidth} 
-    % forward shifted +
-    \pgfpathmoveto{\pgfpoint@onthreedcoil{1    }{-1    }{9}}
-    \pgfpathcurveto
-    {\pgfpoint@onthreedcoil{0.445}{-1    }{10}}
-    {\pgfpoint@onthreedcoil{0    }{-0.555}{11.25}}
-    {\pgfpoint@onthreedcoil{0    }{ 0    }{12.5}}
-    \pgfpathcurveto
-    {\pgfpoint@onthreedcoil{0    }{ 0.555}{13.25}}
-    {\pgfpoint@onthreedcoil{0.445}{ 1    }{14.25}}
-    {\pgfpoint@onthreedcoil{1    }{ 1    }{15}}
-    % draw the curve back shfted -
-    \pgfpathcurveto
-    {\pgfpoint@onthreedcoil{0.445}{ 1    }{14}}
-    {\pgfpoint@onthreedcoil{0    }{ 0.555}{12.75}}
-    {\pgfpoint@onthreedcoil{0    }{ 0    }{11.5}}
-    \pgfpathcurveto
-    {\pgfpoint@onthreedcoil{0    }{-0.555}{10.75}}
-    {\pgfpoint@onthreedcoil{0.445}{-1    }{10}}
-    {\pgfpoint@onthreedcoil{1    }{-1    }{9}}
-    \pgfusepath{stroke,fill} % <- added
-    \pgfcoordinate{TD@coilast}{\pgfpoint@onthreedcoil{1    }{ 1    }{15}} 
-  }
-  \state{last}[width=.25\pgfdecorationsegmentlength+%
-    \pgfdecorationsegmentaspect\pgfdecorationsegmentamplitude+%
-    \pgfdecorationsegmentaspect\pgfdecorationsegmentamplitude,next state=final]
-  {
-    \pgfsetstrokecolor{\TDCoilColor}
-    \pgfsetstrokeopacity{\TDCoilOpacity}
-    \pgfsetlinewidth{\TDCoilWidth}
-    \pgfpathmoveto{\pgfpointanchor{TD@coilast}{center}}
-    \pgfpathcurveto
-    {\pgfpoint@onthreedcoil{1.555}{ 1    }{4}}
-    {\pgfpoint@onthreedcoil{2    }{ 0.555}{5}}
-    {\pgfpoint@onthreedcoil{2    }{ 0    }{6}}
-  }
-  \state{final}
-  {
-    \pgfpathlineto{\pgfpointdecoratedpathlast}
-    \pgfusepath{stroke}
-    \tikzset{restore stroke color/.expand once=\pgfsavedstrokecolor}
-  }
-}
-\makeatother
-
 \hypersetup{
     colorlinks=true,
     linkcolor=black,
@@ -195,7 +34,8 @@
 
 % cose che ha detto e non so dove inserire: 
 % Viene definito il parametro concentrato mem, rapporto tra la carica ed il flusso, parametro dei mem-sistori, nuovo componente dell'elettrotecnica. (17/10)
-
+% Da Aggiungere:
+% Esempio Topologia dei Circuiti (25/10) oppure semplificato;
 
 
 \begin{document}
@@ -1819,7 +1659,9 @@ associato al parametro concentrato capacità $C$, misurata in Farad $F$. Queste 
 In forma circuitale si rappresenta come:
 \begin{center}
     \begin{circuitikz}
-        \draw(0,0) to[C=$C$] (2,0);
+        \draw (-0.5,0) to[short,*-](0,0)
+                    to[C=$C$](2,0)
+                    to[short,-*] (2.5,0);
     \end{circuitikz}
 \end{center}
 
@@ -1956,7 +1798,9 @@ Dato un bipolo induttore ideale si vuole calcolare la sua induttanza, per dimost
 associato a diversi parametri di mutua induttanza $M$, tanti quante le coppie di porte. In forma circuitale si rappresenta come:
 \begin{center}
     \begin{circuitikz}
-        \draw(0,0) to[L=$L$] (2,0);
+        \draw (-0.5,0) to[short,*-](0,0)
+                    to[L=$L$](2,0)
+                    to[short,-*] (2.5,0);
     \end{circuitikz}
 \end{center}
 Si considera un filo avvolto in una bobina composta da $N$ spire, ogni spira rappresenta un giro del filo su sé stesso. Si suppone esista una corrente $i$ iniettata dall'esterno. 
@@ -1969,13 +1813,12 @@ percorso parallele all'asse $x$. Il modulo campo magnetico è inversamente propo
 il campo magnetico è nullo. 
 
 \begin{center}
-    \begin{tikzpicture}[scale=2.5]
-        \draw[decoration={3d coil color=black,3d coil opacity=0.9,aspect=0.45, segment length=3.1mm, amplitude=3mm,3d coil},decorate] (0,1) -- (0,0);
+    \begin{tikzpicture}[scale=2]
 
-        \draw[-,very thick](0,1)--(-0.4,1);
-        \draw[-,very thick](0,0.098)--(-0.4,0.098);
+        \draw[-](0,1)--(-0.4,1);
+        \draw[-](0,0.1)--(-0.4,0.1);
         \draw[->,very thick](-1,1)--(-0.5,1)node[above]{$i$};
-        \draw[->,very thick](-0.5,0.098)node[below]{$i$}--(-1,0.098);
+        \draw[->,very thick](-0.5,0.1)node[below]{$i$}--(-1,0.1);
 
         \draw[-,very thick](2,1.2)--(0,1.2)node[above right]{$\lambda$}--(0,-0.1)--(2,-0.1);
         \draw[->,very thick](0.95,1.2)--(1,1.2);
@@ -1986,6 +1829,8 @@ il campo magnetico è nullo.
         \draw[->,very thick](1,-0.1)--(1,-0.5)node[right]{$\vec{H}$};
         \draw[->,very thick](0,0.25)--(0,0.75);
         \node[right]at(0.2,0.5){$\vec{H}$};
+        \draw(0,1)to[L](0,0);
+
 
     \end{tikzpicture}
 \end{center}
@@ -2117,7 +1962,9 @@ elettro-statico $\vec{E}=\vec{E}_s$, poiché in questa regione è stato definito
 In forma circuitale si rappresenta come:
 \begin{center}
     \begin{circuitikz}
-        \draw(0,0) to[R=$R$] (2,0);
+        \draw (-0.5,0) to[short,*-](0,0)
+                    to[R=$R$](2,0)
+                    to[short,-*] (2.5,0);
     \end{circuitikz}
 \end{center}
 
@@ -2222,8 +2069,10 @@ In forma circuitale si rappresenta il generatore di corrente dal simbolo:
 
 \begin{center}
     \begin{circuitikz}
-        \draw(0,0) to[european current source=$i_g(t)$] (2,0)node[right]{$i(t)$};
-        \draw[<-](2,-0.6)--(0,-0.6)node[midway, below]{$v(t)$};
+        \draw (-0.5,0) to[short,*-](0,0)
+                    to[european current source=$i_g(t)$](2,0)
+                    to[short,-*] (2.5,0)node[above right]{$i(t)$};
+        \draw[<-](2.5,-0.6)--(-0.5,-0.6)node[midway, below]{$v(t)$};
     \end{circuitikz}
 \end{center}
 
@@ -2234,8 +2083,12 @@ essere connesso ad elementi di un circuito, non può essere collegato al vuoto, 
 Il vuoto può essere rappresentato da un generatore di corrente che genera corrente nulla, analogamente ad un resistore con resistenza infinita: 
 \begin{center}
     \begin{circuitikz}
-        \draw(0,0) to[european current source] (2,0)node[above]{$i_g=0\,A$};
-        \draw(0,-1)to[R](2,-1)node[above]{$R=\infty\,\Omega$};
+        \draw (-0.5,0) to[short,*-](0,0)
+                    to[european current source=$0\,A$](2,0)
+                    to[short,-*] (2.5,0);
+        \draw (-0.5,-1) to[short,*-](0,-1)
+                    to[R=$\infty\,\Omega$](2,-1)
+                    to[short,-*] (2.5,-1);
     \end{circuitikz}
 \end{center}
 
@@ -2250,9 +2103,10 @@ campo elettro-statico $\vec{E}_s$ opposto al campo elettro-motore:
 In forma circuitale si rappresenta dal simbolo:
 \begin{center}
     \begin{circuitikz}
-        \draw(0,0) to[european voltage source] (2,0)node[right]{$i(t)$};
-        \draw[->](0.5,0.6)--(1.5,0.6)node[midway, above]{$e_g(t)$};
-        \draw[->](2,-0.6)--(0,-0.6)node[midway, below]{$v(t)$};
+        \draw (-0.5,0) to[short,*-](0,0)
+                    to[european voltage source=$e_g(t)$](2,0)
+                    to[short,-*] (2.5,0)node[above right]{$i(t)$};
+        \draw[<-](2.5,-0.6)--(-0.5,-0.6)node[midway, below]{$v(t)$};
     \end{circuitikz}
 \end{center}
 
@@ -2268,8 +2122,12 @@ della forza elettro-motrice.
 Può erogare una tensione nulla, in questo caso simula un cortocircuito ideale, analogo ad un resistore con un valore nullo di $0\,\Omega$: 
 \begin{center}
     \begin{circuitikz}
-        \draw(0,0) to[european voltage source] (2,0)node[above]{$e_g=0\,V$};
-        \draw(0,-1)to[R](2,-1)node[above]{$R=0\,\Omega$};
+        \draw (-0.5,0) to[short,*-](0,0)
+                    to[european voltage source=$0\,V$](2,0)
+                    to[short,-*] (2.5,0);
+        \draw (-0.5,-1)to[short,*-](0,-1)
+                    to[R=$0\,\Omega$](2,-1)
+                    to[short,-*] (2.5,-1);
     \end{circuitikz}
 \end{center}
 
@@ -2513,12 +2371,14 @@ di due sommatorie:
 \end{center}
 
 
-Equivale a sommare tra di loro la serie dei generatori con la serie dei resistori, per cui il lato corrisponde ad un resistore equivalente posto in serie 
+Equivale a sommare tra di loro la serie dei generatori con la serie dei resistori, per cui il lato corrisponde ad lato composto da un resistore equivalente posto in serie 
 con un generatore di tensione equivalente, con valori determinati dalla due sommatorie:
 
 \begin{equation*}
-    v=\displaystyle\sum_{k=1}^mv_{gk}+\sum_{j=1}^nv_{Rj}=\sum_{k=1}^m(\pm)e_{gk}+i\sum_{j=1}^nR_j=-e_{gs}+R_si=v_{gs}+v_R
+    v=\displaystyle\sum_{k=1}^mv_{gk}+\sum_{j=1}^nv_{Rj}=\sum_{k=1}^m(\pm)e_{gk}+i\sum_{j=1}^nR_j=(\pm)e_{s}+R_si=v_{s}+v_R
 \end{equation*}
+
+Il verso della tensione erogata dipende dal segno del valore complessivo ottenuto dalla sommatoria. 
 
 \begin{center}
     \begin{circuitikz}
@@ -2527,14 +2387,13 @@ con un generatore di tensione equivalente, con valori determinati dalla due somm
                     to[european voltage source](5,0)
                     to[short,-*](6,0);
         \draw[->](2.5,-0.5)--(1.5,-0.5)node[midway, below]{$v_R$};
-        \draw[->](4.5,-0.5)--(3.5,-0.5)node[midway, below]{$v_{gs}$};
-        \draw[<-](4.5,0.5)--(3.5,0.5)node[midway, above]{$e_{gs}$};
+        \draw[->](4.5,-0.5)--(3.5,-0.5)node[midway, below]{$v_{s}$};
+        \draw[<-](4.5,0.5)--(3.5,0.5)node[midway, above]{$e_{s}$};
         \draw[<-](0,-1)--(6,-1)node[midway, below]{$v$};
         \draw[dashed](0,0)--(0,-1);
         \draw[dashed](6,0)--(6,-1);
     \end{circuitikz}
 \end{center}
-
 
 Si considera ora un lato composto da $n$ resistori e $m$ generatori di corrente posti in parallelo. 
 
@@ -2560,27 +2419,27 @@ Si considera ora un lato composto da $n$ resistori e $m$ generatori di corrente 
     \end{circuitikz}
 \end{center}
 
-Ciò equivale ad un lato composto da un resistore con una conduttanza equivalente $G_p$ ed un generatore di corrente, con un verso concorde al verso scelto per scrivere le 
-sommatorie, con una corrente equivalente $i_{gp}$ in parallelo tra di loro:
+Ciò equivale, dall'esterno, ad un lato composto da un resistore con una conduttanza equivalente $G_p$ ed un generatore di corrente, con un verso fissato sulla base del quale si 
+scrivono le sommatorie, con una corrente equivalente $i_{p}$ in parallelo tra di loro:
 
 \begin{equation*}
-    i=\displaystyle\sum_{k=1}^mi_{gk}+\sum_{j=1}^ni_{Rj}=i_{gp}+v\sum_{j=1}^n\frac{1}{R_j}=i_{gp}+\frac{v}{R_p}=i_{gp}+iG_p=i_{gp}+i_R
+    i=\displaystyle\sum_{k=1}^m(\pm)i_{gk}+\sum_{j=1}^ni_{Rj}=i_{p}+v\sum_{j=1}^n\frac{1}{R_j}=i_{p}+\frac{v}{R_p}=i_{p}+iG_p=i_{p}+i_G
 \end{equation*}
 
 \begin{center}
     \begin{circuitikz}
-        \draw (0,0) to[short,*-,i=$i$](1,0)
-                    to[R=$R_s$](1,-3)
-                    to[short, -*](0,-3);
-        \draw (1,0) to[short] (2.5,0)
-                    to[european current source=$i_{gp}$](2.5,-3)
-                    to[short](1,-3);
-        \draw[->](0.75,-0.5)--(0.75,-2.5)node[midway, left]{$i_R$};
-        \draw[->](0,-2.75)--(0,-0.25)node[midway, left]{$v$};
+        \draw(-0.5,0)to[short, *-, i=$i$](0.5,0);
+        \draw[-](0.5,-1)--(0.5,1);
+        \draw(0.5,1)to[R=$R_p$,i=$i_{G}$](4,1);
+        \draw(0.5,-1)to[european current source=$i_{p}$](4,-1);
+        \draw[-](4,-1)--(4,1);
+        \draw(4,0)to[short,-*](5,0);
+        \draw[->](5,-1.5)--(-0.5,-1.5)node[midway, below]{$v$};
     \end{circuitikz}
 \end{center}
 
-Un lato equivale ad un bipolo con leggi costituvie più complesse e può contenere elementi attivi e passivi insieme, ma ha sempre una tensione ed una corrente. 
+
+Un lato equivale ad un bipolo con leggi costitutive più complesse e può contenere elementi attivi e passivi insieme, ma ha sempre una tensione ed una corrente. 
 
 \subsection{Reti con Memoria}
 
@@ -2845,17 +2704,162 @@ Altrimenti sarebbe necessario inserire un componente generatore ideale di corren
 Considerando il principio di Kirchoff alle correnti è possibile costruire il circuito equivalente a quest'espressione:
 \begin{center}
     \begin{circuitikz}
-        \draw (0,0) to[short,*-,i=$i$](1,0)
-                    to[L=$L_s$](1,-3)
-                    to[short, -*](0,-3);
-        \draw (1,0) to[short] (2.5,0)
-                    to[european current source=$i_p$](2.5,-3)
-                    to[short](1,-3);
-        \draw[->](0.75,-0.5)--(0.75,-2.5)node[midway, left]{$i_L$};
-        \draw[->](0,-2.75)--(0,-0.25)node[midway, left]{$v$};
+        \draw(-0.5,0)to[short, *-, i=$i$](0.5,0);
+        \draw[-](0.5,-1)--(0.5,1);
+        \draw(0.5,1)to[L=$L_p$,i=$i_{L}$](4,1);
+        \draw(0.5,-1)to[european current source=$i_{p}$](4,-1);
+        \draw[-](4,-1)--(4,1);
+        \draw(4,0)to[short,-*](5,0);
+        \draw[->](5,-1.5)--(-0.5,-1.5)node[midway, below]{$v$};
+    \end{circuitikz}
+\end{center}
+
+\subsection{Forme Northon e Thevenin}
+
+I lati composti da resistori e generatori in serie si indicano come forma Thevenin, mentre in parallelo si indicano come forma Northon. Un singolo resistore, può essere 
+entrambe le forme, se i generatori erogano tensione o corrente nulla, per cui è sia Thevenin che Northon, nelle successive analisi ci si riferirà ad un singolo resistore come 
+forma "ambigua" per semplicità. Analogamente si indica un singolo generatore di corrente o di tensione come una forma "estrema", dove la resistenza del resistore è infinita in 
+parallelo e nulla in serie. 
+
+
+
+Forma Thevenin:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short, *-, i=$i$](1,0)
+                    to[R=$R_{TH}$](3,0)
+                    to[european voltage source](5,0)
+                    to[short,-*](6,0);
+        \draw[->](2.5,-0.5)--(1.5,-0.5)node[midway, below]{$v_R$};
+        \draw[->](4.5,-0.5)--(3.5,-0.5)node[midway, below]{$E_{TH}$};
+        \draw[<-](0,-1)--(6,-1)node[midway, below]{$v$};
+    \end{circuitikz}
+\end{center}
+
+Forma Northon:
+\begin{center}
+    \begin{circuitikz}
+        \draw(-0.5,0)to[short, *-, i=$i$](0.5,0);
+        \draw[-](0.5,-1)--(0.5,1);
+        \draw(0.5,1)to[R=$R_{N_0}$,i=$i_{R}$](4,1);
+        \draw(4,-1)to[european current source=$I_{N_0}$](0.5,-1);
+        \draw[-](4,-1)--(4,1);
+        \draw(4,0)to[short,-*](5,0);
+        \draw[->](5,-1.5)--(-0.5,-1.5)node[midway, below]{$v$};
     \end{circuitikz}
 \end{center}
 
 
+
+\subsubsection{Passaggio da Northon a Thevenin}
+
+Le forme Northon e Thevenin sono duali tra di loro, si cerca un modo per trasformale tra di loro. Le forme estreme per la loro definizione non possono essere trasformate. 
+Si considerano le due forme, con la stessa convenzione di misura (utilizzatori) e si considera una rappresentazione esterna tramite la quale è possible passare tra le due 
+forme. 
+Si esprimono le leggi costitutive delle due forme:
+\begin{gather*}
+    v=R_{TH}i+E_{TH}\\
+    i=G_{N_0}v-I_{N_0}
+\end{gather*}
+
+Dalla forma Northon si ricava la tensione:
+\begin{gather*}
+    v=\displaystyle\frac{i+I_{N_0}}{G_{N_0}}=R_{N_0}(i+I_{N_0})
+\end{gather*}
+Si applica il principio di identità dei polinomi tra le due leggi, e semplificando l'espressione ottenuta si ottiene:
+\begin{gather*}
+    R_{TH}=R_{N_0}\\
+    E_{TH}=R_{N_0}I_{N_0}
+\end{gather*}
+Quest'equazione rappresenta la legge di passaggio tra la forma Norhton e la forma Thevenin
+
+\subsection{Topologia dei Circuiti}
+
+Si rappresentano dei bipoli generici per descrivere la topologia dei circuiti. Si definisce un lato in maniera più specifica un percorso di bipoli attraversati dalla 
+stessa corrente. Si assegna più importanza alla serie che al parallelo, per semplicità in quest'analisi. 
+
+Un nodo è, formalmente, una zona, non un punto, equipotenziale dove convergono almeno tre lati, affinché il principio di Kirchoff alle correnti dia origine ad un'equazione 
+non banale. Per cui un nodo è obbligatorio se convergono almeno tre lati. Un nodo di calcolo è una zona dove si ammettono anche meno di tre lati, usato appunto ai fini di 
+calcolo. Un nodo non va cercato dalla forma del circuito, da ricordare che la regione di equipotenzialità non rappresenta un lato. Se viene inserito un nodo di calcolo tra due 
+oggetti, non possono essere più considerati in serie. 
+
+
+
+Un grafo è una stilizzazione del circuito, dove i nodi vengono indicati come dei punti ed i lati come degli archetti che collegano i vari nodi. Il grafo si dice orientata, 
+quando assegna una freccia sugli archi che connettono i nodi. La direzione scelta è arbitraria, indica il verso con cui si misurano sia la corrente che la tensione, per cui 
+un grafo orientato esprime un circuito nella convenzione dei generatori.  
+
+
+
+Dato un grafo, un albero è rappresentato da un percorso di lati aperto che tocca ogni nodo del grafo. L'albbero risultante contiene un numero al massimo uguale al numero di lati 
+del grafo meno uno. Dato un albero, un co-albero è dato dai nodi del grafo e tutti i lati non considerati dall'albero. Gli elementi dell'albero si chiamano rami, mentre gli 
+elementi del co-albero si chiamano corde, mentre gli elementi del grafo mantengono la loro nomenclatura, questo rappresenta una rinominazione degli stessi elementi quando 
+vengono inseriti in un albero o un co-albero. Il numero delle corde non è vincolato al numero dei lati. Questi due grafi così creati sono non comunicanti tra di loro. 
+
+
+
+Per determinare le correnti e tensioni per ogni lato, si considerano le relazioni su ogni lato, e le leggi costitutive di ogni lato. Per cui dato $l$ numero dei lati, si 
+ottengono $2l$ equazioni, ma è possible determinare la corrente data la tensione e la legge costitutiva del lato e viceversa, per cui sono necessarie $l$ equazioni. 
+Inoltre si adoperano i prinicpi di Kirchoff, ma sorge il problema di determinare per quali percorsi chiusi si applicano i principi. Bisogna usarne abbastanza per risolvere le 
+equazioni delle leggi costitutive in funzione della tensione e delle correnti. Per determinare il numero di volte da applicare i principi e per quali percorsi chiusi, si 
+aggiunge all'albero una ed una sola corda del co-albero, per ogni corda, in modo da creare un nuovo percorso chiuso ogni volta. Su questi percorsi chiusi così creati si 
+applicano i principi di Kirchoff alle tensioni, rispetto al verso della corda inserita. Se i versi dei rami sono opposti, le loro tensioni si indicano di segno opposto. 
+In questo modo si ottengono $c$ equazioni di tensioni, dove $c$ è il numero di corde del co-allbero, necessariamente indipendenti tra di loro, poiché in ciascuna di esse è 
+presente solo una volta le tensioni delle corde, poiché non possono essere riscritte come combinazioni lineari. Si esprime in forma matriciale come:
+\begin{equation*}
+    \begin{bmatrix}
+        v_{c,1}\\
+        \vdots\\
+        v_{c,c}
+    \end{bmatrix}+[A]\cdot\begin{bmatrix}
+        v_{r,1}\\
+        \vdots\\
+        v_{r,r}
+    \end{bmatrix}=
+    \begin{bmatrix}
+        0\\
+        \vdots\\
+        0
+    \end{bmatrix}
+\end{equation*}
+Dove $r$ è il numero di rami, mentre $c$ è il numero di corde, la matrice $A$ di incidenza corde-rami che rappresenta il sistema è una matrice avente $c$ righe e $r$ colonne. 
+In forma compatta si esprime rispetto al vettore tensione corde $[v_c]$ e rami $[v_r]$:
+\begin{equation*}
+    [v_c]+[A]\cdot[v_r]=[0]
+\end{equation*}
+Quest'equazione racchiude tutte le possibili combinazioni di equazioni risultanti dal primo principio di Kirchoff linearmente indipendenti tra di loro. 
+Si usano le parentesi quadre per denotare la natura matriciale dei componenti, possono essere omesse, ma ciò può causare fraintendimenti sulla natura dei componenti. 
+
+
+Sul grafo si evidenzia, per ogni ramo uno alla volta, quale si sta trattando. Considerando questo ramo si cerca una superficie che ingloba una parte di circuito comprendente 
+solo corde e come unico ramo quello scelto. In questo modo si ottentono $r$ equazioni di correnti, dove $r$ è il numero dei rami dell'albero. Questo processo rappresenta il duale 
+di quello appena svolto. Si ottiene quindi un sistema del tipo:
+\begin{equation*}
+    \begin{bmatrix}
+        i_{r,1}\\
+        \vdots\\
+        i_{r,r}
+    \end{bmatrix}+[B]\cdot\begin{bmatrix}
+        i_{c,1}\\
+        \vdots\\
+        i_{c,c}
+    \end{bmatrix}=\begin{bmatrix}
+        0\\
+        \vdots\\
+        0
+    \end{bmatrix}
+\end{equation*}
+La matrice $B$ si chiama matrice di incidenza rami-corde ed ha $r$ righe e $c$ colonne. Questa espressione può essere espressa mediante i vettori di corrente dei rami e delle 
+corde:
+\begin{equation*}
+    [i_{r}]+[B]\cdot [i_{c}]=[0]
+\end{equation*}
+
+Le matrici $A$ e $B$ sono componenti duali, la relazione che lega queste due matrici corrisponde a:
+\begin{equation*}
+    [B]=-[A]^T
+\end{equation*}
+
+Per cui i due principi di Kirchoff non sono tra di loro indipendenti. 
 
 \end{document}
