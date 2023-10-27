@@ -2423,7 +2423,7 @@ Ciò equivale, dall'esterno, ad un lato composto da un resistore con una condutt
 scrivono le sommatorie, con una corrente equivalente $i_{p}$ in parallelo tra di loro:
 
 \begin{equation*}
-    i=\displaystyle\sum_{k=1}^m(\pm)i_{gk}+\sum_{j=1}^ni_{Rj}=i_{p}+v\sum_{j=1}^n\frac{1}{R_j}=i_{p}+\frac{v}{R_p}=i_{p}+iG_p=i_{p}+i_G
+    i=\displaystyle\sum_{k=1}^m(\pm)i_{gk}+\sum_{j=1}^ni_{Rj}=i_{p}+v\sum_{j=1}^n\frac{1}{R_j}=i_{p}+\frac{v}{R_p}=i_{p}+vG_p=i_{p}+i_G
 \end{equation*}
 
 \begin{center}
@@ -2773,9 +2773,13 @@ Si applica il principio di identità dei polinomi tra le due leggi, e semplifica
 \end{gather*}
 Quest'equazione rappresenta la legge di passaggio tra la forma Norhton e la forma Thevenin
 
+\clearpage
+
+\section{Risoluzione Circuiti}
+
 \subsection{Topologia dei Circuiti}
 
-Si rappresentano dei bipoli generici per descrivere la topologia dei circuiti. Si definisce un lato in maniera più specifica un percorso di bipoli attraversati dalla 
+Per descrivere la topologia dei circuiti si rappresentano dei bipoli generici. Si definisce un lato in maniera più specifica un percorso di bipoli attraversati dalla 
 stessa corrente. Si assegna più importanza alla serie che al parallelo, per semplicità in quest'analisi. 
 
 Un nodo è, formalmente, una zona, non un punto, equipotenziale dove convergono almeno tre lati, affinché il principio di Kirchoff alle correnti dia origine ad un'equazione 
@@ -2861,5 +2865,677 @@ Le matrici $A$ e $B$ sono componenti duali, la relazione che lega queste due mat
 \end{equation*}
 
 Per cui i due principi di Kirchoff non sono tra di loro indipendenti. 
+
+
+Si considera un circuito generico:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[generic=$1$](0,2)node[left]{$A$}
+                    to[generic=$2$](2,2)node[above]{$D$}
+                    to[generic=$4$](4,2)node[above]{$C$}
+                    to[generic=$6$](6,2)node[right]{$B$}
+                    to[generic=$7$](6,0)
+                    to[short](0,0);
+        \draw (2,2) to[generic=$3$](2,0);
+        \draw (4,2) to[generic=$5$](4,0);
+        \draw (0,2) to[short](0,3)
+                    to[generic=$8$](6,3)
+                    to[short](6,2);            
+        \filldraw[black](0,2)circle(1pt);
+        \filldraw[black](2,2)circle(1pt);
+        \filldraw[black](4,2)circle(1pt);
+        \filldraw[black](6,2)circle(1pt);
+        \filldraw[black](3,0)circle(1pt);
+        \node[below]at(3,0){$E$};
+    \end{circuitikz}
+\end{center}
+I nodi $A$, $B$ e $E$ non corrispondo esattamente a quei punti nel circuito, ma all'intera zona dove i tre o più lati si incontrano poiché la zona equipotenziale che 
+rappresenta un cavo nel circuito non è un lato. Ma nella rappresentazione grafica si rappresentano come dei singoli punti, e i lati vengon orappresentati come degli archi 
+orientati, di verso scelto arbitrariamente. Per semplicità si opera nelal convenzione dei generatori, in modo che il verso degli archi indichi sia il verso di misura dell'
+amperometro che del volmetro. Per cui il circuito considerato si esprime in forma grafica come:
+\begin{center}
+    \begin{tikzpicture}[scale=1.5]
+        \filldraw[black](0,0)circle(1pt);
+        \filldraw[black](2,0)circle(1pt);
+        \filldraw[black](4,0)circle(1pt);
+        \filldraw[black](6,0)circle(1pt);
+        \filldraw[black](3,-1)circle(1pt);
+
+        \draw[->](0,0)to[out=45,in=180](3,1)node[above]{$8$};
+        \draw[-](3,1)to[out=0,in=135](6,0);
+
+        \draw[->](0,0)node[left]{$A$}--(1,0)node[above]{$2$};
+        \draw[-](1,0)--(2,0);
+
+        \draw[->](2,0)node[above]{$D$}--(3,0)node[above]{$4$};
+        \draw[-](3,0)--(4,0);
+
+        \draw[->](4,0)node[above]{$C$}--(5,0)node[above]{$6$};
+        \draw[-](5,0)--(6,0)node[right]{$B$};
+
+        \draw[->](3,-1)node[below]{$E$}to[out=180,in=330](1,-0.7)node[above right]{$1$};
+        \draw[-](1,-0.7)to[out=150,in=290](0,0);
+
+        \draw[->](3,-1)--(2.5,-0.5)node[right]{$3$};
+        \draw[-](2.5,-0.5)--(2,0);
+
+        \draw[-](3,-1)--(3.5,-0.5)node[right]{$5$};
+        \draw[->](4,0)--(3.5,-0.5);
+
+        \draw[->](3,-1)to[out=0,in=210](5,-0.7)node[above left]{$7$};
+        \draw[-](5,-0.7)to[out=30,in=250](6,0);
+    \end{tikzpicture}
+\end{center}
+
+Per creare un albero si scelgono i lati $2$, $3$, $6$, e $8$. In questo caso è solo una coincidenza che il numero dei rami corrisponde al numero delle corde. Il co-albero 
+è quindi composto dai lati $1$, $4$, $5$ e $7$. Questi lati si rinominano in base alla loro posizione nei due nuovi grafi (albero a sinitra e co-albero a destra):
+\begin{gather*}
+    \begin{cases}
+        l_2=r_1\\
+        l_3=r_2\\
+        l_6=r_3\\
+        l_8=r_4
+    \end{cases}\land
+    \begin{cases}
+        l_1=c_1\\
+        l_4=c_2\\
+        l_5=c_3\\
+        l_7=c_4
+    \end{cases}
+\end{gather*}
+\begin{center}
+    \begin{tikzpicture}
+        \filldraw[black](0,0)circle(1pt);
+        \filldraw[black](2,0)circle(1pt);
+        \filldraw[black](4,0)circle(1pt);
+        \filldraw[black](6,0)circle(1pt);
+        \filldraw[black](3,-1)circle(1pt);
+
+        \draw[->](0,0)to[out=45,in=180](3,1)node[above]{$r_4$};
+        \draw[-](3,1)to[out=0,in=135](6,0);
+
+        \draw[->](0,0)node[left]{$A$}--(1,0)node[above]{$r_1$};
+        \draw[-](1,0)--(2,0)node[above]{$D$};
+
+        %\draw[->](2,0)--(3,0)node[above]{$4$};
+        %\draw[-](3,0)--(4,0);
+
+        \draw[->](4,0)node[above]{$C$}--(5,0)node[above]{$r_3$};
+        \draw[-](5,0)--(6,0)node[right]{$B$};
+
+        %\draw[->](3,-1)to[out=180,in=330](1,-0.7)node[above right]{$1$};
+        %\draw[-](1,-0.7)to[out=150,in=290](0,0);
+
+        \draw[->](3,-1)node[below]{$E$}--(2.5,-0.5)node[right]{$r_2$};
+        \draw[-](2.5,-0.5)--(2,0);
+
+        %\draw[-](3,-1)--(3.5,-0.5)node[right]{$5$};
+        %\draw[->](4,0)--(3.5,-0.5);
+
+        %\draw[->](3,-1)to[out=0,in=210](5,-0.7)node[above left]{$7$};
+        %\draw[-](5,-0.7)to[out=30,in=250](6,0);
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \filldraw[black](0,0)circle(1pt);
+        \filldraw[black](2,0)circle(1pt);
+        \filldraw[black](4,0)circle(1pt);
+        \filldraw[black](6,0)circle(1pt);
+        \filldraw[black](3,-1)circle(1pt);
+
+        %\draw[->](0,0)to[out=45,in=180](3,1)node[above]{$8$};
+        %\draw[-](3,1)to[out=0,in=135](6,0);
+
+        %\draw[->](0,0)--(1,0)node[above]{$2$};
+        %\draw[-](1,0)--(2,0);
+
+        \draw[->](2,0)node[above]{$D$}--(3,0)node[above]{$c_2$};
+        \draw[-](3,0)--(4,0)node[above]{$C$};
+
+        %\draw[->](4,0)--(5,0)node[above]{$6$};
+        %\draw[-](5,0)--(6,0);
+
+        \draw[->](3,-1)node[below]{$E$}to[out=180,in=330](1,-0.7)node[above right]{$c_1$};
+        \draw[-](1,-0.7)to[out=150,in=290](0,0)node[left]{$A$};
+
+        %\draw[->](3,-1)--(2.5,-0.5)node[right]{$3$};
+        %\draw[-](2.5,-0.5)--(2,0);
+
+        \draw[-](3,-1)--(3.5,-0.5)node[right]{$c_3$};
+        \draw[->](4,0)--(3.5,-0.5);
+
+        \draw[->](3,-1)to[out=0,in=210](5,-0.7)node[above left]{$c_4$};
+        \draw[-](5,-0.7)to[out=30,in=250](6,0)node[right]{$B$};
+    \end{tikzpicture}
+\end{center}
+
+Si applica il secondo teorema di Kirchoff sulle circuitazioni create inserendo una corda alla volta nel grafo albero, di verso concorde alla conrda inserita. Queste 
+circuitazioni si chiamano maglie fondamentali. 
+\begin{center}
+    \begin{tikzpicture}
+        \filldraw[black](0,0)circle(1pt);
+        \filldraw[black](2,0)circle(1pt);
+        %\filldraw[black](4,0)circle(1pt);
+        %\filldraw[black](6,0)circle(1pt);
+        %\filldraw[black](3,-1)circle(1pt);
+
+        %\draw[->](0,0)to[out=45,in=180](3,1)node[above]{$r_4$};
+        %\draw[-](3,1)to[out=0,in=135](6,0);
+
+        \draw[->](0,0)node[left]{$A$}--(1,0)node[above]{$r_1$};
+        \draw[-](1,0)--(2,0)node[above]{$D$};
+
+        %\draw[->](2,0)--(3,0)node[above]{$4$};
+        %\draw[-](3,0)--(4,0);
+
+        %\draw[->](4,0)node[above]{$C$}--(5,0)node[above]{$r_3$};
+        %\draw[-](5,0)--(6,0)node[right]{$B$};
+
+        \draw[->](3,-1)to[out=180,in=330](1,-0.7)node[above right]{$c_1$};
+        \draw[-](1,-0.7)to[out=150,in=290](0,0);
+
+        \draw[->](3,-1)node[below]{$E$}--(2.5,-0.5)node[right]{$r_2$};
+        \draw[-](2.5,-0.5)--(2,0);
+
+        %\draw[-](3,-1)--(3.5,-0.5)node[right]{$5$};
+        %\draw[->](4,0)--(3.5,-0.5);
+
+        %\draw[->](3,-1)to[out=0,in=210](5,-0.7)node[above left]{$7$};
+        %\draw[-](5,-0.7)to[out=30,in=250](6,0);
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \filldraw[black](0,0)circle(1pt);
+        \filldraw[black](2,0)circle(1pt);
+        \filldraw[black](4,0)circle(1pt);
+        \filldraw[black](6,0)circle(1pt);
+        %\filldraw[black](3,-1)circle(1pt);
+
+        \draw[->](0,0)to[out=45,in=180](3,1)node[above]{$r_4$};
+        \draw[-](3,1)to[out=0,in=135](6,0);
+
+        \draw[->](0,0)node[left]{$A$}--(1,0)node[above]{$r_1$};
+        \draw[-](1,0)--(2,0)node[above]{$D$};
+
+        \draw[->](2,0)--(3,0)node[above]{$c_2$};
+        \draw[-](3,0)--(4,0);
+
+        \draw[->](4,0)node[above]{$C$}--(5,0)node[above]{$r_3$};
+        \draw[-](5,0)--(6,0)node[right]{$B$};
+
+        %\draw[->](3,-1)to[out=180,in=330](1,-0.7)node[above right]{$1$};
+        %\draw[-](1,-0.7)to[out=150,in=290](0,0);
+
+        %\draw[->](3,-1)node[below]{$E$}--(2.5,-0.5)node[right]{$r_2$};
+        %\draw[-](2.5,-0.5)--(2,0);
+
+        %\draw[-](3,-1)--(3.5,-0.5)node[right]{$5$};
+        %\draw[->](4,0)--(3.5,-0.5);
+
+        %\draw[->](3,-1)to[out=0,in=210](5,-0.7)node[above left]{$7$};
+        %\draw[-](5,-0.7)to[out=30,in=250](6,0);
+    \end{tikzpicture}
+\end{center}
+\begin{center}
+    \begin{tikzpicture}
+        \filldraw[black](0,0)circle(1pt);
+        \filldraw[black](2,0)circle(1pt);
+        \filldraw[black](4,0)circle(1pt);
+        \filldraw[black](6,0)circle(1pt);
+        \filldraw[black](3,-1)circle(1pt);
+
+        \draw[->](0,0)to[out=45,in=180](3,1)node[above]{$r_4$};
+        \draw[-](3,1)to[out=0,in=135](6,0);
+
+        \draw[->](0,0)node[left]{$A$}--(1,0)node[above]{$r_1$};
+        \draw[-](1,0)--(2,0)node[above]{$D$};
+
+        %\draw[->](2,0)--(3,0)node[above]{$4$};
+        %\draw[-](3,0)--(4,0);
+
+        \draw[->](4,0)node[above]{$C$}--(5,0)node[above]{$r_3$};
+        \draw[-](5,0)--(6,0)node[right]{$B$};
+
+        %\draw[->](3,-1)to[out=180,in=330](1,-0.7)node[above right]{$1$};
+        %\draw[-](1,-0.7)to[out=150,in=290](0,0);
+
+        \draw[->](3,-1)node[below]{$E$}--(2.5,-0.5)node[right]{$r_2$};
+        \draw[-](2.5,-0.5)--(2,0);
+
+        \draw[-](3,-1)--(3.5,-0.5)node[right]{$c_3$};
+        \draw[->](4,0)--(3.5,-0.5);
+
+        %\draw[->](3,-1)to[out=0,in=210](5,-0.7)node[above left]{$7$};
+        %\draw[-](5,-0.7)to[out=30,in=250](6,0);
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \filldraw[black](0,0)circle(1pt);
+        \filldraw[black](2,0)circle(1pt);
+        %\filldraw[black](4,0)circle(1pt);
+        \filldraw[black](6,0)circle(1pt);
+        \filldraw[black](3,-1)circle(1pt);
+
+        \draw[->](0,0)to[out=45,in=180](3,1)node[above]{$r_4$};
+        \draw[-](3,1)to[out=0,in=135](6,0);
+
+        \draw[->](0,0)node[left]{$A$}--(1,0)node[above]{$r_1$};
+        \draw[-](1,0)--(2,0)node[above]{$D$};
+
+        %\draw[->](2,0)--(3,0)node[above]{$4$};
+        %\draw[-](3,0)--(4,0);
+
+        %\draw[->](4,0)node[above]{$C$}--(5,0)node[above]{$r_3$};
+        %\draw[-](5,0)--(6,0);
+
+        %\draw[->](3,-1)to[out=180,in=330](1,-0.7)node[above right]{$1$};
+        %\draw[-](1,-0.7)to[out=150,in=290](0,0);
+
+        \draw[->](3,-1)node[below]{$E$}--(2.5,-0.5)node[right]{$r_2$};
+        \draw[-](2.5,-0.5)--(2,0);
+
+        %\draw[-](3,-1)--(3.5,-0.5)node[right]{$5$};
+        %\draw[->](4,0)--(3.5,-0.5);
+
+        \draw[->](3,-1)to[out=0,in=210](5,-0.7)node[above left]{$c_4$};
+        \draw[-](5,-0.7)to[out=30,in=250](6,0)node[right]{$B$};
+    \end{tikzpicture}
+\end{center}
+
+Da questo si ottiene il sistema delle tensioni del circuito: 
+\begin{gather*}
+    \begin{cases}
+        v_{c_1}+v_{r_1}-v_{r_2}=0\\
+        v_{c_2}+v_{r_1}+v_{r_3}-v_{r_4}=0\\
+        v_{c_3}-v_{r_1}+v_{r_2}-v_{r_3}+v_{r_4}=0\\
+        v_{c_4}-v_{r_2}-r_{v_3}=0
+    \end{cases}
+\end{gather*}
+Per cui la matrice di incidenza corde-rami risulta essere:
+\begin{equation*}
+    [v_c]+[A]\cdot[v_r]=[0]\to [A]=\begin{bmatrix}
+        1&-1&0&0\\
+        1&0&1&-1\\
+        -1&1&-1&1\\
+        -1&1&0&1
+    \end{bmatrix}
+\end{equation*}
+
+Si applica lo stesso processo, partendo dal co-albero, per definire superfici chiamate tagli fondamentali, che tagliano solo un ramo ed almeno una corda. Il verso di 
+riferimento è dato dal verso del ramo considerato per formare il taglio. 
+\begin{center}
+    \begin{tikzpicture}
+        \filldraw[black](0,0)circle(1pt);
+        \filldraw[black](2,0)circle(1pt);
+        \filldraw[black](4,0)circle(1pt);
+        \filldraw[black](6,0)circle(1pt);
+        \filldraw[black](3,-1)circle(1pt);
+
+        \draw[->](0,0)to[out=45,in=180](3,1)node[above]{$r_4$};
+        \draw[-](3,1)to[out=0,in=135](6,0);
+
+        \draw[->](0,0)node[left]{$A$}--(1,0)node[above]{$r_1$};
+        \draw[-](1,0)--(2,0)node[above]{$D$};
+
+        \draw[->](2,0)--(3,0)node[above]{$c_2$};
+        \draw[-](3,0)--(4,0);
+
+        \draw[->](4,0)node[above]{$C$}--(5,0)node[above]{$r_3$};
+        \draw[-](5,0)--(6,0)node[right]{$B$};
+
+        \draw[->](3,-1)to[out=180,in=330](1,-0.7)node[above right]{$c_1$};
+        \draw[-](1,-0.7)to[out=150,in=290](0,0);
+
+        \draw[->](3,-1)node[below]{$E$}--(2.5,-0.5)node[right]{$r_2$};
+        \draw[-](2.5,-0.5)--(2,0);
+
+        \draw[-](3,-1)--(3.5,-0.5)node[right]{$c_3$};
+        \draw[->](4,0)--(3.5,-0.5);
+
+        \draw[->](3,-1)to[out=0,in=210](5,-0.7)node[above left]{$c_4$};
+        \draw[-](5,-0.7)to[out=30,in=250](6,0);
+
+        \draw[-]plot[smooth]coordinates{(2,0.5)(2.5,0)(3.5,-1.5)(2,-1.2)(1.5,0)(2,0.5)};
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \filldraw[black](0,0)circle(1pt);
+        \filldraw[black](2,0)circle(1pt);
+        \filldraw[black](4,0)circle(1pt);
+        \filldraw[black](6,0)circle(1pt);
+        \filldraw[black](3,-1)circle(1pt);
+
+        \draw[->](0,0)to[out=45,in=180](3,1)node[above]{$r_4$};
+        \draw[-](3,1)to[out=0,in=135](6,0);
+
+        \draw[->](0,0)node[left]{$A$}--(1,0)node[above]{$r_1$};
+        \draw[-](1,0)--(2,0)node[above]{$D$};
+
+        \draw[->](2,0)--(3,0)node[above]{$c_2$};
+        \draw[-](3,0)--(4,0);
+
+        \draw[->](4,0)node[above]{$C$}--(5,0)node[above]{$r_3$};
+        \draw[-](5,0)--(6,0)node[right]{$B$};
+
+        \draw[->](3,-1)to[out=180,in=330](1,-0.7)node[above right]{$c_1$};
+        \draw[-](1,-0.7)to[out=150,in=290](0,0);
+
+        \draw[->](3,-1)node[below]{$E$}--(2.5,-0.5)node[right]{$r_2$};
+        \draw[-](2.5,-0.5)--(2,0);
+
+        \draw[-](3,-1)--(3.5,-0.5)node[right]{$c_3$};
+        \draw[->](4,0)--(3.5,-0.5);
+
+        \draw[->](3,-1)to[out=0,in=210](5,-0.7)node[above left]{$c_4$};
+        \draw[-](5,-0.7)to[out=30,in=250](6,0);
+
+        \draw (3,-0.8)circle[radius=0.7cm];
+    \end{tikzpicture}
+\end{center}
+
+\begin{center}
+    \begin{tikzpicture}
+        \filldraw[black](0,0)circle(1pt);
+        \filldraw[black](2,0)circle(1pt);
+        \filldraw[black](4,0)circle(1pt);
+        \filldraw[black](6,0)circle(1pt);
+        \filldraw[black](3,-1)circle(1pt);
+
+        \draw[->](0,0)to[out=45,in=180](3,1)node[above]{$r_4$};
+        \draw[-](3,1)to[out=0,in=135](6,0);
+
+        \draw[->](0,0)node[left]{$A$}--(1,0)node[above]{$r_1$};
+        \draw[-](1,0)--(2,0)node[above]{$D$};
+
+        \draw[->](2,0)--(3,0)node[above]{$c_2$};
+        \draw[-](3,0)--(4,0);
+
+        \draw[->](4,0)node[above]{$C$}--(5,0)node[above]{$r_3$};
+        \draw[-](5,0)--(6,0)node[right]{$B$};
+
+        \draw[->](3,-1)to[out=180,in=330](1,-0.7)node[above right]{$c_1$};
+        \draw[-](1,-0.7)to[out=150,in=290](0,0);
+
+        \draw[->](3,-1)node[below]{$E$}--(2.5,-0.5)node[right]{$r_2$};
+        \draw[-](2.5,-0.5)--(2,0);
+
+        \draw[-](3,-1)--(3.5,-0.5)node[right]{$c_3$};
+        \draw[->](4,0)--(3.5,-0.5);
+
+        \draw[->](3,-1)to[out=0,in=210](5,-0.7)node[above left]{$c_4$};
+        \draw[-](5,-0.7)to[out=30,in=250](6,0);
+
+        \draw (4,0.1) circle[radius=5mm];
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \filldraw[black](0,0)circle(1pt);
+        \filldraw[black](2,0)circle(1pt);
+        \filldraw[black](4,0)circle(1pt);
+        \filldraw[black](6,0)circle(1pt);
+        \filldraw[black](3,-1)circle(1pt);
+
+        \draw[->](0,0)to[out=45,in=180](3,1)node[above]{$r_4$};
+        \draw[-](3,1)to[out=0,in=135](6,0);
+
+        \draw[->](0,0)node[left]{$A$}--(1,0)node[above]{$r_1$};
+        \draw[-](1,0)--(2,0)node[above]{$D$};
+
+        \draw[->](2,0)--(3,0)node[above]{$c_2$};
+        \draw[-](3,0)--(4,0);
+
+        \draw[->](4,0)node[above]{$C$}--(5,0)node[above]{$r_3$};
+        \draw[-](5,0)--(6,0)node[right]{$B$};
+
+        \draw[->](3,-1)to[out=180,in=330](1,-0.7)node[above right]{$c_1$};
+        \draw[-](1,-0.7)to[out=150,in=290](0,0);
+
+        \draw[->](3,-1)node[below]{$E$}--(2.5,-0.5)node[right]{$r_2$};
+        \draw[-](2.5,-0.5)--(2,0);
+
+        \draw[-](3,-1)--(3.5,-0.5)node[right]{$c_3$};
+        \draw[->](4,0)--(3.5,-0.5);
+
+        \draw[->](3,-1)to[out=0,in=210](5,-0.7)node[above left]{$c_4$};
+        \draw[-](5,-0.7)to[out=30,in=250](6,0);
+
+        \draw[-]plot[smooth]coordinates{(6.5,0)(5,1.2)(3.5,1.5)(3.2,-1.5)(5,-1.3)(6.5,0)};
+    \end{tikzpicture}
+\end{center}
+
+
+La matrice di incidenza rami-corde così ottenuta risulta essere:
+\begin{equation*}
+    \begin{cases}
+        i_{r_1}-i_{c_1}-i_{c_2}+i_{c_3}+i_{c_4}=0\\
+        i_{r_2}+i_{c_1}-i_{c_3}-i_{c_4}=0\\
+        i_{r_3}-i_{c_2}+i_{c_3}=0\\
+        i_{c_4}+i_{c_2}-i_{c_3}-i_{c_4}=0
+    \end{cases}:[i_r]+[B]\cdot[i_c]=[0]\to[B]=
+    \begin{bmatrix}
+        -1&-1&1&1\\
+        1&0&-1&-1\\
+        0&-1&1&0\\
+        0&1&-1&-1&
+    \end{bmatrix}
+\end{equation*}
+
+Per cui per risolvere il circuito, non è necessario adoperare entrambi i principi di Kirchoff, poiché producono due sistemi duali. Una volta ottenuta la matrice di incidenza 
+corde-rami, invece di individuare tutti i tagli fondamentali si usa direttametne la sua trasposta per impostare l'equazione delle correnti. 
+
+\subsection{Teorema di Tellegen}
+
+Il teorema di Tellegen rappresenta un teorema fondamentale per la topologia dei circuiti. Questo teorema definisce la proprietà di conservatività delle potenze virtuali 
+di un circuito. 
+Si vuole determinare se un circuito generico rispetta il bilancio energetico, ovvero la somma algebria dell'energia del sistema istante per istante, che equivale alla 
+somma della potenza erogata e assorbita dal circuito durante l'intervallo di funzionamento, è nulla. Poiché si rappresenta il grafo di un circuito rispetto alla convenzione 
+dei generatori, la potenza assorbita è negativa, mentre la potenza erogata è positiva. 
+Si considear per ogni lato generico $k$ del circuito la sua potenza $P_k$, e si applica una sommatoria per tutti i lati $l$ del circuito:
+\begin{equation*}
+    \displaystyle\sum_{k=1}^lP_k=\sum_{k=1}^lv_ki_k
+\end{equation*}
+Questo si può esprimere rispetto alle corde e ai rami, separatamente:
+\begin{equation*}
+    \displaystyle\sum_{k=1}^cv_{c_k}i_{c_k}+\sum_{k=1}^rv_{r_k}i_{r_k}
+\end{equation*}
+Questa sommatoria equivale alla trasposta del vettore dei potenziali moltiplicato matricialmente per il vettore delle correnti:
+\begin{equation*}
+    \begin{pmatrix}
+        a_1&\cdots&a_n
+    \end{pmatrix}\cdot\begin{pmatrix}
+        b_1\\
+        \vdots\\
+        b_n
+    \end{pmatrix}=a_1b_1+\cdots +a_nb_n
+\end{equation*}
+Quindi si ottiene la seguente espressione:
+\begin{equation*}
+    \displaystyle\sum_{k=1}^cv_{c_k}i_{c_k}+\sum_{k=1}^rv_{r_k}i_{r_k}=[v_c]^T\cdot[i_c]+[v_r]^T\cdot[i_r]    
+\end{equation*}
+Considerando le equazioni in forma matriciale individuate precedentemente si può esprimere come:
+\begin{gather*}
+    [v_c]=-[A]\cdot[v_r]\\
+    [i_r]=[A]^T\cdot[i_c]\\
+    [v_c]^T\cdot[i_c]+[v_r]^T\cdot[i_r]=\left(-[A]\cdot[v_r]\right)^T\cdot[i_c]+[v_r]^T\cdot\left([A]^T\cdot[i_c]\right)\\
+    -[A]^T[v_r]^T[i_c]+[A]^T[v_r]^T[i_c]=0
+\end{gather*}
+
+Per cui il bilancio energetico di un qualsiasi circuito è sempre verificato, poiché la somma delle sue potenze per ogni lato sarà sempre nulla, ma hanno disaccopiati 
+i campi, poiché sono solo delle approssimazioni formate dall'unione di regioni quasi-stazionarie tra di loro. 
+
+Si considerano ora due circuiti aventi lo stesso grafo, ma potenzialmente lati diversi. Si indicano questi due circuiti come $\alpha$ e $\beta$. Si considera ora il 
+bilancio energetico, usando le tensioni del circuito $\alpha$ e le correnti di $\beta$. Le potenze individuate da questo prodotto per ogni $k-$esimo lato prendeno il nome 
+di potenze virtuali. Da notare che la matrice di incidenza rimane invariate, poiché è funzione della sola topologia del circuito. 
+
+\begin{gather*}
+    \displaystyle\sum_{k=1}^cv_{c_k}^\alpha i_{c_k}^\beta+\sum_{k=1}^rv_{r_k}^\alpha i_{r_k}^\beta=[v_c]^{T,\alpha}\cdot[i_c]^\beta+[v_r]^{T,\alpha}\cdot[i_r]^\beta\\
+    \left(-[A]\cdot[v_r]^\alpha\right)^T\cdot[i_c]^\beta+[v_r]^{T,\alpha}\cdot\left([A]^T\cdot[i_c]^\beta\right)\\
+    -[A]^T[v_r]^{T,\alpha}[i_c]^\beta+[A]^T[v_r]^{T,\alpha}[i_c]^\beta=0
+\end{gather*}
+Quindi il bilancio energetico è verificato anche considerando potenze virtuali, ciò dimostra il teorema di Tellegen. 
+
+\subsection{Metodo dei Nodi}
+
+Si è determinato precedentemente che i principi di Kirchoff non sono dipendenti tra di loro, infatti le loro rispettive matrici di incidenza sono legate dall'espressione:
+\begin{equation*}
+    [A]=-[B]^T
+\end{equation*}
+
+Per cui è possible risolvere il circuito usando meno equazioni. Uno dei metodi che permettono di usare un numero di equazioni minore dei due principi di Kirchoff è il metodo 
+del Tableau. Questo metodo permette di avere solo $r$ o $c$ equazioni nel sistema, ciò è favorevole in situazioni dove è presente un numero considerevolmente maggiore di 
+corde rispetto ai rami, diminuendo il tempo necessario alla risoluzione del circuito. Un circuito di questo tipo presenta molti lati in parallelo tra di loro. 
+
+Si considera il seguente circuito, su cui verrà adoperato il metodo dei nodi:
+\begin{center}
+    \begin{tikzpicture}
+        \draw (0,0) to[R=$20\,\Omega$] (0,4)
+                    to[short](2,4)
+                    to[R=$10\,\Omega$](4,4)
+                    to[short](6,4);
+        \draw (0,0) to[short](6,0);
+        \draw (2,0) to[european voltage source=$10\,V$](2,2)
+                    to[R=$20\,\Omega$](2,4);
+        \draw (4,0) to[R=$5\,\Omega$] (4,2)
+                    to[R=$7\,\Omega$](4,4);
+        \draw(0,3.5)to[short] (-2,3.5)
+                    to[european current source=$2\,A$](-2,0.5)
+                    to[short](0,0.5);
+        \draw (5,4) to[short](5,5)
+                    to[european voltage source=$50\,V$](3,5)
+                    to[R=$10\,\Omega$](1,5)
+                    to[short](1,4);
+        \draw (6,0) to[european current source=$1\,A$](6,4);
+
+    \end{tikzpicture}
+\end{center}
+Si crea ora il grafo rappresentativo del circuito, considerando sempre la convenzione dei generatori: 
+\begin{center}
+    \begin{tikzpicture}[scale=3]
+        \filldraw[black](0,0)circle(0.5pt);
+        \filldraw[black](2,0)circle(0.5pt);
+        \filldraw[black](1,-1)circle(0.5pt);
+
+        \draw[->](2,0)--(1,0)node[above]{$4$};
+        \draw[-](1,0)--(0,0)node[above left]{$A$};
+
+        \draw[->](1,-1)--(0.5,-0.5)node[right]{$3$};
+        \draw[-](0.5,-0.5)--(0,0);
+
+        \draw[->](1,-1)node[below]{$C$}--(1.5,-0.5)node[left]{$7$};
+        \draw[-](1.5,-0.5)--(2,0)node[right]{$B$};
+
+        \draw[->](2,0)to[out=135,in=0](1,0.5)node[above]{$5$};
+        \draw[-](1,0.5)to[out=180,in=45](0,0);
+
+        \draw[->](1,-1)to[out=0,in=225](1.8,-0.8)node[right]{$6$};
+        \draw[-](1.8,-0.8)to[out=45,in=270](2,0);
+
+        \draw[-](1,-1)to[out=160,in=315](0.3,-0.7)node[left]{$2$};
+        \draw[<-](0.3,-0.7)to[out=135,in=270](0,0);
+
+        \draw[-](1,-1)to[out=180,in=315](0.1,-0.9)node[right]{$1$};
+        \draw[<-](0.1,-0.9)to[out=135,in=270](0,0);
+    \end{tikzpicture}
+\end{center}
+
+
+Il metodo dei nodi fornisce un metodo di risoluzione, usando solo $n-1$ equazioni, dove $n$ è il numero di nodi del grafo, equivalente al numero dei rami $r$. 
+Si scelgono il nodo $A$ ed il nodo $B$, rispetto ai quali si scrive il primo principio di Kirchoff scegliendo arbitrariamente un verso di riferimento, tramite una matrice di 
+incidenza $A\in M(n-1,l,\{-1,0,1\})$:
+\begin{gather*}
+    [A][i_l]=[0]\\
+    \begin{bmatrix}
+        -1&-1&1&1&1&0&0\\
+        0&0&0&-1&-1&1&1
+    \end{bmatrix}\cdot\begin{bmatrix}
+        i_1\\
+        i_2\\
+        i_3\\
+        i_4\\
+        i_5\\
+        i_6\\
+        i_7
+    \end{bmatrix}=\begin{bmatrix}
+        0\\
+        0
+    \end{bmatrix}
+\end{gather*}
+Per cui il primo passaggio del metodo dei nodi è la determinazione della matrice di incidenza $A$. Successivamente si determina l'equazione di utilità, per determinare le nuove 
+incognita da usare nelle $n-1$ equazioni. Vengono quindi definiti i potenziali modali. Si assegna al nodo non considerato un potenziale nullo. In questo caso $C$. 
+Si misurano quindi le tensioni, tenendo il puntale negativo sul nodo $C$. L'equazione risultante si esprime tramite un'altra matrice di incidenza:
+\begin{gather*}
+    \begin{bmatrix}
+        v_1\\
+        v_2\\
+        v_3\\
+        v_4\\
+        v_5\\
+        v_6\\
+        v_7
+    \end{bmatrix}\cdot[B]=\begin{bmatrix}
+        V_A\\
+        V_B
+    \end{bmatrix}\to[B]=\begin{bmatrix}
+        -1&0\\
+        -1&0\\
+        1&0\\
+        1&-1\\
+        1&-1\\
+        0&1\\
+        0&1
+    \end{bmatrix}\\
+    [v_l]\cdot[B]=[V_{mo}]
+\end{gather*}
+Queste due matrici di incidenza sono dipendenti tra di loro:
+\begin{equation*}
+    [B]=[A]^T
+\end{equation*}
+In questo modo si può esprimere l'equazione di utilità rispetto alla matrice di incidenza delle correnti $A$:
+\begin{equation*}
+    [v_l]\cdot[A]^T=[V_{mo}]
+\end{equation*}
+
+Per attuare queste operazioni i lati devono essere in una forma idonea alla corrente, da ricordare che ci troviamo nella convenzione dei generatori. 
+Le forme idonee sono la forma abigua, con equazione costitutiva $i=-Gv$, le forme Northon semplice ed estrema, avendo valori di corrente finiti e assegnati a priori, che si 
+comportano come termini noti. Le forme Thevenin, non estreme, possono essere convertite in forme Northon, per cui le uniche forme, senza memoria, non accettate sono 
+la forma Thevenin estrema. Generalizzando il metodo dei nodi, si può comprendere la forma Thevenin estrema, che non si può esprimere come una forma Northon. 
+Questo metodo dei nodi non generalizzato è valido per tutti i circuiti che non contengono forme Thevenin estreme. 
+
+Per cui ogni generico lato corrisponde ad una forma Northon, la sua corrente di lato si può quindi esprimere come:
+\begin{equation*}
+    i_k=i_{gk}-G_kv_k
+\end{equation*}
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short,*-,i=$i_k$](0.5,0)
+                    to[short](0.5,-0.5)
+                    to[european current source=$i_{gk}$](2.5,-0.5)
+                    to[short](2.5,0)
+                    to[short,-*](3,0);
+        \draw(0.5,0)to[short](0.5,0.5) 
+                    to[R=$G_k$](2.5,0.5)
+                    to[short](2.5,0);
+    \end{circuitikz}
+\end{center}
+
+In questo caso si ottengono le seguenti leggi costitutive dei lati:
+\begin{equation*}
+    \begin{cases}
+        i_1=2\,A&G_1=0\\
+        i_2=\displaystyle-\frac{1}{20\,\Omega}v_2&i_{g2}=0\\
+        i_3=\displaystyle\frac{10V}{10\,\Omega}-\frac{1}{20\,\Omega}v_3\\
+        i_4=\displaystyle-\frac{1}{10\,\Omega}v_4 &i_{g4}=0\\
+        i_5=\displaystyle\frac{50V}{10\,\Omega}-\frac{1}{10\,\Omega}v_5\\
+        i_6=1\,A &G_6=0\\
+        i_7=\displaystyle\frac{1}{5\,\Omega+7\,\Omega}v_7&i_{g7}=0
+    \end{cases}
+\end{equation*}
+Riscrivendole in forma matriciale si ottiene:
+\begin{equation*}
+    [i_l]=\begin{bmatrix}
+        2\,A\\
+        \displaystyle-\frac{1}{20\,\Omega}v_2\\
+        1\,A-\displaystyle\frac{1}{20\,\Omega}v_3\\
+        \displaystyle-\frac{1}{10\,\Omega}v_4\\
+        5\,A-\displaystyle\frac{1}{10\,\Omega}v_5\\
+        1\,A\\
+        \displaystyle\frac{1}{12\,\Omega}v_7
+    \end{bmatrix}
+\end{equation*}
 
 \end{document}
