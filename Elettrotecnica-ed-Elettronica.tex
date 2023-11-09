@@ -1232,9 +1232,9 @@ Il modello circuitale viene definito tramite osservazione sperimentali, per prod
 o distanti dall'elettro-magnetismo. Questo modello così creato è un'approsimmazione dei fenomeni fisici in atto all'interno del circuito, ma sotto certe condizioni può 
 descrivere con considerevole precisione gli andamenti del circuito reale. 
 
-\subsection{Principi Cardinali di Kirchoff}
+\subsection{Principi Cardinali di Kirchhoff}
 
-I principi di Kirchoff descrivono l'andamento dell'elettro-magnetismo a regime stazionario, ovvero ogni grandezza fisica $x$ è invariante nel tempo
+I principi di Kirchhoff descrivono l'andamento dell'elettro-magnetismo a regime stazionario, ovvero ogni grandezza fisica $x$ è invariante nel tempo
 $\displaystyle\frac{\partial }{\partial t}x(t)=0$, ciò rappresenta una visione galileiana della fisica, per cui non descrive a pieno i fenomeni fisici. 
 
 In questa situazione, si considerano le equazioni di Maxwell inerenti al rotore:
@@ -1268,7 +1268,7 @@ del percorso chiuso è nulla:
 \begin{equation}
     \displaystyle\sum_{k=1}^nv_k=0
 \end{equation}
-Quest'equazione si identifica come secondo principio di Kirchoff, o principio di Kirchoff alle tensioni. 
+Quest'equazione si identifica come secondo principio di Kirchhoff, o principio di Kirchhoff alle tensioni. 
 Se non si cambia mai il verso del volmetro, non sarà necessario cambiare il segno del potenziale $v_k$ nella sommatoria. Se il verso non fosse uguale per ogni potenziale, 
 bisognerebbe considerare per ogni potenziale $v_k$ il suo segno nella somma algebrica. 
 
@@ -1298,7 +1298,7 @@ bisognerebbe considerare per ogni potenziale $v_k$ il suo segno nella somma alge
     \end{tikzpicture}
 \end{center}
 
-Per ricavare il primo principio di Kirchoff si considera la divergenza del rotore del campo magnetico $\vec{H}$:
+Per ricavare il primo principio di Kirchhoff si considera la divergenza del rotore del campo magnetico $\vec{H}$:
 \begin{gather*}
     \nabla\times(\nabla\times\vec{H})=\nabla\cdot\vec{J}\\
     \displaystyle\nabla\cdot\left(\displaystyle\left(\frac{\partial H_z}{\partial y}-\frac{\partial H_y}{\partial z}\right)\hat{x}-\left(\frac{\partial H_x}{\partial z}-\frac{\partial H_z}{\partial x}\right)\hat{y}+\left(\frac{\partial H_y}{\partial x}-\frac{\partial H_x}{\partial y}\right)\hat{z}\right)\\
@@ -1321,7 +1321,7 @@ necessariamente anche la somma delle correnti attraverso ogni superficie $S_k$, 
 \begin{equation}
     \displaystyle\sum_{k=1}^ni_k=0
 \end{equation}
-Quest'equazione corrisponde al primo principio di Kirchoff. Una corrente può essere sia entrante che uscente in base al verso dell'amperometro, per cui sarebbe necessario 
+Quest'equazione corrisponde al primo principio di Kirchhoff. Una corrente può essere sia entrante che uscente in base al verso dell'amperometro, per cui sarebbe necessario 
 specificarne il verso all'interno della somma algebrica. Per rappresentare il primo principio con una sommatoria semplice si misurano tutte le correnti nello stesso verso, 
 per cui si esprime come la somma delle correnti entranti nella superficie chiusa $S$, alcune delle quali sono di segno negativo, corrispondenti alle correnti uscenti dalla 
 superficie. 
@@ -1354,7 +1354,7 @@ misura.
 \subsection{Regioni di un Circuito}
 
 Nel tempo il campo elettro-magnetico si propaga come un'onda, poiché i campi sono accoppiati nelle quattro equazioni, ma ciò non avviene a regime stazionario. Poiché le leggi di 
-Kirchoff sono approssimazioni, si vuole determinare la precisione di date leggi. Si considera un canale, guida d'onda, passante per due punti $A$ e $B$. distanti $d$, 
+Kirchhoff sono approssimazioni, si vuole determinare la precisione di date leggi. Si considera un canale, guida d'onda, passante per due punti $A$ e $B$. distanti $d$, 
 attraversato da un flusso di cariche. Sono presenti due osservatori in $A$ e $B$, che misurano la corrente sinusoidale, entrambi aventi lo zero temporale comune. Viene 
 espressa la velocità di propagazione dell'onda con $c$. Viene osservato che l'onda sinusoidale partita da $A$, viene misurata da $B$ con un certo ritardo $\tau$. 
 
@@ -1411,7 +1411,7 @@ Per cui le due correnti sono approsimativamente congruenti:
 L'errore è trascurabile se la lunghezza d'onda è considerevolmente maggiore della distanza tra il trasmettitore ed il ricevitore. 
 L'uso del modello adatto dipende dal valore delle grandezze trattate, in elettrotecnica si studiano frequenze nell'
 ordine dei $GHz$, per cui si considerano modelli di circuiti adimensionali, nei quali, dal punto di vista euclidiano, tutti i punti coincidono. In questo modo si possono 
-trattare i campi in un ambiente quasi-stazionario, quindi usando le leggi di Kirchoff; poiché ancora non disponiamo di modelli di calcolo abbastanza avanzati per poter 
+trattare i campi in un ambiente quasi-stazionario, quindi usando le leggi di Kirchhoff; poiché ancora non disponiamo di modelli di calcolo abbastanza avanzati per poter 
 descrivere sistemi elettro-magnetici molto complessi che richiedono l'uso delle equazioni di campo. 
 
 Si può rappresentare quest'approssimazione 
@@ -1872,7 +1872,7 @@ Dove si indica con $\phi$ il flusso del campo magnetico, per semplicità. Per cu
     v_k=\displaystyle\frac{d\phi}{dt}
 \end{equation*}
 Ma questo valore non corrisponde al valore misurato tra i due morsetti all'inizio ed alla fine della bobina. Per determinare il valore della tensione totale, si considerano 
-tutte le tensioni delle singole spire e la differenza di potenziale totale, viene poi applicato il secondo principio di Kirchoff, rispetto ad un riferimento orario:
+tutte le tensioni delle singole spire e la differenza di potenziale totale, viene poi applicato il secondo principio di Kirchhoff, rispetto ad un riferimento orario:
 \begin{center}
     \begin{tikzpicture}[scale=4]
         \draw[->,very thick](0,0)--(0,0.2)node[right]{$v_N$};
@@ -2147,7 +2147,7 @@ quando vari elementi con memoria sono uniti tra di loro. Elementi omogenei corri
 si ottiene un elemento con grandezze fisiche diverse, per cui è necessario tenerli separati, queste grandezze possono essere uniformate introducendo il concetto di impedenza, 
 ed il suo inverso l'ammettenza, concetti più estesi che verrano discussi successivamente. Si comincia analizzando gli elementi più semplici ovvero i resistori ed i generatori 
 ideali. Le proprietà descritte da questi seplici elementi, descrivono comportamenti di circuiti più complessi, per cui si cercano delle proprietà fondamentali dei circuiti 
-dall'analisi di questi bipoli. Le proprietà fondamentali dei circuiti già analizzate sono i due principi di Kirchoff, queste proprietà non dipendono dal tipo di bipolo trattato, 
+dall'analisi di questi bipoli. Le proprietà fondamentali dei circuiti già analizzate sono i due principi di Kirchhoff, queste proprietà non dipendono dal tipo di bipolo trattato, 
 ma sono prorpietà del circuito in quanto tale e corrispondono alle proprietà dei campi. Mentre le leggi costitutive descrivono il comportamento del campo attraverso uno 
 specifico bipolo.   
 
@@ -2180,9 +2180,9 @@ questo lato avrà anche una tensione, in convenzione degli utilizzatori $v=V_A-V
 
 
 Su ogni elemento si può considerare la differenza di potenziale relativa al solo resistore $R_k$, per ogni resistore. 
-Bisogna cercare percorsi utili al calcolo per i principi di Kirchoff, in questo caso si considera un percorso chiuso composto dal lato e dal volmetro, unico oggetto 
+Bisogna cercare percorsi utili al calcolo per i principi di Kirchhoff, in questo caso si considera un percorso chiuso composto dal lato e dal volmetro, unico oggetto 
 rappresentato da freccie, ma si trova nel vuoto circuitale.  Se si considera una circuitazione in senso orario, concorde al volmetro nel percorso così definito, si può 
-applicare il principio di Kirchoff alle tensioni. 
+applicare il principio di Kirchhoff alle tensioni. 
 \begin{equation*}
     v-\displaystyle\sum_{k=1}^nv_k=0\to v=\displaystyle\sum_{k=1}^nv_k
 \end{equation*}
@@ -2233,7 +2233,7 @@ per cui la tensione è uguale per ogni resistore $R_k$. All'ingresso di tutta la
 \end{center}
 
 Se viene attraversato da una corrente $i$ esterna, la corrente passante per ogni resistore $i_k$ è diversa, e per calcolare la corrente complessiva rispetto a queste singole 
-correnti si considera il principio di Kirchoff alle correnti. Per ottenere informazioni utili si sceglie una superficie $S$ contenente tutte le correnti $i_k$ in modo che 
+correnti si considera il principio di Kirchhoff alle correnti. Per ottenere informazioni utili si sceglie una superficie $S$ contenente tutte le correnti $i_k$ in modo che 
 siano entranti nella superficie, mentre la corrente $i$ risulta uscente in questa configurazione. Le correnti entranti e quelle uscenti presentano un segno opposto, ed 
 arbitrario per cui la loro somma algebrica risulta nulla:
 
@@ -2301,7 +2301,7 @@ Si considera una serie di $n$ generatori di tensione collegati in serie, che pre
 
 
 La tensione generata si misura nella convenzione degli utilizzatori, per cui potrà essere concorde o discorde al verso della forza elettro-motrice, per il 
-primo principio di Kirchoff si ottiene:
+primo principio di Kirchhoff si ottiene:
 \begin{equation*}
     v=\displaystyle\sum_{k=1}^nv_k=\sum_{k=1}^n(\pm)e_{gk}
 \end{equation*}
@@ -2334,14 +2334,14 @@ lo stesso valore. Per cui si considera un lato composto da $m$ generatori di ten
     \end{circuitikz}
 \end{center}
 
-Per il principio di Kirchoff alle correnti:
+Per il principio di Kirchhoff alle correnti:
 
 \begin{equation*}
     i=\displaystyle\sum_{k=1}^n(\pm)i_{gk}
 \end{equation*}
 
 
-Si considera una serie di $n$ resistori ed $m$ generatori di tensione, ogni elemento genera una tensione, per cui per il primo principio di Kirchoff si ottiene una somma 
+Si considera una serie di $n$ resistori ed $m$ generatori di tensione, ogni elemento genera una tensione, per cui per il primo principio di Kirchhoff si ottiene una somma 
 di due sommatorie: 
 
 \begin{center}
@@ -2476,7 +2476,7 @@ circuitale si considera la legge costitutiva del bipolo con memoria:
 \end{gather*}
 Per ottenere lo stesso risultato ottenuto fisicamente, bisogna considerare solo condensatori scarichi, ovvero con memoria nulla. In caso siano carichi si considera un 
 generatore di tensione che genera esattamente una tensione di $v(0^-)$ corrispondente alla memoria del condensatore. In questo modo si introducono informazioni che non 
-esistevano precedentemente, costruendo un circuito applicando il principio di Kirchoff alle tensione sulla relazione $v=v_C+v(0^-)$, dove $v_C$ rappresenta l'evoluzione 
+esistevano precedentemente, costruendo un circuito applicando il principio di Kirchhoff alle tensione sulla relazione $v=v_C+v(0^-)$, dove $v_C$ rappresenta l'evoluzione 
 della tensione allo scorrere della corrente: 
 
 \begin{center}
@@ -2561,7 +2561,7 @@ Poiché bisogna analizzare in termini correnti si considera la legge costitutiva
 \end{equation*}
 
 La variazione di tensione è la stessa su tutti i condensatori posti in parallelo. Analogamente ai resistori in parallelo si considera una superficie $S$ dove tutte le correnti 
-passanti per i condensatori sono concordi, mentre la corrente esterna è di verso discorde. Su questa superficie si applica il principio di Kirchoff alle correnti, scegliendo 
+passanti per i condensatori sono concordi, mentre la corrente esterna è di verso discorde. Su questa superficie si applica il principio di Kirchhoff alle correnti, scegliendo 
 arbitrariamente un verso di riferimento poiché la loro è sempre nulla. Per ogni insieme di elementi omogenei montati in parallelo si usa questo stesso ragionamento. 
 Si ottiene quindi:
 \begin{equation*}
@@ -2599,7 +2599,7 @@ Date le leggi costitutive dell'induttore ideale in forma locale ed integrale:
 
 
 
-Per un lato composto da $n$ induttori montati in serie si considera la forma locale, e si applica il principio di Kirchoff alle tensioni:
+Per un lato composto da $n$ induttori montati in serie si considera la forma locale, e si applica il principio di Kirchhoff alle tensioni:
 \begin{center}
     \begin{circuitikz}
         \draw(-1,0)to[short, *-,i_=$i$](0,0)
@@ -2648,7 +2648,7 @@ Si può quindi rappresentare questo lato come un singolo induttore di induttanza
 
 
 
-Per un lato composto da $m$ induttori montati in parallelo si considera la forma integrale della legge costitutiva, e si applica il principiod i Kirchoff alle correnti su una 
+Per un lato composto da $m$ induttori montati in parallelo si considera la forma integrale della legge costitutiva, e si applica il principiod i Kirchhoff alle correnti su una 
 superficie $S$, analogamente al caso dei resistori e dei condensatori:
 
 \begin{center}
@@ -2701,7 +2701,7 @@ Altrimenti sarebbe necessario inserire un componente generatore ideale di corren
     i_L=\displaystyle\frac{1}{L_p}\int_{0^-}^tvdt\\
     i=i_L+i_p
 \end{gather*}
-Considerando il principio di Kirchoff alle correnti è possibile costruire il circuito equivalente a quest'espressione:
+Considerando il principio di Kirchhoff alle correnti è possibile costruire il circuito equivalente a quest'espressione:
 \begin{center}
     \begin{circuitikz}
         \draw(-0.5,0)to[short, *-, i=$i$](0.5,0);
@@ -2782,7 +2782,7 @@ Quest'equazione rappresenta la legge di passaggio tra la forma Norhton e la form
 Per descrivere la topologia dei circuiti si rappresentano dei bipoli generici. Si definisce un lato in maniera più specifica un percorso di bipoli attraversati dalla 
 stessa corrente. Si assegna più importanza alla serie che al parallelo, per semplicità in quest'analisi. 
 
-Un nodo è, formalmente, una zona, non un punto, equipotenziale dove convergono almeno tre lati, affinché il principio di Kirchoff alle correnti dia origine ad un'equazione 
+Un nodo è, formalmente, una zona, non un punto, equipotenziale dove convergono almeno tre lati, affinché il principio di Kirchhoff alle correnti dia origine ad un'equazione 
 non banale. Per cui un nodo è obbligatorio se convergono almeno tre lati. Un nodo di calcolo è una zona dove si ammettono anche meno di tre lati, usato appunto ai fini di 
 calcolo. Un nodo non va cercato dalla forma del circuito, da ricordare che la regione di equipotenzialità non rappresenta un lato. Se viene inserito un nodo di calcolo tra due 
 oggetti, non possono essere più considerati in serie. 
@@ -2804,10 +2804,10 @@ vengono inseriti in un albero o un co-albero. Il numero delle corde non è vinco
 
 Per determinare le correnti e tensioni per ogni lato, si considerano le relazioni su ogni lato, e le leggi costitutive di ogni lato. Per cui dato $l$ numero dei lati, si 
 ottengono $2l$ equazioni, ma è possible determinare la corrente data la tensione e la legge costitutiva del lato e viceversa, per cui sono necessarie $l$ equazioni. 
-Inoltre si adoperano i prinicpi di Kirchoff, ma sorge il problema di determinare per quali percorsi chiusi si applicano i principi. Bisogna usarne abbastanza per risolvere le 
+Inoltre si adoperano i prinicpi di Kirchhoff, ma sorge il problema di determinare per quali percorsi chiusi si applicano i principi. Bisogna usarne abbastanza per risolvere le 
 equazioni delle leggi costitutive in funzione della tensione e delle correnti. Per determinare il numero di volte da applicare i principi e per quali percorsi chiusi, si 
 aggiunge all'albero una ed una sola corda del co-albero, per ogni corda, in modo da creare un nuovo percorso chiuso ogni volta. Su questi percorsi chiusi così creati si 
-applicano i principi di Kirchoff alle tensioni, rispetto al verso della corda inserita. Se i versi dei rami sono opposti, le loro tensioni si indicano di segno opposto. 
+applicano i principi di Kirchhoff alle tensioni, rispetto al verso della corda inserita. Se i versi dei rami sono opposti, le loro tensioni si indicano di segno opposto. 
 In questo modo si ottengono $c$ equazioni di tensioni, dove $c$ è il numero di corde del co-allbero, necessariamente indipendenti tra di loro, poiché in ciascuna di esse è 
 presente solo una volta le tensioni delle corde, poiché non possono essere riscritte come combinazioni lineari. Si esprime in forma matriciale come:
 \begin{equation*}
@@ -2831,7 +2831,7 @@ In forma compatta si esprime rispetto al vettore tensione corde $[v_c]$ e rami $
 \begin{equation*}
     [v_c]+[A]\cdot[v_r]=[0]
 \end{equation*}
-Quest'equazione racchiude tutte le possibili combinazioni di equazioni risultanti dal primo principio di Kirchoff linearmente indipendenti tra di loro. 
+Quest'equazione racchiude tutte le possibili combinazioni di equazioni risultanti dal primo principio di Kirchhoff linearmente indipendenti tra di loro. 
 Si usano le parentesi quadre per denotare la natura matriciale dei componenti, possono essere omesse, ma ciò può causare fraintendimenti sulla natura dei componenti. 
 
 
@@ -2864,7 +2864,7 @@ Le matrici $A$ e $B$ sono componenti duali, la relazione che lega queste due mat
     [B]=-[A]^T
 \end{equation*}
 
-Per cui i due principi di Kirchoff non sono tra di loro indipendenti. 
+Per cui i due principi di Kirchhoff non sono tra di loro indipendenti. 
 
 
 Si considera un circuito generico:
@@ -3008,7 +3008,7 @@ Per creare un albero si scelgono i lati $2$, $3$, $6$, e $8$. In questo caso è 
     \end{tikzpicture}
 \end{center}
 
-Si applica il secondo teorema di Kirchoff sulle circuitazioni create inserendo una corda alla volta nel grafo albero, di verso concorde alla conrda inserita. Queste 
+Si applica il secondo teorema di Kirchhoff sulle circuitazioni create inserendo una corda alla volta nel grafo albero, di verso concorde alla conrda inserita. Queste 
 circuitazioni si chiamano maglie fondamentali. 
 \begin{center}
     \begin{tikzpicture}
@@ -3315,7 +3315,7 @@ La matrice di incidenza rami-corde così ottenuta risulta essere:
     \end{bmatrix}
 \end{equation*}
 
-Per cui per risolvere il circuito, non è necessario adoperare entrambi i principi di Kirchoff, poiché producono due sistemi duali. Una volta ottenuta la matrice di incidenza 
+Per cui per risolvere il circuito, non è necessario adoperare entrambi i principi di Kirchhoff, poiché producono due sistemi duali. Una volta ottenuta la matrice di incidenza 
 corde-rami, invece di individuare tutti i tagli fondamentali si usa direttametne la sua trasposta per impostare l'equazione delle correnti. 
 
 \subsection{Teorema di Tellegen}
@@ -3371,12 +3371,12 @@ Quindi il bilancio energetico è verificato anche considerando potenze virtuali,
 
 \subsection{Metodo dei Nodi}
 
-Si è determinato precedentemente che i principi di Kirchoff non sono dipendenti tra di loro, infatti le loro rispettive matrici di incidenza sono legate dall'espressione:
+Si è determinato precedentemente che i principi di Kirchhoff non sono dipendenti tra di loro, infatti le loro rispettive matrici di incidenza sono legate dall'espressione:
 \begin{equation*}
     [A]=-[B]^T
 \end{equation*}
 
-Per cui è possible risolvere il circuito usando meno equazioni. Uno dei metodi che permettono di usare un numero di equazioni minore dei due principi di Kirchoff è il metodo 
+Per cui è possible risolvere il circuito usando meno equazioni. Uno dei metodi che permettono di usare un numero di equazioni minore dei due principi di Kirchhoff è il metodo 
 del Tableau. Questo metodo permette di avere solo $r$ o $c$ equazioni nel sistema, ciò è favorevole in situazioni dove è presente un numero considerevolmente maggiore di 
 corde rispetto ai rami, diminuendo il tempo necessario alla risoluzione del circuito. Un circuito di questo tipo presenta molti lati in parallelo tra di loro. 
 
@@ -3439,7 +3439,7 @@ della somma algebrica dei generatori. % "regola del pigro"
 
 
 Il metodo dei nodi fornisce un metodo di risoluzione, usando solo $n-1$ equazioni, dove $n$ è il numero di nodi del grafo, equivalente al numero dei rami $r$. 
-Si scelgono il nodo $A$ ed il nodo $B$, rispetto ai quali si scrive il primo principio di Kirchoff scegliendo arbitrariamente un verso di riferimento, tramite una matrice di 
+Si scelgono il nodo $A$ ed il nodo $B$, rispetto ai quali si scrive il primo principio di Kirchhoff scegliendo arbitrariamente un verso di riferimento, tramite una matrice di 
 incidenza nodi-lati $A\in M(n-1,l,\{-1,0,1\})$:
 \begin{gather*}
     [A][i_l]=[0]\\
@@ -3681,20 +3681,302 @@ Si verifica il bilancio energetico del circuito:
 \end{equation*}
 Questo bilancio energetico presenta un errore accettabile in base allo strumento di calcolo usato per determinare il risultato. 
 
+\subsubsection{Generalizzazione}
+
+Da questo metodo, si possono ottenere delle regole generalizzate che permettono di evitare l'analisi della topologia del circuito. Si indica come scrittura metodo dei nodi 
+per semplice ispezione. Gli elementi della matrice delle conduttanze modali che si trovano sulla diagonale principale si chiamano autoconduttanze. Si dimostra che si ottengono 
+sommando tutte le $n_{j}$ conduttanze dei lati $l_k$ che affiorano su quel nodo: 
+\begin{equation*}
+    G_{{mo}_{ij}}=\displaystyle\sum_{k=1}^{n_j}G_{l_k}\,\forall i= j
+\end{equation*}
+Gli elmenti che non si trovano sulla diagonale principale si chiamano mutue- o trans-conduttanze, e rappresentano una somma cambiata di segno delle $n_{ij}$ conduttanze dei lati 
+$l_k$ che collegano due nodi:
+\begin{equation*}
+    G_{{mo}_{ij}}=-\displaystyle\left(\sum_{k=1}^{n_{ij}}G_{l_k}\right)\,\forall i\neq j
+\end{equation*}
+Si può esprimere semplicemente la matrice delle conduttanze modali, come una matrice quadrata di ordine $n-1$ i cui componenti assumono valori descritti dalla seguente 
+espressione: 
+\begin{equation*}
+    [G_{mo}]:=(G_{{mo}_{ij}})=\begin{cases}
+        \displaystyle\sum_{k=1}^{n_j}G_{l_k} &i=j\\
+        -\displaystyle\left(\sum_{k=1}^{n_{ij}}G_{l_k}\right)&i\neq j
+    \end{cases}
+\end{equation*}
+
+Per esprimere il vettore delle correnti modali si considerano solo i lati con un generatore di corrente, e si attua una somma, tenendo conto del verso delle correnti. 
+Se le correnti sono entranti nel nodo sono positive, negative quelle uscenti: 
+\begin{equation*}
+    [I_{mo}]:=(I_{{mo}_{i}})=\displaystyle\sum_{k=1}^{n_i}\pm i_{g_k}
+\end{equation*}
 
 
-Da questo metodo, risultano delle regole generalizzate che permettono di saltare il passaggio per la topologia del circuito. Si indica come scrittura metodo dei nodi per 
-semplice ispezione. Gli elementi della matrice delle conduttanze modali che si trovano sulla diagonale principale si chiamano autoconduttanze. Si dimostra che si ottengono 
-sommango tutte le conduttanze dei lati che affiorano su quel nodo. Gli elmenti che non si trovano sulla diagonale principale si chiamano mutue- o trans-conduttanze, e 
-rappresentano una somma cambiata di segno delle conduttanze che collegano due nodi. 
+Per determinare la corrente $i_k$ passante per un lato $l_k$ si considera la differenza tra la tensione tra i due nodi $A$ e $B$ che racchiudono il lato e la tensione erogata dal 
+lato $v_k$, moltiplicata per la conduttanza del lato $G_k$:
+\begin{equation*}
+    i_k=(V_A-V_B-v_k)G_k
+\end{equation*}
+Il verso, e quindi il segno ottenuto, è arbitrario e dipende dalla convenzione utilizzata per misurare le grandezze di ogni singolo lato. 
+
+\subsection{Metodo delle Maglie}
+
+Il metodo delle maglie è il duale del metodo dei nodi, questo metodo si basa sul secondo principio di Kirchhoff. Permette di scrivere tante equazioni tante sono il numero di 
+maglie indipendenti del sistema. Si può raggiungere questo numero scegliendo opportune maglie. Non quelle fondamentali, ma maglie che non contengono altre maglie. Questo 
+tipo di maglie vengono indicati con il termine di anelli. Essendo il duale del metodo dei nodi, per dimostrarlo, si sostituiscono le correnti alle tensioni, le resistenze alle 
+conduttanze ed i lati Northon ai lati Thevenin. 
+
+Si può rappresentare in forma matriciale tramite la matrice di incidenza maglie-lati $[B]$, che  indica se un certo lato appartiene alla circuitazione di uno degli anelli:
+\begin{equation*}
+    [B]\cdot[v_l]=[0]
+\end{equation*}
+
+%% grafo anelli 
 
 
-Per esprimere il vettore delle correnti modali si considerano solo i nodi con un generatore 
-di corrente, e si attua una somma, tenendo conto del verso delle correnti. Se le correnti sono entranti nel nodo sono positive, negative quelle uscenti. 
+Analogamente al metodo dei nodi, si usufruisce di un'equazione di utilità per cambiare le incognite e diminuire il numero di equazioni necessarie. Si vogliono esprimere 
+le correnti passanti per i lati come la differenza tra due correnti, e si sceglie una corrente di riferimento, assunta di valore nullo. Si prende ogni lato e si indica come 
+differenza tra due correnti di maglia. Queste incognite fittizie forniscono dalla loro differenza il valore delle correnti passanti per ogni lato. Il loro valore è noto 
+solo a meno di una costante di riferimento, in questo caso $I_m$, corrispondente alla corrente di maglia passante nel vuoto. 
+
+%% grafo 
+
+Si esprimono quindi le correnti, considerando la corrente di riferimento $I_m=0$: 
+\begin{gather*}
+    i_1=I_{m_1}-0\\
+    i_2=I_{m_2}-I_{m_1}\\
+    i_3=I_{m_3}-I_{m_2}\\
+    i_4=I_{m_4}-I_{m_2}\\
+    i_5=I_{m_3}-I_{m_4}\\
+    i_6=0-I_{m_4}\\
+    i_7=0-I_{m_3}
+\end{gather*}
+
+Per cui l'equazione di utilità è: 
+\begin{gather*}
+    [i_l]=\begin{bmatrix}
+        i_1\\
+        i_2\\
+        i_3\\
+        i_4\\
+        i_5\\
+        i_6\\
+        i_7
+    \end{bmatrix}=\begin{bmatrix}
+        1&0&0&0\\
+        -1&1&0&0\\
+        0&-1&1&0\\
+        0&-1&0&1\\
+        0&0&1&-1\\
+        0&0&0&-1\\
+        0&0&-1&0
+    \end{bmatrix}\cdot\begin{bmatrix}
+        I_{m_1}\\
+        I_{m_2}\\
+        I_{m_3}\\
+        I_{m_4}
+    \end{bmatrix}\\
+    [H]=\begin{bmatrix}
+        1&0&0&0\\
+        -1&1&0&0\\
+        0&-1&1&0\\
+        0&-1&0&1\\
+        0&0&1&-1\\
+        0&0&0&-1\\
+        0&0&-1&0
+    \end{bmatrix}
+\end{gather*}
+
+Questa matrice $[H]$ risulta essere esattamente la trasposta della matrice di incidenza magile-lati:
+\begin{equation*}
+    [H]=[B]^T
+\end{equation*}
+
+Tutti i lati si rappresentano come lati Thevenin nella convenzione dei generatori. Quindi ogni lato $k-$esimo è definito dall'equazione:
+\begin{equation*}
+    v_k=E_k-R_ki_k
+\end{equation*}
+I lati Northon estremi, amigui oppure lati in parallelo con il vuoto non possono essere analizzati tramite questo metodo. Verrà poi generalizzato per tenere conto di queste 
+forme. In forma matriciale si può esprimere come:
+\begin{gather*}
+    [v_l]=[E_l]-[R_l][i_l]
+\end{gather*}
+La matrice delle resistenze di lato presenta degli zeri solo in presenta di lati Thevenin estremi, può presentare elementi non nulli solo sulla sua diagonale. 
+Si moltiplicano ambo i membri per la matrice di incidenca maglie-lati:
+\begin{gather*}
+    [B][v_l]=[B]\left([E_l]-[R_l][i_l]\right)\\
+    [0]=[B][E_l]-[B][R_l][i_l]
+\end{gather*}
+Si sostituisce:
+\begin{gather*}
+    [i_l]=[B]^T[I_m]
+\end{gather*}
+Si definisce il vettore tensione di maglia:
+\begin{equation*}
+    [E_m]=[B][E_l]
+\end{equation*}
+Per cui l'equazione diventa:
+\begin{gather*}
+    [E_m]=[B][R_l][B]^T[I_m]=[0]
+\end{gather*}
+Si definisce la matrice resistenze di maglia:
+\begin{gather*}
+    [R_m]=[B][R_l][B]^T
+\end{gather*}
+Il vettore correnti di maglia si calcolano tramite l'equazione:
+\begin{gather*}
+    [I_m]=[R_m]^{-1}[E_m]
+\end{gather*}
+
+\subsubsection{Scrittura per Semplice Ispezione}
+%% grafo dim per semplice ispezione
+Si considera il seguente circuito. E si esprimono le equazioni senza passare per il grafo del circuito.
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[R=$R_1$] (0,3)
+                    to[short] (0,5.5)
+                    to[R=$R_2$] (10,5.5)
+                    to[short] (10,3)
+                    to[R=$R_6$](8,3)
+                    to[R=$R_5$](8,0)
+                    to[short](10,0)
+                    to[european voltage source=$E_7$](10,3);
+        \draw (0,3) to[short](1,3)
+                    to[short](1,2)
+                    to[R=$R_3$](5,2)
+                    to[short](5,3)
+                    to[short](8,3);
+        \draw (0,3) to[short](1,3)
+                    to[short](1,4)
+                    to[R=$R_2$](3,4)
+                    to[european voltage source=$E_2$](5,4)
+                    to[short](5,3);
+        \draw (5.5,3) to[R=$R_4$](5.5,1.5)
+                    to[european voltage source=$E_4$](5.5,0);
+        \draw (7,0) to[R=$R_5$](7,3);
+        \draw (0,0) to[short](10,0);
+    \end{circuitikz}
+\end{center}
 
 
-Per determinare la corrente passante per un lato si considera la differenza tra la tensione tra i due nodi e la tensione erogata dal lato, divisa per la resistenza del lato. 
-Il verso scelto in questo caso dipende alla convenzione scelta per analizzarlo. 
+Si rappresenta il vettore tensioni di maglia, controllando per ogni maglia, i lati di essa che presentano un generatore di tensione:
+\begin{gather*}
+    [E_m]=\begin{bmatrix}
+        E_1+E_4\\
+        E_2\\
+        -E_2\\
+        -E_4\\
+        -E_7
+    \end{bmatrix}
+\end{gather*}
+Si esprime la matrice delle resistenza di maglia. L'autoresistenza si ottine come la somma delle resistenza dei lati appartenenti alla maglia. Altrimenti si calcolano come 
+la somma cambiata di segno delle resistenze dei lati in comune tra le maglie. 
+\begin{gather*}
+    [R_m]=\begin{bmatrix}
+        R_1+R_4+R_6&-R_8&0&-R-4&0\\
+        -R_8&R_2+R_8&-R_2&0&0\\
+        0&-R_2&R_2+R_6+R_3&0&-R_6\\
+        -R_4&0&0&R_5+R_6&-R_5\\
+        0&0&-R_6&-R_5&R_5+R_4
+    \end{bmatrix}
+\end{gather*}
+Le correnti di maglia si ottengono come:
+\begin{equation*}
+    [I_m]=[R_m]^{-1}[E_m]
+\end{equation*}
+
+\subsection{Generatori Controllati}
+
+Questo tipo di generatori vivono nella modellistica circuitale. Cercano di emulare il comportamento di oggetti reali, ma essendo solamente un modello, non possono essere 
+realizzati. 
+%% campo della modellistica circuitale
+Esprime una grandezza, che può essere una tensione o una corrente. Possono essere controllati in corrente o in tensione o in entrambi, ma generalmente sono controllati rispetto 
+ad un'unica grandezza. La grandezza che controlla il generatore si chiama pilota, per cui si indicano anche come generatori pilotati. Non sono quindi indipendenti. 
+
+I generatori non controllati, erogano una grandezza costante dovuta ad una trasformazione energetica. Questo oggeto è pilotato da una grandezza, per cui non può essere 
+un bipolo, poiché è necessario un altro ingresso per la grandezza di controllo. La grandezza erogata dal generatore si rappresenta come una funzione, dipendente dalle 
+grandezze di controllo, e presenta tante porte quante sono queste grandezze. Non si può dimostrare la passività di questi elementi, per cui si considerano come degli oggetti 
+attivi. 
+Se non fosse presente un elemento effettivamente indipendente che effettua una conversione energetica, questi elementi non producono energia propria, possono diventare 
+erogatori, ma sempre a spese di una fonte indipendente. 
+
+
+Questi generatori in prima analisi vengono analizzati come fossero dei generatori indipendenti. 
+
+
+%% simbolo generatori controllati 
+Si considera un circuito dov'è presente un generatore pilotato:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short] (2,0)
+                    to[short] (4,0)
+                    to[R=$G_3$](4,2)node[right]{$B$}
+                    to[short](4,4)
+                    to[R=$G_2$](2,4)
+                    to[short](2,2)node[above left]{$A$}
+                    to[short](0,2);
+        \draw (0,0) to[european current source=$I_g$](0,2);
+        \draw (2,2) to[R=$G_1$,i=$I_x$](2,0)node[below]{$C$};
+        \draw (2,2) to[american current source=$2I_x$](4,2);
+    \end{circuitikz}
+\end{center}
+\begin{gather}
+    I_g=12\,A\\
+    R_1=28\,\Omega\\
+    R_2=4\,\Omega\\
+    R_3=8\,\Omega
+\end{gather}
+Si analizza come se fosse un generatore indipendente, considerando il nodo $C$ il nodo di riferimento:
+\begin{gather*}
+    [G_{mo}]=\begin{bmatrix}
+        G_1+G_2&-G_2\\
+        -G_2&G_2+G_3
+    \end{bmatrix}\\
+    [I_{mo}]=\begin{bmatrix}
+        I_g-2I_x\\
+        2I_x
+    \end{bmatrix}
+\end{gather*}
+Si inietta l'equazione di vincolo, fornita dal valore della grandezza che controlla il generatore di corrente, in questo caso la corrente: 
+\begin{gather*}
+    I_x=G_1V_A\\
+    [I_{mo}]=\begin{bmatrix}
+        I_g-2G_1V_A\\
+        2G_1V_A
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        I_g-2G_1V_A\\
+        2G_1V_A    
+    \end{bmatrix}=
+    \begin{bmatrix}
+        I_g\\
+        0
+    \end{bmatrix}+\begin{bmatrix}
+        -2G_1&0\\
+        2G_1&0
+    \end{bmatrix}\cdot\begin{bmatrix}
+        V_A\\
+        V_B
+    \end{bmatrix}
+\end{gather*}
+I piloti delle grandezze di lato devono essere espressi in funzione dei potenziali modali. 
+
+\begin{gather*}
+    [P]=\begin{bmatrix}
+        -2G_1&0\\
+        2G_1&0
+    \end{bmatrix}\\
+    [{coeff}]=[G_{mo}]-[P]=\begin{bmatrix}
+        3G_1+G_2&-G_2\\
+        -G_2-2G_1&G_2+G_3
+    \end{bmatrix}
+\end{gather*}
+
+Allora l'equazione diventa:
+\begin{equation*}
+    [V_{mo}]=[coeff]^{-1}[I_{mo}]
+\end{equation*}
+
+
+
 
 
 
