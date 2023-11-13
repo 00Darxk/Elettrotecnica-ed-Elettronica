@@ -3507,11 +3507,11 @@ Per ogni generico lato $k$ è esprimibile come una forma Northon, la sua corrent
 \end{equation*}
 \begin{center}
     \begin{circuitikz}
-        \draw (0,0) to[short,*-,i=$i_k$](0.5,0)
+        \draw (-0.5,0) to[short,*-,i=$i_k$](0.5,0)
                     to[short](0.5,-0.5)
                     to[european current source=$i_{gk}$](2.5,-0.5)
                     to[short](2.5,0)
-                    to[short,-*](3,0);
+                    to[short,-*](3.5,0);
         \draw(0.5,0)to[short](0.5,0.5) 
                     to[R=$G_k$](2.5,0.5)
                     to[short](2.5,0);
@@ -3681,7 +3681,7 @@ Si verifica il bilancio energetico del circuito:
 \end{equation*}
 Questo bilancio energetico presenta un errore accettabile in base allo strumento di calcolo usato per determinare il risultato. 
 
-\subsubsection{Generalizzazione}
+\subsubsection{Metodo per Semplice Ispezione}
 
 Da questo metodo, si possono ottenere delle regole generalizzate che permettono di evitare l'analisi della topologia del circuito. Si indica come scrittura metodo dei nodi 
 per semplice ispezione. Gli elementi della matrice delle conduttanze modali che si trovano sulla diagonale principale si chiamano autoconduttanze. Si dimostra che si ottengono 
@@ -3722,14 +3722,45 @@ Il verso, e quindi il segno ottenuto, è arbitrario e dipende dalla convenzione 
 Il metodo delle maglie è il duale del metodo dei nodi, questo metodo si basa sul secondo principio di Kirchhoff. Permette di scrivere tante equazioni tante sono il numero di 
 maglie indipendenti del sistema. Si può raggiungere questo numero scegliendo opportune maglie. Non quelle fondamentali, ma maglie che non contengono altre maglie. Questo 
 tipo di maglie vengono indicati con il termine di anelli. Essendo il duale del metodo dei nodi, per dimostrarlo, si sostituiscono le correnti alle tensioni, le resistenze alle 
-conduttanze ed i lati Northon ai lati Thevenin. 
+conduttanze ed i lati Northon ai lati Thevenin, nelle formule risolutive. 
+Si considera la seguente rete:
+\begin{center}
+    \begin{tikzpicture}
+        \filldraw[black](0,0)circle(1pt);
+        \filldraw[black](4,0)circle(1pt);
+        \filldraw[black](6,0)circle(1pt);
+        \filldraw[black](3,-1)circle(1pt);
+
+        \draw[-](0,0)node[left]{$A$}to[out=45,in=180](3,1)node[above]{$7$}node[below]{$m_4$};
+        \draw[<-](3,1)to[out=0,in=135](6,0);
+
+        \draw[->](0,0)--(2,0)node[above]{$3$};
+        \draw[-](2,0)--(4,0);
+
+        \draw[-](4,0)node[above]{$B$}node[below right]{$m_4$}--(5,0)node[above]{$5$};
+        \draw[<-](5,0)--(6,0)node[right]{$C$};
+
+        \draw[->](3,-1)node[below]{$D$}node[above]{$m_2$}to[out=180,in=330](1,-0.7)node[below left]{$1$}node[right]{$m_1$};
+        \draw[-](1,-0.7)to[out=150,in=290](0,0);
+
+        \draw[->](3,-1)--(1.5,-0.5)node[above right]{$2$};
+        \draw[-](1.5,-0.5)--(0,0);
+
+        \draw[->](3,-1)--(3.5,-0.5)node[right]{$4$};
+        \draw[-](4,0)--(3.5,-0.5);
+
+        \draw[->](3,-1)to[out=0,in=210](5,-0.7)node[above left]{$6$};
+        \draw[-](5,-0.7)to[out=30,in=250](6,0);
+
+        \draw[-]plot[smooth]coordinates{(-0.5,0)(0.8,-1.2)(3,-1.5)(5.2,-1.2)(6.5,0)(5.2,1.2)(3,1.5)(0.8,1.2)(-0.5,0)};
+        \node[above]at(5.2,1.2){$I_m$};
+    \end{tikzpicture}
+\end{center}
 
 Si può rappresentare in forma matriciale tramite la matrice di incidenza maglie-lati $[B]$, che  indica se un certo lato appartiene alla circuitazione di uno degli anelli:
 \begin{equation*}
     [B]\cdot[v_l]=[0]
 \end{equation*}
-
-%% grafo anelli 
 
 
 Analogamente al metodo dei nodi, si usufruisce di un'equazione di utilità per cambiare le incognite e diminuire il numero di equazioni necessarie. Si vogliono esprimere 
@@ -3737,9 +3768,7 @@ le correnti passanti per i lati come la differenza tra due correnti, e si scegli
 differenza tra due correnti di maglia. Queste incognite fittizie forniscono dalla loro differenza il valore delle correnti passanti per ogni lato. Il loro valore è noto 
 solo a meno di una costante di riferimento, in questo caso $I_m$, corrispondente alla corrente di maglia passante nel vuoto. 
 
-%% grafo 
-
-Si esprimono quindi le correnti, considerando la corrente di riferimento $I_m=0$: 
+Si esprimono quindi le correnti, considerando la corrente di riferimento $I_m=0$, e gli anelli attraversati tutti in verso orario da una corrente associata $I_{m_k}$:
 \begin{gather*}
     i_1=I_{m_1}-0\\
     i_2=I_{m_2}-I_{m_1}\\
@@ -3794,7 +3823,14 @@ Tutti i lati si rappresentano come lati Thevenin nella convenzione dei generator
 \begin{equation*}
     v_k=E_k-R_ki_k
 \end{equation*}
-I lati Northon estremi, amigui oppure lati in parallelo con il vuoto non possono essere analizzati tramite questo metodo. Verrà poi generalizzato per tenere conto di queste 
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[european voltage source=$E_k$,*-,i=$i_k$](2,0)
+                    to[R=$R_k$,-*](4,0);
+        \draw[->](0.5,-0.5)--(3.5,-0.5)node[midway, below]{$v_k$};
+    \end{circuitikz}
+\end{center}
+I lati Northon estremi, ambigui, oppure lati in parallelo con il vuoto non possono essere analizzati tramite questo metodo. Verrà poi generalizzato per tenere conto di queste 
 forme. In forma matriciale si può esprimere come:
 \begin{gather*}
     [v_l]=[E_l]-[R_l][i_l]
@@ -3826,8 +3862,7 @@ Il vettore correnti di maglia si calcolano tramite l'equazione:
     [I_m]=[R_m]^{-1}[E_m]
 \end{gather*}
 
-\subsubsection{Scrittura per Semplice Ispezione}
-%% grafo dim per semplice ispezione
+\subsubsection{Metodo per Semplice Ispezione}
 Si considera il seguente circuito. E si esprimono le equazioni senza passare per il grafo del circuito.
 \begin{center}
     \begin{circuitikz}
@@ -3857,7 +3892,7 @@ Si considera il seguente circuito. E si esprimono le equazioni senza passare per
 \end{center}
 
 
-Si rappresenta il vettore tensioni di maglia, controllando per ogni maglia, i lati di essa che presentano un generatore di tensione:
+Si rappresenta il vettore tensioni di maglia, controllando per ogni maglia, i lati che presentano un generatore di tensione:
 \begin{gather*}
     [E_m]=\begin{bmatrix}
         E_1+E_4\\
@@ -3900,9 +3935,21 @@ erogatori, ma sempre a spese di una fonte indipendente.
 
 
 Questi generatori in prima analisi vengono analizzati come fossero dei generatori indipendenti. 
+In forma circuitale, se sono generatori di corrente si possono rappresentare come:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[european controlled current source,*-*](2,0);
+        \draw (0,-1.25) to[american controlled current source,*-*](2,-1.25);
+    \end{circuitikz}
+\end{center}
+In caso siano di tensione:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[european controlled voltage source,*-*](2,0);
+        \draw (0,-1.25) to[american controlled voltage source,*-*](2,-1.25);
+    \end{circuitikz}
+\end{center}
 
-
-%% simbolo generatori controllati 
 Si considera un circuito dov'è presente un generatore pilotato:
 \begin{center}
     \begin{circuitikz}
@@ -3915,15 +3962,15 @@ Si considera un circuito dov'è presente un generatore pilotato:
                     to[short](0,2);
         \draw (0,0) to[european current source=$I_g$](0,2);
         \draw (2,2) to[R=$G_1$,i=$I_x$](2,0)node[below]{$C$};
-        \draw (2,2) to[american current source=$2I_x$](4,2);
+        \draw (2,2) to[american controlled current source=$2I_x$](4,2);
     \end{circuitikz}
 \end{center}
-\begin{gather}
+\begin{gather*}
     I_g=12\,A\\
     R_1=28\,\Omega\\
     R_2=4\,\Omega\\
     R_3=8\,\Omega
-\end{gather}
+\end{gather*}
 Si analizza come se fosse un generatore indipendente, considerando il nodo $C$ il nodo di riferimento:
 \begin{gather*}
     [G_{mo}]=\begin{bmatrix}
@@ -3975,7 +4022,235 @@ Allora l'equazione diventa:
     [V_{mo}]=[coeff]^{-1}[I_{mo}]
 \end{equation*}
 
+\subsection{Teorema di Thevenin e Northon}
 
+Considerando la forma Thevenin, rappresentaziona esterna equivalente di resistenze e generatori di tensione posti in serie, e la forma Northon, rappresentazione 
+esterna equivalente di una serie di resistori e generatori di corrente posti in parallelo, e le regole di passaggio tra le due forme, si può descrivere una rappresentazione 
+equivalente di un intero circuito.  
+Per ottenere tale rappresentazione, si considera come fosse un bipolo, accessibile dall'esterno da soli due morsetti di accesso $A$ e $B$.
+\begin{center}
+    \begin{circuitikz}
+        \draw[-](0,0)--(3,0)--(3,2)--(0,2)--(0,0);
+        \draw(0.5,0.25)to[european current source](0.5,1.75);
+        \draw(1.5,0.25)to[european voltage source](1.5,1.75);
+        \draw(2.5,0.25)to[R](2.5,1.75);
+        \draw(3,0.5)to[short,-*](3.5,0.5)node[above right]{$B$};
+        \draw(3,1.5)to[short,-*](3.5,1.5)node[above right]{$A$};
+    \end{circuitikz}
+\end{center}
+Se esistesse questa rappresentazione, tra i due morsetti sarebbe presente un unico lato, equivalente alla rete analizzata. Questo problema è stato risolto da Thevenin e Northon, 
+basandosi sulle due forme duali omonime. Quindi anche le due dimostrazioni seguenti sono duali tra di loro.
+
+
+Per dimostrare queste rappresentazioni bisogna riprendere il principio di sovrapposizione degli effetti dalla fisica, e dimostrarne la validità per alcune grandezze dei 
+circuiti. Il principio afferma che se le cause di determinati effetti sono più di una, e se il sistema è lineare, allora l'effetto risultante può essere espresso come la 
+combinazione lineare degli effetti di ogni singola causa, calcolata singolarmente. 
+Bisogna quindi dimostrare che in un circuito le cause sono legate agli effetti da relazioni di proporzionalità lineare. 
+Si dimostra questa proprietà dato il seguente circuito:
+\begin{center}
+    \begin{circuitikz}
+        \draw (1,0) to[european current source=$I_g$](1,2)
+                    to[short](2.5,2)
+                    to[R=$R_1$](4.25,2);
+        \draw (1,0) to[short](2.5,0)
+                    to[R=$R_4$](2.5,2);
+        \draw (2.5,0) to[short](6,0)
+                    to[R=$R_3$](10,0)
+                    to[R=$R_2$](10,2)
+                    to[european voltage source=$E_3$](8,2);
+        \draw (6,2) to[european voltage source=$E_2$](8,2);
+        \draw (6,0) to[R=$R_5$](6,2)
+                    to[european voltage source=$E_1$](4.25,2);
+    \end{circuitikz}
+\end{center}
+Si risolve mediante il metodo degli anelli, per cui si considera un unico lato i componenti in parallelo $R_4$ e $I_g$, trasformati in forma Northon. 
+\begin{gather*}
+    \begin{bmatrix}
+        R_1+R_4+R_5&-R_5\\
+        -R_5&R_2+R_3+R_5
+    \end{bmatrix}\left\{
+            \begin{bmatrix}
+                R_4Ig\\
+                0
+            \end{bmatrix}^{I}+
+            \begin{bmatrix}
+                -E_1\\
+                0
+            \end{bmatrix}^{II}+
+            \begin{bmatrix}
+                0\\
+                E_2
+            \end{bmatrix}^{III}+
+            \begin{bmatrix}
+                0\\
+                -E_3
+            \end{bmatrix}^{IV}
+    \right\}^{-1}=\begin{bmatrix}
+        I_{m_1}\\
+        I_{m_2}
+    \end{bmatrix}
+\end{gather*}
+Se ogni generatore è indipendente dagli altri allora si possono considerare quattro cause separate, oppure si possono considerare i generatori di tensione insieme tra di loro, 
+oppure si possono considerare tutti insieme come unica causa. Per cui le cause non sono sempre dei singoli elementi, possono rappresentare invece degli insiemi. 
+
+Per cui ogni corrente di maglia avrà compomenti che dipendono da ogni singola causa nel sistema, dato che il sistema di risoluzione è lineare rispetto alle cause, ovvero 
+rispetto ai generatori di tensione o di corrente. Ciò vale poiché la corrente e la tensione sono due grandezze legate da una relazione lineare tra di loro. Infatti non si può 
+applicare il principio di sovrapposizione degli effetti sulla potenza, poiché ha una relazione quadratica tra le grandezze. Ogni corrente di maglia $I_{m_k}$ si può esprime come:
+\begin{gather*}
+    I_{m_k}=I_{m_k}^{I}+I_{m_k}^{II}+I_{m_k}^{III}+I_{m_k}^{IV}
+\end{gather*}
+Dove il numero dei contributi corrisponde al numero delle cause individuate nel circuito. 
+
+
+
+Si dimostra il teorema di Thevenin dato il seguente circuito:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[european voltage source=$10\,V$](0,3)node[left]{$b$}
+                    to[R=$4\,\Omega$](2,3)
+                    to[R=$1\,\Omega$](2,1.5)
+                    to[european voltage source=$20\,V$](2,0)
+                    to[R=$2\,\Omega$](0,0);
+        \draw (2,3) to[short](2,4.5)
+                    to[european current source=$2\,A$](0,4.5)
+                    to[short](0,3);
+        \draw (2,0) to[short,-*](6,0)node[right]{$in_2$};
+        \draw (2,3) to[short](4,3)node[above left]{$a$}
+                    to[R=$10\,\Omega$,-*](6,3)node[right]{$in_1$};
+        \draw (4,0) to[R=$8\,\Omega$](4,3);
+        \draw (4,0)node[below right]{$o$}to (4,-0.5)node[ground]{};
+        \draw[->](6,0.25)--(6,2.75)node[midway, right]{$V_{in}$};
+    \end{circuitikz}
+\end{center}
+Si risolve tramite il metodo dei nodi, e si considera il nodo $o$ di potenziale nullo, ovvero a terra. Per cui si esprime il lato contenente un generatore di corrente nella 
+forma Thevenin equivalente. 
+La tensione tra i due morsetti $in_1$ e $in_2$ corrisponde al potenziale tra i due nodi $a$ e $o$ $V_{ao}$, poiché il resistore a valle di $in_1$ è un compomente passivo. 
+Fino a quando tra i due morsetti è presente il vuoto, quindi non passa corrente, il resistore presenta una tensione nulla, per cui non deve essere considerato nella matrice 
+delle conduttanze di maglia:  
+\begin{gather*}
+    \begin{bmatrix}
+        \displaystyle\frac{1}{4}+1&-\displaystyle\frac{1}{4}\\
+        \displaystyle-\frac{1}{4}&\displaystyle\frac{1}{2}+\frac{1}{4}+\frac{1}{8}
+    \end{bmatrix}\begin{bmatrix}
+        V_b\\
+        V_{ao}
+    \end{bmatrix}=\begin{bmatrix}
+        2+10\\
+        -2-\displaystyle\frac{20}{2}
+    \end{bmatrix}
+\end{gather*}
+Questo sistema quindi calcola il potenziale tra i due morsetti collegati a vuoto $V_{in}=V_{ao}$, anche chiamata tensione a vuoto. 
+Se fosse presente un generatore di tensione tra i due morsetti in entrata al circuito, di valore pari alla tensione a vuoto calcolata. Tra i due nodi $a$ e $o$ sarebbe 
+presente un potenziale diverso $V_{ac}$, carico, poiché nell'autoconduttanza di $a$ compare il valore del resistore, che era precedentemente scarico, poiché non attraversato 
+da una corrente: 
+\begin{center}
+    \begin{circuitikz}
+        \draw[dashed](0,2)--(2,2);
+        \draw[dashed](0,0)--(2,0);
+        \draw (2,0) to[short,*-](2.5,0) 
+                    to[european voltage source=$V_{ao}$](2.5,2)
+                    to[short,-*](2,2);
+        \draw[->](3,0.5)--(3,1.5)node[midway, right]{$V_{in}$};
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    \begin{bmatrix}
+        \displaystyle\frac{1}{4}+1&-\displaystyle\frac{1}{4}\\
+        \displaystyle-\frac{1}{4}&\displaystyle\frac{1}{2}+\frac{1}{4}+\frac{1}{8}+\frac{1}{10}
+    \end{bmatrix}\begin{bmatrix}
+        V_b\\
+        V_{ac}
+    \end{bmatrix}=\begin{bmatrix}
+        2+10\\
+        -2-\displaystyle\frac{20}{2}+\frac{V_{ao}}{10}
+    \end{bmatrix}
+\end{gather*}
+Risolvendo questo sistema, si ottiene che la corrente a carico $V_{ac}$ è uguale alla tensione a vuoto, per cui non scorre all'esterno del circuito alcuna corrente. Quindi, 
+se tutto il circuito viene 
+considerato come un unico oggetto, da cui escono due morsetti, allora dall'esterno si può considerare l'intero circuito come un unico lato, rappresentabile in forma 
+Thevenin. Poiché applicando la stessa tensione a vuoto in entrata ad una forma Thevenin, la corrente che attraversa il circuito è a sua volta nulla. Per cui la tensione 
+necessaria affinché il lato Thevenin sia una rappresentazione equivalente dall'esterno dell'intero circuito deve essere pari alla tensione a vuoto tra i due morsetti. 
+\begin{center}
+    \begin{circuitikz}
+        \draw (2,0) to[short](0,0)
+                    to[european voltage source=$E_{th}$](0,1.5)
+                    to[R=$R_{eq}$](0,3)
+                    to[short](2,3);
+        \draw (2,0) to[short,*-](2.5,0)node[below]{$in_2$}
+                    to[european voltage source=$V_{ao}$](2.5,3)node[above]{$in_1$}
+                    to[short,-*](2,3);
+    \end{circuitikz}
+\end{center}
+
+Segue il teorema di Thevenin:
+\begin{quotation}
+    Una qualsiasi rete può essere rappresentata dall'esterno come un generatore di tensione che eroga una tensione pari alla tensione misurata a vuoto nel circuito, in serie 
+    con un resistore. 
+\end{quotation}
+Poiché la rete non è un oggetto passsivo, per determinare la resistenza equivalente di Thevenin, la si rende passiva: 
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short](0,2)
+                    to[R=$4\,\Omega$](2,2)
+                    to[R=$1\,\Omega$](2,0)
+                    to[R=$2\,\Omega$](0,0);
+        \draw (2,0) to[short,-*](6,0)node[below]{$in_2$};
+        \draw (2,2) to[short](4,2)node[above left]{$a$}
+                    to[R=$10\,\Omega$,-*](6,2)node[above]{$in_1$};
+        \draw (4,0) to[R=$8\,\Omega$](4,2);
+        \draw (4,0)node[below right]{$o$}to (4,-0.5)node[ground]{};
+        \draw (6,0) to[short](6.5,0)
+                    to[european voltage source=$V_{ge}$](6.5,2)
+                    to[short](6,2);
+    \end{circuitikz}
+\end{center}
+La resistenza Thevenin corrisponde alla resistenza equivalente, misurata dall'esterno, tra i due 
+morsetti di ingresso della rete, quando esse viane resa passiva. Ovvero quando viene sostituito ai generatori di corrente il vuoto, ed ai generatori di tensione il 
+cortocircuito. L'unico genratore rimasto, è un generatore di tensione esterno che eroga una tensione $V_{ge}$ nel circuito. 
+
+Per cui risolvendo tramite il metodo dei nodi, dopo aver eliminato il nodo $b$, ora solo di calcolo si ottiene la seguente equazione:
+\begin{gather*}
+    \begin{bmatrix}
+        \displaystyle\frac{1}{2}+\frac{1}{5}+\frac{1}{8}+\frac{1}{10}
+    \end{bmatrix}\begin{bmatrix}
+        V_{ge}
+    \end{bmatrix}=\begin{bmatrix}
+        I
+    \end{bmatrix}
+\end{gather*}
+La risposta del circuito, reso passivo, 
+rispetto ad una tensione $V_{ge}$ in entrata equivale a quella di un lato Thevenin, dove la matrice di conduttanza equivale alla conduttanza equivalente di 
+Thevenin, misurata dall'esterno. La corrente ottenuta 
+corrisponde alla corrente passante per il circuito quando i due morsetti sono collegati da un generatore di tensione esterno. Questo metodo di calcolo si chiama dell'
+amperometro, richiede di rendere passiva la rete, per poi risolverla.  
+
+Alternativamente, invece di risolvere il circuito per il metodo dei nodi, è possibile attuare diverse trasformazioni serie-parallelo fino ad arrivare ad un circuito 
+equivalente composto di un singolo resistore collegato ai due morsetti. In questo modo si ottiene la stessa resistenza equivalente.  
+%% circuito equivalente 
+
+Se la rete è collegata ad un resistore esterno $R_5=5\,\Omega$, per estrarre potenza dalla rete, per determinare la corrente assorbita da quest'ultimo si considera la forma equivalente 
+del circuito
+\begin{gather*}
+    I=\displaystyle\frac{E_{th}}{R_5+R_{eq}}
+\end{gather*}
+Per verirficare questa soluzione, si può risolvere il circuito considerando un resistore di resistenza $R_5=5\,\Omega$ tra i due morsetti:
+\begin{gather*}
+    \begin{bmatrix}
+        \displaystyle\frac{1}{4}+1&-\displaystyle\frac{1}{4}\\
+        \displaystyle-\frac{1}{4}&\displaystyle\frac{1}{4}+\frac{1}{4}+\frac{1}{8}+\frac{1}{15}
+    \end{bmatrix}\begin{bmatrix}
+        V_b\\
+        V_{ap}
+    \end{bmatrix}=\begin{bmatrix}
+        2+10\\
+        -2-\displaystyle\frac{20}{2}
+    \end{bmatrix}
+\end{gather*}
+
+
+%% cose che ha detto, ma non centrano
+Ci si pone il problema di calcolare la corrente passante per il circuito $I_C$, se i due morsetti sono collegati tra di loro tramite un resistore carico $R_C$. Invece di 
+inserire un cortociruito, si inseriscono due generatori di tensione opposti tra di loro, in modo che la tensione generata complessivamente risulta nulla. 
 
 
 
