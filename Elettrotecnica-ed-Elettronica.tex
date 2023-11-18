@@ -1255,7 +1255,7 @@ l'inizio e la fine del percorso $\lambda_k$. Questi potenziali vengono misurati 
 
 Il percorso chiuso $\lambda$ corrisponde all'unione di tutti i $n$ percorsi $\lambda_k$:
 \begin{equation*}
-    \lambda=\cup_{k=1}^n\lambda_k
+    \lambda=\bigcup_{k=1}^n\lambda_k
 \end{equation*}
 Per cui la circuitazione su tutto il percorso chiuso corrisponde alla somma di ogni integrale di circuitazione su ogni sezione del percorso $\lambda$. L'integrale di circuitazione 
 del campo elettrico $\vec{E}$ su un certo percorso $\lambda_k$ corrisponde all'opposto potenziale tra l'inizio e la fine del percorso:
@@ -2775,7 +2775,7 @@ Quest'equazione rappresenta la legge di passaggio tra la forma Norhton e la form
 
 \clearpage
 
-\section{Risoluzione Circuiti}
+\section{Metodi Risolutivi di Un Circuito}
 
 \subsection{Topologia dei Circuiti}
 
@@ -3731,8 +3731,9 @@ Si considera la seguente rete:
         \filldraw[black](6,0)circle(1pt);
         \filldraw[black](3,-1)circle(1pt);
 
-        \draw[-](0,0)node[left]{$A$}to[out=45,in=180](3,1)node[above]{$7$}node[below]{$m_4$};
+        \draw[-](0,0)node[left]{$A$}to[out=45,in=180](3,1)node[above]{$7$};
         \draw[<-](3,1)to[out=0,in=135](6,0);
+        \node[]at(3,0.5){$m_3$};
 
         \draw[->](0,0)--(2,0)node[above]{$3$};
         \draw[-](2,0)--(4,0);
@@ -3740,8 +3741,9 @@ Si considera la seguente rete:
         \draw[-](4,0)node[above]{$B$}node[below right]{$m_4$}--(5,0)node[above]{$5$};
         \draw[<-](5,0)--(6,0)node[right]{$C$};
 
-        \draw[->](3,-1)node[below]{$D$}node[above]{$m_2$}to[out=180,in=330](1,-0.7)node[below left]{$1$}node[right]{$m_1$};
+        \draw[->](3,-1)node[below]{$D$}to[out=180,in=330](1,-0.7)node[below left]{$1$}node[right]{$m_1$};
         \draw[-](1,-0.7)to[out=150,in=290](0,0);
+        \node[]at(3,-0.5){$m_2$};
 
         \draw[->](3,-1)--(1.5,-0.5)node[above right]{$2$};
         \draw[-](1.5,-0.5)--(0,0);
@@ -3825,9 +3827,9 @@ Tutti i lati si rappresentano come lati Thevenin nella convenzione dei generator
 \end{equation*}
 \begin{center}
     \begin{circuitikz}
-        \draw (0,0) to[european voltage source=$E_k$,*-,i=$i_k$](2,0)
-                    to[R=$R_k$,-*](4,0);
-        \draw[->](0.5,-0.5)--(3.5,-0.5)node[midway, below]{$v_k$};
+        \draw (0,0) to[european voltage source=$E_k$,*-](2,0)
+                    to[R=$R_k$,i=$i_k$,-*](4.5,0);
+        \draw[->](0.5,-0.5)--(4,-0.5)node[midway, below]{$v_k$};
     \end{circuitikz}
 \end{center}
 I lati Northon estremi, ambigui, oppure lati in parallelo con il vuoto non possono essere analizzati tramite questo metodo. Verrà poi generalizzato per tenere conto di queste 
@@ -3851,13 +3853,13 @@ Si definisce il vettore tensione di maglia:
 \end{equation*}
 Per cui l'equazione diventa:
 \begin{gather*}
-    [E_m]=[B][R_l][B]^T[I_m]=[0]
+    [E_m]=[B][R_l][B]^T[I_m]
 \end{gather*}
 Si definisce la matrice resistenze di maglia:
 \begin{gather*}
     [R_m]=[B][R_l][B]^T
 \end{gather*}
-Il vettore correnti di maglia si calcolano tramite l'equazione:
+Il vettore correnti di maglia si calcola tramite la risultante equazione risolutiva della rete:
 \begin{gather*}
     [I_m]=[R_m]^{-1}[E_m]
 \end{gather*}
@@ -3892,7 +3894,8 @@ Si considera il seguente circuito. E si esprimono le equazioni senza passare per
 \end{center}
 
 
-Si rappresenta il vettore tensioni di maglia, controllando per ogni maglia, i lati che presentano un generatore di tensione:
+Si rappresenta il vettore tensioni di maglia, controllando per ogni maglia, i lati che presentano un generatore di tensione. Si considerano positive le tensioni erogate 
+da generatori concordi alla direzione di attraversamento della maglia, in questo caso sempre orario, altrimenti si indicano con il segno opposto:
 \begin{gather*}
     [E_m]=\begin{bmatrix}
         E_1+E_4\\
@@ -3902,9 +3905,13 @@ Si rappresenta il vettore tensioni di maglia, controllando per ogni maglia, i la
         -E_7
     \end{bmatrix}
 \end{gather*}
-Si esprime la matrice delle resistenza di maglia. L'autoresistenza si ottine come la somma delle resistenza dei lati appartenenti alla maglia. Altrimenti si calcolano come 
-la somma cambiata di segno delle resistenze dei lati in comune tra le maglie. 
+Si esprime la matrice delle resistenza di maglia. L'autoresistenza si ottiene come la somma delle resistenza dei lati appartenenti alla maglia. Le mutue resistenze si calcolano 
+come la somma cambiata di segno delle resistenze dei lati in comune tra le maglie:
 \begin{gather*}
+    R_{m_{ij}}:=\begin{cases}
+        \displaystyle\sum_{k=1}^{n_i}R_{k_i}&\forall i=j\\
+        \displaystyle-\left(\sum_{k=1}^{n_{ij}}R_{k_{ij}}\right)&\forall i\neq j
+    \end{cases}\\
     [R_m]=\begin{bmatrix}
         R_1+R_4+R_6&-R_8&0&-R-4&0\\
         -R_8&R_2+R_8&-R_2&0&0\\
@@ -3920,37 +3927,36 @@ Le correnti di maglia si ottengono come:
 
 \subsection{Generatori Controllati}
 
-Questo tipo di generatori vivono nella modellistica circuitale. Cercano di emulare il comportamento di oggetti reali, ma essendo solamente un modello, non possono essere 
-realizzati. 
-%% campo della modellistica circuitale
-Esprime una grandezza, che può essere una tensione o una corrente. Possono essere controllati in corrente o in tensione o in entrambi, ma generalmente sono controllati rispetto 
-ad un'unica grandezza. La grandezza che controlla il generatore si chiama pilota, per cui si indicano anche come generatori pilotati. Non sono quindi indipendenti. 
+Si definisce un tipo di generatori che vivono nella modellistica circuitale. Questi generatori pilotati cercano di emulare il comportamento di oggetti reali, ma essendo 
+solamente un modello, non possono essere realizzati. 
+Esprimono una grandezza, che può essere una tensione o una corrente. Possono essere controllati in corrente o in tensione o in entrambi, ma generalmente sono controllati 
+rispetto ad un'unica grandezza. La grandezza che controlla il generatore si chiama pilota, per cui si indicano anche come generatori pilotati. Non sono quindi indipendenti. 
 
 I generatori non controllati, erogano una grandezza costante dovuta ad una trasformazione energetica. Questo oggeto è pilotato da una grandezza, per cui non può essere 
 un bipolo, poiché è necessario un altro ingresso per la grandezza di controllo. La grandezza erogata dal generatore si rappresenta come una funzione, dipendente dalle 
 grandezze di controllo, e presenta tante porte quante sono queste grandezze. Non si può dimostrare la passività di questi elementi, per cui si considerano come degli oggetti 
 attivi. 
-Se non fosse presente un elemento effettivamente indipendente che effettua una conversione energetica, questi elementi non producono energia propria, possono diventare 
-erogatori, ma sempre a spese di una fonte indipendente. 
+Se non fosse presente un elemento effettivamente indipendente che effettua una conversione energetica, questi elementi non producono energia propria, hanno la possibilità di 
+diventare erogatori, ma sempre a spese di una fonte indipendente, non possono generare loro energia. 
 
 
-Questi generatori in prima analisi vengono analizzati come fossero dei generatori indipendenti. 
 In forma circuitale, se sono generatori di corrente si possono rappresentare come:
 \begin{center}
     \begin{circuitikz}
         \draw (0,0) to[european controlled current source,*-*](2,0);
-        \draw (0,-1.25) to[american controlled current source,*-*](2,-1.25);
     \end{circuitikz}
 \end{center}
 In caso siano di tensione:
 \begin{center}
     \begin{circuitikz}
         \draw (0,0) to[european controlled voltage source,*-*](2,0);
-        \draw (0,-1.25) to[american controlled voltage source,*-*](2,-1.25);
     \end{circuitikz}
 \end{center}
 
-Si considera un circuito dov'è presente un generatore pilotato:
+\subsubsection{Esempio Applicativo di Una Rete Pilotata}
+
+Risolvendo reti dove sono presenti generatori controllati, in prima analisi vengono analizzati come fossero dei generatori indipendenti. 
+Si considera un circuito dov'è presente un generatore controllato, il metodo risolutivo ottenuto da quesst'analisi varrà per ogni rete dov'è presente un generatore pilotato: 
 \begin{center}
     \begin{circuitikz}
         \draw (0,0) to[short] (2,0)
@@ -3962,7 +3968,7 @@ Si considera un circuito dov'è presente un generatore pilotato:
                     to[short](0,2);
         \draw (0,0) to[european current source=$I_g$](0,2);
         \draw (2,2) to[R=$G_1$,i=$I_x$](2,0)node[below]{$C$};
-        \draw (2,2) to[american controlled current source=$2I_x$](4,2);
+        \draw (2,2) to[european controlled current source=$2I_x$](4,2);
     \end{circuitikz}
 \end{center}
 \begin{gather*}
@@ -4017,10 +4023,40 @@ I piloti delle grandezze di lato devono essere espressi in funzione dei potenzia
     \end{bmatrix}
 \end{gather*}
 
-Allora l'equazione diventa:
-\begin{equation*}
-    [V_{mo}]=[coeff]^{-1}[I_{mo}]
-\end{equation*}
+L'equazione risolutiva della rete diventa:
+\begin{gather*}
+    [coeff]^{-1}\begin{bmatrix}
+        I_g\\
+        0
+    \end{bmatrix}=[V_{mo}]\\
+    \begin{bmatrix}
+        3G_1+G_2&-G_2\\
+        -G_2-2G_1&G_2+G_3
+    \end{bmatrix}^{-1}\begin{bmatrix}
+        I_g\\
+        0
+    \end{bmatrix}=\begin{bmatrix}
+        V_A\\
+        V_B
+    \end{bmatrix}
+\end{gather*}
+
+%% 6/11: riscrivere, con esempi applicativi
+
+In generale per risolvere una rete controllata, bisogna analizzarla come fosse indipendente. Successivamente si esprimono le grandezze di controllo, nuove 
+incognite. Per poter risolvere il sistema, si considerano equazioni banali o di vincolo, per poter diminuire il numero delle incognite totali del sistema. Si sostituiscono 
+nel sistema, e si decide un nuovo vettore delle incognite $[X]$, se corrispondono a grandezze diverse, si dice di aver ibridizzato il sistema. Dopo aver definito questo nuovo 
+vettore, bisogna esprimere la matrice dei coefficienti $[coeff]$ ed il nuovo vettore termini noti $[Y]$ adeguatamente per mantenere le uguaglianze precedenti:
+\begin{gather*}
+    [coeff][X]=[Y]\\
+    [X]=[coeff]^{-1}[Y]
+\end{gather*}
+
+%%
+
+\subsection{Partitore di Tensione e di Corrente}
+
+%% 8/11
 
 \subsection{Teorema di Thevenin e Northon}
 
@@ -4030,12 +4066,12 @@ equivalente di un intero circuito.
 Per ottenere tale rappresentazione, si considera come fosse un bipolo, accessibile dall'esterno da soli due morsetti di accesso $A$ e $B$.
 \begin{center}
     \begin{circuitikz}
-        \draw[-](0,0)--(3,0)--(3,2)--(0,2)--(0,0);
-        \draw(0.5,0.25)to[european current source](0.5,1.75);
-        \draw(1.5,0.25)to[european voltage source](1.5,1.75);
-        \draw(2.5,0.25)to[R](2.5,1.75);
-        \draw(3,0.5)to[short,-*](3.5,0.5)node[above right]{$B$};
-        \draw(3,1.5)to[short,-*](3.5,1.5)node[above right]{$A$};
+        \draw[-](0,-0.5)--(3,-0.5)--(3,2.5)--(0,2.5)--(0,-0.5);
+        \draw(0.5,0)to[R](0.5,2);
+        \draw(1.5,0)to[european voltage source](1.5,2);
+        \draw(2.5,0)to[european current source](2.5,2);
+        \draw(3,0)to[short,-*](3.5,0)node[below right]{$B$};
+        \draw(3,2)to[short,-*](3.5,2)node[above right]{$A$};
     \end{circuitikz}
 \end{center}
 Se esistesse questa rappresentazione, tra i due morsetti sarebbe presente un unico lato, equivalente alla rete analizzata. Questo problema è stato risolto da Thevenin e Northon, 
@@ -4072,19 +4108,19 @@ Si risolve mediante il metodo degli anelli, per cui si considera un unico lato i
             \begin{bmatrix}
                 R_4Ig\\
                 0
-            \end{bmatrix}^{I}+
+            \end{bmatrix}^{(1)}+
             \begin{bmatrix}
                 -E_1\\
                 0
-            \end{bmatrix}^{II}+
+            \end{bmatrix}^{(2)}+
             \begin{bmatrix}
                 0\\
                 E_2
-            \end{bmatrix}^{III}+
+            \end{bmatrix}^{(3)}+
             \begin{bmatrix}
                 0\\
                 -E_3
-            \end{bmatrix}^{IV}
+            \end{bmatrix}^{(4)}
     \right\}^{-1}=\begin{bmatrix}
         I_{m_1}\\
         I_{m_2}
@@ -4097,7 +4133,7 @@ Per cui ogni corrente di maglia avrà compomenti che dipendono da ogni singola c
 rispetto ai generatori di tensione o di corrente. Ciò vale poiché la corrente e la tensione sono due grandezze legate da una relazione lineare tra di loro. Infatti non si può 
 applicare il principio di sovrapposizione degli effetti sulla potenza, poiché ha una relazione quadratica tra le grandezze. Ogni corrente di maglia $I_{m_k}$ si può esprime come:
 \begin{gather*}
-    I_{m_k}=I_{m_k}^{I}+I_{m_k}^{II}+I_{m_k}^{III}+I_{m_k}^{IV}
+    I_{m_k}=I_{m_k}^{(1)}+I_{m_k}^{(2)}+I_{m_k}^{(3)}+I_{m_k}^{(4)}
 \end{gather*}
 Dove il numero dei contributi corrisponde al numero delle cause individuate nel circuito. 
 
@@ -4118,13 +4154,13 @@ Si dimostra il teorema di Thevenin dato il seguente circuito:
         \draw (2,3) to[short](4,3)node[above left]{$a$}
                     to[R=$10\,\Omega$,-*](6,3)node[right]{$in_1$};
         \draw (4,0) to[R=$8\,\Omega$](4,3);
-        \draw (4,0)node[below right]{$o$}to (4,-0.5)node[ground]{};
+        \draw (4,0)node[below right]{$0$}to (4,-0.5)node[ground]{};
         \draw[->](6,0.25)--(6,2.75)node[midway, right]{$V_{in}$};
     \end{circuitikz}
 \end{center}
-Si risolve tramite il metodo dei nodi, e si considera il nodo $o$ di potenziale nullo, ovvero a terra. Per cui si esprime il lato contenente un generatore di corrente nella 
+Si risolve tramite il metodo dei nodi, e si considera il nodo $0$ di potenziale nullo, ovvero a terra. Per cui si esprime il lato contenente un generatore di corrente nella 
 forma Thevenin equivalente. 
-La tensione tra i due morsetti $in_1$ e $in_2$ corrisponde al potenziale tra i due nodi $a$ e $o$ $V_{ao}$, poiché il resistore a valle di $in_1$ è un compomente passivo. 
+La tensione tra i due morsetti $in_1$ e $in_2$ corrisponde al potenziale tra i due nodi $a$ e $o$ $V_{a0}$, poiché il resistore a valle di $in_1$ è un compomente passivo. 
 Fino a quando tra i due morsetti è presente il vuoto, quindi non passa corrente, il resistore presenta una tensione nulla, per cui non deve essere considerato nella matrice 
 delle conduttanze di maglia:  
 \begin{gather*}
@@ -4133,24 +4169,38 @@ delle conduttanze di maglia:
         \displaystyle-\frac{1}{4}&\displaystyle\frac{1}{2}+\frac{1}{4}+\frac{1}{8}
     \end{bmatrix}\begin{bmatrix}
         V_b\\
-        V_{ao}
+        V_{a0}
     \end{bmatrix}=\begin{bmatrix}
         2+10\\
         -2-\displaystyle\frac{20}{2}
     \end{bmatrix}
 \end{gather*}
-Questo sistema quindi calcola il potenziale tra i due morsetti collegati a vuoto $V_{in}=V_{ao}$, anche chiamata tensione a vuoto. 
-Se fosse presente un generatore di tensione tra i due morsetti in entrata al circuito, di valore pari alla tensione a vuoto calcolata. Tra i due nodi $a$ e $o$ sarebbe 
+Data una matrice di $[M]\in M(2,2,\mathbb{R})$, la sua inversa si calcola come:
+\begin{gather*}
+    [M]=\begin{bmatrix}
+        m_{11}&m_{12}\\
+        m_{21}&m_{22}
+    \end{bmatrix}\\
+    [M]^{-1}=\displaystyle\frac{1}{\det\{[M]\}}\begin{bmatrix}
+        m_{22}&-m_{12}\\
+        -m_{21}&m_{11}
+    \end{bmatrix}
+\end{gather*}
+Questo sistema quindi calcola il potenziale tra i due morsetti collegati a vuoto $V_{in}=V_{a0}$, anche chiamata tensione a vuoto. 
+Se fosse presente un generatore di tensione tra i due morsetti in entrata al circuito, di valore pari alla tensione a vuoto calcolata. Tra i due nodi $a$ e $0$ sarebbe 
 presente un potenziale diverso $V_{ac}$, carico, poiché nell'autoconduttanza di $a$ compare il valore del resistore, che era precedentemente scarico, poiché non attraversato 
 da una corrente: 
 \begin{center}
     \begin{circuitikz}
         \draw[dashed](0,2)--(2,2);
         \draw[dashed](0,0)--(2,0);
-        \draw (2,0) to[short,*-](2.5,0) 
-                    to[european voltage source=$V_{ao}$](2.5,2)
-                    to[short,-*](2,2);
-        \draw[->](3,0.5)--(3,1.5)node[midway, right]{$V_{in}$};
+        \draw(2,0)to[short,-*](2.5,0);
+        \draw(2,2)to[short,-*](2.5,2);
+
+        \draw[->](3,0)--(2.75,0);
+        \draw[->](3,2)--(2.75,2);
+        \draw (3,0)to[european voltage source=$V_{a0}$](3,2);
+        %\draw[->](3.5,0.5)--(3.5,1.5)node[midway, right]{$V_{in}$};
     \end{circuitikz}
 \end{center}
 \begin{gather*}
@@ -4172,20 +4222,20 @@ Thevenin. Poiché applicando la stessa tensione a vuoto in entrata ad una forma 
 necessaria affinché il lato Thevenin sia una rappresentazione equivalente dall'esterno dell'intero circuito deve essere pari alla tensione a vuoto tra i due morsetti. 
 \begin{center}
     \begin{circuitikz}
-        \draw (2,0) to[short](0,0)
+        \draw (2,0)node[below]{$in_2$} to[short,*-](0,0)
                     to[european voltage source=$E_{th}$](0,1.5)
                     to[R=$R_{eq}$](0,3)
-                    to[short](2,3);
-        \draw (2,0) to[short,*-](2.5,0)node[below]{$in_2$}
-                    to[european voltage source=$V_{ao}$](2.5,3)node[above]{$in_1$}
-                    to[short,-*](2,3);
+                    to[short,-*](2,3)node[above]{$in_1$};
+        \draw(2.5,0)to[european voltage source=$V_{a0}$](2.5,3);
+        \draw[->](2.5,0)--(2.25,0);
+        \draw[->](2.5,3)--(2.25,3);
     \end{circuitikz}
 \end{center}
 
 Segue il teorema di Thevenin:
 \begin{quotation}
     Una qualsiasi rete può essere rappresentata dall'esterno come un generatore di tensione che eroga una tensione pari alla tensione misurata a vuoto nel circuito, in serie 
-    con un resistore. 
+    con un resistore di resistenza, pari alla resistenza equivalente misurata nella rete resa passiva
 \end{quotation}
 Poiché la rete non è un oggetto passsivo, per determinare la resistenza equivalente di Thevenin, la si rende passiva: 
 \begin{center}
@@ -4198,10 +4248,10 @@ Poiché la rete non è un oggetto passsivo, per determinare la resistenza equiva
         \draw (2,2) to[short](4,2)node[above left]{$a$}
                     to[R=$10\,\Omega$,-*](6,2)node[above]{$in_1$};
         \draw (4,0) to[R=$8\,\Omega$](4,2);
-        \draw (4,0)node[below right]{$o$}to (4,-0.5)node[ground]{};
-        \draw (6,0) to[short](6.5,0)
-                    to[european voltage source=$V_{ge}$](6.5,2)
-                    to[short](6,2);
+        \draw (4,0)node[below right]{$0$}to (4,-0.5)node[ground]{};
+        \draw (6.5,0)to[european voltage source=$V_{ge}$](6.5,2);
+        \draw[->](6.5,0)--(6.25,0);
+        \draw[->](6.5,2)--(6.25,2);
     \end{circuitikz}
 \end{center}
 La resistenza Thevenin corrisponde alla resistenza equivalente, misurata dall'esterno, tra i due 
@@ -4211,7 +4261,7 @@ cortocircuito. L'unico genratore rimasto, è un generatore di tensione esterno c
 Per cui risolvendo tramite il metodo dei nodi, dopo aver eliminato il nodo $b$, ora solo di calcolo si ottiene la seguente equazione:
 \begin{gather*}
     \begin{bmatrix}
-        \displaystyle\frac{1}{2}+\frac{1}{5}+\frac{1}{8}+\frac{1}{10}
+        \displaystyle\frac{1}{2}+\frac{1}{4}+\frac{1}{8}+\frac{1}{10}
     \end{bmatrix}\begin{bmatrix}
         V_{ge}
     \end{bmatrix}=\begin{bmatrix}
@@ -4224,20 +4274,39 @@ Thevenin, misurata dall'esterno. La corrente ottenuta
 corrisponde alla corrente passante per il circuito quando i due morsetti sono collegati da un generatore di tensione esterno. Questo metodo di calcolo si chiama dell'
 amperometro, richiede di rendere passiva la rete, per poi risolverla.  
 
-Alternativamente, invece di risolvere il circuito per il metodo dei nodi, è possibile attuare diverse trasformazioni serie-parallelo fino ad arrivare ad un circuito 
-equivalente composto di un singolo resistore collegato ai due morsetti. In questo modo si ottiene la stessa resistenza equivalente.  
+Alternativamente, invece di risolvere il circuito inserendo in entrata un generatore di tensione noto e fittizio, è possibile attuare diverse trasformazioni serie-parallelo 
+fino ad arrivare ad un circuito equivalente composto di un singolo resistore collegato ai due morsetti. In questo modo si ottiene la stessa resistenza equivalente.  
 %% circuito equivalente 
+Se nella rete originaria sono presenti generatori pilotati, la rete diventa attiva. Rendendo passiva la rete, per misurara la resistenza equivalente, bisogna considerare 
+che i generatori controllati si accendono in base ad altre grandezze dei lati della rete, e non possono essere quindi mai spenti. Allora non si può usufruire del metodo delle 
+trasformazioni in serie ed in parallelo, poiché sono presneti elementi diversi dai resistori. L'unico metodo è quello dell'amperotmetro, inserendo un generatore noto e fittizio 
+dall'esterno tra i due morsetti in entrata. 
+
 
 Se la rete è collegata ad un resistore esterno $R_5=5\,\Omega$, per estrarre potenza dalla rete, per determinare la corrente assorbita da quest'ultimo si considera la forma equivalente 
-del circuito
+del circuito:
+\begin{center}
+    \begin{circuitikz}
+        \draw (2,0)node[below]{$in_2$} to[short,*-](0,0)
+                    to[european voltage source=$E_{th}$](0,1.5)
+                    to[R=$R_{eq}$](0,3)
+                    to[short,-*](2,3)node[above]{$in_1$};
+        \draw(2.5,0)to[R=$R_5$](2.5,3);
+        \draw[->](2.5,0)--(2.25,0);
+        \draw[->](2.5,3)--(2.25,3);
+    \end{circuitikz}
+\end{center}
+
 \begin{gather*}
     I=\displaystyle\frac{E_{th}}{R_5+R_{eq}}
 \end{gather*}
-Per verirficare questa soluzione, si può risolvere il circuito considerando un resistore di resistenza $R_5=5\,\Omega$ tra i due morsetti:
+Per verirficare questa soluzione, si può risolvere il circuito considerando un resistore di resistenza $R_5=5\,\Omega$ tra i due morsetti, rispetto alla tensione modale 
+particolare $V_{ap}$. La corrente passante per il lato $R_5$, data la tensione ricavata da quest'equazione, corrisponde alla corrente calcolata studiando la rappresentazione 
+equivalente esterna del circuito:
 \begin{gather*}
     \begin{bmatrix}
         \displaystyle\frac{1}{4}+1&-\displaystyle\frac{1}{4}\\
-        \displaystyle-\frac{1}{4}&\displaystyle\frac{1}{4}+\frac{1}{4}+\frac{1}{8}+\frac{1}{15}
+        \displaystyle-\frac{1}{4}&\displaystyle\frac{1}{2}+\frac{1}{4}+\frac{1}{8}+\frac{1}{15}
     \end{bmatrix}\begin{bmatrix}
         V_b\\
         V_{ap}
@@ -4248,11 +4317,872 @@ Per verirficare questa soluzione, si può risolvere il circuito considerando un 
 \end{gather*}
 
 
-%% cose che ha detto, ma non centrano
-Ci si pone il problema di calcolare la corrente passante per il circuito $I_C$, se i due morsetti sono collegati tra di loro tramite un resistore carico $R_C$. Invece di 
-inserire un cortociruito, si inseriscono due generatori di tensione opposti tra di loro, in modo che la tensione generata complessivamente risulta nulla. 
+%% 15/11
+Per dimostrare la validità generale di questa situazione, si considera una rete generica con due morsetti di ingresso $A$ e $B$. 
+Si inserisce tra i due morsetti $A$ e $B$ un resistore $R_C$. Si vuole calcolare la corrente $I_C$ assorbita 
+dal resistore. Invece di inserire un cortociruito, si inseriscono due generatori di tensione di polarità opposta, indipendenti ed esterni al circuito, in modo che la tensione 
+generata complessivamente risulta nulla, analogamente all'inserimento di un corcocircuito. La tensione erogata corrisponde alla tensione misurata a vuota tra i due morsetti 
+$V_{AB0}$: 
+\begin{center}
+    \begin{circuitikz}
+        \draw[-](0,-1)--(3,-1)--(3,3)--(0,3)--(0,-1);
+        \draw(0.5,-0.5)to[R](0.5,2.5);
+        \draw(1.5,-0.5)to[european voltage source](1.5,2.5);
+        \draw(2.5,-0.5)to[european current source](2.5,2.5);
+        \draw(3,-0.5)to[short](3.25,-0.5);
+        \draw(3,2.5)to[short](3.25,2.5);
+        \draw[-{Rays[]}](3.25,2.5)--(3.5,2.5)node[above]{$A$};
+        \draw[-{Rays[]}](3.25,-0.5)--(3.5,-0.5)node[below]{$B$};
+        \draw (3.5,2.5) to[<-,short,i=$I_C$](7.5,2.5)
+                        to[R=$R_C$](7.5,-0.5);
+        \draw (5.5,-0.5)to[->,european voltage source=$V_{AB0}$](3.5,-0.5);
+        \draw (5.5,-0.5)to[european voltage source=$V_{AB0}$](7.5,-0.5);  
+    \end{circuitikz}
+\end{center} 
+Per il principio di sovrapposizione degli effetti, è possibile la corrente assorbita $I_C$ rispetto a tutte le cause del sistema. Si individuano due cause diverse, una 
+comprende l'intero circuito ed il generatore che eroga la tensione di polarità opposta rispetto alla corrente. Mentre l'altra causa corrisponde al solo generatore di 
+tensione concorde alla corrente:
+\begin{gather*}
+    I_C=I_C^{(1)}+I_C^{(2)}
+\end{gather*} 
+Per misurare i singoli effetti si considera ogni causa da sola, per cui si rendono passivi tutti gli elementi delle altre cause. 
+La prima causa corrisponde alla situazione di un circuito che presenta in entrata ai due morsetti la tensione misurata a vuoto $V_{AB0}$: 
+\begin{center}
+    \begin{circuitikz}
+        \draw[-](0,-1)--(3,-1)--(3,3)--(0,3)--(0,-1);
+        \draw(0.5,-0.5)to[R](0.5,2.5);
+        \draw(1.5,-0.5)to[european voltage source](1.5,2.5);
+        \draw(2.5,-0.5)to[european current source](2.5,2.5);
+        \draw(3,-0.5)to[short](3.25,-0.5);
+        \draw(3,2.5)to[short](3.25,2.5);
+        \draw[-{Rays[]}](3.25,2.5)--(3.5,2.5)node[above ]{$A$};
+        \draw[-{Rays[]}](3.25,-0.5)--(3.5,-0.5)node[below ]{$B$};
+        \draw (3.5,2.5) to[short,i=$I_C^{(1)}$](5.5,2.5)
+                        to[R=$R_C$](5.5,-0.5);
+        \draw (3.5,-0.5)to[european voltage source=$V_{AB0}$](5.5,-0.5);
+    \end{circuitikz}
+\end{center} 
+Si è precedentemente dimostrato che se viene inserito una tensione pari alla tensione a vuoto tra i due morsetti $A$ e $B$, di polarità opposta, in un circuito qualsiasi, 
+la corrente passante per quel circuito, data questa entrata, è nulla: 
+\begin{gather*}
+    I_C^{(1)}=\displaystyle\frac{E_{th}-V_{AB0}}{R_{eq}}=\frac{V_{AB0}-V_{AB0}}{R_{eq}}=0
+\end{gather*}
+
+Per misurare l'effetto della seconda causa, si rende passiva la prima. Ci si trova quindi nella seguente situazione: 
+\begin{center}
+    \begin{circuitikz}
+        \draw[-](0,-1)--(3,-1)--(3,3)--(0,3)--(0,-1);
+        \draw(0.5,-0.5)to[R](0.5,2.5);
+        \draw(2.5,-0.5)to[short,-*](2.5,0.5);
+        \draw(2.5,2.5)to[short,-*](2.5,1.5);
+        \draw(1.5,-0.5)to[short](1.5,2.5);
+        \draw(3,-0.5)to[short](3.25,-0.5);
+        \draw(3,2.5)to[short](3.25,2.5);
+        \draw[-{Rays[]}](3.25,2.5)--(3.5,2.5)node[above ]{$A$};
+        \draw[-{Rays[]}](3.25,-0.5)--(3.5,-0.5)node[below ]{$B$};
+        \draw (3.5,2.5) to[short,i=$I_C^{(2)}$](5.5,2.5)
+                        to[R=$R_C$](5.5,-0.5);
+        \draw (5.5,-0.5)to[european voltage source=$V_{AB0}$](3.5,-0.5);
+    \end{circuitikz}
+\end{center}
+Considerando la rappresentazione esterna di Thevenin della rete, la corrente derivante da questa causa si ottiene come:
+\begin{gather*}
+    I_C^{(2)}=\displaystyle\frac{V_{AB0}}{R_{eq}+R_{C}}
+\end{gather*}
+Per il principio di sovrapposizione degli effetti la corrente totale assorbita da un resistore $R_C$ inserito tra i due morsetti di un circuito è calcolabile come:
+\begin{gather*}
+    I_C=I_C^{(1)}+I_C^{(2)}=\displaystyle\frac{V_{AB0}}{R_{eq}+R_{C}}
+\end{gather*}
 
 
+Come gi à noto, la forma Thevevnin è la duale della forma Norhton, ed è possibile passare tra le due forme. Per cui è possibile, nota la rappresentazione Thevenin esterna di 
+un circuito, passare ad una rappresentazione Norhton esterna. Da notare che il processo per arrivare a questa forma Norhton equivalente è indipendente dal 
+processo dimostrato precedentemente per la rappresentazione Thevenin. Per calcolare la corrente erogata tra i due morsetti $I_{No}$ invece del vuoto, bisogna inserire un 
+cortocircuito tra i due. Mentre per misurare la resistenza equivalente $R_{No}$, si rende passiva la rete, e si applicano trasformazioni in serie e parallelo, oppure tramite 
+il metodo dell'amperometro. Quando sono presenti generatori pilotati nella rete, si applicano le stesse considerazioni per il calcolo nella forma Thevenin. 
 
+
+Questi due calcoli arrivano allo stesso risultato, per cui sono intercambiabili le due rappresentazioni 
+Thevnin e Northon, secondo le formule di passaggio già note:
+\begin{gather*}
+    R_{th}=R_{No}\\
+    I_{No}=\displaystyle\frac{E_{th}}{R_{th}}
+\end{gather*} 
+Per cui un generico circuito:
+\begin{center}
+    \begin{circuitikz}
+        \draw[-](0,-0.5)--(3,-0.5)--(3,2.5)--(0,2.5)--(0,-0.5);
+        \draw(0.5,0)to[R](0.5,2);
+        \draw(1.5,0)to[european voltage source](1.5,2);
+        \draw(2.5,0)to[european current source](2.5,2);
+        \draw(3,0)to[short,-*](3.5,0)node[below right]{$B$};
+        \draw(3,2)to[short,-*](3.5,2)node[above right]{$A$};
+    \end{circuitikz}
+\end{center}
+Può essere espresso da queste due rappresentazioni:
+\begin{center}
+    \begin{circuitikz}
+        % Forma Thevenin:
+        \draw (2,0)node[below]{$B$} to[short,*-](0,0)
+                    to[european voltage source=$E_{th}$](0,1.5)
+                    to[R=$R_{eq}$](0,3)
+                    to[short,-*](2,3)node[above]{$A$};
+        % Forma Northon:
+        \draw (5,0)node[below]{$B$}to[short,*-](3,0)
+                    to[european current source=$I_{No}$](3,3)
+                    to[short](4,3)
+                    to[R=$R_{eq}$](4,0);
+        \draw (4,3) to[short,-*](5,3)node[above]{$A$};
+    \end{circuitikz}
+\end{center}
+
+%% 15/11
+
+\subsection{Teorema del Massimo Trasferimento di Potenza}
+
+Si considera un generico circuito, espresso mediante la rappresentazione esterna equivalente di Thevenin, inserendo un resistore $R_M$ in entrata ai morsetti $A$ e $B$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (2,0)node[below]{$B$} to[short,*-](0,0)
+                    to[european voltage source=$E_{th}$](0,1.5)
+                    to[R=$R_{eq}$](0,3)
+                    to[short,-*](2,3)node[above]{$A$};
+        \draw(2.5,0)to[R=$R_M$](2.5,3);
+        \draw[->](2.5,0)--(2.25,0);
+        \draw[->](2.5,3)--(2.25,3);
+    \end{circuitikz}
+\end{center}
+La tensione tra i due morsetti $A$ e $B$ si può calcolare tramite l'equazione per i partitori di tensione:
+\begin{gather*}
+    V_{AB}=\displaystyle\frac{R_M}{R_{eq}+R_M}E_{th}
+\end{gather*}
+Per cui la potenza assorbita dal resistore in $R_M$ corrisponde a:
+\begin{gather*}
+    P=R_M\displaystyle\frac{E_{th}^2}{(R_{th}+R_M)^2}
+\end{gather*}
+Per calcolare la potenza massima trasferibile da questo circuito, si considera la derivata della potenza in funzione della resistenza esterna:
+\begin{gather*}
+    \displaystyle\frac{dP}{dR_M}=E_{th}\frac{d}{dR_M}\left(\frac{1}{{R_{th}^2}/{R_M}+2R_{th}+R}\right)
+\end{gather*}
+Per trovare il massimo, bisogna trovare il valore minimo del denominatore, per cui, si deriva solo il denominatore della funzione potenza $P(R_M)$:
+\begin{gather*}
+    \displaystyle\frac{d}{dR_M}\left(\frac{R_{th}^2}{R_M}+2R_{th}+R\right)=-\frac{R_{th}^2}{R_M^2}+1=0\\
+    R_M^2=R_{th}^2\\
+    R_M=R_{th}
+\end{gather*}
+Poiché il valore delle resistenza è sempre strettamente positivo. Per cui il valore della tensione tra i due morsetti in entrata risulta essere:
+\begin{gather*}
+    V_{AB}=\displaystyle\frac{R_M}{R_M+R_M}E_{th}=\frac{E_{th}}{2}
+\end{gather*}
+Si vuole caloclare il rendimento di questo circuito. In generale il rendimento di un sistema è dato dal rapporto tra la potenza utile e la potenza totale del sistema. In questo 
+caso la potenza utile, è la potenza assorbita dalla resistenza $R_M$, mentre la potenza totale è quella generata dal generatore $E_{th}$:
+\begin{gather*}
+    \eta=\displaystyle\frac{P_{utile}}{P_{totale}}=\frac{R_{M}I^2}{E_{th}I}=\frac{1}{2}\frac{E_{th}}{E_{th}}=\frac{1}{2}
+\end{gather*}
+Erogando la massima potenza, il rendimento del circuito è la metà. Aumentando il numero di resisenza poste in paralleo in entrata al circuito, la tensione tra i morsetti 
+comincia a diminuire sempre di più. Questo fenomeno si chiama caduta di tensione. La tensione diminuisce fino ad un valore tale che nessuno degli oggetti posti in parallelo 
+sia in grado di assorbire corrente. Per cui anche la potenza, con il rendimento del sistema, diminuisce all'aumentare del numero degli oggetti inseriti in parallelo. I 
+generatori indipendenti sono elementi a potenza infinita, non realizzabili in natura. Per cui per evitare il fenomeno del collasso della tensione, si investe nell'aggiunta di 
+linee di trasferimento della tensione parallele, per diminuire la possibilità del collasso della tensione. Quando si raggiunge la potenza massima, un oggetto connesso alla 
+griglia elettrica, richiede una tensione superiore al suo valore a regime per accendersi, e non avendo una tensione sufficiente dal sistema richiede una corrente maggiore. 
+Ma richiedendo una corrente maggiore, la tensione del sistema diminuisce a sua volta. Questo processo individua il fenomeno del collasso di tensione. Per questo si opera 
+sempre ad un livello di potenza molto lontano dalla potenza massima trasferibile. 
+
+\clearpage 
+
+\section{Reti Dinamiche}
+
+Si analizzano in questa sezione una serie di circuiti conententi bipoli con memoria: condensatori ed induttori. Si risolveranno questo tipo di reti, distinguendo 
+circuiti di primo e di secondo ordine. Si considerano parametri concentrati tempo invarianti, per cui le leggi costitutive di questi bipoli con memoria, duali tra di loro, sono:
+\begin{gather*}
+    i=\displaystyle C\frac{dv}{dt}\\
+    v=\displaystyle L\frac{di}{dt}
+\end{gather*}
+
+\subsection{Circuiti del Primo ordine}
+
+\subsubsection{Circuito RC}
+
+Si considera una rete, alimentata da un generatore di tensione a corrente continua, posto a valle di un commutatore ideale. Questo commutatore è un oggetto che permette 
+di alterare la struttura del circuito commutando, per chiudere o aprire il circuito. Si considera uno stato iniziale dove il commutatore è aperto, ed all'istante $t=0$, 
+con tempo di commutazione nulla, il circuito si chiude, e comincia a fluire corrente. Tra i due morsetti legati dal commutatore è presente il vuoto prima della chiusura, ed 
+il cortocircuito dopo la commutazione. 
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[european voltage source=$E$](0,2)
+                    to[closing switch](2,2)node[above]{$t=0$}
+                    to[R=$R$](4,2)
+                    to[C=$C$](4,0)
+                    to[short,i_=$i(t)$](0,0);
+    \end{circuitikz}
+\end{center}
+La tensione assorbita dal resistore e dal condensatore sono quindi due grandezze variabili nel tempo. Non fluisce corrente all'interno del circuito prima della 
+commutazione, per cui la corrente è una grandezza variabile nel tempo:
+\begin{gather*}
+    i(t)=\begin{cases}
+        0&t\leq0^-\\
+        i(t)&t>0^+
+    \end{cases}
+\end{gather*}
+Per esprimere questo concetto, si considera nelle equazioni risolutive, la tensione generate come una funzione $e(t)$, che assume valore nullo per $t<0$, mentre un valore 
+$E$ pari alla tensione erogata per $t>0$. Per rappresentare questa funzione si considera il segnale gradino unitario $u_{-1}(t)$, non si può parlare di funzione poiché 
+presenta una discontinuità in $t=0$, per cui ci si riferisce a questo oggetto come una distribuzione:
+\begin{equation*}
+    e(t)=Eu_{-1}(t)
+\end{equation*} Si considerano le tensioni del resistore e del condensatore di polarità 
+opposta rispetto al generatore di tensione. Applicando il principio di Kirchhoff alle tensioni si ottiene la seguente equazione:
+\begin{gather*}
+    e(t)=v_R(t)+v_C(t)
+\end{gather*}
+Si considera per ipotesi $t\geq0^+$, per non dover tenere conto gradino unitario. Si inseriscono le leggi costitutive dei bipoli, e si ottiene la seguente equazione 
+differenziale di primo ordine:
+\begin{gather*}
+    E=Ri+v_C\\
+    E=RC\displaystyle\frac{dv_C}{dt}+v_C
+\end{gather*}
+La soluzione di questo tipo di equazione differenziale è formata da un combinazione lineare della soluzione o integrale generale, soluzione dell'equazione omogena, e 
+della soluzione o integrale particolare, dalla stessa classe di funzioni della forzante:
+\begin{equation*}
+    v_C(t)=v_{Cg}(t)+v_{Cp}(t)
+\end{equation*}
+Si risolve l'equazione omogena:
+\begin{gather*}
+    RC\displaystyle\frac{dv_C}{dt}+v_C=0
+\end{gather*}
+Per risolvere un'equazione differenziale omogena, lineare e di ordine $k$ a parametri costanti, si passa per il suo polinomio caratteristico associato. Questo polinomio 
+si ottiene sostituendo ad ogni derivata $k-$esima una variabile di appoggio $\alpha$ elevata all'ordine della derivata $k$:
+\begin{gather*}
+    \displaystyle a_k\frac{d^ky}{dt^k}+\cdots+a_1\frac{dy}{dt}+a_0y=0\\
+    P_y(\alpha):a_k\alpha^k+\cdots+a_1\alpha^1+a_0\alpha^0=0
+\end{gather*}
+Le soluzioni dell'equazione differenziale appartengono alla classe di funzioni esponenziali, di argomento le radici del polinomio caratteristico:
+\begin{gather*}
+    y_g=k_1e^{\alpha_1t}+\cdots+k_ne^{\alpha_nt}
+\end{gather*}
+Questo è il caso dove ogni radice ha molteplicità pari ad uno. Per ogni radice di molteplicità maggiore di $m(\alpha_i)>1$, la sua soluzione associata corrisponde a:
+\begin{gather*}
+    \displaystyle\sum_{n=0}^{m(\alpha_i)}k_{i+n}t^ne^{\alpha_it}=k_ie^{\alpha_it}+\cdots+k_{i+m(\alpha_i)}t^{m(\alpha_i)}e^{\alpha_1t}
+\end{gather*}
+Quindi il polinomio caratteristico associato all'equazione di Kirchhoff del circuito, resa omogena, corrisponde ad un'equazione lineare, con una sola radice:
+\begin{gather*}
+    RC\alpha+1=0\\
+    \alpha=\displaystyle-\frac{1}{RC}\\
+    v_{Cg}(t)=k_1e^{-\frac{1}{RC}t}
+\end{gather*}
+L'integrale particolare tiene conto della forzante inserita nel sistema, ed appartiene alla sua stessa classe di funzioni, per la proprietà della similiarità. In questo caso, 
+la forzante è una costante, per cui l'integrale particolare è:
+\begin{gather*}
+    v_{Cp}(t)=k_2
+\end{gather*}
+La soluzione completa è quindi data dalla somma di questi due integrali:
+\begin{gather*}
+    v_C(t)=k_1e^{-\frac{1}{RC}t}+k_2
+\end{gather*}
+Per trovare le costanti $k_1$ e $k_2$, si considera il problema di Cauchy, con le equazioni di vincolo fornite dal sistema. La carica del condensatore in $t=0^-$ è nota, 
+per cui si può esprimere rispetto alle due costanti. La tensione erogata dal generatore, per tempi tendenti asintoticamente all'infinito, sarà assorbita 
+completamente dal condensatore. Le equazioni di vincolo sono quindi:
+\begin{gather*}
+    \begin{cases}
+        v_C(0^-)=k_1+k_2\\
+        \displaystyle\lim_{t\to+\infty}v_C(t)=E=k_2
+    \end{cases}\\
+    \begin{bmatrix}
+        1&1\\0&1
+    \end{bmatrix}\begin{bmatrix}
+        k_1\\k_2
+    \end{bmatrix}=\begin{bmatrix}
+        v_C(0^-)\\E
+    \end{bmatrix}\to
+    \begin{cases}
+        k_1=v_C(0^-)-E\\
+        k_2=E
+    \end{cases}\\
+    \begin{cases}
+        v_C(t)=(v_C(0^-)-E)e^{-\frac{1}{RC}t}+E&t\geq0^+\\
+        i(t)=-\displaystyle\frac{1}{R}(v_C(0^-)-E)e^{-\frac{1}{RC}t} &t\geq0^+
+    \end{cases}
+\end{gather*}
+Il condensatore si carica, quando la sua tensione al tempo $t=0^-$ è minore della tensione erogata dal generatore, mentre si scarica quando la sua tensione è maggiore della 
+tensione erogata dal generatore:
+\begin{gather*}
+    \mbox{carica: }|v_C(0^-)|<|E|\\
+    \mbox{scarica: }|v_C(0^-)|>|E|
+\end{gather*}
+
+Si considera una carica semplice con $v_C(0^-)=0$, per cui le funzioni della tensione e della corrente diventano:
+\begin{gather*}
+    v_C(t)=E\left(1-e^{-\frac{1}{RC}t}\right)u_{-1}(t)\\
+    i(t)=\displaystyle\frac{E}{R}e^{-\frac{1}{RC}t}
+\end{gather*}
+
+L'argomento dell'esponenziale deve essere una grandezza adimensionale, per cui si effettua un'analisi della grandezza fisica di $RC$:
+\begin{gather*}
+    [R]=\displaystyle\frac{V}{A}\\
+    [C]=\displaystyle\frac{A\cdot s}{V}\\
+    [R\cdot C]=\displaystyle\frac{V}{A}\frac{A\cdot s}{V}=s\\
+    \left[\displaystyle\frac{t}{RC}\right]=1  
+\end{gather*}
+Si è verificato che la grandezza $RC$ è un tempo. Si definisce questa grandezza il tempo caratteristico $\tau$:
+\begin{gather*}
+    \tau=RC
+\end{gather*}
+
+Graficando l'andamento rispetto al tempo della tensione e la corrente del circuito si può osservare l'importanza di questo tempo caratteristico. La retta tangente alla corrente 
+$v_C$ in $t=0$ interseca l'asintoto orizzontale $E$ in $t=\tau$, allo stesso modo la retta passante per $i(0)$ ed il tempo caratteristico $\tau$ risulta essere tangente alla 
+funzione della corrente nel tempo. 
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](0,-0.5)--(0,2)node[right]{$v_C(t)$};
+        \draw[->](-0.5,0)--(2.5,0)node[above]{$t$};
+        \draw[dashed](0,1.5)node[left]{$E$}--(2.5,1.5);
+        \draw[-]plot[smooth, domain=0:2.4](\x,{1.5*(1-e^(-\x))});
+        \draw[-](0,0)node[below right]{$0$}--(1.2,1.8);
+
+        \draw[->](0,-3.5)--(0,-1)node[right]{$i(t)$};
+        \draw[->](-0.5,-3)--(2.5,-3)node[above]{$t$};
+        \draw[dashed](0,-2)node[below left]{$\displaystyle\frac{E}{R}$}--(2.5,-2);
+        \draw[-]plot[smooth, domain=0:2.4](\x,{e^(-\x)-3});
+        \draw[-](1,-3)--(-0.25,-1.75);
+        \node[below right]at(0,-3){$0$};
+        \draw[dashed](1,1.5)--(1,-3)node[below]{$\tau$};
+    \end{tikzpicture}
+\end{center}
+Si dimostra che l'interesezione tra la retta tangente a $v_C(0)$ e l'asintoto $E$ corrisponde esattamente al tempo caratteristico $\tau$:
+\begin{gather*}
+    mt^*=E\\
+    m=\displaystyle\frac{dv_C}{dt}\\
+    \displaystyle\frac{d}{dt}\left[E\left(1-e^{-\frac{1}{RC}t}\right)\right]t^*=E\\
+    \displaystyle\frac{E}{RC}e^{-\frac{1}{RC}0}t^*=E\\
+    t^*=RC=\tau
+\end{gather*}
+
+
+Si nota come questo modella presenta un paradosso. Poiché la corrente presenta una discontinuità in $t=0$. Ma rappresenta una grandezza continua, per cui questo modello 
+presenta delle limitazioni nella sua descrizione di un circuito reale. Le grandezze descritte seguono l'andamento così definito, solo se non si trovano nell'intorno di $t=0$. 
+Nell'analisi fisica lo stato si conserva, mentre nei modelli circuitali, approssimazioni dei fenomeni fisici, è presente una discontinuità. Per risolvere questo errore, si 
+considereranno circuiti di ordine superiore, che mantengono la continuità per tutte le grandezze trattate. 
+
+\subsubsection{Circuito RL}
+%% 16/11
+Il duale della carica o scarica di un condensatore, è il caso della carica o scarica dell'induttore. In questo caso poiché è presente un generatore di corrente, e non 
+può essere inserito a vuoto, il commutatore crea due circuiti chiusi, in modo che il generatore di corrente non sia mai collegato a vuoto:
+\begin{center}
+    \begin{circuitikz}        
+        \draw (-1,0) to[european current source=$i(t)$](-1,3)
+                    to[short,-*](0,3);
+        \draw(1,3)to[short,*-](1.5,3)node[above]{$t=0$}
+                    to[R=$R$](1.5,0)
+                    to[short](2.75,0)
+                    to[L=$L$](2.75,3)
+                    to[short](1.5,3);
+        \draw(0,3)to[short](0.5,2.5)
+                    to[short](0.5,0);
+        \draw (-1,0) to[short](1.5,0);
+    \end{circuitikz}
+\end{center}
+Sarebbe stata una situazione di paradosso collegare il generatore di corrente al vuoto. Si considera il generatore di corrente continua, e per il principio di Kirchhoff alle 
+correnti si ottiene la seguente equazione:
+\begin{gather*}
+    i(t)-Gv(t)-i_L(t)=0
+\end{gather*}
+Si considera la legge costitutiva dell'induttore:
+\begin{gather*}
+    v=L\displaystyle\frac{di_L(t)}{dt}\\
+    i(t)=GL\displaystyle\frac{di_L(t)}{dt}+i_L(t)
+\end{gather*}
+Si considera il commutatore ideale, di tempo di commutazione istantaneo in $t=0$, per cui la corrente passante erogata corrisponde a:
+\begin{gather*}
+    i(t)=Iu_{-1}(t)
+\end{gather*}
+Si omette il gradino, considerando tutte le successive analisi per $t\geq0^+$. Si risolve analogamente alla scarica e carica di un condensatore, poiché sono due situazioni 
+completamente duali:
+\begin{gather*}
+    GL\displaystyle\frac{di_L}{dt}+i_L=I\\
+    P_{i_L}(\alpha):GL\alpha+1=0\\
+    \alpha=\displaystyle-\frac{1}{GL}\\
+    i_{Lg}(t)=k_1e^{-\frac{1}{GL}t}\\
+    i_{Lp}(t)=k_2
+\end{gather*}
+La soluzione totale è quindi:
+
+\begin{gather*}
+    i_L(t)=k_1e^{-\frac{1}{GL}t}+k_2
+\end{gather*}
+Si inseriscono le equazioni del vincolo di questo problema di Cauchy, ovvero la memoria dell'induttore, ed il caso per il tempo tendente asintoticamente all'infinito, dove 
+tutta la corrente erogata dal generatore si trova nell'induttore:
+\begin{gather*}
+    \begin{cases}
+        i_L(0^-)=k_1+k_2\\
+        \displaystyle\lim_{t\to\infty}i_L(t)=I=k_2
+    \end{cases}\\
+    \begin{bmatrix}
+        1&1\\0&1
+    \end{bmatrix}\begin{bmatrix}
+        k_1\\k_2
+    \end{bmatrix}=\begin{bmatrix}
+        i_L(0^-)\\E
+    \end{bmatrix}\\
+    \begin{cases}
+        k_1=i_L(0^-)-I\\
+        k_2=I
+    \end{cases}
+\end{gather*}
+Le funzioni della tensione e della corrente nel tempo sono quindi
+\begin{gather*}
+    \begin{cases}
+        i_L(t)=(i_L(0^-)-I)e^{-\frac{1}{GL}t}-I\\
+        v(t)=\displaystyle-\frac{L}{GL}(i_L(0^-)-I)e^{-\frac{1}{GL}t}
+    \end{cases}
+\end{gather*}
+Per cui si individuano le due situazioni di carica e scarica dell'induttore:
+\begin{gather*}
+    \mbox{carica: }|i_L(0^-)|<|I|\\
+    \mbox{scarica: }|i_L(0^-)|>|I|
+\end{gather*}
+Si considera una situazione di semplice carica, dove la memoria è nulla $i_L(0^-)=0$.
+In questo caso si ottengono quindi le seguenti equazioni per la carica di un induttore scarico:
+\begin{gather*}
+    i_L(t)=i\left(1-e^{-\frac{1}{GL}T}\right)\\
+    v_L(t)=\displaystyle\frac{I}{G}e^{-\frac{1}{GL}t}
+\end{gather*}
+I grafici della corrente e della tensione nel tempo sono quindi duali a quelli di un condensatore, quindi il tempo caratteristico del sistema è dato da:
+\begin{gather*}
+    \tau=GL
+\end{gather*}
+Viene qui rappresentato l'andamento delle grandezze nel tempo, in un caso di semplice carica di un induttore:
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](0,-0.5)--(0,2)node[right]{$i_L(t)$};
+        \draw[->](-0.5,0)--(2.5,0)node[above]{$t$};
+        \draw[dashed](0,1.5)node[left]{$I$}--(2.5,1.5);
+        \draw[-]plot[smooth, domain=0:2.4](\x,{1.5*(1-e^(-\x))});
+        \draw[-](0,0)node[below right]{$0$}--(1.2,1.8);
+
+        \draw[->](0,-3.5)--(0,-1)node[right]{$v(t)$};
+        \draw[->](-0.5,-3)--(2.5,-3)node[above]{$t$};
+        \draw[dashed](0,-2)node[below left]{$\displaystyle\frac{I}{G}$}--(2.5,-2);
+        \draw[-]plot[smooth, domain=0:2.4](\x,{e^(-\x)-3});
+        \draw[-](1,-3)--(-0.25,-1.75);
+        \node[below right]at(0,-3){$0$};
+        \draw[dashed](1,1.5)--(1,-3)node[below]{$\tau$};
+    \end{tikzpicture}
+\end{center}
+
+
+La tensione è una variabile di stato per il condensatore, poiché il suo valore rimane uguale per $0^{\pm}$, mentre la corrente presenta una discontinuità in $t=0$. I 
+circuiti del primo ordine descrivono i fenomeni adeguatamente per istanti di tempo lontani del tempo di commutazione. %
+Analogamente per l'induttore, invertendo la corrente e la tensione, poiché sono due oggetti duali. 
+Sperimentalmente il comportamento di un circuito reale di carica o scarica di un condensatore o un induttore è molto simile all'andamento approssimato di un circuito di primo 
+ordine. Per modellare l'andamento di un circuito reale nell'intorno di $t=0$ si considerano circuiti del secondo ordine. 
+
+\subsection{Circuiti del Secondo Ordine}
+
+\subsubsection{Forzante Sinusoidale}
+
+Si considera ora una forzante sinusoidale, e per rappresentarla si adopera una rappresentazione tramite i numeri complessi. 
+%% richiami dei numeri complessi, si esprime l'unità immaginaria con j
+In elettrotecnica si lavora con numeri complessi, per facilitare l'analisi di circuiti di ordine superiore al primo. 
+Si vuole ricavare la rappresentazione esponenziale della formula di Eulero. 
+Dato un numero complesso $z$, si considera la sua derivata e si moltiplicano entrambi i lati per l'unità immaginaria:
+\begin{gather*}
+    z=|z|(\cos\theta+j\sin\theta)\in\mathbb{C}\\
+    \displaystyle\frac{dz}{d\theta}=|z|(-\sin\theta+j\cos\theta)\\
+    jz=j|z|(\cos\theta+j\sin\theta)=|z|(-\sin\theta+j\cos\theta)\\
+    \displaystyle\frac{dz}{d\theta}=jz
+\end{gather*}
+Si integra per separazione delle variabili, e si semplifca $z$, ottenendo la rappresentazione di Eulero dell'esponenziale: 
+\begin{gather*}
+    \displaystyle\int_{z(0)}^{z(\theta)}\frac{dz}{z}=\int_{0}^{\theta}jd\theta\\
+    \ln\left(\displaystyle\frac{z(\theta)}{|z|}\right)=j\theta\\
+    \displaystyle\frac{z(\theta)}{|z|}=e^{j\theta}\\
+    z(\theta)=|z|e^{j\theta}\\
+    z=|z|(\cos\theta+j\sin\theta)=|z|e^{j\theta}\\
+    \cos\theta+j\sin\theta=e^{j\theta}\\
+    \cos\theta=\displaystyle\frac{e^{j\theta}+e^{-j\theta}}{2}\\
+    \sin\theta=\displaystyle\frac{e^{j\theta}-e^{-j\theta}}{2j}
+\end{gather*}
+
+
+Si considerano forzanti sinusoidali. L'uso della funzione seno o coseno è indipendente poiché rappresentano la stessa funzione, di fase differente. Si definisce $E_m$ il 
+valore massimo della forzante. 
+\begin{gather*}
+    e(t)=E_m\sin(\omega t+\alpha)=\displaystyle\frac{E_m}{2j}\left[e^{j(\omega t+\alpha)}-e^{-j(\omega t +\alpha)}\right]\\
+    e(t)=\displaystyle\frac{E_m}{2j}\left[e^{j\omega t}e^{j\alpha}-e^{-j\omega t}e^{-j\alpha}\right]
+\end{gather*}
+Si definisce il fasore, in elettrotecnia, della data forzante, come il numero complesso:
+\begin{gather*}
+    \overline{E}=\displaystyle\frac{E_m}{2j}e^{j\alpha}
+\end{gather*}
+In elettronica si definisce come:
+\begin{gather*}
+    \overline{E}'=\displaystyle\frac{E_m}{\sqrt2}e^{j\alpha}
+\end{gather*}
+%% nozioni di base sui numeri complessi
+%% \arctan\frac{\Im}{\Re}\pm\pi
+Tramite il fasore si può esprimere la forzante sinusoidale come una combinazione lineare di esponenziali moltiplicati per coefficienti complessi: 
+\begin{gather*}
+    E_m\sin(\omega t+\alpha)=\overline{E}e^{j\omega t}-\overline{E}^*e^{-j\omega t}
+\end{gather*} 
+In questo modo si può compattare l'informazione contenuta nella sinusoide, nel fasore $\overline{E}$, la fase $\alpha$ e la pulsazione $\omega$. In questo modo si lavora nel 
+dominio complesso dei fasori. 
+
+\subsubsection{Circuito RLC}
+
+Si considera una rete composta da un resistore $R$, un induttore $L$, ed un condensatore $C$, alimentati alla chiusura di un commutatore in $t=0$, da un generatore 
+di tensione che eroga una tensione $E$.
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,2) to[R=$R$](2,2)
+                    to[L=$L$](4,2)
+                    to[C=$C$](6,2)
+                    to[short, i=$i$](6,0)
+                    to[european voltage source=$E$](0,0)
+                    to[closing switch](0,2);
+    \end{circuitikz}
+\end{center}
+Entrambe le grandezze hanno memoria per $t=0^-$, ovvero prima della chiusura del circuito, ed assumono valori noti: 
+\begin{gather*}
+    v_C(0^-)\\
+    i_L(0^-)
+\end{gather*}
+Essendo presente un'unica maglia, si può applicare direttamente il principio di Kirchhoff alle tensioni, considerando le leggi costitutive dei bipoli inseriti in serie:
+\begin{gather*}
+    Eu_{-1}(t)=Ri(t)+\displaystyle L\frac{di(t)}{dt}+v_C(t)\\
+    i=\displaystyle C\frac{dv_C}{dt}\\
+    E=RC\displaystyle\frac{dv_C}{dt}+LC\frac{d^2v_C}{dt^2}+v_C
+\end{gather*}
+L'aggiunta di un elemento con memoria corrisponde ad un aumento dell'ordine dell'equazione differenziale del sistema. 
+Per calcolare la soluzione $v_C(t)$, si considera prima l'integrale generale $v_{Cg}(t)$, esprimendo l'equazione omogenea associata. In seguito tramite la variabile ausialiaria 
+$\alpha$, si esprime l'equazione caratteristica:
+\begin{gather*}
+    LC\frac{d^2v_C}{dt^2}+RC\displaystyle\frac{dv_C}{dt}+v_C=0\\
+    LC\alpha^2+RC\alpha+1=0\\
+    \alpha_{1,2}=\displaystyle-\frac{R}{2L}\pm\sqrt{\left(\frac{R}{2L}\right)^2-\frac{1}{LC}}\\
+    \Delta=\displaystyle\left(\frac{R}{2L}\right)^2-\frac{1}{LC}\\
+    \sigma=\displaystyle-\frac{R}{2L}
+\end{gather*}
+Si individuano $4$ possibili casi, in base al discriminante $\Delta$:
+\begin{gather*}
+    \begin{cases}
+        \alpha_1\neq\alpha_2\in\mathbb{R}^-&\Delta>0\\
+        \alpha_1=\alpha_2^*=\sigma\pm j\omega\in\mathbb{C}&\Delta<0\\
+        \alpha_1=\alpha_2\in\mathbb{R}&\Delta=0\to R=2\displaystyle\sqrt{\frac{L}{C}}\\
+        \alpha_1=\alpha_2^*\in\mathbb{I}&R=0
+    \end{cases}
+\end{gather*}
+Non è possibile realizzare il caso dove $\Delta=0$, poiché non si può conoscere alla perfezione il valore delle grandezze degli oggetti. Sono sempre noti con un certo 
+errore, rappresenta quindi un caso limite. 
+Quando la resistenza è nulla, le soluzioni del polinomio caratteristico sono puramente immaginarie, per cui le soluzioni dell'equazione differenziale sono delle sinusoidi pure. 
+Le grandezze quindi oscillano. 
+Al contrario 
+del caso precedente, è possibile trovarsi in un caso dove la resistenza equivalente è nulla, compensando la resistenza. In questo modo si crea un oscillatore, poiché è 
+sempre presenta un errore di eccesso o di difetto nella sua correzione. 
+%% 17/11
+
+Si definisce la pulsazione $\omega$:
+\begin{gather*}
+    \omega=\displaystyle\frac{1}{\sqrt{LC}}
+\end{gather*}
+Inoltre si definisce la pulsazione caratteristica:
+\begin{gather*}
+    \omega_C=\sqrt{|\Delta|}
+\end{gather*}
+Si definisce la resistenza critica $R_{cr}$, per cui $\Delta=0$:
+\begin{gather*}
+    R_{cr}=2\displaystyle\sqrt{\frac{L}{C}}
+\end{gather*}
+
+\subsubsection{Caso Sovrasmorzato}
+
+Nel primo caso si considera come primo caso un resistore di resistenza $R_1>R_{cr}$. In questo caso le radici $\alpha_{1,2}$ sono reali e negative, l'integrale generale 
+risulta essere:
+\begin{gather*}
+    v_{Cg}(t)=k_1e^{\alpha_1t}+k_2e^{\alpha_2t}
+\end{gather*}
+Mentre per la proprietà di similiarità la soluzione particolare è della stessa classe della forzante, in questo caso continua:
+\begin{gather*}
+    v_{Cp}(t)=k_3
+\end{gather*}
+La soluzione totale è quindi:
+\begin{gather*}
+    v_C(t)=k_1e^{\alpha_1t}+k_2e^{\alpha_2t}+k_3\\
+    i(t)=Ck_1\alpha_1e^{\alpha_1t}+Ck_2\alpha_2e^{\alpha_2t}
+\end{gather*}
+Si esprimono le equazioni di vincolo del problema di Cauchy. Per il tempo tendente asintoticamente all'infinito, la corrente è nulla, e la carica è presente interamente nel 
+condensatore. Per cui la tensione del condensatore in questa situazione è pari alla tensione erogata dal generatore: 
+\begin{gather*}
+    \lim_{t\to\infty}i(t)=0\rightarrow \lim_{t\to\infty}v_C(t)=k_3=E
+\end{gather*}
+Noti i valori della memoria si possono definire le equazioni di vincolo:
+\begin{gather*}
+    v_C(0^-)-E=k_1+k_2\\
+    i_L(0^-)=C\alpha_1k_1+C\alpha_2k_2\\
+    \begin{bmatrix}
+        k_1\\k_2
+    \end{bmatrix}=\begin{bmatrix}
+        1&1\\\alpha_1C&\alpha_2C
+    \end{bmatrix}^{-1}\begin{bmatrix}
+        v_C(0^-)-E\\i_L(0^-)
+    \end{bmatrix}
+\end{gather*}
+Essendo una matrice quadrata di ordine $2$, si può calcolare facilmente la sua inversa:
+\begin{gather*}
+    \begin{bmatrix}
+        k_1\\k_2
+    \end{bmatrix}=\displaystyle\frac{1}{(\alpha_2-\alpha_1)C}\begin{bmatrix}
+        \alpha_2C&-1\\-\alpha_1C&1
+    \end{bmatrix}\begin{bmatrix}
+        v_C(0^-)-E\\i_L(0^-)
+    \end{bmatrix}
+\end{gather*}
+Si considerano $\alpha_{1,2}=\sigma\pm\sqrt\Delta$, l'equazione allora diventa:
+\begin{gather*}
+    \begin{bmatrix}
+        k_1\\k_2
+    \end{bmatrix}=\displaystyle-\frac{1}{2\sqrt{\Delta} C}\begin{bmatrix}
+        \alpha_2C&-1\\-\alpha_1C&1
+    \end{bmatrix}\begin{bmatrix}
+        v_C(0^-)-E\\i_L(0^-)
+    \end{bmatrix}\\
+    \begin{cases}
+        k_1=\displaystyle-\frac{1}{2\sqrt{\Delta} C}\{\alpha_2C[v_C(0^-)-E]-i_L(0^-)\}\\
+        k_2=\displaystyle-\frac{1}{2\sqrt{\Delta} C}\{-\alpha_1C[v_C(0^-)-E]-i_L(0^-)\}
+    \end{cases}
+\end{gather*}
+%Si esprime la tensione e la corrente rispetto a queste costanti:
+%\begin{gather*}
+%    v_C(t)=\displaystyle-\frac{1}{2\sqrt{\Delta}C}\left\{C[v_C(0^-)-E]\left[\alpha_2e^{\left(\sigma+\sqrt{\Delta}\right)t}-\alpha_1e^{\left(\sigma-\sqrt{\Delta}\right)t}\right]-i(0^-)\left[e^{\left(\sigma+\sqrt{\Delta}\right)t}+e^{\left(\sigma-\sqrt{\Delta}\right)t}\right]\right\}+E\\
+%       %% in caso scrivo anche per la corrente
+%\end{gather*}
+ 
+
+Poiché non sono presenti oscillazioni che cambiano il segno delle grandezze, il caso si chiama sovrasmorzato. 
+
+\subsubsection{Caso Sottosmorzato}
+Considerando un valore di resistenza $R_2<R_{cr}$, le radici $\alpha_{1,2}$ sono complesse, così come le costanti $k_1$ e $k_2$. Queste costanti sono anch'essi 
+complessi e coiungati $k_1=k_2^*$. Per dimostrare che sono coniugati, in ogni caso simile:
+\begin{gather*}
+    \begin{cases}
+        v_C(0^-)-E=k_1+k_2\\
+        i(0^-)=C\alpha_1k_1+C\alpha_2k_2
+    \end{cases}\\
+    \begin{bmatrix}
+        k_1\\k_2
+    \end{bmatrix}=
+    \begin{bmatrix}
+        1&1\\\alpha_1C&\alpha_2C 
+    \end{bmatrix}^{-1}
+    \begin{bmatrix}
+        v_C(0^-)-E\\i_L(0^-)
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        k_1\\k_2
+    \end{bmatrix}=\displaystyle-\frac{1}{2j\omega_CC}
+    \begin{bmatrix}
+        \alpha_1C&-1\\-\alpha_2C&1
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_C(0^-)-E\\i_L(0^-)
+    \end{bmatrix}\\
+    \begin{cases}
+        k_1=\displaystyle-\frac{1}{2j\omega_C C}\{\alpha_2C[v_C(0^-)-E]-i_L(0^-)\}\\
+        k_2=\displaystyle-\frac{1}{2j\omega_C C}\{-\alpha_1C[v_C(0^-)-E]+i_L(0^-)\}
+    \end{cases}
+\end{gather*}
+\begin{gather*}
+    \begin{cases}
+        k_1=\displaystyle-\frac{1}{2j\omega_CC}\frac{j}{j}\alpha_2C[v_C(0^-)-E]+\frac{1}{2j\omega_CC}\frac{j}{j}i_L(0^-)\\
+        k_2=\displaystyle\frac{1}{2j\omega_CC}\frac{j}{j}\alpha_1C[v_C(0^-)-E]-\frac{1}{2j\omega_CC}\frac{j}{j}i_L(0^-)\\
+    \end{cases}\\
+    \alpha_1=\alpha_2^*
+\end{gather*}
+\begin{gather*}
+    \begin{cases}
+        k_1=j\left(\displaystyle\frac{\alpha_1^*}{2\omega_C}[v_C(0^-)-E]-\frac{i_L(0^-)}{2\omega_CC}\right)\\
+        k_2=j\left(\displaystyle-\frac{\alpha_1}{2\omega_C}[v_C(0^-)-E]+\frac{i_L(0^-)}{2\omega_CC}\right)
+    \end{cases}\implies k_1=k_2^*
+\end{gather*}
+Si esprimono le costanti tramite la rappresentazione di Eulero, in modo da poter scrivere la tensione in funzione del tempo come una combinazione lineare di esponenziali 
+complessi:
+\begin{gather*}
+    k_1=|k_1|e^{-j\gamma}\land k_2=|k_1|e^{j\gamma}\\
+    \alpha_1=\sigma+j\omega_C\land \alpha_2=\sigma-j\omega_C\\
+    v_C(t)=k_1e^{\alpha_1t}+k_2e^{\alpha_2t}+E\\
+    v_C(t)=|k_1|\left[e^{-(\sigma+j\omega_C)t}te^{j\gamma}+e^{(\sigma-j\omega_C)t}e^{-j\gamma}\right]+E\\
+    v_C(t)=|k_1|\left[e^{\sigma t}e^{j(\omega_Ct+\gamma)}+e^{\sigma t}e^{-j(\omega_Ct+\gamma)}\right]+E\\
+    v_C(t)=|k_1|e^{\sigma t}\left[e^{j(\omega_Ct+\gamma)}+e^{-j(\omega_Ct+\gamma)}\right]+E\\
+    v_C(t)=2|k_1|e^{\sigma t}\cos(\omega_Ct+\gamma)+E
+\end{gather*}
+Poiché $\sigma<0$, l'ampiezza dell'oscillazione della sinusoide diminuisce nel tempo, quindi è u ìn oscillatorio smorzato. Questo caso si chiama quindi sottosmorzato. 
+
+\subsubsection{Caso Critico}
+Il terzo caso per $R=R_{cr}$, corrisponde a delle radici del polinomio caratteristico uguali $\alpha_1=\alpha_2$. La radice $\alpha_1$, ha molteplicità $2$, per cui 
+la soluzione dell'equazione differenziale è della forma:
+\begin{gather*}
+    \alpha_1=\alpha_2=\displaystyle-\frac{R}{2L}\\
+    v_{Cg}(t)=k_1e^{\alpha_1t}+k_2e^{\alpha_1t}
+\end{gather*}
+La soluzione totale corrisponde a:
+\begin{gather*}
+    v_C(t)=k_1te^{\alpha_1t}+k_2e^{\alpha_1t}+E\\
+    i(t)=C\left[k_1(e^{\alpha_1t}+\alpha_1te^{\alpha_1t})+k_2\alpha_1e^{\alpha_1t}\right]
+\end{gather*}
+Mentre le costanti $k_1$ e $k_2$ sono:
+\begin{gather*}
+    \begin{cases}
+        v_C(0^-)-E=k_2\\
+        i_L(0^-)=Ck_1+Ck_2\alpha_1
+    \end{cases}\\
+    \begin{bmatrix}
+        k_1\\k_2
+    \end{bmatrix}=\begin{bmatrix}
+        0&1\\C&\alpha_1C
+    \end{bmatrix}^{-1}\begin{bmatrix}
+        v_C(0^-)-E\\i(0^-)
+    \end{bmatrix}
+\end{gather*}
+\begin{gather*}
+    \begin{bmatrix}
+        k_1\\k_2
+    \end{bmatrix}=\displaystyle-\frac{1}{C}\begin{bmatrix}
+        \alpha_1C&-1\\-C&0
+    \end{bmatrix}\begin{bmatrix}
+        v_C(0^-)-E\\i(0^-)
+    \end{bmatrix}\\
+    \begin{cases}
+        k_1=-\alpha_1[v_C(0^-)-E]+\displaystyle\frac{i_L(0^-)}{C}\\
+        k_2=v_C(0^-)-E
+    \end{cases}
+\end{gather*}
+
+\subsubsection{Caso Oscillatorio Puro}
+
+Il quarto caso corrisponde ad inserire un resistore di resistenza nulla $R=0\,\Omega$:
+\begin{gather*}
+    v(t)=L\displaystyle\frac{di}{dt}+v_C=LC\frac{d^2v_C}{dt}+v_C\\
+    i(t)=C\displaystyle\frac{dv_C}{dt}\\
+    P_{v_C}(\alpha):LC\alpha^2+1=0\\
+    \alpha_{1,2}=\displaystyle\pm j\frac{1}{\sqrt{LC}}=\pm j\omega_C
+\end{gather*}
+Si considera la pulsazione $\omega_C$ la pulsazione di risonanza del circuito $\omega_0$. 
+La soluzione totale risulta essere:
+\begin{gather*}
+    v_C(t)=k_1e^{j\omega_0t}+k_2e^{-j\omega_0t}+E\\
+    i(t)=jCk_1\omega_0e^{j\omega_0t}-jCk_2\omega_0e^{-j\omega_0t}
+\end{gather*}
+Si calcolano le costanti, mediante le equazioni di vincolo:
+\begin{gather*}
+    \begin{cases}
+        v_C(0^-)-E=k_1+k_2\\
+        i(0^-)=jCk_1\omega_0-jCk_2\omega_0
+    \end{cases}\\
+    \begin{bmatrix}
+        k_1\\k_2
+    \end{bmatrix}=
+    \begin{bmatrix}
+        1&1\\jC\omega_0&-jC\omega_0 
+    \end{bmatrix}^{-1}
+    \begin{bmatrix}
+        v_C(0^-)-E\\i_L(0^-)
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        k_1\\k_2
+    \end{bmatrix}=\displaystyle-\frac{1}{2jC\omega_0}
+    \begin{bmatrix}
+        -jC\omega_0&-1\\-jC\omega_0&1
+    \end{bmatrix}
+    \begin{bmatrix}
+        v_C(0^-)-E\\i_L(0^-)
+    \end{bmatrix}
+\end{gather*}
+\begin{gather*}
+    \begin{cases}
+        k_1=\displaystyle\frac{1}{2jC\omega_0}\left\{jC\omega_0\left[v_C(0^-)-E\right]+i_L(0^-)\right\}\\
+        k_2=\displaystyle\frac{1}{2jC\omega_0}\left\{jC\omega_0\left[v_C(0^-)-E\right]-i_L(0^-)\right\}
+    \end{cases}
+\end{gather*}
+\begin{gather*}
+    \begin{cases}
+        k_1=\displaystyle\frac{1}{2}\left[v_C(0^-)-E\right]-j\frac{i_L(0^-)}{2C\omega_0}\\
+        k_2=\displaystyle\frac{1}{2}\left[v_C(0^-)-E\right]+j\frac{i_L(0^-)}{2C\omega_0}
+    \end{cases}\implies k_1=k_2^*
+\end{gather*}
+Attuando lo stesso procedimento del caso sottosmorzato, si ottiene una sinusoide non smorzata per la tensione:
+\begin{gather*}
+    k_1=|k_1|e^{j\gamma}\\
+    k_2=|k_1|e^{-j\gamma}\\
+    \alpha_1=\alpha_2^*=j\omega_0\\
+    v_C(t)=|k_1|\left[e^{j\omega_0t}e^{j\gamma}+e^{-j\omega_0t}e^{-j\gamma}\right]+E\\
+    v_C(t)=|k_1|\left[e^{j(\omega_0t+\gamma)}+e^{-j(\omega_0t+\gamma)}\right]+E\\
+    v_C(t)=2|k_1|\cos(\omega_0t+\gamma)+E
+\end{gather*}
+
+\subsubsection{Andamenti del Circuito RLC}
+%% graficare i quattro casi per la tensione e tre per la corrente
+%Si considera un circuito con le seguenti grandezze:
+%\begin{gather*}
+%    v_C(0^-)=0\,V\\
+%    i(0^-)=0\,A\\
+%    L=1\times10^{-4}H\\
+%    C=500\times10^{-6}F\\
+%    E=20\,V
+%\end{gather*}
+In tutti questi casi, la corrente e la tensione sono grandezze continue nel tempo, e riflettono l'andamento di un circuito reale. Si considera un caso semplice dove i 
+bipoli con memoria sono scarichi:
+\begin{gather*}
+    v_C(0^-)=0\\
+    i_L(0^-)=0
+\end{gather*}
+
+Si considera l'andamento del caso sovrasmorzato, la curva di colore nero, il caso sottosmorzato la curva di colore rosso ed il caso critico la curva di colore blu: 
+\begin{align*}
+    &v_C(t)^{(1)}=k_1e^{\alpha_1t}+k_2e^{\alpha_2t}+E\\
+    &v_C(t)^{(2)}=2|k_1|e^{\sigma t}\cos(\omega_Ct+\gamma)+E\\
+    &v_C(t)^{(3)}=k_1te^{\alpha_1t}+k_2e^{\alpha_1t}+E
+\end{align*}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-0.5,0)--(3,0)node[above]{$t$};
+        \draw[->](0,-0.5)--(0,2)node[right]{$v_C(t)$};
+        \draw[dashed](0,1)node[left]{$E$}--(3,1);
+
+        \draw[blue]plot[smooth, domain=0:2.8](\x,{1+1.5*\x*e^(-1.3*\x)-e^(-1.3*\x)});        
+        \draw[red]plot[smooth, domain=0:2.8](\x,{1-e^(-1.3*\x)*cos(4*\x r)});
+        \draw[black]plot[smooth, domain=0:2.8](\x,{1-e^(-1.3*\x)});
+    \end{tikzpicture}
+\end{center}
+Si considerano inoltre i tre andamenenti possibili della corrente nel caso sovrasmorzato, rappresentato dalla curva di colore nero, nel caso sottosmorzato, 
+rappresentato dalla curva di colore rosso, ed il caso critico, rappresentato dalla curva di colore blu. Si considera un unico andamento per la corrente 
+nel caso sovrasmorzato e nel caso limite, poiché sono due funzioni della stessa classe di equivalenza, entrambe combinazione lineare di esponenziali reali. 
+\begin{align*}
+    &i(t)^{(1)}=C\alpha_1k_1e^{\alpha_1t}+C\alpha_2k_2e^{\alpha_2t}\\
+    &i(t)^{(2)}=2C|k_1|\sigma e^{\sigma t}\cos(\omega_Ct+\gamma)-2C|k_1|\omega_Ce^{\sigma t}\sin(\omega_Ct+\gamma)\\
+    &i(t)^{(3)}=Ck_1(e^{\alpha_1t}+\alpha_1te^{\alpha_1t})+Ck_2\alpha_1e^{\alpha_1t}
+\end{align*}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-0.5,0)--(3,0)node[above]{$t$};
+        \draw[->](0,-0.5)--(0,1.5)node[right]{$v_C(t)$};
+
+        \draw[black]plot[smooth, domain=0:2.8](\x,{-4*e^(-1.5*\x)+4*e^(-\x)});        
+        \draw[red]plot[smooth, domain=0:2.8](\x,{2*e^(-1.3*\x)*sin(4*\x r)});
+        \draw[blue]plot[smooth, domain=0:2.8](\x,{-e^(-4*\x)+3*\x*e^(-2*\x)+e^(-\x)});
+    \end{tikzpicture}
+\end{center}
+
+
+Le grandezze così definite dal circuito di ordine due sono continue, anche nell'intorno di $t=0$, per cui questo tipo di circuiti offre una descrizione più accurata di 
+fenomeni reali. Il modello corretto è quindi sempre un RLC sia per le tensioni che per le correnti, poiché conserva lo stato delle grandezze. 
+
+Si definisce la risposta libera del sistema, l'evoluzione del circuito con un'entrata nulla, corrisponde all'integrale generale.  
+Si definisce la risposta forzata, la risposta di un circuito ad una forzante in entrata, corrisponde all'integrale particolare. 
+Il transitorio è lo stato di evoluzione del sistema nell'intorno di $t=0$, può coincidere con la risposta libera del sistema. 
+La risposta forzata può dare luogo ad un regime, se il transitorio assume valori trascurabili, generalmente dopo $3$ o $6$ volte il tempo caratteristico $\tau$, 
+ma la durata del transitorio cambia in base ai parametri del circuito. 
+Si definisce il transitorio, la risposta del sistema nell'intorno di $t=0$, che 
+dipende dalle condizioni iniziali del circuito, ovvero dalla sua memoria. Il regime dipende dalla forzante in entrata, si parlerà quindi di regime continuo o sinusoidale. 
+
+In generale il transitorio tende a valori nulli se il sistema si dice asintoticamente stabile, ovvero se ogni radice del polinomio caratteristico dell'equazione 
+differenziale associata al sistema ha parte reale negativa. Per cui può esistere un regime in un sistema solo se il sistema è asintoticamente stabile. 
 
 \end{document}
