@@ -571,7 +571,7 @@ Il vettore $\rho_Q\vec{v}$ corrisponde al vettore densità di corrente $\vec{J}\
 
 
 Come una cairca è in grado di generare un campo elettrico, una corrente è in grado di generare un campo magnetico. Nei magneti permanenti la corrente generatrice di campo 
-dipende dal moviemtno degli elettroni all'interno del materiale. 
+dipende dal movimento degli elettroni all'interno del materiale. 
 
 Si considera un mezzo filiforme, ovvero monodimensionale, composto di materiale conduttore, tipicamente un qualche 
 metallo, dove gli elettroni sono liberi di muoversi all'interno. Si considera che un effetto esterno non definito abbia causato uno spostamento degli elettroni all'interno del filo, 
@@ -2714,10 +2714,10 @@ Considerando il principio di Kirchhoff alle correnti è possibile costruire il c
     \end{circuitikz}
 \end{center}
 
-\subsection{Forme Northon e Thevenin}
+\subsection{Forme Norton e Thevenin}
 
-I lati composti da resistori e generatori in serie si indicano come forma Thevenin, mentre in parallelo si indicano come forma Northon. Un singolo resistore, può essere 
-entrambe le forme, se i generatori erogano tensione o corrente nulla, per cui è sia Thevenin che Northon, nelle successive analisi ci si riferirà ad un singolo resistore come 
+I lati composti da resistori e generatori in serie si indicano come forma Thevenin, mentre in parallelo si indicano come forma Norton. Un singolo resistore, può essere 
+entrambe le forme, se i generatori erogano tensione o corrente nulla, per cui è sia Thevenin che Norton, nelle successive analisi ci si riferirà ad un singolo resistore come 
 forma "ambigua" per semplicità. Analogamente si indica un singolo generatore di corrente o di tensione come una forma "estrema", dove la resistenza del resistore è infinita in 
 parallelo e nulla in serie. 
 
@@ -2736,7 +2736,7 @@ Forma Thevenin:
     \end{circuitikz}
 \end{center}
 
-Forma Northon:
+Forma Norton:
 \begin{center}
     \begin{circuitikz}
         \draw(-0.5,0)to[short, *-, i=$i$](0.5,0);
@@ -2751,9 +2751,9 @@ Forma Northon:
 
 
 
-\subsubsection{Passaggio da Northon a Thevenin}
+\subsubsection{Passaggio da Norton a Thevenin}
 
-Le forme Northon e Thevenin sono duali tra di loro, si cerca un modo per trasformale tra di loro. Le forme estreme per la loro definizione non possono essere trasformate. 
+Le forme Norton e Thevenin sono duali tra di loro, si cerca un modo per trasformale tra di loro. Le forme estreme per la loro definizione non possono essere trasformate. 
 Si considerano le due forme, con la stessa convenzione di misura (utilizzatori) e si considera una rappresentazione esterna tramite la quale è possible passare tra le due 
 forme. 
 Si esprimono le leggi costitutive delle due forme:
@@ -2762,7 +2762,7 @@ Si esprimono le leggi costitutive delle due forme:
     i=G_{N_0}v-I_{N_0}
 \end{gather*}
 
-Dalla forma Northon si ricava la tensione:
+Dalla forma Norton si ricava la tensione:
 \begin{gather*}
     v=\displaystyle\frac{i+I_{N_0}}{G_{N_0}}=R_{N_0}(i+I_{N_0})
 \end{gather*}
@@ -2771,7 +2771,7 @@ Si applica il principio di identità dei polinomi tra le due leggi, e semplifica
     R_{TH}=R_{N_0}\\
     E_{TH}=R_{N_0}I_{N_0}
 \end{gather*}
-Quest'equazione rappresenta la legge di passaggio tra la forma Norhton e la forma Thevenin
+Quest'equazione rappresenta la legge di passaggio tra la forma Norton e la forma Thevenin
 
 \clearpage
 
@@ -3371,7 +3371,7 @@ Quindi il bilancio energetico è verificato anche considerando potenze virtuali,
 
 %% 6/11
 
-Per determinare la potenza erogata da un generatore, si calcola la tensione, se generatore Northon, o la corrente, se generatore Thevenin, di lato, nella convenzione dei 
+Per determinare la potenza erogata da un generatore, si calcola la tensione, se generatore Norton, o la corrente, se generatore Thevenin, di lato, nella convenzione dei 
 generatori. I prodotti ottenuti dalla grandezza erogata e la grandezza di lato, indipendentemente dal segno, vengono considerati potenze erogate. Dovranno comunque 
 verificare il bilancio energetico. 
 
@@ -3469,7 +3469,7 @@ incidenza nodi-lati $A\in M(n-1,l,\{-1,0,1\})$:
 \end{gather*}
 Per cui il primo passaggio del metodo dei nodi è la determinazione della matrice di incidenza $A$. Successivamente si determina l'equazione di utilità, per determinare le nuove 
 incognite da usare nelle $n-1$ equazioni. Equazione di utilità risponde al metodo, non dipende risponde a leggi fisiche, ma ad intuizioni computazionali. 
-Vengono quindi definiti i potenziali modali $[V_{mo}]\in M(n-1,1,\mathbb{R})$. Si assegna al nodo non considerato un potenziale nullo, in questo caso $C$. 
+Vengono quindi definiti i potenziali nodali $[V_{no}]\in M(n-1,1,\mathbb{R})$. Si assegna al nodo non considerato un potenziale nullo, in questo caso $C$. 
 Si misurano quindi le tensioni, tenendo il puntale negativo sul nodo $C$. L'equazione risultante si esprime tramite un'altra matrice di incidenza lati-nodi $B\in M(l,n-1,\{-1,0,1\})$: 
 \begin{gather*}
     \begin{bmatrix}
@@ -3492,7 +3492,7 @@ Si misurano quindi le tensioni, tenendo il puntale negativo sul nodo $C$. L'equa
         0&1\\
         0&1
     \end{bmatrix}\\
-    [v_l]\cdot[B]=[V_{mo}]
+    [v_l]\cdot[B]=[V_{no}]
 \end{gather*}
 Queste due matrici di incidenza sono dipendenti tra di loro:
 \begin{equation*}
@@ -3500,16 +3500,16 @@ Queste due matrici di incidenza sono dipendenti tra di loro:
 \end{equation*}
 In questo modo si può esprimere l'equazione di utilità rispetto alla matrice di incidenza delle correnti $A$:
 \begin{equation*}
-    [v_l]\cdot[A]^T=[V_{mo}]
+    [v_l]\cdot[A]^T=[V_{no}]
 \end{equation*}
 
 Per attuare queste operazioni i lati devono essere in una forma idonea alla corrente, da ricordare che ci troviamo nella convenzione dei generatori. 
-Le forme idonee sono la forma abigua, con equazione costitutiva $i=-Gv$, le forme Northon semplice ed estrema, avendo valori di corrente finiti e assegnati a priori, che si 
-comportano come termini noti. Le forme Thevenin, non estreme, possono essere convertite in forme Northon, per cui le uniche forme, senza memoria, non accettate sono 
-la forma Thevenin estrema. Generalizzando il metodo dei nodi, si può includere la forma Thevenin estrema, che non si può esprimere come una forma Northon. 
+Le forme idonee sono la forma ambigua, con equazione costitutiva $i=-Gv$, le forme Norton semplice ed estrema, avendo valori di corrente finiti e assegnati a priori, che si 
+comportano come termini noti. Le forme Thevenin, non estreme, possono essere convertite in forme Norton, per cui le uniche forme, senza memoria, non accettate sono 
+la forma Thevenin estrema. Generalizzando il metodo dei nodi, si può includere la forma Thevenin estrema, che non si può esprimere come una forma Norton. 
 Questo metodo dei nodi non generalizzato è valido per tutti i circuiti che non contengono forme Thevenin estreme. 
 
-Per ogni generico lato $k$ è esprimibile come una forma Northon, la sua corrente di lato si può quindi esprimere come:
+Per ogni generico lato $k$ è esprimibile come una forma Norton, la sua corrente di lato si può quindi esprimere come:
 \begin{equation*}
     i_k=i_{gk}-G_kv_k
 \end{equation*}
@@ -3559,36 +3559,36 @@ conduttnza che possono non essere nulli sono sulla diagonale, per cui la matrice
 \end{gather*}
 
 Si indicano lati "stravaganti", sono dei lati che presentano dei generatori di corrente con un resistore in serie, poiché la corrente erogata dal generatore di corrente non può 
-essere alterata dal resistore posto in serie, per cui la conduttanza relativa a questo lato è nulla. Ovvero rappresenta un Northon estremo. Ma nel calcolo della potenza 
-erogata si considera anche il resistore, poiché la potenza di un Northon estremo non corrisponde alla potenza generata dal lato generico con un generatore avente un resistore in 
+essere alterata dal resistore posto in serie, per cui la conduttanza relativa a questo lato è nulla. Ovvero rappresenta un Norton estremo. Ma nel calcolo della potenza 
+erogata si considera anche il resistore, poiché la potenza di un Norton estremo non corrisponde alla potenza generata dal lato generico con un generatore avente un resistore in 
 serie. 
 Analogamente per un generatore di corrente in serie ad un generatore di tensione, poiché la corrente passante per il lato dipende dal solo generatore di corrente, per cui la 
-forma equivalente esterna corrisponde alla forma Northon estrema. 
+forma equivalente esterna corrisponde alla forma Norton estrema. 
 
 Si moltiplicano ora entrambi i lati dell'equazione per la matrice di incidenza nodi-lati:
 \begin{gather*}
     [A][i_l]=[A]\left\{[I_g]-[G_l][v_l]\right\}\\
     [0]=[A][I_g]-[A][G_l][v_l]\\
-    [0]=[A][I_g]-[A][G_l][A]^T[V_{mo}]
+    [0]=[A][I_g]-[A][G_l][A]^T[V_{no}]
 \end{gather*}
-Si indica il prodotto tra la matrice di incidenza nodi-lati ed il vettore di tutte le correnti erogate dai generatori di corrente in forma Northon, il vettore delle correnti 
-modali:
+Si indica il prodotto tra la matrice di incidenza nodi-lati ed il vettore di tutte le correnti erogate dai generatori di corrente in forma Norton, il vettore delle correnti 
+nodali:
 \begin{equation*}
-    [A][I_g]=[I_{mo}]
+    [A][I_g]=[I_{no}]
 \end{equation*}
-Viene definita invece la matrice dele conduttanze modali $[G_{mo}]$ come:
+Viene definita invece la matrice dele conduttanze nodali $[G_{no}]$ come:
 \begin{equation*}
-    [G_{mo}]=[A][G_l][A]^T
+    [G_{no}]=[A][G_l][A]^T
 \end{equation*}
 Allora l'equazione diventa:
 \begin{gather*}
-    [I_{mo}]=[G_{mo}][V_{mo}]\\
-    [G_{mo}]^{-1}[I_{mo}]=[V_{mo}]
+    [I_{no}]=[G_{no}][V_{no}]\\
+    [G_{no}]^{-1}[I_{no}]=[V_{no}]
 \end{gather*}
 
-Dopo aver determinato questi vettori e matrici modali, si risolvono le equazioni relative ai principi di Kirchhoff: 
+Dopo aver determinato questi vettori e matrici nodali, si risolvono le equazioni relative ai principi di Kirchhoff: 
 \begin{gather*}
-    [A]^T[v_l]=[V_{mo}]\\
+    [A]^T[v_l]=[V_{no}]\\
     [i_l]=[I_g]-[G_l][v_l]
 \end{gather*}
 
@@ -3621,31 +3621,31 @@ Un vettore corrente erogata:
         0\,A
     \end{bmatrix}
 \end{equation*}
-Un vettore correnti modali:
+Un vettore correnti nodali:
 \begin{equation*}
-    [I_{mo}]=[A][I_g]=\begin{bmatrix}
+    [I_{no}]=[A][I_g]=\begin{bmatrix}
         3.5\\
         -4
     \end{bmatrix}
 \end{equation*}
-Una matrice conduttanza modale:
+Una matrice conduttanza nodale:
 \begin{equation*}
-    [G_{mo}]=[A][G_l][A]^T=\begin{bmatrix}
+    [G_{no}]=[A][G_l][A]^T=\begin{bmatrix}
         0.3&-0.2\\
         -0.2&0.3
     \end{bmatrix}
 \end{equation*}
 
-Un vettore potenziali modali:
+Un vettore potenziali nodali:
 \begin{equation*}
-    [V_{mo}]=[G_{mo}]^{-1}[I_{mo}]=\begin{bmatrix}
+    [V_{no}]=[G_{no}]^{-1}[I_{no}]=\begin{bmatrix}
         5\\
         -10
     \end{bmatrix}
 \end{equation*}
 Si risolvono ora i vettori tensioni e correnti di lato:
 \begin{equation*}
-    [v_l]=[A]^T[V_{mo}]=\begin{bmatrix}
+    [v_l]=[A]^T[V_{no}]=\begin{bmatrix}
         -5\\
         -5\\
         5\\
@@ -3692,36 +3692,36 @@ Questo bilancio energetico presenta un errore accettabile in base allo strumento
 \subsubsection{Metodo per Semplice Ispezione e Generalizzazione}
 
 Da questo metodo, si possono ottenere delle regole generalizzate che permettono di evitare l'analisi della topologia del circuito. Si indica come scrittura metodo dei nodi 
-per semplice ispezione. Gli elementi della matrice delle conduttanze modali che si trovano sulla diagonale principale si chiamano autoconduttanze. Si dimostra che si ottengono 
+per semplice ispezione. Gli elementi della matrice delle conduttanze nodali che si trovano sulla diagonale principale si chiamano autoconduttanze. Si dimostra che si ottengono 
 sommando tutte le $n_{j}$ conduttanze dei lati $l_k$ che affiorano su quel nodo:
 \begin{equation*}
-    g_{{mo}_{ij}}=\displaystyle\sum_{k=1}^{n_j}G_{l_k}\,\forall i= j
+    g_{{no}_{ij}}=\displaystyle\sum_{k=1}^{n_j}G_{l_k}\,\forall i= j
 \end{equation*}
 Gli elmenti che non si trovano sulla diagonale principale si chiamano mutue- o trans-conduttanze, e rappresentano una somma cambiata di segno delle $n_{ij}$ conduttanze dei lati 
 $l_k$ che collegano due nodi:
 \begin{equation*}
-    g_{{mo}_{ij}}=-\displaystyle\left(\sum_{k=1}^{n_{ij}}G_{l_k}\right)\,\forall i\neq j
+    g_{{no}_{ij}}=-\displaystyle\left(\sum_{k=1}^{n_{ij}}G_{l_k}\right)\,\forall i\neq j
 \end{equation*}
-Si può esprimere semplicemente la matrice delle conduttanze modali, come una matrice quadrata di ordine $n-1$ i cui componenti assumono valori descritti dalla seguente 
+Si può esprimere semplicemente la matrice delle conduttanze nodali, come una matrice quadrata di ordine $n-1$ i cui componenti assumono valori descritti dalla seguente 
 espressione: 
 \begin{gather*}
-    [G_{mo}]:=(g_{{mo}_{ij}})\\
-    g_{{mo}_{ij}}=\begin{cases}
+    [G_{no}]:=(g_{{no}_{ij}})\\
+    g_{{no}_{ij}}=\begin{cases}
         \displaystyle\sum_{k=1}^{n_j}G_{l_k} &i=j\\
         -\displaystyle\left(\sum_{k=1}^{n_{ij}}G_{l_k}\right)&i\neq j
     \end{cases}
 \end{gather*}
 Da considerare che se il resistore è collegato a vuoto, ovvero non può fluire corrente, non potrà assorbirla e quindi il suo effetto sarà nullo. Per cui non bisogna considerare 
 la conduttanza di resistori collegati a vuoto, oppure in serie ad un generatore di corrente, poiché non sono in grado di alterare la corrente erogata. Per il calcolo della potenza 
-invece, bisogna considerare il contributo di ogni lato. Quindi solo nella risoluzione con la matrice delle conduttanze modali, e delle resistenze modali per il metodo 
+invece, bisogna considerare il contributo di ogni lato. Quindi solo nella risoluzione con la matrice delle conduttanze nodali, e delle resistenze nodali per il metodo 
 delle maglie, non bisogna consideare resistori in serie a generatori di corrente, o connessi a vuoto, rappresentabile come un generatore di corrente che eroga corrente nulla. 
 
 
-Per esprimere il vettore delle correnti modali si considerano solo i lati con un generatore di corrente, e si attua una somma, tenendo conto del verso delle correnti. 
+Per esprimere il vettore delle correnti nodali si considerano solo i lati con un generatore di corrente, e si attua una somma, tenendo conto del verso delle correnti. 
 Se le correnti sono entranti nel nodo sono positive, negative quelle uscenti: 
 \begin{gather*}
-    [I_{mo}]:=(i_{{mo}_{i}})\\
-    i_{{mo}_i}=\displaystyle\sum_{k=1}^{n_i}\pm i_{g_k}
+    [I_{no}]:=(i_{{no}_{i}})\\
+    i_{{no}_i}=\displaystyle\sum_{k=1}^{n_i}\pm i_{g_k}
 \end{gather*}
 
 
@@ -3765,7 +3765,7 @@ Si esprime l'equazione risolutiva del metodo dei nodi, ma bisogna sommare ai ter
         -I_{x_1}\\I_{x_2}\\-I_{x_2}
     \end{bmatrix}
 \end{gather*}
-Si esrpimono le equazioni banali o di vincolo, che esprimono la relazione delle potenze modali con le tensioni erogate dalle forme Thevenin estreme: 
+Si esprimono le equazioni banali o di vincolo, che esprimono la relazione delle potenze nodali con le tensioni erogate dalle forme Thevenin estreme: 
 \begin{gather*}
     V_A=-4\,V\\
     V_B-V_C=8\,V\\
@@ -3833,7 +3833,7 @@ parallelo:
     \end{circuitikz}
 \end{center}
 Si considera il nodo inferiore il nodo di salto, per il metodo di nodi si può esprimere la tensione tra i due nodi $V_A$ come il rapporto tra la somma delle correnti delle 
-forme Northon equivalenti e la somma delle conduttanze di lato:
+forme Norton equivalenti e la somma delle conduttanze di lato:
 \begin{gather*}
     V_A=\displaystyle\frac{\sum_{k=1}^nG_k\cdot(\pm E_k)}{\sum_{k=1}^nG_k}
 \end{gather*}
@@ -3877,7 +3877,7 @@ nodo fittizio $C$ all'interno del circuito:
     \end{circuitikz}
 \end{center}
 
-Si esprimono ora le relazioni del metodo dei nodi su questo nuovo circuito, considerando la forma Northon corrispondente del lato Thevenin presente: 
+Si esprimono ora le relazioni del metodo dei nodi su questo nuovo circuito, considerando la forma Norton corrispondente del lato Thevenin presente: 
 \begin{gather*}
     \begin{bmatrix}
         \displaystyle\frac{13}{40}&-\displaystyle\frac{1}{10}&-\displaystyle\frac{1}{8}\\
@@ -3913,7 +3913,7 @@ Alternativamente questo problema può essere risolto tramite trasformazioni in s
 Il metodo delle maglie è il duale del metodo dei nodi, questo metodo si basa sul secondo principio di Kirchhoff. Permette di scrivere tante equazioni tante sono il numero di 
 maglie indipendenti del sistema. Si può raggiungere questo numero scegliendo opportune maglie. Non quelle fondamentali, ma maglie che non contengono altre maglie. Questo 
 tipo di maglie vengono indicati con il termine di anelli. Essendo il duale del metodo dei nodi, per dimostrarlo, si sostituiscono le correnti alle tensioni, le resistenze alle 
-conduttanze ed i lati Northon ai lati Thevenin, nelle formule risolutive. 
+conduttanze ed i lati Norton ai lati Thevenin, nelle formule risolutive. 
 Si considera la seguente rete:
 \begin{center}
     \begin{tikzpicture}
@@ -4033,7 +4033,7 @@ Tutti i lati si rappresentano come lati Thevenin nella convenzione dei generator
         \draw[->](0.5,-0.5)--(4,-0.5)node[midway, below]{$v_k$};
     \end{circuitikz}
 \end{center}
-I lati Northon estremi, ambigui, oppure lati in parallelo con il vuoto non possono essere analizzati tramite questo metodo. Verrà poi generalizzato per tenere conto di queste 
+I lati Norton estremi, ambigui, oppure lati in parallelo con il vuoto non possono essere analizzati tramite questo metodo. Verrà poi generalizzato per tenere conto di queste 
 forme. In forma matriciale si può esprimere come:
 \begin{gather*}
     [v_l]=[E_l]-[R_l][i_l]
@@ -4261,11 +4261,11 @@ Si considera un circuito dov'è presente un generatore controllato, il metodo ri
 \end{gather*}
 Si analizza come se fosse un generatore indipendente, considerando il nodo $C$ il nodo di riferimento:
 \begin{gather*}
-    [G_{mo}]=\begin{bmatrix}
+    [G_{no}]=\begin{bmatrix}
         G_1+G_2&-G_2\\
         -G_2&G_2+G_3
     \end{bmatrix}\\
-    [I_{mo}]=\begin{bmatrix}
+    [I_{no}]=\begin{bmatrix}
         I_g-2I_x\\
         2I_x
     \end{bmatrix}
@@ -4273,7 +4273,7 @@ Si analizza come se fosse un generatore indipendente, considerando il nodo $C$ i
 Si inietta l'equazione di vincolo, fornita dal valore della grandezza che controlla il generatore di corrente, in questo caso la corrente: 
 \begin{gather*}
     I_x=G_1V_A\\
-    [I_{mo}]=\begin{bmatrix}
+    [I_{no}]=\begin{bmatrix}
         I_g-2G_1V_A\\
         2G_1V_A
     \end{bmatrix}\\
@@ -4292,14 +4292,14 @@ Si inietta l'equazione di vincolo, fornita dal valore della grandezza che contro
         V_B
     \end{bmatrix}
 \end{gather*}
-I piloti delle grandezze di lato devono essere espressi in funzione dei potenziali modali. 
+I piloti delle grandezze di lato devono essere espressi in funzione dei potenziali nodali. 
 
 \begin{gather*}
     [P]=\begin{bmatrix}
         -2G_1&0\\
         2G_1&0
     \end{bmatrix}\\
-    [{coef}]=[G_{mo}]-[P]=\begin{bmatrix}
+    [{coef}]=[G_{no}]-[P]=\begin{bmatrix}
         3G_1+G_2&-G_2\\
         -G_2-2G_1&G_2+G_3
     \end{bmatrix}
@@ -4307,7 +4307,7 @@ I piloti delle grandezze di lato devono essere espressi in funzione dei potenzia
 
 L'equazione risolutiva della rete diventa:
 \begin{gather*}
-    [V_{mo}]=[coef]^{-1}\begin{bmatrix}
+    [V_{no}]=[coef]^{-1}\begin{bmatrix}
         I_g\\
         0
     \end{bmatrix}\\
@@ -4329,22 +4329,22 @@ L'equazione risolutiva della rete diventa:
 In generale per risolvere una rete controllata, bisogna analizzarla come fosse indipendente. Successivamente si esprimono le grandezze di controllo, nuove 
 incognite. Per poter risolvere il sistema, si considerano equazioni banali o di vincolo, per poter diminuire il numero delle incognite totali del sistema, generalizzando il 
 metodo dei nodi o delle maglie, e si sostituiscono nel sistema. Si esprime così un nuovo vettore delle incognite $[X]$, su cui si scrive una nuova matrice 
-dei coefficienti $[coef]$ e si riportano oltre al vettore dei termini noti di partenza $[I_{mo}]$ o $[E_m]$, in base al metodo usato, le grandezze di vincolo note, tolte dal 
+dei coefficienti $[coef]$ e si riportano oltre al vettore dei termini noti di partenza $[I_{no}]$ o $[E_m]$, in base al metodo usato, le grandezze di vincolo note, tolte dal 
 vettore delle incognite, $[X_{no}]$. 
 \begin{gather*}
-    [coef][X]=[I_{mo}/E_m]+[X_{no}]
+    [coef][X]=[I_{no}/E_m]+[X_{no}]
 \end{gather*}
 Si definisce così un nuovo vettore dei termini noti $[T_{no}]$, per risolvere il sistema rispetto alle nuove grandezze:
 \begin{gather*}
-    [T_{no}]=[I_{mo}/E_m]+[X_{no}]\\
+    [T_{no}]=[I_{no}/E_m]+[X_{no}]\\
     [X]=[coef]^{-1}[T_{no}]
 \end{gather*}
 
 %%
 
-\subsection{Teorema di Thevenin e Northon}
+\subsection{Teorema di Thevenin e Norton}
 
-Considerando la forma Thevenin, rappresentaziona esterna equivalente di resistenze e generatori di tensione posti in serie, e la forma Northon, rappresentazione 
+Considerando la forma Thevenin, rappresentaziona esterna equivalente di resistenze e generatori di tensione posti in serie, e la forma Norton, rappresentazione 
 esterna equivalente di una serie di resistori e generatori di corrente posti in parallelo, e le regole di passaggio tra le due forme, si può descrivere una rappresentazione 
 equivalente di un intero circuito.  
 Per ottenere tale rappresentazione, si considera come fosse un bipolo, accessibile dall'esterno da soli due morsetti di accesso $A$ e $B$.
@@ -4358,7 +4358,7 @@ Per ottenere tale rappresentazione, si considera come fosse un bipolo, accessibi
         \draw(3,2)to[short,-*](3.5,2)node[above right]{$A$};
     \end{circuitikz}
 \end{center}
-Se esistesse questa rappresentazione, tra i due morsetti sarebbe presente un unico lato, equivalente alla rete analizzata. Questo problema è stato risolto da Thevenin e Northon, 
+Se esistesse questa rappresentazione, tra i due morsetti sarebbe presente un unico lato, equivalente alla rete analizzata. Questo problema è stato risolto da Thevenin e Norton, 
 basandosi sulle due forme duali omonime. Quindi anche le due dimostrazioni seguenti sono duali tra di loro.
 
 
@@ -4383,7 +4383,7 @@ Si dimostra questa proprietà dato il seguente circuito:
                     to[european voltage source=$E_1$](4.25,2);
     \end{circuitikz}
 \end{center}
-Si risolve mediante il metodo degli anelli, per cui si considera un unico lato i componenti in parallelo $R_4$ e $I_g$, trasformati in forma Northon. 
+Si risolve mediante il metodo degli anelli, per cui si considera un unico lato i componenti in parallelo $R_4$ e $I_g$, trasformati in forma Norton. 
 \begin{gather*}
     \begin{bmatrix}
         R_1+R_4+R_5&-R_5\\
@@ -4584,7 +4584,7 @@ del circuito:
 \begin{gather*}
     I=\displaystyle\frac{E_{th}}{R_5+R_{eq}}
 \end{gather*}
-Per verirficare questa soluzione, si può risolvere il circuito considerando un resistore di resistenza $R_5=5\,\Omega$ tra i due morsetti, rispetto alla tensione modale 
+Per verificare questa soluzione, si può risolvere il circuito considerando un resistore di resistenza $R_5=5\,\Omega$ tra i due morsetti, rispetto alla tensione nodale 
 particolare $V_{ap}$. La corrente passante per il lato $R_5$, data la tensione ricavata da quest'equazione, corrisponde alla corrente calcolata studiando la rappresentazione 
 equivalente esterna del circuito:
 \begin{gather*}
@@ -4687,7 +4687,7 @@ il metodo dell'amperometro. Quando sono presenti generatori pilotati nella rete,
 
 
 Questi due calcoli arrivano allo stesso risultato, per cui sono intercambiabili le due rappresentazioni 
-Thevnin e Northon, secondo le formule di passaggio già note:
+Thevnin e Norton, secondo le formule di passaggio già note:
 \begin{gather*}
     R_{th}=R_{No}\\
     I_{No}=\displaystyle\frac{E_{th}}{R_{th}}
@@ -4711,7 +4711,7 @@ Può essere espresso da queste due rappresentazioni:
                     to[european voltage source=$E_{th}$](0,1.5)
                     to[R=$R_{eq}$](0,3)
                     to[short,-*](2,3)node[above]{$A$};
-        % Forma Northon:
+        % Forma Norton:
         \draw (5,0)node[below]{$B$}to[short,*-](3,0)
                     to[european current source=$I_{No}$](3,3)
                     to[short](4,3)
