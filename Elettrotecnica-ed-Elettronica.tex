@@ -3369,7 +3369,15 @@ di potenze virtuali. Da notare che la matrice di incidenza rimane invariate, poi
 \end{gather*}
 Quindi il bilancio energetico è verificato anche considerando potenze virtuali, ciò dimostra il teorema di Tellegen. 
 
-\subsection{Metodo dei Nodi}
+%% 6/11
+
+Per determinare la potenza erogata da un generatore, si calcola la tensione, se generatore Northon, o la corrente, se generatore Thevenin, di lato, nella convenzione dei 
+generatori. I prodotti ottenuti dalla grandezza erogata e la grandezza di lato, indipendentemente dal segno, vengono considerati potenze erogate. Dovranno comunque 
+verificare il bilancio energetico. 
+
+%%
+
+\subsection{Metodo dei Nodi con Esempi Applicativi}
 
 Si è determinato precedentemente che i principi di Kirchhoff non sono dipendenti tra di loro, infatti le loro rispettive matrici di incidenza sono legate dall'espressione:
 \begin{equation*}
@@ -3545,8 +3553,8 @@ conduttnza che possono non essere nulli sono sulla diagonale, per cui la matrice
         G_{11}&0&\cdots&0&0\\
         0&G_{22}&\cdots&0&0\\
         \vdots&\vdots&\ddots&\vdots&\vdots\\
-        0&0&\cdots&G_{l-1,l-1}&0\\
-        0&0&\cdots&0&G_{ll}
+        0&0&\cdots&G_{l-1\,l-1}&0\\
+        0&0&\cdots&0&G_{l\,l}
     \end{bmatrix}
 \end{gather*}
 
@@ -3681,43 +3689,226 @@ Si verifica il bilancio energetico del circuito:
 \end{equation*}
 Questo bilancio energetico presenta un errore accettabile in base allo strumento di calcolo usato per determinare il risultato. 
 
-\subsubsection{Metodo per Semplice Ispezione}
+\subsubsection{Metodo per Semplice Ispezione e Generalizzazione}
 
 Da questo metodo, si possono ottenere delle regole generalizzate che permettono di evitare l'analisi della topologia del circuito. Si indica come scrittura metodo dei nodi 
 per semplice ispezione. Gli elementi della matrice delle conduttanze modali che si trovano sulla diagonale principale si chiamano autoconduttanze. Si dimostra che si ottengono 
-sommando tutte le $n_{j}$ conduttanze dei lati $l_k$ che affiorano su quel nodo: 
+sommando tutte le $n_{j}$ conduttanze dei lati $l_k$ che affiorano su quel nodo:
 \begin{equation*}
-    G_{{mo}_{ij}}=\displaystyle\sum_{k=1}^{n_j}G_{l_k}\,\forall i= j
+    g_{{mo}_{ij}}=\displaystyle\sum_{k=1}^{n_j}G_{l_k}\,\forall i= j
 \end{equation*}
 Gli elmenti che non si trovano sulla diagonale principale si chiamano mutue- o trans-conduttanze, e rappresentano una somma cambiata di segno delle $n_{ij}$ conduttanze dei lati 
 $l_k$ che collegano due nodi:
 \begin{equation*}
-    G_{{mo}_{ij}}=-\displaystyle\left(\sum_{k=1}^{n_{ij}}G_{l_k}\right)\,\forall i\neq j
+    g_{{mo}_{ij}}=-\displaystyle\left(\sum_{k=1}^{n_{ij}}G_{l_k}\right)\,\forall i\neq j
 \end{equation*}
 Si può esprimere semplicemente la matrice delle conduttanze modali, come una matrice quadrata di ordine $n-1$ i cui componenti assumono valori descritti dalla seguente 
 espressione: 
-\begin{equation*}
-    [G_{mo}]:=(G_{{mo}_{ij}})=\begin{cases}
+\begin{gather*}
+    [G_{mo}]:=(g_{{mo}_{ij}})\\
+    g_{{mo}_{ij}}=\begin{cases}
         \displaystyle\sum_{k=1}^{n_j}G_{l_k} &i=j\\
         -\displaystyle\left(\sum_{k=1}^{n_{ij}}G_{l_k}\right)&i\neq j
     \end{cases}
-\end{equation*}
+\end{gather*}
+Da considerare che se il resistore è collegato a vuoto, ovvero non può fluire corrente, non potrà assorbirla e quindi il suo effetto sarà nullo. Per cui non bisogna considerare 
+la conduttanza di resistori collegati a vuoto, oppure in serie ad un generatore di corrente, poiché non sono in grado di alterare la corrente erogata. Per il calcolo della potenza 
+invece, bisogna considerare il contributo di ogni lato. Quindi solo nella risoluzione con la matrice delle conduttanze modali, e delle resistenze modali per il metodo 
+delle maglie, non bisogna consideare resistori in serie a generatori di corrente, o connessi a vuoto, rappresentabile come un generatore di corrente che eroga corrente nulla. 
+
 
 Per esprimere il vettore delle correnti modali si considerano solo i lati con un generatore di corrente, e si attua una somma, tenendo conto del verso delle correnti. 
 Se le correnti sono entranti nel nodo sono positive, negative quelle uscenti: 
-\begin{equation*}
-    [I_{mo}]:=(I_{{mo}_{i}})=\displaystyle\sum_{k=1}^{n_i}\pm i_{g_k}
-\end{equation*}
+\begin{gather*}
+    [I_{mo}]:=(i_{{mo}_{i}})\\
+    i_{{mo}_i}=\displaystyle\sum_{k=1}^{n_i}\pm i_{g_k}
+\end{gather*}
 
 
 Per determinare la corrente $i_k$ passante per un lato $l_k$ si considera la differenza tra la tensione tra i due nodi $A$ e $B$ che racchiudono il lato e la tensione erogata dal 
 lato $v_k$, moltiplicata per la conduttanza del lato $G_k$:
 \begin{equation*}
-    i_k=(V_A-V_B-v_k)G_k
+    i_k=[(V_A-V_B)-v_k]G_k
 \end{equation*}
 Il verso, e quindi il segno ottenuto, è arbitrario e dipende dalla convenzione utilizzata per misurare le grandezze di ogni singolo lato. 
 
-\subsection{Metodo delle Maglie}
+
+Si risolve il seguente circuito con un Thevenin estremo, per cui bisogna modificare il metodo per poterlo usare:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short,i=$I_{x_2}$](2,0)
+                    to[short](6,0)
+                    to[european current source=$2\,A$](6,2)
+                    to[short,-*](4,2)node[above]{$c$}
+                    to[european voltage source=$8\,V$,i=$-I_{x_1}$,-*](2,2)node[above]{$b$}
+                    to[R=$G_1$,-*](0,2)node[above]{$a$}
+                    to[european voltage source=$4\,V$](0,0);
+        \draw (2,0) to[R=$G_2$](2,2);
+        \draw (4,0) to[R=$G_3$](4,2);
+        \draw (3,0)node[below right]{$0$}to (3,-0.5)node[ground]{};
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    G_1=6\,\Omega\\
+    G_2=G_3=12\,\Omega
+\end{gather*}
+Si può inserire un nodo fittizio, oppure si cambiano le incognite. In questo caso si considerano le due correnti incognite nei lati dei Thevenin estremi in $b\to c$ e $a\to0$. 
+Si esprime l'equazione risolutiva del metodo dei nodi, ma bisogna sommare ai termini noti il vettore dei contributi delle correnti incognite $I_{x_{1,2}}$: 
+\begin{gather*}
+    \begin{bmatrix}
+        G_1&-G_1&0\\-G_1&G_1+G_2&0\\0&0&G_3
+    \end{bmatrix}\begin{bmatrix}
+        V_A\\V_B\\V_C
+    \end{bmatrix}=\begin{bmatrix}
+        0\\0\\2
+    \end{bmatrix}+\begin{bmatrix}
+        -I_{x_1}\\I_{x_2}\\-I_{x_2}
+    \end{bmatrix}
+\end{gather*}
+Si esrpimono le equazioni banali o di vincolo, che esprimono la relazione delle potenze modali con le tensioni erogate dalle forme Thevenin estreme: 
+\begin{gather*}
+    V_A=-4\,V\\
+    V_B-V_C=8\,V\\
+    \begin{bmatrix}
+        G_1&-G_1&0\\-G_1&G_1+G_2&0\\0&0&G_3
+    \end{bmatrix}\begin{bmatrix}
+        -4\\V_B\\V_B-8
+    \end{bmatrix}=\begin{bmatrix}
+        0\\0\\2
+    \end{bmatrix}+\begin{bmatrix}
+        -I_{x_1}\\I_{x_2}\\-I_{x_2}
+    \end{bmatrix}
+\end{gather*}
+Quindi si ritorna ad avere tre incognite $I_{x_1}$, $V_B$ e $I_{x_2}$. Si esprime la nuova matrice dei coefficienti rispetto a questo nuovo vettore delle incognite:
+\begin{gather*}
+    \begin{bmatrix}
+        I_{x_1}\\V_B\\I_{x_2}
+    \end{bmatrix}\implies\left[coef\right]=\begin{bmatrix}
+        1&-G_1&0\\0&G_1+G_2&-1\\0&G_3&1
+    \end{bmatrix}
+\end{gather*}
+Si esprime il nuovo vettore dei termini noti e si risolve il sistema così ottenuto:
+\begin{gather*}
+    \begin{bmatrix}
+        1&-G_1&0\\0&G_1+G_2&-1\\0&G_3&1
+    \end{bmatrix}\begin{bmatrix}
+        I_{x_1}\\V_B\\I_{x_2}
+    \end{bmatrix}=\begin{bmatrix}
+        0\\0\\2
+    \end{bmatrix}+\begin{bmatrix}
+        4G_1\\-4G_1\\0
+    \end{bmatrix}+\begin{bmatrix}
+        0\\0\\8G_3
+    \end{bmatrix}\\
+    [T_{no}]=\begin{bmatrix}
+        4G_1\\-4G_1\\2+8G_3
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        I_{x_1}\\V_B\\I_{x_2}
+    \end{bmatrix}=\begin{bmatrix}
+        1&-G_1&0\\0&G_1+G_2&-1\\0&G_3&1
+    \end{bmatrix}^{-1}\begin{bmatrix}
+        4G_1\\-4G_1\\2+8G_3
+    \end{bmatrix}=\begin{bmatrix}
+        1.667\\
+        6\\
+        2.167
+    \end{bmatrix}
+\end{gather*}
+
+\subsubsection{Teorema di Millman}
+
+Questo teorema corrisponde al caso più semplice del metodo dei nodi, per cui non fornisce informazioni nuove al metodo. Considera una rete formata da soli lati Thevenin in 
+parallelo:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short] (4,0);
+        \draw (0,4)--(4,4)node[midway, above]{$A$};
+        \draw (1,0) to[european voltage source=$E_1$] (1,2)
+                    to[R=$R_1$](1,4);
+        \draw (3,0) to[european voltage source=$E_n$] (3,2)
+                    to[R=$R_n$](3,4);
+        \draw[dashed] (1.25,2)--(2.75,2);
+        \draw (3.5,0)node[below right]{$0$}to[short](3.5,-0.25)node[ground]{};
+    \end{circuitikz}
+\end{center}
+Si considera il nodo inferiore il nodo di salto, per il metodo di nodi si può esprimere la tensione tra i due nodi $V_A$ come il rapporto tra la somma delle correnti delle 
+forme Northon equivalenti e la somma delle conduttanze di lato:
+\begin{gather*}
+    V_A=\displaystyle\frac{\sum_{k=1}^nG_k\cdot(\pm E_k)}{\sum_{k=1}^nG_k}
+\end{gather*}
+
+\subsubsection{Aggiunta di Un Nodo Fittizio}
+
+Si vuole determinare la corrente $I_x$ passante per un lato di questo circuito:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,2)node[left]{$A$}to[R=$10\,\Omega$,*-](2,2)node[above]{$B$}
+                    to[R=$10\,\Omega$,i=$I_x$,*-](2,0)
+                    to[short,*-](0,0)
+                    to[european voltage source=$150\,V$](0,2)
+                    to[short](0,4)
+                    to[R=$10\,\Omega$](4,4)
+                    to[short,-*](4,2)
+                    to[short](4,0)node[right]{$0$}
+                    to[short](2,0);
+        \draw (2,2) to[R=$10\,\Omega$](4,2);
+        \draw (4,0)--(4,-0.5)node[ground]{};
+    \end{circuitikz}
+\end{center}
+
+Si inseriscono due resistori di resistenza rispettivamente $8\,\Omega$ e $-8\,\Omega$, invece di un cortocircuito, in serie al lato contenente la forma Thevenin estrema 
+poiché entrambi presentano una resistenza equivalente pari a zero. In questo modo è presente nel circuito un lato Thevenin trasformabile in Norhton. Viene quindi aggiunto un 
+nodo fittizio $C$ all'interno del circuito:
+\begin{center}
+    \begin{circuitikz}
+        \draw (-2,2)node[left]{$A$}to[R=$10\,\Omega$,*-](2,2)node[above]{$B$}
+                    to[R=$10\,\Omega$,i=$I_x$,*-](2,0)
+                    to[R=$-8\,\Omega$,*-](0,0)node[below]{$C$}
+                    to[R=$8\,\Omega$,*-](-2,0)
+                    to[european voltage source=$150\,V$](-2,2)
+                    to[short](-2,4)
+                    to[R=$10\,\Omega$](4,4)
+                    to[short,-*](4,2)
+                    to[short](4,0)node[right]{$0$}
+                    to[short](2,0);
+        \draw (2,2) to[R=$10\,\Omega$](4,2);
+        \draw (4,0)--(4,-0.5)node[ground]{};
+    \end{circuitikz}
+\end{center}
+
+Si esprimono ora le relazioni del metodo dei nodi su questo nuovo circuito, considerando la forma Northon corrispondente del lato Thevenin presente: 
+\begin{gather*}
+    \begin{bmatrix}
+        \displaystyle\frac{13}{40}&-\displaystyle\frac{1}{10}&-\displaystyle\frac{1}{8}\\
+        -\displaystyle\frac{1}{10}&\displaystyle\frac{3}{10}&0\\
+        -\displaystyle\frac{1}{8}&0&0
+    \end{bmatrix}\begin{bmatrix}
+        V_A\\V_B\\V_C
+    \end{bmatrix}=\begin{bmatrix}
+        \displaystyle\frac{75}{5}\\0\\-\displaystyle\frac{75}{4}
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        V_A\\V_B\\V_C
+    \end{bmatrix}=\begin{bmatrix}
+        \displaystyle\frac{13}{40}&-\displaystyle\frac{1}{10}&-\displaystyle\frac{1}{8}\\
+        -\displaystyle\frac{1}{10}&\displaystyle\frac{3}{10}&0\\
+        -\displaystyle\frac{1}{8}&0&0
+    \end{bmatrix}^{-1}\begin{bmatrix}
+        \displaystyle\frac{75}{5}\\0\\-\displaystyle\frac{75}{4}
+    \end{bmatrix}=\begin{bmatrix}
+        150\\50\\200
+    \end{bmatrix}
+\end{gather*}
+
+Il potenziale $V_A$ corrisponde alla tensione originaria, per cui questo metodo non altera le grandezze del circuito. La corrente $I_x$ è quindi semplicemente calcolabile come:
+\begin{gather*}
+    I_x=\displaystyle\frac{V_B}{10\,\Omega}=5\,A
+\end{gather*}
+
+Alternativamente questo problema può essere risolto tramite trasformazioni in serie ed in parallelo per ottenere una resistenza equivalente, ed una successiva ricomposizione. 
+
+\subsection{Metodo delle Maglie con Esempi Applicativi}
 
 Il metodo delle maglie è il duale del metodo dei nodi, questo metodo si basa sul secondo principio di Kirchhoff. Permette di scrivere tante equazioni tante sono il numero di 
 maglie indipendenti del sistema. Si può raggiungere questo numero scegliendo opportune maglie. Non quelle fondamentali, ma maglie che non contengono altre maglie. Questo 
@@ -3760,9 +3951,19 @@ Si considera la seguente rete:
 \end{center}
 
 Si può rappresentare in forma matriciale tramite la matrice di incidenza maglie-lati $[B]$, che  indica se un certo lato appartiene alla circuitazione di uno degli anelli:
-\begin{equation*}
-    [B]\cdot[v_l]=[0]
-\end{equation*}
+\begin{gather*}
+    [B]\cdot[v_l]=[0]\\
+    \begin{bmatrix}
+        1&-1&0&0&0&0&0\\
+        0&1&-1&-1&0&0&0\\
+        0&0&1&0&-1&0&-1\\
+        0&0&0&1&-1&-1&0
+    \end{bmatrix}\cdot\begin{bmatrix}
+        v_1\\v_2\\v_3\\v_4\\v_5\\v_6\\v_7
+    \end{bmatrix}=\begin{bmatrix}
+        0\\0\\0\\0
+    \end{bmatrix}
+\end{gather*}
 
 
 Analogamente al metodo dei nodi, si usufruisce di un'equazione di utilità per cambiare le incognite e diminuire il numero di equazioni necessarie. Si vogliono esprimere 
@@ -3870,7 +4071,7 @@ Si considera il seguente circuito. E si esprimono le equazioni senza passare per
     \begin{circuitikz}
         \draw (0,0) to[R=$R_1$] (0,3)
                     to[short] (0,5.5)
-                    to[R=$R_2$] (10,5.5)
+                    to[R=$R_8$] (10,5.5)
                     to[short] (10,3)
                     to[R=$R_6$](8,3)
                     to[R=$R_5$](8,0)
@@ -3897,6 +4098,8 @@ Si considera il seguente circuito. E si esprimono le equazioni senza passare per
 Si rappresenta il vettore tensioni di maglia, controllando per ogni maglia, i lati che presentano un generatore di tensione. Si considerano positive le tensioni erogate 
 da generatori concordi alla direzione di attraversamento della maglia, in questo caso sempre orario, altrimenti si indicano con il segno opposto:
 \begin{gather*}
+    [E_m]:=(e_{m_{i}})\\
+    e_{m_i}=\displaystyle\sum_{k=1}^{n_i}\pm E_{k_i}\\
     [E_m]=\begin{bmatrix}
         E_1+E_4\\
         E_2\\
@@ -3908,12 +4111,13 @@ da generatori concordi alla direzione di attraversamento della maglia, in questo
 Si esprime la matrice delle resistenza di maglia. L'autoresistenza si ottiene come la somma delle resistenza dei lati appartenenti alla maglia. Le mutue resistenze si calcolano 
 come la somma cambiata di segno delle resistenze dei lati in comune tra le maglie:
 \begin{gather*}
-    R_{m_{ij}}:=\begin{cases}
-        \displaystyle\sum_{k=1}^{n_i}R_{k_i}&\forall i=j\\
-        \displaystyle-\left(\sum_{k=1}^{n_{ij}}R_{k_{ij}}\right)&\forall i\neq j
+    [R_m]:=(r_{m_{ij}})\\
+    r_{m_{ij}}=\begin{cases}
+        \displaystyle\sum_{k=1}^{n_i}R_{k_i}& i=j\\
+        \displaystyle-\left(\sum_{k=1}^{n_{ij}}R_{k_{ij}}\right)& i\neq j
     \end{cases}\\
     [R_m]=\begin{bmatrix}
-        R_1+R_4+R_6&-R_8&0&-R-4&0\\
+        R_1+R_4+R_6&-R_8&0&-R_4&0\\
         -R_8&R_2+R_8&-R_2&0&0\\
         0&-R_2&R_2+R_6+R_3&0&-R_6\\
         -R_4&0&0&R_5+R_6&-R_5\\
@@ -3925,7 +4129,86 @@ Le correnti di maglia si ottengono come:
     [I_m]=[R_m]^{-1}[E_m]
 \end{equation*}
 
-\subsection{Generatori Controllati}
+\subsection{Partitore di Tensione e di Corrente con Esempi Applicativi}
+%% 8/11
+
+Si considera il seguente circuito, e si vuole calcolare il valore delle tensioni $V_{x,y}$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (6,2) to[R=$6\,\Omega$](6,0)node[below]{$+$}
+                    to[R=$8\,\Omega$,*-](4,0)node[below]{$-$}
+                    to[european voltage source=$8\,V$,*-](2,0)node[below]{$+$}
+                    to[R=$11\,\Omega$,*-](0,0)node[below]{$-$} 
+                    to[european voltage source=$12\,V$,*-](0,2)
+                    to[R=$10\,\Omega$](2,2)
+                    to[R=$15\,\Omega$](4,2);
+        \draw (6,2) to[european voltage source=$5\,V$](4,2);
+        \draw[->](0,-0.75)--(2,-0.75)node[midway, below]{$V_y$};
+        \draw[->](4,-0.75)--(6,-0.75)node[midway, below]{$V_x$};
+    \end{circuitikz}
+\end{center}
+Applicando il secondo principio di Kirchhoff, si può esprimere questo circuito in una forma equivalente all'esterno come:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[european voltage source=$15\,V$](0,2)
+                    to[short,i=$i$](2,2)
+                    to[R=$50\,\Omega$](2,0)
+                    to[short](0,0);
+    \end{circuitikz}
+\end{center}
+La corrente passante per il circuito è quindi semplicemente:
+\begin{gather*}
+    i=\displaystyle\frac{15\,V}{50\,\Omega}=\frac{3}{10}\,A
+\end{gather*}
+Data la corrente passante per il circuito, le due tensioni possono essere calcolate facilmente come:
+\begin{gather*}
+    V_x=8\,\Omega\cdot \displaystyle\frac{3}{10}\,A=\frac{12}{5}\,V\\
+    V_y=11\,\Omega\cdot \displaystyle\frac{3}{10}\,A=\frac{33}{10}\,V
+\end{gather*}
+Questo corrisponde ad un'equazione di partitore, poiché la tensione $V_k$ assorbita della resistenza $k-$esima in una maglia dove sono presenti solo generatori di tensione 
+e resistori in serie, equivale al rapporto tra il valore della resistenza $R_k$ e la somma delle resistenze $\sum R$, moltiplicato per la tensione globale del lato $E_g$:
+\begin{gather*}
+    V_k=\displaystyle\frac{R_k}{\sum_{j=1}^n R_j}E_g
+\end{gather*}
+
+
+Come esiste il partitore di tensione, esiste il suo duale il paritore di corrente, dove tutti gli elementi, resistori e generatori di corrente, sono montati in parallelo:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)node[below]{$B$} to[short,*-](1,0)
+                    to[european current source=$I_g$](1,2)
+                    to[short,-*](0,2)node[above]{$A$};
+        \draw (2,2) to[R=$R_1$,i=$i_1$](2,0);
+        \draw[dashed] (2.75,1)--(3.25,1);
+        \draw (3.5,2)to[R=$R_k$,i=$i_k$](3.5,0);
+        \draw[dashed](4.25,1)--(4.75,1);
+        \draw (5,2) to[R=$R_n$,i=$i_n$] (5,0);
+        \draw (1,0) to[short] (5,0);
+        \draw (1,2) to[short] (5,2);
+    \end{circuitikz}
+\end{center}
+Se sono note tutte le conduttanze di lato, si può esprimere la corrente passante per una singola resistenza $k-$esima come:
+\begin{gather*}
+    I_k=\displaystyle\frac{G_k}{\sum_{ij=1}^n G_j}I_g
+\end{gather*}
+Dove $I_g$ è la tensione globale di lato. 
+Si può dimostrare facilmente tramite il metodo dei nodi, considerando il nodo $B$, il nodo di salto. Per cui si ha un'unica equazione:
+\begin{gather*}
+    \begin{bmatrix}
+        \displaystyle\sum_{j=1}^nG_j
+    \end{bmatrix}[V_A]=[I_g]
+\end{gather*}
+Essendoci un'unica equazione la matrice ed i vettori diventano scalari. La tensione tra i due morsetti è quindi:
+\begin{gather*}
+    V_A=\displaystyle\frac{I_g}{\sum_{j=1}^nG_j}
+\end{gather*} 
+Nota la tensione, la corrente di lato di un $k-$esimo resistore è data da:
+\begin{gather*}
+    I_k=G_kV_A=\displaystyle G_k\frac{I_g}{\sum_{ij=1}^n G_j}
+\end{gather*}
+Si è quindi dimostrata la formula del partitore di corrente. 
+
+\subsection{Generatori Controllati con Esempi Applicativi}
 
 Si definisce un tipo di generatori che vivono nella modellistica circuitale. Questi generatori pilotati cercano di emulare il comportamento di oggetti reali, ma essendo 
 solamente un modello, non possono essere realizzati. 
@@ -3953,9 +4236,8 @@ In caso siano di tensione:
     \end{circuitikz}
 \end{center}
 
-\subsubsection{Esempio Applicativo di Una Rete Pilotata}
 
-Risolvendo reti dove sono presenti generatori controllati, in prima analisi vengono analizzati come fossero dei generatori indipendenti. 
+Per risolvere reti dove sono presenti generatori controllati, in prima analisi vengono analizzati come fossero dei generatori indipendenti. 
 Si considera un circuito dov'è presente un generatore controllato, il metodo risolutivo ottenuto da quesst'analisi varrà per ogni rete dov'è presente un generatore pilotato: 
 \begin{center}
     \begin{circuitikz}
@@ -4017,7 +4299,7 @@ I piloti delle grandezze di lato devono essere espressi in funzione dei potenzia
         -2G_1&0\\
         2G_1&0
     \end{bmatrix}\\
-    [{coeff}]=[G_{mo}]-[P]=\begin{bmatrix}
+    [{coef}]=[G_{mo}]-[P]=\begin{bmatrix}
         3G_1+G_2&-G_2\\
         -G_2-2G_1&G_2+G_3
     \end{bmatrix}
@@ -4025,38 +4307,40 @@ I piloti delle grandezze di lato devono essere espressi in funzione dei potenzia
 
 L'equazione risolutiva della rete diventa:
 \begin{gather*}
-    [coeff]^{-1}\begin{bmatrix}
+    [V_{mo}]=[coef]^{-1}\begin{bmatrix}
         I_g\\
         0
-    \end{bmatrix}=[V_{mo}]\\
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        V_A\\
+        V_B
+    \end{bmatrix}=
     \begin{bmatrix}
         3G_1+G_2&-G_2\\
         -G_2-2G_1&G_2+G_3
     \end{bmatrix}^{-1}\begin{bmatrix}
         I_g\\
         0
-    \end{bmatrix}=\begin{bmatrix}
-        V_A\\
-        V_B
     \end{bmatrix}
 \end{gather*}
 
-%% 6/11: riscrivere, con esempi applicativi
+%% 6/11 generalizzazione dei metodi
 
 In generale per risolvere una rete controllata, bisogna analizzarla come fosse indipendente. Successivamente si esprimono le grandezze di controllo, nuove 
-incognite. Per poter risolvere il sistema, si considerano equazioni banali o di vincolo, per poter diminuire il numero delle incognite totali del sistema. Si sostituiscono 
-nel sistema, e si decide un nuovo vettore delle incognite $[X]$, se corrispondono a grandezze diverse, si dice di aver ibridizzato il sistema. Dopo aver definito questo nuovo 
-vettore, bisogna esprimere la matrice dei coefficienti $[coeff]$ ed il nuovo vettore termini noti $[Y]$ adeguatamente per mantenere le uguaglianze precedenti:
+incognite. Per poter risolvere il sistema, si considerano equazioni banali o di vincolo, per poter diminuire il numero delle incognite totali del sistema, generalizzando il 
+metodo dei nodi o delle maglie, e si sostituiscono nel sistema. Si esprime così un nuovo vettore delle incognite $[X]$, su cui si scrive una nuova matrice 
+dei coefficienti $[coef]$ e si riportano oltre al vettore dei termini noti di partenza $[I_{mo}]$ o $[E_m]$, in base al metodo usato, le grandezze di vincolo note, tolte dal 
+vettore delle incognite, $[X_{no}]$. 
 \begin{gather*}
-    [coeff][X]=[Y]\\
-    [X]=[coeff]^{-1}[Y]
+    [coef][X]=[I_{mo}/E_m]+[X_{no}]
+\end{gather*}
+Si definisce così un nuovo vettore dei termini noti $[T_{no}]$, per risolvere il sistema rispetto alle nuove grandezze:
+\begin{gather*}
+    [T_{no}]=[I_{mo}/E_m]+[X_{no}]\\
+    [X]=[coef]^{-1}[T_{no}]
 \end{gather*}
 
 %%
-
-\subsection{Partitore di Tensione e di Corrente}
-
-%% 8/11
 
 \subsection{Teorema di Thevenin e Northon}
 
@@ -4212,7 +4496,7 @@ da una corrente:
         V_{ac}
     \end{bmatrix}=\begin{bmatrix}
         2+10\\
-        -2-\displaystyle\frac{20}{2}+\frac{V_{ao}}{10}
+        -2-\displaystyle\frac{20}{2}+\frac{V_{a0}}{10}
     \end{bmatrix}
 \end{gather*}
 Risolvendo questo sistema, si ottiene che la corrente a carico $V_{ac}$ è uguale alla tensione a vuoto, per cui non scorre all'esterno del circuito alcuna corrente. Quindi, 
@@ -4395,7 +4679,7 @@ Per il principio di sovrapposizione degli effetti la corrente totale assorbita d
 \end{gather*}
 
 
-Come gi à noto, la forma Thevevnin è la duale della forma Norhton, ed è possibile passare tra le due forme. Per cui è possibile, nota la rappresentazione Thevenin esterna di 
+Come già noto, la forma Thevevnin è la duale della forma Norhton, ed è possibile passare tra le due forme. Per cui è possibile, nota la rappresentazione Thevenin esterna di 
 un circuito, passare ad una rappresentazione Norhton esterna. Da notare che il processo per arrivare a questa forma Norhton equivalente è indipendente dal 
 processo dimostrato precedentemente per la rappresentazione Thevenin. Per calcolare la corrente erogata tra i due morsetti $I_{No}$ invece del vuoto, bisogna inserire un 
 cortocircuito tra i due. Mentre per misurare la resistenza equivalente $R_{No}$, si rende passiva la rete, e si applicano trasformazioni in serie e parallelo, oppure tramite 
@@ -4495,8 +4779,8 @@ sempre ad un livello di potenza molto lontano dalla potenza massima trasferibile
 Si analizzano in questa sezione una serie di circuiti conententi bipoli con memoria: condensatori ed induttori. Si risolveranno questo tipo di reti, distinguendo 
 circuiti di primo e di secondo ordine. Si considerano parametri concentrati tempo invarianti, per cui le leggi costitutive di questi bipoli con memoria, duali tra di loro, sono:
 \begin{gather*}
-    i=\displaystyle C\frac{dv}{dt}\\
-    v=\displaystyle L\frac{di}{dt}
+    i=\displaystyle C\frac{dv_C}{dt}\\
+    v=\displaystyle L\frac{di_L}{dt}
 \end{gather*}
 
 \subsection{Circuiti del Primo ordine}
@@ -4644,7 +4928,7 @@ funzione della corrente nel tempo.
         \draw[-]plot[smooth, domain=0:2.4](\x,{e^(-\x)-3});
         \draw[-](1,-3)--(-0.25,-1.75);
         \node[below right]at(0,-3){$0$};
-        \draw[dashed](1,1.5)--(1,-3)node[below]{$\tau$};
+        \draw[dashed](1,1.5)--(1,0)node[below right]{$\tau$}--(1,-3)node[below]{$\tau$};
     \end{tikzpicture}
 \end{center}
 Si dimostra che l'interesezione tra la retta tangente a $v_C(0)$ e l'asintoto $E$ corrisponde esattamente al tempo caratteristico $\tau$:
@@ -4704,7 +4988,7 @@ completamente duali:
     i_{Lp}(t)=k_2
 \end{gather*}
 La soluzione totale è quindi:
-
+%% sistemare l'overfull
 \begin{gather*}
     i_L(t)=k_1e^{-\frac{1}{GL}t}+k_2
 \end{gather*}
@@ -4742,7 +5026,7 @@ Per cui si individuano le due situazioni di carica e scarica dell'induttore:
 Si considera una situazione di semplice carica, dove la memoria è nulla $i_L(0^-)=0$.
 In questo caso si ottengono quindi le seguenti equazioni per la carica di un induttore scarico:
 \begin{gather*}
-    i_L(t)=i\left(1-e^{-\frac{1}{GL}T}\right)\\
+    i_L(t)=I\left(1-e^{-\frac{1}{GL}T}\right)\\
     v_L(t)=\displaystyle\frac{I}{G}e^{-\frac{1}{GL}t}
 \end{gather*}
 I grafici della corrente e della tensione nel tempo sono quindi duali a quelli di un condensatore, quindi il tempo caratteristico del sistema è dato da:
@@ -4764,7 +5048,7 @@ Viene qui rappresentato l'andamento delle grandezze nel tempo, in un caso di sem
         \draw[-]plot[smooth, domain=0:2.4](\x,{e^(-\x)-3});
         \draw[-](1,-3)--(-0.25,-1.75);
         \node[below right]at(0,-3){$0$};
-        \draw[dashed](1,1.5)--(1,-3)node[below]{$\tau$};
+        \draw[dashed](1,1.5)--(1,0)node[below right]{$\tau$}--(1,-3)node[below]{$\tau$};
     \end{tikzpicture}
 \end{center}
 
@@ -5013,7 +5297,7 @@ complessi:
     v_C(t)=|k_1|e^{\sigma t}\left[e^{j(\omega_Ct+\gamma)}+e^{-j(\omega_Ct+\gamma)}\right]+E\\
     v_C(t)=2|k_1|e^{\sigma t}\cos(\omega_Ct+\gamma)+E
 \end{gather*}
-Poiché $\sigma<0$, l'ampiezza dell'oscillazione della sinusoide diminuisce nel tempo, quindi è u ìn oscillatorio smorzato. Questo caso si chiama quindi sottosmorzato. 
+Poiché $\sigma<0$, l'ampiezza dell'oscillazione della sinusoide diminuisce nel tempo, quindi è un oscillatorio smorzato. Questo caso si identifica come sottosmorzato. 
 
 \subsubsection{Caso Critico}
 Il terzo caso per $R=R_{cr}$, corrisponde a delle radici del polinomio caratteristico uguali $\alpha_1=\alpha_2$. La radice $\alpha_1$, ha molteplicità $2$, per cui 
@@ -5038,7 +5322,7 @@ Mentre le costanti $k_1$ e $k_2$ sono:
     \end{bmatrix}=\begin{bmatrix}
         0&1\\C&\alpha_1C
     \end{bmatrix}^{-1}\begin{bmatrix}
-        v_C(0^-)-E\\i(0^-)
+        v_C(0^-)-E\\i_L(0^-)
     \end{bmatrix}
 \end{gather*}
 \begin{gather*}
@@ -5047,7 +5331,7 @@ Mentre le costanti $k_1$ e $k_2$ sono:
     \end{bmatrix}=\displaystyle-\frac{1}{C}\begin{bmatrix}
         \alpha_1C&-1\\-C&0
     \end{bmatrix}\begin{bmatrix}
-        v_C(0^-)-E\\i(0^-)
+        v_C(0^-)-E\\i_L(0^-)
     \end{bmatrix}\\
     \begin{cases}
         k_1=-\alpha_1[v_C(0^-)-E]+\displaystyle\frac{i_L(0^-)}{C}\\
@@ -5152,8 +5436,7 @@ Si considera l'andamento del caso sovrasmorzato, la curva di colore nero, il cas
     \end{tikzpicture}
 \end{center}
 Si considerano inoltre i tre andamenenti possibili della corrente nel caso sovrasmorzato, rappresentato dalla curva di colore nero, nel caso sottosmorzato, 
-rappresentato dalla curva di colore rosso, ed il caso critico, rappresentato dalla curva di colore blu. Si considera un unico andamento per la corrente 
-nel caso sovrasmorzato e nel caso limite, poiché sono due funzioni della stessa classe di equivalenza, entrambe combinazione lineare di esponenziali reali. 
+rappresentato dalla curva di colore rosso, ed il caso critico, rappresentato dalla curva di colore blu. 
 \begin{align*}
     &i(t)^{(1)}=C\alpha_1k_1e^{\alpha_1t}+C\alpha_2k_2e^{\alpha_2t}\\
     &i(t)^{(2)}=2C|k_1|\sigma e^{\sigma t}\cos(\omega_Ct+\gamma)-2C|k_1|\omega_Ce^{\sigma t}\sin(\omega_Ct+\gamma)\\
@@ -5162,7 +5445,7 @@ nel caso sovrasmorzato e nel caso limite, poiché sono due funzioni della stessa
 \begin{center}
     \begin{tikzpicture}[scale=2]
         \draw[->](-0.5,0)--(3,0)node[above]{$t$};
-        \draw[->](0,-0.5)--(0,1.5)node[right]{$v_C(t)$};
+        \draw[->](0,-0.5)--(0,1.5)node[right]{$i(t)$};
 
         \draw[black]plot[smooth, domain=0:2.8](\x,{-4*e^(-1.5*\x)+4*e^(-\x)});        
         \draw[red]plot[smooth, domain=0:2.8](\x,{2*e^(-1.3*\x)*sin(4*\x r)});
