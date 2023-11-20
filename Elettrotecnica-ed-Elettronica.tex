@@ -5200,13 +5200,13 @@ condensatore. Per cui la tensione del condensatore in questa situazione è pari 
 Noti i valori della memoria si possono definire le equazioni di vincolo:
 \begin{gather*}
     v_C(0^-)-E=k_1+k_2\\
-    i_L(0^-)=C\alpha_1k_1+C\alpha_2k_2\\
+    i(0^-)=C\alpha_1k_1+C\alpha_2k_2\\
     \begin{bmatrix}
         k_1\\k_2
     \end{bmatrix}=\begin{bmatrix}
         1&1\\\alpha_1C&\alpha_2C
     \end{bmatrix}^{-1}\begin{bmatrix}
-        v_C(0^-)-E\\i_L(0^-)
+        v_C(0^-)-E\\i(0^-)
     \end{bmatrix}
 \end{gather*}
 Essendo una matrice quadrata di ordine $2$, si può calcolare facilmente la sua inversa:
@@ -5216,7 +5216,7 @@ Essendo una matrice quadrata di ordine $2$, si può calcolare facilmente la sua 
     \end{bmatrix}=\displaystyle\frac{1}{(\alpha_2-\alpha_1)C}\begin{bmatrix}
         \alpha_2C&-1\\-\alpha_1C&1
     \end{bmatrix}\begin{bmatrix}
-        v_C(0^-)-E\\i_L(0^-)
+        v_C(0^-)-E\\i(0^-)
     \end{bmatrix}
 \end{gather*}
 Si considerano $\alpha_{1,2}=\sigma\pm\sqrt\Delta$, l'equazione allora diventa:
@@ -5226,11 +5226,11 @@ Si considerano $\alpha_{1,2}=\sigma\pm\sqrt\Delta$, l'equazione allora diventa:
     \end{bmatrix}=\displaystyle-\frac{1}{2\sqrt{\Delta} C}\begin{bmatrix}
         \alpha_2C&-1\\-\alpha_1C&1
     \end{bmatrix}\begin{bmatrix}
-        v_C(0^-)-E\\i_L(0^-)
+        v_C(0^-)-E\\i(0^-)
     \end{bmatrix}\\
     \begin{cases}
-        k_1=\displaystyle-\frac{1}{2\sqrt{\Delta} C}\{\alpha_2C[v_C(0^-)-E]-i_L(0^-)\}\\
-        k_2=\displaystyle-\frac{1}{2\sqrt{\Delta} C}\{-\alpha_1C[v_C(0^-)-E]-i_L(0^-)\}
+        k_1=\displaystyle-\frac{1}{2\sqrt{\Delta} C}\{\alpha_2C[v_C(0^-)-E]-i(0^-)\}\\
+        k_2=\displaystyle-\frac{1}{2\sqrt{\Delta} C}\{-\alpha_1C[v_C(0^-)-E]-i(0^-)\}
     \end{cases}
 \end{gather*}
 %Si esprime la tensione e la corrente rispetto a queste costanti:
@@ -5257,7 +5257,7 @@ complessi e coiungati $k_1=k_2^*$. Per dimostrare che sono coniugati, in ogni ca
         1&1\\\alpha_1C&\alpha_2C 
     \end{bmatrix}^{-1}
     \begin{bmatrix}
-        v_C(0^-)-E\\i_L(0^-)
+        v_C(0^-)-E\\i(0^-)
     \end{bmatrix}\\
     \begin{bmatrix}
         k_1\\k_2
@@ -5266,24 +5266,24 @@ complessi e coiungati $k_1=k_2^*$. Per dimostrare che sono coniugati, in ogni ca
         \alpha_1C&-1\\-\alpha_2C&1
     \end{bmatrix}
     \begin{bmatrix}
-        v_C(0^-)-E\\i_L(0^-)
+        v_C(0^-)-E\\i(0^-)
     \end{bmatrix}\\
     \begin{cases}
-        k_1=\displaystyle-\frac{1}{2j\omega_C C}\{\alpha_2C[v_C(0^-)-E]-i_L(0^-)\}\\
-        k_2=\displaystyle-\frac{1}{2j\omega_C C}\{-\alpha_1C[v_C(0^-)-E]+i_L(0^-)\}
+        k_1=\displaystyle-\frac{1}{2j\omega_C C}\{\alpha_2C[v_C(0^-)-E]-i(0^-)\}\\
+        k_2=\displaystyle-\frac{1}{2j\omega_C C}\{-\alpha_1C[v_C(0^-)-E]+i(0^-)\}
     \end{cases}
 \end{gather*}
 \begin{gather*}
     \begin{cases}
-        k_1=\displaystyle-\frac{1}{2j\omega_CC}\frac{j}{j}\alpha_2C[v_C(0^-)-E]+\frac{1}{2j\omega_CC}\frac{j}{j}i_L(0^-)\\
-        k_2=\displaystyle\frac{1}{2j\omega_CC}\frac{j}{j}\alpha_1C[v_C(0^-)-E]-\frac{1}{2j\omega_CC}\frac{j}{j}i_L(0^-)\\
+        k_1=\displaystyle-\frac{1}{2j\omega_CC}\frac{j}{j}\alpha_2C[v_C(0^-)-E]+\frac{1}{2j\omega_CC}\frac{j}{j}i(0^-)\\
+        k_2=\displaystyle\frac{1}{2j\omega_CC}\frac{j}{j}\alpha_1C[v_C(0^-)-E]-\frac{1}{2j\omega_CC}\frac{j}{j}i(0^-)\\
     \end{cases}\\
     \alpha_1=\alpha_2^*
 \end{gather*}
 \begin{gather*}
     \begin{cases}
-        k_1=j\left(\displaystyle\frac{\alpha_1^*}{2\omega_C}[v_C(0^-)-E]-\frac{i_L(0^-)}{2\omega_CC}\right)\\
-        k_2=j\left(\displaystyle-\frac{\alpha_1}{2\omega_C}[v_C(0^-)-E]+\frac{i_L(0^-)}{2\omega_CC}\right)
+        k_1=j\left(\displaystyle\frac{\alpha_1^*}{2\omega_C}[v_C(0^-)-E]-\frac{i(0^-)}{2\omega_CC}\right)\\
+        k_2=j\left(\displaystyle-\frac{\alpha_1}{2\omega_C}[v_C(0^-)-E]+\frac{i(0^-)}{2\omega_CC}\right)
     \end{cases}\implies k_1=k_2^*
 \end{gather*}
 Si esprimono le costanti tramite la rappresentazione di Eulero, in modo da poter scrivere la tensione in funzione del tempo come una combinazione lineare di esponenziali 
@@ -5315,14 +5315,14 @@ Mentre le costanti $k_1$ e $k_2$ sono:
 \begin{gather*}
     \begin{cases}
         v_C(0^-)-E=k_2\\
-        i_L(0^-)=Ck_1+Ck_2\alpha_1
+        i(0^-)=Ck_1+Ck_2\alpha_1
     \end{cases}\\
     \begin{bmatrix}
         k_1\\k_2
     \end{bmatrix}=\begin{bmatrix}
         0&1\\C&\alpha_1C
     \end{bmatrix}^{-1}\begin{bmatrix}
-        v_C(0^-)-E\\i_L(0^-)
+        v_C(0^-)-E\\i(0^-)
     \end{bmatrix}
 \end{gather*}
 \begin{gather*}
@@ -5331,10 +5331,10 @@ Mentre le costanti $k_1$ e $k_2$ sono:
     \end{bmatrix}=\displaystyle-\frac{1}{C}\begin{bmatrix}
         \alpha_1C&-1\\-C&0
     \end{bmatrix}\begin{bmatrix}
-        v_C(0^-)-E\\i_L(0^-)
+        v_C(0^-)-E\\i(0^-)
     \end{bmatrix}\\
     \begin{cases}
-        k_1=-\alpha_1[v_C(0^-)-E]+\displaystyle\frac{i_L(0^-)}{C}\\
+        k_1=-\alpha_1[v_C(0^-)-E]+\displaystyle\frac{i(0^-)}{C}\\
         k_2=v_C(0^-)-E
     \end{cases}
 \end{gather*}
@@ -5343,7 +5343,7 @@ Mentre le costanti $k_1$ e $k_2$ sono:
 
 Il quarto caso corrisponde ad inserire un resistore di resistenza nulla $R=0\,\Omega$:
 \begin{gather*}
-    v(t)=L\displaystyle\frac{di}{dt}+v_C=LC\frac{d^2v_C}{dt}+v_C\\
+    v_C(t)=L\displaystyle\frac{di}{dt}+v_C=LC\frac{d^2v_C}{dt}+v_C\\
     i(t)=C\displaystyle\frac{dv_C}{dt}\\
     P_{v_C}(\alpha):LC\alpha^2+1=0\\
     \alpha_{1,2}=\displaystyle\pm j\frac{1}{\sqrt{LC}}=\pm j\omega_C
@@ -5367,7 +5367,7 @@ Si calcolano le costanti, mediante le equazioni di vincolo:
         1&1\\jC\omega_0&-jC\omega_0 
     \end{bmatrix}^{-1}
     \begin{bmatrix}
-        v_C(0^-)-E\\i_L(0^-)
+        v_C(0^-)-E\\i(0^-)
     \end{bmatrix}\\
     \begin{bmatrix}
         k_1\\k_2
@@ -5376,19 +5376,19 @@ Si calcolano le costanti, mediante le equazioni di vincolo:
         -jC\omega_0&-1\\-jC\omega_0&1
     \end{bmatrix}
     \begin{bmatrix}
-        v_C(0^-)-E\\i_L(0^-)
+        v_C(0^-)-E\\i(0^-)
     \end{bmatrix}
 \end{gather*}
 \begin{gather*}
     \begin{cases}
-        k_1=\displaystyle\frac{1}{2jC\omega_0}\left\{jC\omega_0\left[v_C(0^-)-E\right]+i_L(0^-)\right\}\\
-        k_2=\displaystyle\frac{1}{2jC\omega_0}\left\{jC\omega_0\left[v_C(0^-)-E\right]-i_L(0^-)\right\}
+        k_1=\displaystyle\frac{1}{2jC\omega_0}\left\{jC\omega_0\left[v_C(0^-)-E\right]+i(0^-)\right\}\\
+        k_2=\displaystyle\frac{1}{2jC\omega_0}\left\{jC\omega_0\left[v_C(0^-)-E\right]-i(0^-)\right\}
     \end{cases}
 \end{gather*}
 \begin{gather*}
     \begin{cases}
-        k_1=\displaystyle\frac{1}{2}\left[v_C(0^-)-E\right]-j\frac{i_L(0^-)}{2C\omega_0}\\
-        k_2=\displaystyle\frac{1}{2}\left[v_C(0^-)-E\right]+j\frac{i_L(0^-)}{2C\omega_0}
+        k_1=\displaystyle\frac{1}{2}\left[v_C(0^-)-E\right]-j\frac{i(0^-)}{2C\omega_0}\\
+        k_2=\displaystyle\frac{1}{2}\left[v_C(0^-)-E\right]+j\frac{i(0^-)}{2C\omega_0}
     \end{cases}\implies k_1=k_2^*
 \end{gather*}
 Attuando lo stesso procedimento del caso sottosmorzato, si ottiene una sinusoide non smorzata per la tensione:
@@ -5415,7 +5415,7 @@ In tutti questi casi, la corrente e la tensione sono grandezze continue nel temp
 bipoli con memoria sono scarichi:
 \begin{gather*}
     v_C(0^-)=0\\
-    i_L(0^-)=0
+    i(0^-)=0
 \end{gather*}
 
 Si considera l'andamento del caso sovrasmorzato, la curva di colore nero, il caso sottosmorzato la curva di colore rosso ed il caso critico la curva di colore blu: 
@@ -5470,12 +5470,10 @@ differenziale associata al sistema ha parte reale negativa. Per cui può esister
 
 \subsubsection{Circuito RLC In Parallelo}
 
-Per la dualità si ottengono delle equazioni delle grandezze duali nel circuito dove i compomenti sono montati in parallelo, applicando il principio di Kirchhoff alle correnti 
-invece che alle tensioni. 
-%% circuito RLC parallelo
+Si considera ora un circuito dove gli elementi resistori, condensatori ed induttori sono montati in parallelo
 \begin{center}
     \begin{circuitikz}        
-        \draw (-1,0) to[european current source=$i(t)$](-1,3)
+        \draw (-1,0) to[european current source=$i_g(t)$](-1,3)
                     to[short,-*](0,3);
         \draw(1,3)to[short,*-](1.5,3)node[above]{$t=0$}
                     to[R=$R$](1.5,0)
@@ -5490,8 +5488,43 @@ invece che alle tensioni.
                     to[short](2.75,0);
     \end{circuitikz}
 \end{center}
-
-%% equazioni delle grandezze
+Per la dualità si ottengono delle equazioni delle grandezze duali, applicando il principio di Kirchhoff alle correnti invece che alle tensioni:
+\begin{gather*}
+    \begin{cases}
+        i_g(t)=Rv(t)+C\displaystyle\frac{dv(t)}{dt}+i_L(t)\\
+        v=\displaystyle L\frac{di_L(t)}{dt}
+    \end{cases}\\
+    i_g(t)=Iu_{-1}(t)\\
+    Iu_{-1}(t)=RL\displaystyle\frac{di_L(t)}{dt}+LC\frac{d^2i_L(t)}{dt^2}+i_L(t)
+\end{gather*}
+Si individuano le soluzioni del polinomio caratteristico:
+\begin{gather*}
+    LC\alpha^2+RL\alpha+1=0\\
+    \alpha_{1,2}=-\displaystyle\frac{R}{2C}\pm\sqrt{\left(\frac{R}{2C}\right)^2-\frac{1}{LC}}\\
+    \Delta=\displaystyle\left(\frac{R}{2C}\right)^2-\frac{1}{LC}\\
+    \sigma=\displaystyle-\frac{R}{2C}\\
+    \omega=\sqrt{|\Delta|}
+\end{gather*}
+Si individuano, analogamente al circuito RLC in serie quattro possibili casi, sovrasmorzato, sottosmorzato, critico e oscillatorio puro. Si individuano queste quattro 
+possibili funzioni per la corrente: 
+\begin{align*}
+    &i_L(t)^{(1)}=k_1e^{\alpha_1t}+k_2e^{\alpha_2t}+I\\
+    &i_L(t)^{(2)}=2|k_1|e^{\sigma t}\cos(\omega t+\gamma)+I\\
+    &i_L(t)^{(3)}=k_1te^{\alpha_1t}+k_2e^{\alpha_1t}+I\\
+    &i_L(t)^{(4)}=2|k_1|\cos(\omega t+\gamma)+I
+\end{align*}
+E queste funzioni per la tensione:
+\begin{align*}
+    &v(t)^{(1)}=L\alpha_1k_1e^{\alpha_1t}+L\alpha_2k_2e^{\alpha_2t}\\
+    &v(t)^{(2)}=2L|k_1|\sigma e^{\sigma t}\cos(\omega t+\gamma)-2L|k_1|\omega e^{\sigma t}\sin(\omega t+\gamma)\\
+    &v(t)^{(3)}=Lk_1(e^{\alpha_1t}+\alpha_1te^{\alpha_1t})+Lk_2\alpha_1e^{\alpha_1t}\\
+    &v(t)^{(4)}=-2L|k_1|\omega\sin(\omega t+\gamma)
+\end{align*}
+Il valore delle costanti $k_{1,2}$, si ottengono applicando le equazioni di vincolo, considerando i valori noti della memoria $i_L(0^-)$ e $v(0^-)$:
+\begin{gather*}
+    i_L(0^-)-I=k_1+k_2\\
+    v(0^-)=L\displaystyle\frac{di_L(t)}{dt}\bigg|_{t={0^-}}
+\end{gather*}
 
 \subsection{Generatori Sinusoidali}
 
@@ -5504,7 +5537,7 @@ un generatore di tensione sinusoidale inserito in un circuito RLC in serie:
                     to[L=$L$](4,2)
                     to[C=$C$](6,2)
                     to[short, i=$i$](6,0)
-                    to[european voltage source=$v_g$](0,0) %% generatore sinusoidale
+                    to[sV=$v_g$](0,0) 
                     to[closing switch](0,2);
     \end{circuitikz}
 \end{center}
@@ -5654,15 +5687,15 @@ La parte reale dell'impedenza non è funzione della pulsazione $\omega$ della fo
 Si considerano due componenti RL e RC in parallelo:
 \begin{center}
     \begin{circuitikz}
-        \draw (4,0) to[european voltage source=$E$] (0,0)
+        \draw (4,0) to[sV=$E$] (0,0)
                     to[short,i=$\overline{I}$](0,2)
                     to[R=$R_2$](2,2)
                     to[C=$C$](4,2)
                     to[short](4,4)
                     to[L=$L$](2,4)
                     to[R=$R_1$](0,4)
-                    to[short](0,4);
-        \draw (4,1) to[short](4,0);
+                    to[short](0,2);
+        \draw (4,2) to[short](4,0);
     \end{circuitikz}
 \end{center}
 Collegati ad un generatore di tensione che varia tra due pulsazioni $\omega_{1,2}$. Per arrivare al valore di un'impedenza equvialente $R_{eq}+jX_{eq}$ si considerano due 
@@ -5688,8 +5721,8 @@ Si considerano i tre bipoli resistori, condensatori ed induttori.
 La legge di Ohm complessa per il resistore, nella convenzione degli utilizzatori:
 \begin{center}
     \begin{circuitikz}
-        \draw (0,0)to[R,i=$\overline{I}$](2,0);
-        \draw[->](1.75,-0.75)--(0.25,-0.75)node[midway, below]{$\overline{V}$};
+        \draw (0,0)to[R,i=$\overline{I}$,*-*](2,0);
+        \draw[->](1.75,-0.5)--(0.25,-0.5)node[midway, below]{$\overline{V}$};
     \end{circuitikz}
 \end{center}
 \begin{gather*}
@@ -5699,15 +5732,17 @@ La legge di Ohm complessa per il resistore, nella convenzione degli utilizzatori
 La corrente e la tensione si dicono tra di loro in fase. Gli angoli relativi tra fasori si chiamano sfasamenti. 
 \begin{center}
     \begin{tikzpicture}
-        \draw[->](0,0)--(2,0)node[right]{$\overline V$};
+        \draw[->](0,-0.5)--(0,1)node[above]{$\Im$};
+        \draw[->](-0.25,0)--(2.5,0)node[right]{$\Re$};
+        \draw[->](0,0)--(2,0)node[above]{$\overline V$};
         \draw[->](0,-0.25)--(1,-0.25)node[right]{$\overline{I}$};
     \end{tikzpicture}
 \end{center}
 Si considera il bipolo condensatore ideale e la sua legge di Ohm complessa:
 \begin{center}
     \begin{circuitikz}
-        \draw (0,0)to[C,i=$\overline{I}$](2,0);
-        \draw[->](1.75,-0.75)--(0.25,-0.75)node[midway, below]{$\overline{V}$};
+        \draw (0,0)to[C,i=$\overline{I}$,*-*](2,0);
+        \draw[->](1.75,-0.5)--(0.25,-0.5)node[midway, below]{$\overline{V}$};
     \end{circuitikz}
 \end{center}
 \begin{gather*}
@@ -5720,7 +5755,9 @@ Si dice che la tensione è in quadratura in anticipo rispetto alla corrente, ana
 senso antiorario nel dominio dei fasori è il senso degli anticipi, mentre il senso orario è il senso dei ritardi. 
 \begin{center}
     \begin{tikzpicture}
-        \draw[->](0,0)--(2,0)node[right]{$\overline V$};
+        \draw[->](0,-0.25)--(0,1.25)node[above]{$\Im$};
+        \draw[->](-0.5,0)--(2.5,0)node[right]{$\Re$};
+        \draw[->](0,0)--(2,0)node[above]{$\overline V$};
         \draw[->](0,0)--(0,1)node[right]{$\overline{I}$};
     \end{tikzpicture}
 \end{center}
@@ -5736,11 +5773,12 @@ Si considera il bipolo condensatore ideale e la sua legge di Ohm complessa:
     \gamma-\displaystyle\frac{\pi}{2}=\beta\\
     \varphi=\displaystyle\frac{\pi}{2}
 \end{gather*}
-
 Si dice che la corrente è in quadratura in anticipo rispetto alla tensione, analogamente la tensione è in quadratura in ritardo rispetto alla corrente.
 \begin{center}
     \begin{tikzpicture}
-        \draw[->](0,0)--(2,0)node[right]{$\overline V$};
+        \draw[->](0,-1.25)--(0,0.25)node[above]{$\Im$};
+        \draw[->](-0.5,0)--(2.5,0)node[right]{$\Re$};
+        \draw[->](0,0)--(2,0)node[above]{$\overline V$};
         \draw[->](0,0)--(0,-1)node[right]{$\overline{I}$};
     \end{tikzpicture}
 \end{center}
