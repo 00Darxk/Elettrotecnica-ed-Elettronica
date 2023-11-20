@@ -2594,7 +2594,7 @@ duale per i condensatori in parallelo, mentre per gli induttori in parallelo, la
 Date le leggi costitutive dell'induttore ideale in forma locale ed integrale:
 \begin{gather*}
     v=L\displaystyle\frac{di}{dt}\\
-    i=\displaystyle\int_{0^-}^tvdt+i(0^-)
+    i=\displaystyle\frac{1}{L}\int_{0^-}^tvdt+i(0^-)
 \end{gather*}
 
 
@@ -2622,7 +2622,7 @@ Per un lato composto da $n$ induttori montati in serie si considera la forma loc
 \end{center}
 
 \begin{equation*}
-    v-\displaystyle\sum_{k=1}^nv_k=0\to v=\sum_{k=1}^nv_k=\sum_{k=1}^n\left(L_k\frac{di}{dt}\right)=\frac{dv}{dt}\sum_{k=1}^mL_k
+    v-\displaystyle\sum_{k=1}^nv_k=0\to v=\sum_{k=1}^nv_k=\sum_{k=1}^n\left(L_k\frac{di}{dt}\right)=\frac{di}{dt}\sum_{k=1}^mL_k
 \end{equation*}
 La corrente passante per ogni induttore è la stessa per cui è uguale anche la sua variazione nel tempo. Si definisce l'induttanza equivalente come la somma delle induttanze 
 dei singoli induttori posti in serie:
@@ -5467,5 +5467,282 @@ dipende dalle condizioni iniziali del circuito, ovvero dalla sua memoria. Il reg
 
 In generale il transitorio tende a valori nulli se il sistema si dice asintoticamente stabile, ovvero se ogni radice del polinomio caratteristico dell'equazione 
 differenziale associata al sistema ha parte reale negativa. Per cui può esistere un regime in un sistema solo se il sistema è asintoticamente stabile. 
+
+\subsubsection{Circuito RLC In Parallelo}
+
+Per la dualità si ottengono delle equazioni delle grandezze duali nel circuito dove i compomenti sono montati in parallelo, applicando il principio di Kirchhoff alle correnti 
+invece che alle tensioni. 
+%% circuito RLC parallelo
+\begin{center}
+    \begin{circuitikz}        
+        \draw (-1,0) to[european current source=$i(t)$](-1,3)
+                    to[short,-*](0,3);
+        \draw(1,3)to[short,*-](1.5,3)node[above]{$t=0$}
+                    to[R=$R$](1.5,0)
+                    to[short](2.75,0)
+                    to[L=$L$](2.75,3)
+                    to[short](1.5,3);
+        \draw (0,3) to[short](0.5,2.5)
+                    to[short](0.5,0);
+        \draw (-1,0)to[short](1.5,0);
+        \draw(2.75,3)to[short] (4,3)
+                    to[C=$C$](4,0)
+                    to[short](2.75,0);
+    \end{circuitikz}
+\end{center}
+
+%% equazioni delle grandezze
+
+\subsection{Generatori Sinusoidali}
+
+Continuare l'analisi nel dominio del tempo può rendere difficile lo studio di equazioni integro-differenziali di ordine elevato, per cui si vuole determinare un domino dove 
+queste equazioni vengono risolte in maniare molto più semplice. Questo domini di calcolo sono il domino dei fasori o domino della frequenza o della pulsazione. Si considera 
+un generatore di tensione sinusoidale inserito in un circuito RLC in serie:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,2) to[R=$R$](2,2)
+                    to[L=$L$](4,2)
+                    to[C=$C$](6,2)
+                    to[short, i=$i$](6,0)
+                    to[european voltage source=$v_g$](0,0) %% generatore sinusoidale
+                    to[closing switch](0,2);
+    \end{circuitikz}
+\end{center}
+Dove la tensione erogata dal generatore è una funzione sinusoidale:
+\begin{gather*}
+    v_g(t)=E_M\sin(\omega t+\gamma)u_{-1}(t)
+\end{gather*}
+Per il principio di Kirchhoff alle tensioni si ottiene la stessa equazione differenziale di un circuito RLC con tensione erogata costante. L'unico componente della soluzione 
+totale della tensione che differeisce è l'integrale particoalre, poiché deve appartenere alla stessa classe delle funzioni della forzante:
+\begin{gather*}
+    \begin{cases}
+        v_g(t)=Ri(t)+\displaystyle L\frac{di(t)}{dt}+v_C(t)\\
+        i_C(t)=\displaystyle C\frac{dv_C(t)}{dt}
+    \end{cases}\\
+    v_g=RC\displaystyle\frac{dv_c}{dt}+LC\frac{d^2v_C}{dt^2}+v_C\\
+    v_C(t)=v_{Cg}(t)+v_{Cp}(t)\\
+    \alpha_{1,2}=\displaystyle-\frac{R}{2L}\pm\sqrt{\Delta}\\
+    \Delta=\left(\displaystyle\frac{R}{2L}\right)^2-\frac{1}{LC}\\
+    \begin{cases}
+        v_C(t)=k_1e^{\alpha_1t}+k_2e^{\alpha_2t}+v_{Cp}(t)\\
+        i_C(t)=k_1\alpha_1Ce^{\alpha_1t}+k_2\alpha_2Ce^{\alpha_2t}+C\displaystyle\frac{dv_{Cp}(t)}{dt}
+    \end{cases}\\
+    \begin{bmatrix}
+        k_1\\k_2
+    \end{bmatrix}=\begin{bmatrix}
+        1&1\\\alpha_1C&\alpha_2C
+    \end{bmatrix}^{-1}\begin{bmatrix}
+        v_{Cg}(0^-)-v_{Cp}(0^-)\\i(0^-)-i_p(0^-)
+    \end{bmatrix}
+\end{gather*}
+Per la proprietà di similarità l'integrale particolare è anch'esso una sinusoide:
+\begin{gather*}
+    v_{Cp}(t)=V_M\sin(\omega t+\theta)\\
+    v_{Cp}(0^-)=V_M\sin(\theta)
+\end{gather*}
+Le costanti incognite di questo integrale particolare sono la tensione massima $V_M$ e la sua fase $\theta$. Il resto dell'analisi sull'andamento dell'integrale generale 
+corrisponde esattamente all'analisi effetuttata per una forzante costante. Poiché l'evoluzione libera tende a valori trascurabili, in un sistema asintoticamente stabile, per 
+valori di tempo necessariamente elevati. 
+Si analizza quindi solo la risposta a regime permanente, ovvero l'integrale particolare, nel dominio dei fasori. Si considera solo la risposta a regime permanente della 
+tensione e della corrente $i_p(t)$:
+\begin{gather*}
+    \begin{cases}
+        v_g(t)=Ri_p(t)+\displaystyle L\frac{di_p(t)}{dt}+v_{Cp}(t)\\
+        i_p(t)=\displaystyle C\frac{dv_{Cp}(t)}{dt}
+    \end{cases}\\
+    i_p(t)=I_M\sin(\omega t+\beta)
+\end{gather*}
+Dove la $I_M$ è la corrente massima, e $\beta$ è la fase della corrente sinusoidale. Rappresenta una sinusoide essendo una derivata della soluzione particolare, anch'essa 
+una sinusoide. Si vuole confermare se sia possibile applicare un approccio algebrico estendendo il 
+teorema di Ohm solo sulla risposta a regime. Si vuole esprimere la tensione rispetto alla corrente a regime $i_p$:
+\begin{gather*}
+    v_{Cp}(t)=\displaystyle\frac{1}{C}\int_{0}^{t}i_p(\tau)d\tau+v_C(0^-)
+\end{gather*}
+Poiché si analizzano un tempo molto distante dello stato transitorio, non si può considerare la memoria $v_C(0^-)$. Per ottenere una sinusoide non bisogna quindi effettuare 
+un integrale definito poiché risulterebbe in una costante, ma per la similarità la risposta forzata deve essere una sinusoide. 
+Si esprimono la corrente a regime e la tensione erogata nel dominio dei fasori:  
+\begin{gather*}
+    i_p(t)=\displaystyle\frac{\overline{I}e^{j\omega t}-\overline{I}^*e^{-j\omega t}}{2j}\\
+    \overline{I}=I_e^{j\beta}\\
+    v_{g}(t)=\displaystyle\frac{\overline{V_g}e^{j\omega t}-\overline{V_g}^*e^{-j\omega t}}{2j}\\
+    \overline{V_g}=E_me^{j\gamma}
+\end{gather*}
+Applicando una derivata nel dominio dei fasori corrisponde a moltiplicare per un fattore $j\omega$, mentre integrare corrisponde a dividere per lo stesso 
+fattore:
+\begin{gather*}
+    \displaystyle\frac{d(\cdot)}{dt}\to j\omega\times(\cdot)\\
+    \displaystyle\int (\cdot)dt\to\displaystyle\frac{1}{j\omega}\times(\cdot)
+\end{gather*}
+Le equazioni differenziali nel dominio dei fasori diventano quindi una combinazione lineare moltiplicata per un fattore esponenziale che rimane invariato, diviso per un 
+fattore costante. Per la proprietà di identità dei polinomi si possono identificare due elementi che non contengono informazioni aggiuntive, uno rispetto all'altro: 
+\begin{gather*}
+    \displaystyle\frac{e^{j\omega t}}{2j}\left[\overline{V_g}=R\overline{I}+j\omega L\overline{I}+\frac{1}{j\omega C}\overline{I}\right]\\
+    \displaystyle\frac{e^{-j\omega t}}{2j}\left[-\overline{V_g}^*=-R\overline{I}^*-j\omega L\overline{I}^*+\frac{1}{j\omega C}\overline{I}^*\right]\\
+    \displaystyle\frac{e^{j\omega t}}{2j}\left\{\overline{V_g}=\left[R+j\left(\omega L-\frac{1}{\omega C}\right)\right]\overline{I}\right\}\\
+    \displaystyle\frac{e^{-j\omega t}}{2j}\left\{\overline{V_g}^*=\left[R-j\left(\omega L-\frac{1}{\omega C}\right)\right]\overline{I}^*\right\}
+\end{gather*}
+Si definisce l'operatore $z$ complesso come:
+\begin{gather*}
+    z=R+j\left(\omega L-\displaystyle\frac{1}{\omega C}\right)
+\end{gather*}
+Si può notare quindi come si ottengono due elementi complessi e coniugati tra di loro, corrispondenti a delle equazioni lineari nel dominio dei fasori:
+\begin{gather*}
+    \overline{V_g}=z\overline{I}\\
+    \overline{V_g}^*=z^*\overline{I}^*
+\end{gather*}
+Per cui per continuare l'analisi è sufficiente considera una sola di queste due espressioni. Si considera l'espressione senza coniugati e si esprimono i fasori e l'operatore 
+$z$ in forma esponenziale:
+\begin{gather*}
+    E_Me^{j\gamma}=|z|e^{j\varphi}I_Me^{j\beta}\\
+    I_Me^{j\beta}=\displaystyle\frac{E_M}{|z|}\frac{e^{j\gamma}}{e^{j\phi}}=\frac{E_M}{|z|}e^{j(\gamma-\varphi)}
+\end{gather*} 
+Si ottiene quindi l'integrale particolare in corrente, applicando una sostituzione dal domnio dei fasori al dominio del tempo:
+\begin{gather*}
+    i_p(t)=\displaystyle\frac{E_M}{|z|}\sin(\omega t+\gamma-\varphi)
+\end{gather*}
+Dato che tutta l'informazione del regime permanente è contenuta nei fasori, non è necessario antitrasformare l'equazione ottenuta nel dominio del tempo. 
+
+\subsection{Impedenza}
+Si definisce quindi la legge di Ohm complessa, o lege di Ohm nel dominio dei fasori:
+\begin{gather*}
+    \overline{V_g}=z\overline{I}
+\end{gather*}
+Il modulo dell'operatore $z$ si ottiene come:
+\begin{gather*}
+    |z|=\displaystyle\sqrt{R^2+X^2}\\
+    X=\left(\omega L-\displaystyle\frac{1}{\omega C}\right)
+\end{gather*}
+Nell'equazione di Ohm nei reali, le grandezze sono collegate dalla resistenza $R$:
+\begin{gather*}
+    v=Ri
+\end{gather*}
+Si definisce l'impedenza $z$, la grandezza che lega la tensione e la corrente nella legge di Ohm complessa, poiché le grandezze fisiche si conservano nei trasferimenti di 
+dominii sempre calcolata in Ohm. 
+Tramite le impedenze si possono descrivere circuiti dinamici tramite relazioni lineari, definite dalle impedenze di ogni elemento del circuito con la legge di Ohm complessa, 
+supponendo si conosca la pulsazione della sinusoide in entrata. 
+Si definisce l'ammettenza, il reciproco della resistenza:
+\begin{gather*}
+    y=\displaystyle\frac{1}{z}
+\end{gather*}
+In questo modo si può esprimere facilmente una rappresentazione esterna equivalente di un circuito dinamico. 
+L'impedenza non è una grandezza fisica, ma è un operatore che applicato opportunamente ottiene una corrente. 
+
+
+Si esprime l'impedenza $z$ come un numero complesso di parte reale resistenza $R$, e parte complessa reattanza $X$, entrambe misurate in Ohm:
+\begin{gather*}
+    z=R+jX
+\end{gather*}
+L'inverso dell'impedenza è l'ammettenza $y$, di parte reale conduttanza $G$ e di parte immaginaria suscettanza $B$:
+\begin{gather*}
+    y=G+jB
+\end{gather*}
+
+Per i bipoli puramente reattivi, condensatori ideali ed il suo duale induttore ideale. 
+Nel caso di di un circuito RLC in serie, di pulsazione $\omega$, l'impedenza del circuito corrisponde a:
+\begin{gather*}
+    z=R+j\left(\displaystyle \omega L-\frac{1}{\omega C}\right)
+\end{gather*}
+Per cui l'impedenza dei singoli componenti è l'impedenza resistiva $z_R$, l'impedenza induttiva $z_L$ e l'impedenza conduttiva $z_C$:
+\begin{gather*}
+    z_R=R\\
+    z_L=j\omega L\\
+    z_C=\displaystyle -j\frac{1}{\omega C}
+\end{gather*}
+
+La parte reale dell'impedenza non è funzione della pulsazione $\omega$ della forzante sinusoidale, nel circuito RLC. 
+
+Si considerano due componenti RL e RC in parallelo:
+\begin{center}
+    \begin{circuitikz}
+        \draw (4,0) to[european voltage source=$E$] (0,0)
+                    to[short,i=$\overline{I}$](0,2)
+                    to[R=$R_2$](2,2)
+                    to[C=$C$](4,2)
+                    to[short](4,4)
+                    to[L=$L$](2,4)
+                    to[R=$R_1$](0,4)
+                    to[short](0,4);
+        \draw (4,1) to[short](4,0);
+    \end{circuitikz}
+\end{center}
+Collegati ad un generatore di tensione che varia tra due pulsazioni $\omega_{1,2}$. Per arrivare al valore di un'impedenza equvialente $R_{eq}+jX_{eq}$ si considerano due 
+casi estremi:
+\begin{gather*}
+    \omega_1=0\\
+    \omega_2\to\infty
+\end{gather*}
+Nel caso $\omega_1$, la corrente non può passare per il condensatore $C$, poiché presenta un'impedenza infinita, quindi la corrente ha ampiezza massima:
+\begin{gather*}
+    I_{M_1}=\displaystyle\frac{E_M}{R_1}
+\end{gather*}
+Nel caso $\omega_2$, la corrente non può passare per l'induttore $L$, poiché presneta un'impedenza infinita, quindi la corrente ha ampiezza massima:
+\begin{gather*}
+    I_{M_2}=\displaystyle\frac{E_M}{R_2}
+\end{gather*}
+
+Per cui la resistenza equivalente cambia in base alla pulsazione delle sinusoide in entrata. Per cui la resistenza, parte reale dell'impedenza, non è indipendente dalla 
+pulsazione $\omega$. 
+
+
+Si considerano i tre bipoli resistori, condensatori ed induttori. 
+La legge di Ohm complessa per il resistore, nella convenzione degli utilizzatori:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)to[R,i=$\overline{I}$](2,0);
+        \draw[->](1.75,-0.75)--(0.25,-0.75)node[midway, below]{$\overline{V}$};
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    V_Me^{j\gamma}=Re^{j0}I_Me^{j\beta}\\
+    \varphi=\gamma-\beta=0
+\end{gather*}
+La corrente e la tensione si dicono tra di loro in fase. Gli angoli relativi tra fasori si chiamano sfasamenti. 
+\begin{center}
+    \begin{tikzpicture}
+        \draw[->](0,0)--(2,0)node[right]{$\overline V$};
+        \draw[->](0,-0.25)--(1,-0.25)node[right]{$\overline{I}$};
+    \end{tikzpicture}
+\end{center}
+Si considera il bipolo condensatore ideale e la sua legge di Ohm complessa:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)to[C,i=$\overline{I}$](2,0);
+        \draw[->](1.75,-0.75)--(0.25,-0.75)node[midway, below]{$\overline{V}$};
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    V_M=\displaystyle\frac{j}{\omega C}I_Me^{j\beta}\\
+    V_M=\displaystyle\frac{1}{\omega C}e^{-j\pi/2}I_Me^{j\beta}\\
+    \beta=\gamma+\displaystyle\frac{\pi}{2}\\
+    \varphi=\displaystyle-\frac{\pi}{2}
+\end{gather*}
+Si dice che la tensione è in quadratura in anticipo rispetto alla corrente, analogamente la corrente è in quadratura in ritardo rispetto alla tensione. Il 
+senso antiorario nel dominio dei fasori è il senso degli anticipi, mentre il senso orario è il senso dei ritardi. 
+\begin{center}
+    \begin{tikzpicture}
+        \draw[->](0,0)--(2,0)node[right]{$\overline V$};
+        \draw[->](0,0)--(0,1)node[right]{$\overline{I}$};
+    \end{tikzpicture}
+\end{center}
+Si considera il bipolo condensatore ideale e la sua legge di Ohm complessa:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)to[L,i=$\overline{I}$](2,0);
+        \draw[->](1.75,-0.75)--(0.25,-0.75)node[midway, below]{$\overline{V}$};
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    V_Me^{j\gamma}=\omega Le^{j\pi/2}I_Me^{j\beta}\\
+    \gamma-\displaystyle\frac{\pi}{2}=\beta\\
+    \varphi=\displaystyle\frac{\pi}{2}
+\end{gather*}
+
+Si dice che la corrente è in quadratura in anticipo rispetto alla tensione, analogamente la tensione è in quadratura in ritardo rispetto alla corrente.
+\begin{center}
+    \begin{tikzpicture}
+        \draw[->](0,0)--(2,0)node[right]{$\overline V$};
+        \draw[->](0,0)--(0,-1)node[right]{$\overline{I}$};
+    \end{tikzpicture}
+\end{center}
 
 \end{document}
