@@ -12,7 +12,11 @@
 \usepackage{braket}
 \usepackage{bookmark}
 \usepackage{circuitikz}
+\usepackage[italian]{babel}
 
+
+%% numerare equazioni nella versione finale
+%% segnati con un doppio segno percentuale ("%%") le correzioni o inserimenti da apportare al testo
 
 \hypersetup{
     colorlinks=true,
@@ -3369,13 +3373,13 @@ di potenze virtuali. Da notare che la matrice di incidenza rimane invariate, poi
 \end{gather*}
 Quindi il bilancio energetico è verificato anche considerando potenze virtuali, ciò dimostra il teorema di Tellegen. 
 
-%% 6/11
+% 6/11
 
 Per determinare la potenza erogata da un generatore, si calcola la tensione, se generatore Norton, o la corrente, se generatore Thevenin, di lato, nella convenzione dei 
 generatori. I prodotti ottenuti dalla grandezza erogata e la grandezza di lato, indipendentemente dal segno, vengono considerati potenze erogate. Dovranno comunque 
 verificare il bilancio energetico. 
 
-%%
+%
 
 \subsection{Metodo dei Nodi con Esempi Applicativi}
 
@@ -4130,7 +4134,7 @@ Le correnti di maglia si ottengono come:
 \end{equation*}
 
 \subsection{Partitore di Tensione e di Corrente con Esempi Applicativi}
-%% 8/11
+ 8/11
 
 Si considera il seguente circuito, e si vuole calcolare il valore delle tensioni $V_{x,y}$:
 \begin{center}
@@ -4324,7 +4328,7 @@ L'equazione risolutiva della rete diventa:
     \end{bmatrix}
 \end{gather*}
 
-%% 6/11 generalizzazione dei metodi
+% 6/11 generalizzazione dei metodi
 
 In generale per risolvere una rete controllata, bisogna analizzarla come fosse indipendente. Successivamente si esprimono le grandezze di controllo, nuove 
 incognite. Per poter risolvere il sistema, si considerano equazioni banali o di vincolo, per poter diminuire il numero delle incognite totali del sistema, generalizzando il 
@@ -4340,7 +4344,7 @@ Si definisce così un nuovo vettore dei termini noti $[T_{no}]$, per risolvere i
     [X]=[coef]^{-1}[T_{no}]
 \end{gather*}
 
-%%
+%
 
 \subsection{Teorema di Thevenin e Norton}
 
@@ -4601,7 +4605,7 @@ equivalente esterna del circuito:
 \end{gather*}
 
 
-%% 15/11
+% 15/11
 Per dimostrare la validità generale di questa situazione, si considera una rete generica con due morsetti di ingresso $A$ e $B$. 
 Si inserisce tra i due morsetti $A$ e $B$ un resistore $R_C$. Si vuole calcolare la corrente $I_C$ assorbita 
 dal resistore. Invece di inserire un cortociruito, si inseriscono due generatori di tensione di polarità opposta, indipendenti ed esterni al circuito, in modo che la tensione 
@@ -4720,7 +4724,7 @@ Può essere espresso da queste due rappresentazioni:
     \end{circuitikz}
 \end{center}
 
-%% 15/11
+ 15/11
 
 \subsection{Teorema del Massimo Trasferimento di Potenza}
 
@@ -4947,7 +4951,7 @@ Nell'analisi fisica lo stato si conserva, mentre nei modelli circuitali, appross
 considereranno circuiti di ordine superiore, che mantengono la continuità per tutte le grandezze trattate. 
 
 \subsubsection{Circuito RL}
-%% 16/11
+ 16/11
 Il duale della carica o scarica di un condensatore, è il caso della carica o scarica dell'induttore. In questo caso poiché è presente un generatore di corrente, e non 
 può essere inserito a vuoto, il commutatore crea due circuiti chiusi, in modo che il generatore di corrente non sia mai collegato a vuoto:
 \begin{center}
@@ -5161,7 +5165,7 @@ Le grandezze quindi oscillano.
 Al contrario 
 del caso precedente, è possibile trovarsi in un caso dove la resistenza equivalente è nulla, compensando la resistenza. In questo modo si crea un oscillatore, poiché è 
 sempre presenta un errore di eccesso o di difetto nella sua correzione. 
-%% 17/11
+% 17/11
 
 Si definisce la pulsazione $\omega$:
 \begin{gather*}
@@ -5178,7 +5182,7 @@ Si definisce la resistenza critica $R_{cr}$, per cui $\Delta=0$:
 
 \subsubsection{Caso Sovrasmorzato}
 
-Nel primo caso si considera come primo caso un resistore di resistenza $R_1>R_{cr}$. In questo caso le radici $\alpha_{1,2}$ sono reali e negative, l'integrale generale 
+Nel primo caso si considera come primo caso un resistore di resistenza $R_1>R_{cr}$, valore ipercritico. In questo caso le radici $\alpha_{1,2}$ sono reali e negative, l'integrale generale 
 risulta essere:
 \begin{gather*}
     v_{Cg}(t)=k_1e^{\alpha_1t}+k_2e^{\alpha_2t}
@@ -5243,7 +5247,7 @@ Si considerano $\alpha_{1,2}=\sigma\pm\sqrt\Delta$, l'equazione allora diventa:
 Poiché non sono presenti oscillazioni che cambiano il segno delle grandezze, il caso si chiama sovrasmorzato. 
 
 \subsubsection{Caso Sottosmorzato}
-Considerando un valore di resistenza $R_2<R_{cr}$, le radici $\alpha_{1,2}$ sono complesse, così come le costanti $k_1$ e $k_2$. Queste costanti sono anch'essi 
+Considerando un valore di resistenza $R_2<R_{cr}$, valore subcritico, le radici $\alpha_{1,2}$ sono complesse, così come le costanti $k_1$ e $k_2$. Queste costanti sono anch'essi 
 complessi e coiungati $k_1=k_2^*$. Per dimostrare che sono coniugati, in ogni caso simile:
 \begin{gather*}
     \begin{cases}
@@ -5300,7 +5304,8 @@ complessi:
 Poiché $\sigma<0$, l'ampiezza dell'oscillazione della sinusoide diminuisce nel tempo, quindi è un oscillatorio smorzato. Questo caso si identifica come sottosmorzato. 
 
 \subsubsection{Caso Critico}
-Il terzo caso per $R=R_{cr}$, corrisponde a delle radici del polinomio caratteristico uguali $\alpha_1=\alpha_2$. La radice $\alpha_1$, ha molteplicità $2$, per cui 
+Il terzo caso per $R=R_{cr}$, corrisponde a delle radici del polinomio caratteristico uguali $\alpha_1=\alpha_2$. Rappresenta un caso di confine tra il caso 
+sovrasmorzato ed il caso sottosmorzato. La radice $\alpha_1$, ha molteplicità $2$, per cui 
 la soluzione dell'equazione differenziale è della forma:
 \begin{gather*}
     \alpha_1=\alpha_2=\displaystyle-\frac{R}{2L}\\
@@ -5341,7 +5346,7 @@ Mentre le costanti $k_1$ e $k_2$ sono:
 
 \subsubsection{Caso Oscillatorio Puro}
 
-Il quarto caso corrisponde ad inserire un resistore di resistenza nulla $R=0\,\Omega$:
+Il quarto caso corrisponde ad inserire un resistore di resistenza nulla $R=0\,\Omega$, e corrisponed ad un circuito LC serie:
 \begin{gather*}
     v_C(t)=L\displaystyle\frac{di}{dt}+v_C=LC\frac{d^2v_C}{dt}+v_C\\
     i(t)=C\displaystyle\frac{dv_C}{dt}\\
@@ -5400,6 +5405,7 @@ Attuando lo stesso procedimento del caso sottosmorzato, si ottiene una sinusoide
     v_C(t)=|k_1|\left[e^{j(\omega_0t+\gamma)}+e^{-j(\omega_0t+\gamma)}\right]+E\\
     v_C(t)=2|k_1|\cos(\omega_0t+\gamma)+E
 \end{gather*}
+Per cui eccitare in continuo un circuito puramente reattivo, con componenti induttori e condensatori, senza componenti smorzati produce un oscillazione. 
 
 \subsubsection{Andamenti del Circuito RLC}
 %% graficare i quattro casi per la tensione e tre per la corrente
@@ -5525,8 +5531,31 @@ Il valore delle costanti $k_{1,2}$, si ottengono applicando le equazioni di vinc
     i_L(0^-)-I=k_1+k_2\\
     v(0^-)=L\displaystyle\frac{di_L(t)}{dt}\bigg|_{t={0^-}}
 \end{gather*}
+Si rappresenta ora l'andamento di queste grandezze, nel caso sovrasmorzato, la curva di colore nero, il caso sottosmorzato la curva di colore rosso ed il caso critico la curva 
+di colore blu: 
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-0.5,0)--(3,0)node[above]{$t$};
+        \draw[->](0,-0.5)--(0,2)node[right]{$i_L(t)$};
+        \draw[dashed](0,1)node[left]{$I$}--(3,1);
 
-\subsection{Generatori Sinusoidali}
+        \draw[blue]plot[smooth, domain=0:2.8](\x,{1+1.5*\x*e^(-1.3*\x)-e^(-1.3*\x)});        
+        \draw[red]plot[smooth, domain=0:2.8](\x,{1-e^(-1.3*\x)*cos(4*\x r)});
+        \draw[black]plot[smooth, domain=0:2.8](\x,{1-e^(-1.3*\x)});
+    \end{tikzpicture}
+\end{center}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-0.5,0)--(3,0)node[above]{$t$};
+        \draw[->](0,-0.5)--(0,1.5)node[right]{$v(t)$};
+
+        \draw[black]plot[smooth, domain=0:2.8](\x,{-4*e^(-1.5*\x)+4*e^(-\x)});        
+        \draw[red]plot[smooth, domain=0:2.8](\x,{2*e^(-1.3*\x)*sin(4*\x r)});
+        \draw[blue]plot[smooth, domain=0:2.8](\x,{-e^(-4*\x)+3*\x*e^(-2*\x)+e^(-\x)});
+    \end{tikzpicture}
+\end{center}
+
+\subsection{Generatore Sinusoidale}
 
 Continuare l'analisi nel dominio del tempo può rendere difficile lo studio di equazioni integro-differenziali di ordine elevato, per cui si vuole determinare un domino dove 
 queste equazioni vengono risolte in maniare molto più semplice. Questo domini di calcolo sono il domino dei fasori o domino della frequenza o della pulsazione. Si considera 
@@ -5575,7 +5604,32 @@ Per la proprietà di similarità l'integrale particolare è anch'esso una sinuso
 \end{gather*}
 Le costanti incognite di questo integrale particolare sono la tensione massima $V_M$ e la sua fase $\theta$. Il resto dell'analisi sull'andamento dell'integrale generale 
 corrisponde esattamente all'analisi effetuttata per una forzante costante. Poiché l'evoluzione libera tende a valori trascurabili, in un sistema asintoticamente stabile, per 
-valori di tempo necessariamente elevati. 
+valori di tempo sufficientemente elevati. 
+%% inserire grafico se possibile
+%L'andamento di un circuito RLC serie corrisponde alle curve qui rappresentando il caso sovrasmorzato, con la curva di colore nero, 
+%il caso sottosmorzato con la curva di colore rosso ed il caso critico con la curva di colore blu, e la soluzione particolare con la curva di colore giallo:
+%\begin{center}
+%    \begin{tikzpicture}[scale=2]
+%        \draw[->](-0.5,0)--(3,0)node[above]{$t$};
+%        \draw[->](0,-1.5)--(0,1.5)node[right]{$v_C(t)$};
+%        
+%        \draw[yellow]plot[smooth, domain=0:2.9](\x,{sin(2*pi*\x)});
+%        \draw[blue]plot[smooth, domain=0:2.8](\x,{1.5*\x*e^(-1.3*\x)-e^(-1.3*\x)+sin(2*pi*\x r)});        
+%        \draw[red]plot[smooth, domain=0:2.8](\x,{-e^(-1.3*\x)*cos(4*\x r)+sin(2*pi*\x r)});
+%        \draw[black]plot[smooth, domain=0:2.8](\x,{-e^(-1.3*\x)+sin(2*pi*\x r)});
+%    \end{tikzpicture}
+%\end{center}
+%\begin{center}
+%    \begin{tikzpicture}[scale=2]
+%        \draw[->](-0.5,0)--(3,0)node[above]{$t$};
+%        \draw[->](0,-1.5)--(0,1.5)node[right]{$i(t)$};
+%
+%        \draw[yellow]plot[smooth, domain=0:2.9](\x,{+cos(2*pi*\x)});
+%        \draw[black]plot[smooth, domain=0:2.8](\x,{-4*e^(-1.5*\x)+4*e^(-\x)+cos(2*pi*\x r)});        
+%        \draw[red]plot[smooth, domain=0:2.8](\x,{2*e^(-1.3*\x)*sin(4*\x r)+cos(2*pi*\x r)});
+%        \draw[blue]plot[smooth, domain=0:2.8](\x,{-e^(-4*\x)+3*\x*e^(-2*\x)+e^(-\x)+cos(2*pi*\x r)});
+%    \end{tikzpicture}
+%\end{center}
 Si analizza quindi solo la risposta a regime permanente, ovvero l'integrale particolare, nel dominio dei fasori. Si considera solo la risposta a regime permanente della 
 tensione e della corrente $i_p(t)$:
 \begin{gather*}
@@ -5593,7 +5647,8 @@ teorema di Ohm solo sulla risposta a regime. Si vuole esprimere la tensione risp
 \end{gather*}
 Poiché si analizzano un tempo molto distante dello stato transitorio, non si può considerare la memoria $v_C(0^-)$. Per ottenere una sinusoide non bisogna quindi effettuare 
 un integrale definito poiché risulterebbe in una costante, ma per la similarità la risposta forzata deve essere una sinusoide. 
-Si esprimono la corrente a regime e la tensione erogata nel dominio dei fasori:  
+Si esprimono la corrente a regime e la tensione erogata nel dominio dei fasori. Questa trasformata è bionivoca, e l'unica informazione persa da questo passaggio, che deve 
+essere nota a priori per ritornare in tempo continuo è la pulsazione $\omega$:
 \begin{gather*}
     i_p(t)=\displaystyle\frac{\overline{I}e^{j\omega t}-\overline{I}^*e^{-j\omega t}}{2j}\\
     \overline{I}=I_e^{j\beta}\\
@@ -5636,6 +5691,7 @@ Si ottiene quindi l'integrale particolare in corrente, applicando una sostituzio
 Dato che tutta l'informazione del regime permanente è contenuta nei fasori, non è necessario antitrasformare l'equazione ottenuta nel dominio del tempo. 
 
 \subsection{Impedenza}
+
 Si definisce quindi la legge di Ohm complessa, o lege di Ohm nel dominio dei fasori:
 \begin{gather*}
     \overline{V_g}=z\overline{I}
@@ -5729,7 +5785,8 @@ La legge di Ohm complessa per il resistore, nella convenzione degli utilizzatori
     V_Me^{j\gamma}=Re^{j0}I_Me^{j\beta}\\
     \varphi=\gamma-\beta=0
 \end{gather*}
-La corrente e la tensione si dicono tra di loro in fase. Gli angoli relativi tra fasori si chiamano sfasamenti. 
+Gli angoli relativi tra fasori si chiamano sfasamenti, quando nel lato considerato sono presenti dei generatori, bisogna 
+considerare il loro contributo nel calcolo della fase. La corrente e la tensione si dicono tra di loro in fase, il rapporto di fase indica che ruotano alla stessa velocità. 
 \begin{center}
     \begin{tikzpicture}
         \draw[->](0,-0.5)--(0,1)node[above]{$\Im$};
@@ -5748,10 +5805,10 @@ Si considera il bipolo condensatore ideale e la sua legge di Ohm complessa:
 \begin{gather*}
     V_M=\displaystyle\frac{j}{\omega C}I_Me^{j\beta}\\
     V_M=\displaystyle\frac{1}{\omega C}e^{-j\pi/2}I_Me^{j\beta}\\
-    \beta=\gamma+\displaystyle\frac{\pi}{2}\\
+    \beta=\gamma-\varphi\\
     \varphi=\displaystyle-\frac{\pi}{2}
 \end{gather*}
-Si dice che la tensione è in quadratura in anticipo rispetto alla corrente, analogamente la corrente è in quadratura in ritardo rispetto alla tensione. Il 
+Si dice che il fasore della tensione è in quadratura in ritardo rispetto alla corrente, analogamente la corrente è in quadratura in anticipo rispetto alla tensione. Il 
 senso antiorario nel dominio dei fasori è il senso degli anticipi, mentre il senso orario è il senso dei ritardi. 
 \begin{center}
     \begin{tikzpicture}
@@ -5761,19 +5818,19 @@ senso antiorario nel dominio dei fasori è il senso degli anticipi, mentre il se
         \draw[->](0,0)--(0,1)node[right]{$\overline{I}$};
     \end{tikzpicture}
 \end{center}
-Si considera il bipolo condensatore ideale e la sua legge di Ohm complessa:
+Si considera il bipolo induttore ideale e la sua legge di Ohm complessa:
 \begin{center}
     \begin{circuitikz}
-        \draw (0,0)to[L,i=$\overline{I}$](2,0);
+        \draw (0,0)to[L,i=$\overline{I}$,*-*](2,0);
         \draw[->](1.75,-0.75)--(0.25,-0.75)node[midway, below]{$\overline{V}$};
     \end{circuitikz}
 \end{center}
 \begin{gather*}
     V_Me^{j\gamma}=\omega Le^{j\pi/2}I_Me^{j\beta}\\
-    \gamma-\displaystyle\frac{\pi}{2}=\beta\\
+    \beta=\gamma-\varphi\\
     \varphi=\displaystyle\frac{\pi}{2}
 \end{gather*}
-Si dice che la corrente è in quadratura in anticipo rispetto alla tensione, analogamente la tensione è in quadratura in ritardo rispetto alla corrente.
+Si dice che il fasore della corrente è in quadratura in ritardo rispetto alla tensione, analogamente la tensione è in quadratura in anticipo rispetto alla corrente.
 \begin{center}
     \begin{tikzpicture}
         \draw[->](0,-1.25)--(0,0.25)node[above]{$\Im$};
@@ -5782,5 +5839,158 @@ Si dice che la corrente è in quadratura in anticipo rispetto alla tensione, ana
         \draw[->](0,0)--(0,-1)node[right]{$\overline{I}$};
     \end{tikzpicture}
 \end{center}
+
+L'oggetto fasore moltiplicato per l'esponenziale complesso corrisponde ad un vettore rotante, poiché la sua fase varia nel tempo:
+\begin{gather*}
+    \overline{V}e^{j\omega t}=V_Me^{j(\omega t+\gamma)}\\
+    \overline Ie^{j\omega t}=I_Me^{j(\omega t+\beta)}
+\end{gather*}
+Il fasore codifica l'informazione a pulsazione costante, se fossero presenti più di una sorgente con pulsazione $\omega'\neq\omega$, i fasori non manterebbero il rapporto di 
+fase tra di loro; ruoterebbero con velocità diverse tra di loro. Questo non permetterebbe di sommare tra di loro fasori a pulsazione diversa, se non ad un istante fisso. 
+
+I generatori analizzati sono isofrequenziali, proprietà richiesta a tutti i generatori sinusoidali di avere la stessa pulsazione $\omega=2\pi f$. 
+Per un lato passivo RLC si è precedentemente ottenuta la legge di Ohm complessa, legata dall'operatore compelsso $z$, identificato come impedenza: 
+\begin{gather*}
+    \overline V=z\overline I
+\end{gather*}
+Si ottiene quindi che il modulo di questo operatore equivale al rapporto tra i due valori di picco delle due grandezze:
+\begin{gather*}
+    |z|=\displaystyle\frac{V_M}{I_M}\,[\Omega]
+\end{gather*}
+Nel caso trattato l'impedenza corrisponde ad una parte reale resitenza $R$ ed una parte immaginaria reattanza $X$:
+\begin{gather*}
+    z=R+j\left(\displaystyle\omega L-\frac{1}{\omega C}\right)
+\end{gather*}
+
+In questo caso la parte reale dell'impedenza è immune alla pulsaazione $\omega$, ma è stato notato come in circuiti più complessi la parte reale può essere una funzione della 
+pulsazione. Per cui di regola la parte reale ed immaginaria dell'impedenza dipendono dalla pulsazione:
+\begin{gather*}
+    \Re\{z\}=f(\omega)\\
+    \Im\{z\}=g(\omega)
+\end{gather*}
+
+
+Quando si vuole indicare l'impedenza come une un elemento generico, si ritorna alla rappresentazione di bipolo. In forma Thevenin equivalente di una rete, alternata 
+sinusodale, l'impedenza equivalente $z_{th}$ è l'impedenza misurata dopo aver reso passiva la rete. Per attuare il metodo dell'amperometro, bisogna inseire dall'esterno un 
+fasore noto, sinusoidale e isofrequente. 
+\begin{center}
+    \begin{circuitikz}
+        \draw (2,0)node[right]{$B$}to[short](0,0)
+                    to[sV=$\overline{V_{th}}$](0,2)
+                    to[generic=$z_{eq}$](2,2)node[right]{$A$};
+    \end{circuitikz}
+\end{center}
+
+Si è poi definita l'ammettenza, l'inverso dell'impedenza:
+\begin{gather*}
+    y=\displaystyle\frac{1}{R+jX}=\frac{R-jX}{R^2+X^2}=G+jB\\
+    G=\displaystyle\frac{R}{R^2+X^2}\\
+    B=-j\displaystyle\frac{X}{R^2+X^2}
+\end{gather*}
+La dimensione dell'ammettenza deriva dalla stessa legge di Ohm complessa, ed il suo modulo corrisponde al rapporot tra i due picchi di grandezze:
+\begin{gather*}
+    \overline{I}=y\overline{V}\\
+    |y|=\displaystyle\frac{I_M}{V_M}\,[\Omega^{-1}]
+\end{gather*}
+
+\subsection{Risposta Armonica}
+
+Si considera un circuito RLC serie, con genreatori sempre isofrequenti, esprimendo l'impedenza in funzione della pulsazione:
+\begin{gather*}
+    z(\omega)=R+j\displaystyle\left(\omega L-\frac{1}{\omega C}\right)\\
+    |z(\omega)|=\displaystyle\sqrt{R^2+\left(\omega L-\frac{1}{\omega C}\right)^2}\\
+    \varphi(\omega)=\arctan\left(\displaystyle\frac{\displaystyle\omega L-\frac{1}{\omega C}}{R}\right)
+\end{gather*}
+Si somma alla fase un fattore $\pi$, in alcuni casi, per mantenere la continuità della funzione. Si esprime la variazione dei valori dell'impedenza, al variare della 
+pulsazione. Si considera l'effetto di ogni componente singolarmente. La parte reale di modulo è sempre costante in questo caso ripspetto alla pulsazione, quindi il suo 
+contributo è costante, mentre il suo contributo alla fase rimane nullo, poiché è puramente reale. L'induttore contribuise linearmente all'aumento del modulo, mentre presenta 
+sempre uno sfasamento di $\pi/2$. Il condensatore presenta un andamento iperbolico nel modulo, mentre presenta una sfasatura costante di $-\pi/2$
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-0.5,0)--(2.5,0)node[above right]{$\omega$};
+        \draw[->](0,-0.25)--(0,1.5)node[above left]{$|z(\omega)|$};
+        \draw[red](-0.5,0.3)node[above right, black]{$R$}--(2.5,0.3);
+        \draw[cyan](0,0)node[below right, black]{$0$}--(2.5,1.5)node[right, black]{$\omega L$};
+        \draw[orange]plot[smooth, domain=0.33:2.5](\x,{1/(2*\x)});
+        \node[right]at(0.33,1.5){$\displaystyle\frac{1}{\omega C}$};
+        \draw[black]plot[smooth, domain=0.33:2.5](\x,{(0.3^2+(3/5*\x-1/(2*\x))^2)^0.5});
+
+        \draw[->](-0.5,-2)--(2.5,-2)node[above right]{$\omega$};
+        \draw[->](0,-3.25)--(0,-0.5)node[above left]{$\varphi(\omega)$};
+        \draw[dashed](0,-1)node[left]{$\displaystyle\frac{\pi}{2}$}--(2.5,-1);
+        \draw[dashed](0,-3)node[left]{$-\displaystyle\frac{\pi}{2}$}--(2.5,-3);
+        \draw[dashed](0.913,0.548)--(0.913,0)node[below right]{$\omega_0$}--(0.913,-2)node[below right]{$\omega_0$};
+        \draw[red]plot[smooth,domain=0.01:2.5](\x,{2/pi*rad(atan((3/5*\x-1/(2*\x))/0.3))-2});
+        \draw[black]plot[smooth,domain=0.01:2.5](\x,{2/pi*rad(atan(2*(3/5*\x-1/(2*\x))/0.3))-2});
+        \draw[blue]plot[smooth,domain=0.01:2.5](\x,{2/pi*rad(atan(4*(3/5*\x-1/(2*\x))/0.3))-2});
+        \node[]at(1.55,-1.5){$R'<R$};
+        \node[]at(0.5,-1.5){$R''>R$};
+    \end{tikzpicture}
+\end{center}
+
+
+Si individua il punto di interesezione delle curve dell'andamento del modulo del solo condensatore e del solo induttore $\omega_0$:
+\begin{gather*}
+    \displaystyle\frac{1}{\omega_0C}=\omega_0L\\
+    \omega_0=\displaystyle\sqrt{\frac{1}{LC}}
+\end{gather*}
+Si definisce $\omega_0$ pulsazione di risonanza. In generale tutte le pulsazioni che annullano la parte immaginaria dell'impedenza si indicano come pulsazioni di risonanza. 
+
+In alcuni casi la frequenza del generatore corrisponde alla frequenza di risonanza, per cui l'impedenza equivalente misurata presenta parte immaginaria nulla, per cui non 
+si può inferire nulla a posteriori sulla dinamicità della rete. Se è possibile, bisognerebbe variare la frequenza, per individuare quali componenti sono presenti nel circuito. 
+In un circuito RLC, prima della pulsazione di risonanza, si misurano impedenze Thevenin che sono di tipo capacitivo, dove la reattanza è negativa, e si può realizzare mediante 
+una singola capacità equivalente. Analogamente misurando 
+il valore dell'impedenza dopo la pulsazione di risonanza si misura una reattanza positiva, per cui si misura un'induttanza equivalente. Nei due casi quindi il circuito 
+si comporta come un RC, comportamento ohmico-capacitivo, per pulsazioni minori e RL, comportamento ohmico-induttivo, per pulsazioni maggiori della pulsazione di risonanza, 
+mentre il valore della resistenza misurato rimane invariato: 
+\begin{gather*}
+    \begin{cases}
+        \omega L-\displaystyle\frac{1}{\omega C}=-\frac{1}{\omega C_{eq}}&\omega<\omega_0\\
+        \omega L-\displaystyle\frac{1}{\omega C}=\omega L_{eq}&\omega>\omega_0
+    \end{cases}
+\end{gather*}
+La fase corrispondente alla pulsazione di risonanza è nulla. Per pulsazioni minori, il comportamento è ohmico capacitivo, per cui per la pulsazione tendente a zero, 
+l'unico contributo di fase non nullo è fornito dalla capacità e corrisponde ad una fase di $\pi/2$. Mentre per pulsazioni maggiori di della pulsazione di risonanza, 
+il circuito presenta un comportamento ohmico-induttivo, e per valori di pulsazioni tendenti all'infinito, la fase tende asintoticamente alla fase dell'induttore $\pi/2$. 
+In assenza di una resistenza, ci si trova in una situazione di cortocircuito, corrispondente ad un generatore di corrente nulla, ma non si può montare in serie ad un 
+generatore di tensione, per cui non si potrebbe parlare del caso $\omega=\omega_0$ con una resistenza nulla. Per $R=0$, per pulsazioni minodi di $\omega_0$ il circuito 
+si comporta come un condensatore puro, e la fasa rimane costante al contributo del condensatore $-\pi/2$. Analogamente per $R=0$ e $\omega>\omega_0$ si avrebbe un 
+comprotamento induttivo, in questo caso si avrebbe un valore di induttanza equivalente misurato, e la fase rimane costante al valore della fase dell'induttore $\pi/2$. 
+Il comportamento della fase per $R=0$, corrisponde ad un gradino con una discontinuità nella pulsazione $\omega=\omega_0$, mentre mantenendo i valori di induttanza e capacità 
+costanti e variando la resistenza, all'aumentare di R la curva della fase si allontana dall'andamento a $R=0$, mentre al diminuire di R la curva si avvicina. 
+
+
+%% in teoria corretti, per la dualità, ma ricontrollare
+Si può attuare un'analisi duale per un circuito RLC parallelo, in questo caso si analizza invece che l'impedenza l'ammettenza $y$, e la sua fase $\alpha$. Valgono le stesse 
+considerazioni ottenute per il circuito RLC serie, ma sono invertiti i comprotamenti ohmico induttivi e capacitivi, poiché si inverte il ruolo della capacità e dell'induttanza 
+dal passaggio da circuiti RLC serie a RLC parallelo, e viceversa. 
+\begin{gather*}
+    y(\omega)=G+j\displaystyle\left(\omega C-\frac{1}{\omega L}\right)\\
+    |y(\omega)|=\displaystyle\sqrt{G^2+\left(\omega C-\frac{1}{\omega L}\right)^2}\\
+    \alpha(\omega)=\arctan\left(\displaystyle\frac{\displaystyle\omega C-\frac{1}{\omega L}}{G}\right)
+\end{gather*}
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-0.5,0)--(2.5,0)node[above right]{$\omega$};
+        \draw[->](0,-0.25)--(0,1.5)node[above left]{$|y(\omega)|$};
+        \draw[red](-0.5,0.3)node[above right, black]{$G$}--(2.5,0.3);
+        \draw[cyan](0,0)node[below right, black]{$0$}--(2.5,1.5)node[right, black]{$\omega C$};
+        \draw[orange]plot[smooth, domain=0.33:2.5](\x,{1/(2*\x)});
+        \node[right]at(0.33,1.5){$\displaystyle\frac{1}{\omega L}$};
+        \draw[black]plot[smooth, domain=0.33:2.5](\x,{(0.3^2+(3/5*\x-1/(2*\x))^2)^0.5});
+
+        \draw[->](-0.5,-2)--(2.5,-2)node[above right]{$\omega$};
+        \draw[->](0,-3.5)--(0,-0.5)node[above left]{$\alpha(\omega)$};
+        \draw[dashed](0,-1)node[left]{$\displaystyle\frac{\pi}{2}$}--(2.5,-1);
+        \draw[dashed](0,-3)node[left]{$-\displaystyle\frac{\pi}{2}$}--(2.5,-3);
+        \draw[dashed](0.913,0.548)--(0.913,0)node[below right]{$\omega_0$}--(0.913,-2)node[below right]{$\omega_0$};
+        \draw[red]plot[smooth,domain=0.01:2.5](\x,{2/pi*rad(atan((3/5*\x-1/(2*\x))/0.3))-2});
+        \draw[black]plot[smooth,domain=0.01:2.5](\x,{2/pi*rad(atan(2*(3/5*\x-1/(2*\x))/0.3))-2});
+        \draw[blue]plot[smooth,domain=0.01:2.5](\x,{2/pi*rad(atan(4*(3/5*\x-1/(2*\x))/0.3))-2});
+        \node[]at(1.55,-1.5){$G'<G$};
+        \node[]at(0.5,-1.5){$G''>G$};
+    \end{tikzpicture}
+\end{center}
+
 
 \end{document}
