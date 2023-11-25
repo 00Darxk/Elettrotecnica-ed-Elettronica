@@ -2745,7 +2745,7 @@ Forma Norton:
     \begin{circuitikz}
         \draw(-0.5,0)to[short, *-, i=$i$](0.5,0);
         \draw[-](0.5,-1)--(0.5,1);
-        \draw(0.5,1)to[R=$R_{N_0}$,i=$i_{R}$](4,1);
+        \draw(0.5,1)to[R=$G_{N_0}$,i=$i_{G}$](4,1);
         \draw(4,-1)to[european current source=$I_{N_0}$](0.5,-1);
         \draw[-](4,-1)--(4,1);
         \draw(4,0)to[short,-*](5,0);
@@ -3604,12 +3604,12 @@ In seguito bisogna verificare il bilanco energetico del circuito per verificare 
 In questo circuito è presente una matrice di conduttanza di lato:
 \begin{equation*}
     [G_l]=\begin{bmatrix}
-        0\,\Omega&&&&&&\\
+        0\,\Omega^{-1}&&&&&&\\
         &\displaystyle\frac{1}{20\,\Omega}&&&&&\\
         &&\displaystyle\frac{1}{20\,\Omega}&&&&\\
         &&&\displaystyle\frac{1}{10\,\Omega}&&&\\
         &&&&\displaystyle\frac{1}{10\,\Omega}&&\\
-        &&&&&0\,\Omega&\\
+        &&&&&0\,\Omega^{-1}&\\
         &&&&&&\displaystyle\frac{1}{10\,\Omega}
     \end{bmatrix}
 \end{equation*}
@@ -4134,7 +4134,6 @@ Le correnti di maglia si ottengono come:
 \end{equation*}
 
 \subsection{Partitore di Tensione e di Corrente con Esempi Applicativi}
- 8/11
 
 Si considera il seguente circuito, e si vuole calcolare il valore delle tensioni $V_{x,y}$:
 \begin{center}
@@ -4724,8 +4723,6 @@ Può essere espresso da queste due rappresentazioni:
     \end{circuitikz}
 \end{center}
 
- 15/11
-
 \subsection{Teorema del Massimo Trasferimento di Potenza}
 
 Si considera un generico circuito, espresso mediante la rappresentazione esterna equivalente di Thevenin, inserendo un resistore $R_M$ in entrata ai morsetti $A$ e $B$:
@@ -4857,7 +4854,7 @@ Quindi il polinomio caratteristico associato all'equazione di Kirchhoff del circ
     \alpha=\displaystyle-\frac{1}{RC}\\
     v_{Cg}(t)=k_1e^{-\frac{1}{RC}t}
 \end{gather*}
-L'integrale particolare tiene conto della forzante inserita nel sistema, ed appartiene alla sua stessa classe di funzioni, per la proprietà della similiarità. In questo caso, 
+L'integrale particolare tiene conto della forzante inserita nel sistema, ed appartiene alla sua stessa classe di funzioni, per la proprietà della similarità. In questo caso, 
 la forzante è una costante, per cui l'integrale particolare è:
 \begin{gather*}
     v_{Cp}(t)=k_2
@@ -4951,7 +4948,6 @@ Nell'analisi fisica lo stato si conserva, mentre nei modelli circuitali, appross
 considereranno circuiti di ordine superiore, che mantengono la continuità per tutte le grandezze trattate. 
 
 \subsubsection{Circuito RL}
- 16/11
 Il duale della carica o scarica di un condensatore, è il caso della carica o scarica dell'induttore. In questo caso poiché è presente un generatore di corrente, e non 
 può essere inserito a vuoto, il commutatore crea due circuiti chiusi, in modo che il generatore di corrente non sia mai collegato a vuoto:
 \begin{center}
@@ -5187,7 +5183,7 @@ risulta essere:
 \begin{gather*}
     v_{Cg}(t)=k_1e^{\alpha_1t}+k_2e^{\alpha_2t}
 \end{gather*}
-Mentre per la proprietà di similiarità la soluzione particolare è della stessa classe della forzante, in questo caso continua:
+Mentre per la proprietà di similarità la soluzione particolare è della stessa classe della forzante, in questo caso continua:
 \begin{gather*}
     v_{Cp}(t)=k_3
 \end{gather*}
@@ -5709,7 +5705,7 @@ Si definisce l'impedenza $z$, la grandezza che lega la tensione e la corrente ne
 dominii sempre calcolata in Ohm. 
 Tramite le impedenze si possono descrivere circuiti dinamici tramite relazioni lineari, definite dalle impedenze di ogni elemento del circuito con la legge di Ohm complessa, 
 supponendo si conosca la pulsazione della sinusoide in entrata. 
-Si definisce l'ammettenza, il reciproco della resistenza:
+Si definisce l'ammettenza, il reciproco dell'impedenza:
 \begin{gather*}
     y=\displaystyle\frac{1}{z}
 \end{gather*}
@@ -5991,6 +5987,454 @@ dal passaggio da circuiti RLC serie a RLC parallelo, e viceversa.
         \node[]at(0.5,-1.5){$G''>G$};
     \end{tikzpicture}
 \end{center}
+
+\subsection{Potenza a Regime Sinusoidale}
+
+Si vuole calcolare la potenza erogata da un generico lato attraversato da una corrente sinusoidale e connesso ai due poli ad una tensione anch'essa sinusoidale, di pulsazione 
+uguale:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,2) to[short,i=$i(t)$,*-](1,2)
+                    to[generic](1,0)
+                    to[short,-*](0,0);
+        \draw[->](0,0.25)--(0,1.75)node[midway, right]{$v(t)$};
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    v(t)=V_M\sin(\omega t+\gamma)\\
+    i(t)=I_M\sin(\omega t+\gamma)
+\end{gather*}
+Si calcola la potenza istantanea erogata dal lato esprimendo le sinusoidi in forma euleriana:
+\begin{gather*}
+    p(t)=v(t)i(t)=\displaystyle\frac{\overline{V}e^{j\omega t}-\overline{V}^*e^{-j\omega t}}{2j}\frac{\overline{I}e^{j\omega t}-\overline{I}^*e^{-j\omega t}}{2j}\\
+    \displaystyle-\frac{1}{4}\left(\overline{V}\overline{I}e^{2j\omega t}-\overline{V}\overline{I}^*-\overline{V}^*\overline{I}+\overline{V}^*\overline{I}^*e^{-2j\omega t}\right)
+    =-\frac{1}{2}\frac{\overline{V}\overline{I}e^{2j\omega t}-(\overline{V}\overline{I})^*e^{-2j\omega t}}{2}+\frac{1}{2}\frac{\overline{V}\overline{I}^*+\overline{V}^*\overline{I}}{2}
+\end{gather*}
+Si definisce lo sfasamento tra tensione e corrente $\varphi$, equivalente all'argomento dell'impedenza per ogni lato passivo. Quando sono presenti 
+generatori bisogna tenere conto dei loro contributi nell'argomento dell'impedenza. 
+\begin{gather*}
+    \overline{VI}=V_MI_Me^{j(\gamma+\beta)}\\
+     (\overline{VI})^*=V_MI_Me^{-j(\gamma+\beta)}\\
+    \overline{V}\overline{I}^*=V_MI_Me^{j(\gamma-\beta)}\\
+    \overline{V}^*\overline{I}=V_MI_Me^{-j(\gamma-\beta)}\\
+    \gamma-\beta=\varphi\\
+    \gamma+\beta=2\gamma-\varphi
+\end{gather*}
+Si applicano queste sostituzioni appena definite, e si esprime in questo modo la potenza istantanea di un generico lato come la somma di due sinusoidi, una funzione nel tempo, 
+mentre l'altra costante:
+\begin{gather*}
+    p(t)=\displaystyle-\frac{1}{2}V_MI_M\frac{e^{j(2\gamma t+2\gamma-\varphi)}+e^{-j(2\gamma t+2\gamma-\varphi)}}{2}+\frac{1}{2}V_MI_M\frac{e^{j\varphi}+e^{-j\varphi}}{2}\\
+    -\displaystyle\frac{1}{2}V_MI_M\cos(2\omega t+2\gamma-\varphi)+\frac{1}{2}V_MI_M\cos\varphi\\
+    p_f(t)=-\displaystyle\frac{1}{2}V_MI_M\cos(2\omega t+2\gamma-\varphi)\\
+    P=\displaystyle\frac{1}{2}V_MI_M\cos\varphi
+\end{gather*}
+Si definisce il primo componente , variante nel tempo, potenza fluttuante $p_f(t)$ di pulsazione doppia rispetto alla pulsazione di corrente e tensione di lato, mentre la seconda 
+componente costante, potenza attiva $P$ del lato. Si definisce il compomente $\cos\varphi$ fattore di potenza che indica quale percentuale della potenza apparente, prodotto 
+tra la lettura del volmetro e dell'amperometro, viene ad essere convertita in potenza attiva. 
+Poiché il lato è passivo, la potenza non potrà mai essere negativa, nella convenzione dei generatori, poiché non può erogare potenza. Per cui la potenza attiva corrisponde 
+ai minimi valori assunti dalla potenza fluttuante, per ottenere una potenza sempre positiva. 
+Si definisce il periodo di un'oscillazione $T=2\pi/\omega$, e data la precedente considerazione si può esprimere la potenza attiva come il valore medio della potenza 
+istantanea. Questa relazione esprime la potenza attiva relativa ad una potenza alternata:
+\begin{gather}
+    P=\displaystyle\frac{1}{T}\int_0^Tp(t)dt=\cancelto{0}{\frac{1}{T}\int_0^Tp_f(t)dt}+\frac{1}{T}\int_0^TPdt=P\cancelto{1}{\frac{1}{T}\int_0^Tdt}\\
+\end{gather}
+Si possono rappresentare i prodotti incrociati tra i fasori ed i loro coniugati in forma trigonometrica, mediante le formule di Eulero: 
+\begin{gather*}
+    \overline{V}\overline{I}^*=V_MI_Me^{j(\gamma-\beta)}=V_MI_M\left(\cos\varphi+j\sin\varphi\right)\\
+    \overline{V}^*\overline{I}=V_MI_Me^{-j(\gamma-\beta)}=V_MI_M\left(\cos\varphi-j\sin\varphi\right)\\
+    P=\displaystyle\frac{1}{2}\Re\{\overline{V}\overline{I}^*\}\\
+    \displaystyle\frac{1}{2}\overline{V}\overline{I}^*=P+jQ
+\end{gather*}
+Viene definita la potenza Volt Ampere Reattiva (VAR) come la parte immaginaria $Q$ così ottenuta: 
+\begin{gather*}
+    Q=P\tan\varphi\\
+    [\mathcal{P}]=W,\,[Q]=V\cdot A
+\end{gather*}
+Dato un resistore attraversato da una corrente continua (DC), la potenza assorbita si esprime tramite la relazione:
+\begin{gather*}
+    P=RI^2
+\end{gather*}
+Mentre se attraversato da una corrente alternata (AC) la potenza assorbita dal resistore si esprime considerando la legge di Ohm complessa per un resistore, dove 
+l'impedenza coincide alla sua resistenza. Il fattore di potenza è uguale ad $1$, poiché la tensione e la corrente sono in fase, per cui la potenza apparente coincide con la 
+potenza attiva assorbita dal resistore:
+\begin{gather*}
+    \overline{V}=R\overline{I}\\
+    \displaystyle\frac{1}{2}V_MI_M\cancelto{1}{\cos\varphi}=\frac{1}{2}RI_M^2
+\end{gather*}
+A parità di potenza (attiva) assorbita, si può esprimere la relazione tra la corrente continua ed il picco della corrente a regime sinusoidale:
+\begin{gather*}
+    RI_{DC}^2=\displaystyle\frac{1}{2}RI_M^2\\
+    I_{DC}=\displaystyle\frac{I_M}{\sqrt{2}}
+\end{gather*}
+Questa corrente così ottenuta prende il nome di corrente efficace $I_{eff}$. 
+Si esprimono i fasori tramite i valori efficaci di tensione e corrente, invece dei valori di picco:
+\begin{gather*}
+    \begin{cases}
+        \overline{V}=\displaystyle\frac{V_{M}}{\sqrt{2}}e^{j\gamma}=V_{eff}e^{j\gamma}\implies V=V_{eff}\\
+        \overline{I}=\displaystyle\frac{I_{M}}{\sqrt{2}}e^{j\beta}=I_{eff}e^{j\beta}\implies I=I_{eff}
+    \end{cases}
+\end{gather*}
+Si consdiera per semplicità $V$ e $I$ il modulo dei fasori corrispondenti. 
+Si esprime la potenza attiva mediante questi nuovi fasori: 
+\begin{gather*}
+    P=\displaystyle\frac{1}{2}V_MI_M\cos\varphi=\frac{1}{2}V_{eff}\sqrt{2}\,I_{eff}\sqrt{2}\cos\varphi=V_{eff}I_{eff}\cos\varphi
+\end{gather*}
+In forma generale, senza sapere a priori il tipo di corrente passante per il resistore, si esprime questa relazione tramite la radice 
+della media quadrata "Root of Mean Square" (RMS). Per cui equivalendo le due potenze attive, in continuo ed in alternata, si ottiene la seguente corrente efficace: 
+\begin{gather*}
+    RI_{DC}^2=\displaystyle\frac{1}{T}\int_0^Tp(t)dt=\frac{1}{T}\int_0^TRi^2(t)dt\\
+    I_{DC}=\displaystyle\sqrt{\frac{1}{T}\int_0^Ti^2(t)dt}=I_{eff}
+\end{gather*}
+
+
+Si è ottenuto precedentemente che il prodotto tra il fasore di tensione ed il coniugato di corrente corrisponde ad numero complesso avente parte reale la potenza attiva, e 
+parte immaginaria la potenza reattiva:
+\begin{gather*}
+    VI\cos\varphi=\displaystyle\frac{1}{2}V_MI_M\cos\varphi=P\\
+    VI\sin\varphi=\displaystyle\frac{1}{2}V_MI_M\sin\varphi=Q\\
+    \overline{V}\overline{I}^*=P+jQ
+\end{gather*}
+Per cui si può esprimere la potenza attiva come la parte reale di questo prodotto:
+\begin{gather*}
+    \Re\{\overline{V}\overline{I}^*\}=P=VI\cos\varphi\\
+    \varphi=\arccos\left(\displaystyle\frac{\Re\{\overline{V}\overline{I}^*\}}{VI}\right)
+\end{gather*}
+Si definisce questo prodotto tra i due fasori efficaci potenza complessa:
+\begin{gather*}
+    \dot P_C=\overline{V}\overline{I}^*
+\end{gather*}
+La potenza reattiva può essere positiva o negativa sulla base della natura capacitiva o induttiva della reattanza. 
+Dove il modulo della potenza complessa corrisponde alla potenza apparente, il prodotto tra i valori efficaci delle due letture del volmetro e dell'amperometro, ma non forniscono 
+informazioni sulla fase, che indica quanta parte viene trasformata in potenza attiva e quanta in potenza reattiva, che rimane interna al circuito, usata come potenza di 
+calcolo per determinare il valore dello sfasamento tra tensione e corrente $\varphi$: 
+\begin{gather*}
+    |\dot P_C|=\displaystyle\sqrt{P^2+Q^2}=VI\\
+    \left[|\dot P_C|\right]=V\cdot A
+\end{gather*}
+\begin{center}
+    \begin{tikzpicture}
+        \draw[->](-0.25,0)--(2,0)node[right]{$\Re$};
+        \draw[->](0,-0.25)--(0,1.5)node[right]{$\Im$};
+
+        \draw[->](0,0)--(1.5,1)node[above right]{$\dot P_C$};
+        \draw[dashed](1.5,1)--(0,1)node[left]{$Q$};
+        \draw[dashed](1.5,1)--(1.5,0)node[below]{$\mathcal{P}$};
+    \end{tikzpicture}
+\end{center}
+Analogamente si può esprimere la potenza attiva e reattiva tramite la potenza complessa e la sua fase, coincidente per i lati passivi all'argomento dell'impedenza di lato:
+\begin{gather*}
+    P=|\dot P_C|\cos\varphi\\
+    Q=|\dot P_C|\sin\varphi
+\end{gather*}
+
+Se la potenza reattiva è positiva, allora corrisponde a potenza assorbita dal lato, se è negativa allora la potenza viene erogata dal lato. Si vuole esprimere la 
+potenza complessa considerando una sola grandezza e l'impedenza, tramite la legge di Ohm complessa, analogamente al caso continuo:
+\begin{gather*}
+    \overline{V}=z\overline{I}\\
+    \dot P_C=z\overline{I}\overline{I}^*=z|\overline{I}|^2
+    z=R+jQ\\
+    RI^2=RI^2+jXI^2\\
+    P=RI^2\\
+    Q=XI^2
+\end{gather*}
+In questo modo si può analizzare direttamente se un dato bipolo eroga o assorbe potenza reattiva, sulla base dalla reattanza. 
+In un resistore i fasori sono in fase, per cui la potenza attiva corrisponde alla potenza apparente:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)to[R,i=$\overline{I}$,*-*](2,0);
+        \draw[->](1.75,-0.5)--(0.25,-0.5)node[midway, below]{$\overline{V}$};
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    \varphi=0\\
+    P=VI\cos\varphi=VI=|\dot P_C|
+    Q=0
+\end{gather*}
+
+Si considera un condesatore nella convenzione degli utilizzatori: 
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)to[C,i=$\overline{I}$,*-*](2,0);
+        \draw[<-](1.75,-0.5)--(0.25,-0.5)node[midway, below]{$\overline{V}$};
+    \end{circuitikz}
+\end{center}
+La sua impedenza ha un'argomento di $-\pi/2$, poiché la tensione è in quadratura in ritardo rispetto alla corrente:
+\begin{gather*}
+    \varphi=\displaystyle-\frac{\pi}{2}
+    P=VI\cos\varphi=0\\
+    Q=VI\sin\varphi=-|\dot P_C|
+\end{gather*}
+In questo caso la potenza attiva è nulla, e la potenza reattiva è negativa e corisponde alla potenza apparente. 
+\begin{gather*}
+    X_C=\displaystyle-\frac{1}{\omega C}\implies Q<0
+\end{gather*} 
+
+Si considera il bipolo induttore, nella convenzione degli utilizzatori, dove per dualità si ottiene la stessa soluzione, ma la potenza reattiva è positiva:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)to[L,i=$\overline{I}$,*-*](2,0);
+        \draw[<-](1.75,-0.75)--(0.25,-0.75)node[midway, below]{$\overline{V}$};
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    \varphi=\displaystyle\frac{\pi}{2}\\
+    P=VI\cos\varphi=0\\
+    Q=VI\sin\varphi=|\dot P_C|\\
+    X_L=\omega L\implies Q>0
+\end{gather*}
+
+Per cui un condensatore eroga potenza reattiva, mentre l'induttore assorbe potenza reattiva, nella convenzione degli utilizzatori, ma non essendoci alcun tipo di convenzione 
+energetica non ha senso analizzare questa potenza come potenza effettiva. 
+Considerando il duale della legge di Ohm complessa si può esprimere la potenza complessa rispetto alla tensione ed all'ammettenza
+\begin{gather*}
+    \overline{I}=y\overline{V}\\
+    \dot P_C=\overline{V}(y\overline{V})^*=y^*|\overline{V}|^2=y^*V^2
+\end{gather*} 
+
+
+Si considera un lato ohmico-capacitivo, nella convenzione degli utilizzatori, definito da un'impedenza:
+\begin{gather*}
+    z=R-\displaystyle\frac{j}{\omega C}
+\end{gather*}
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[R=$R$,*-](2,0)
+                    to[C=$C$,i=$\overline{I}$,-*](4,0);
+        \draw[->](3.75,-0.75)--(0.25,-0.75)node[midway, below]{$\overline{V}$};
+    \end{circuitikz}
+\end{center}
+Per cui ha una potenza complessa:
+\begin{gather*}
+    \dot P_C=zI^2=RI^2-j\displaystyle\frac{I^2}{\omega C}\\
+    P=RI^2\\
+    Q=-\displaystyle\frac{I^2}{\omega C}
+\end{gather*}
+Questo lato eroga potenza attiva, e assorbe potenza reattiva. 
+
+Per dualità un lato ohmico-induttivo, nella convenzione degli utilizzatori, eroga potenza attiva, ed eroga potenza reattiva: 
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[R=$R$,*-](2,0)
+                    to[L=$L$,i=$\overline{I}$,-*](4,0);
+        \draw[->](3.75,-0.75)--(0.25,-0.75)node[midway, below]{$\overline{V}$};
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    z=R+j\omega L\\
+    \dot P_C=RI^2+j\omega LI^2\\
+    P=RI^2\\
+    Q=\omega LI^2
+\end{gather*}
+Da notare che un circuito RLC serie corrisponde ad una di questi due lati in base alla pulsazione della forzante sinusoidale in entrata, per cui le grandezze di capacità ed 
+induttanza presenti corrispondno a grandezze equivalenti dall'esterno, mentre la resistenza corrisponde alla stessa resistenza del circuito RLC. 
+
+
+In generale in un modello di una macchina elettrica monofase, per trasformare una potenza elettrica in meccanica, bisogna considerare che la potenza trasferita alla macchina 
+presenta una componente oscillante, per cui bisogna analizzarla in ambiente meccanico come una vibrazione, che dissipa una parte dell'energia trasferita, per cui 
+per mantenere le prestazioni desiderate bisognerebbe trasferire una potenza attiva superiore. Per cui anche da lato elettrico è importante realizzare macchine in assenza di 
+vibrazione. Uno di questi motori è un motore alimentato da un sistema trifase simmetrico ed equilibrato è un sistema senza potenza fluttuante. Generalmente vengono realizzati 
+motori bifase, poiché l'alimentazione è monofase, applicando un certo sfasamento alla corrente in ingresso, può essere realizzato applicando un condensatore ad un altro oggetto 
+in parallelo per avere due correnti $I$ e $I'$ in quadratura di fase. 
+
+\subsubsection{Teorema del Massimo Trasferimento di Potenza per Reti Dinamiche}
+
+Nel caso di reti senza memoria si ottiene la massima potenza quando la resistenza di carico equivale alla resistenza equivalente di Thevenin. Si considera ora un generico 
+circuito dinamico, accessibile dall'esterno da due morsetti:
+\begin{center}
+    \begin{circuitikz}
+        \draw[-](0,-0.5)--(4,-0.5)--(4,2.5)--(0,2.5)--(0,-0.5);
+        \draw(0.5,0)to[generic](0.5,2);
+        \draw(1.5,0)to[sV](1.5,2);
+        \draw(2.5,0)to[european controlled current source](2.5,2);
+        \draw(3.5,0)to[european controlled voltage source](3.5,2);
+        \draw(4,0)to[short,-*](4.5,0)node[below right]{$B$};
+        \draw(4,2)to[short,-*](4.5,2)node[above right]{$A$};
+    \end{circuitikz}
+\end{center}
+
+Si vuole determinare la massima potenza attiva estrabile da un qualsiasi circuito dinamico, in funzione dell'impedenza. Tutto ciò che è stato tratato nelle reti adinamiche 
+può essere riportato in una situazione dinamica nel dominio di fasori considerando impedenze e generatori dinamici. Per cui si può esprimere un qualsiasi circuito 
+tramite il teorema di Thevenin a regime sinusoidale, con un generatore di tensione sinusoidale che presenta un fasore di tensione $\overline{E}_th$ equivalente al fasore 
+di tensione misurato a vuoto tra i due morsetti $\overline{V}_{AB0}$, ed un'impedenza equivalente $z_{eq}$, misurata rendendo passiva la rete. Si considera quindi un'impedenza 
+di carico $z_C$, in modo da avere la massima potenza attiva:
+\begin{center}
+    \begin{circuitikz}
+        \draw (2,0)node[below]{$B$} to[short,*-](0,0)
+                    to[sV=$\overline{E}_{th}$](0,1.5)
+                    to[generic=$z_{eq}$](0,3)
+                    to[short,-*](2,3)node[above]{$A$};
+        \draw(2.5,0)to[generic=$z_C$](2.5,3);
+        \draw[->](2.5,0)--(2.25,0);
+        \draw[->](2.5,3)--(2.25,3);
+    \end{circuitikz}
+\end{center}
+
+La corrente erogata sul carico corrisponde a:
+\begin{gather*}
+    \overline{I}=\displaystyle\frac{\overline{E}_{th}}{z_{eq}+z_C}
+\end{gather*}
+Si può considerare la parte reale ed immaginaria dell'impedenza Thevenin e di carico:
+\begin{gather*}
+    \overline{I}=\displaystyle\frac{\overline{E}_{th}}{(R_{eq}+R_{C})+j(X_{eq}+X_C)}
+\end{gather*}
+La potenza complessa può essere espressa come il prodotto tra l'impedenza ed il quadrato del valore efficace della corrente:
+\begin{gather*}
+    \dot P_C=zI^2=RI^2+jXI^2
+\end{gather*}
+Per cui per ottenere la potenza attiva assorbita dall'impedenza di carico si considera:
+\begin{gather*}
+    P_C=R_C|\overline I|^2=R_C\displaystyle\frac{E_{th}^2}{(R_{eq}+R_C)^2+(X_{eq}+X_C)^2}
+\end{gather*}
+Se si analizzasse solamente in ambiente matematico, poiché è una funzione a due variabile, trovare i valori per cui si annulla il differenziale totale:
+\begin{gather*}
+    \begin{cases}
+        \displaystyle\frac{\partial P_C}{\partial R_C}=0\\
+        \displaystyle\frac{\partial P_C}{\partial X_C}=0
+    \end{cases}
+\end{gather*}
+
+Invece ci si può avvalere in ambito elettrotecnico dello stesso ragionamento effettuato per determinare il massimo trasferimeto di potenza in una rete adinamica. Si 
+considera il massimo della potenza quando si ha massimizzato la corrente, a parità di resistenza. Per tornare a questa situazione analoga, bisogna diminuire il contributo 
+della reattanza $X$. Per cui si considera la reattanza di carico:
+\begin{gather*}
+    X_C=-X_{eq}\\
+    X_{tot}=0
+\end{gather*}
+Avendo una reattanza nulla ci si trova in una condizione di risonanza. Per cui si inserisce un'impedenza esterna per risonare il circuito. Questa è quindi la prima 
+condizione per il teorema. In questa situaizone dove il circuito si comporta come una rete adinamica, vale il teorma del massimo trasferimento di potenza, dimostratato 
+per le reti adinamiche $R_C=R_{eq}$. 
+Per cui per estrarre la massima potenza da una rete dinamica bisogna inserire un'impedenza di carico pari al coniugato dell'impedenza equivalente del circuito:
+\begin{gather*}
+    z_C=z_{eq}^*
+\end{gather*}
+
+Da notare che questa potenza massima è ottenuta rispetto ad una pulsazione di risonanza $\omega_0$, mentre al cambiamento della pulsazione la resistenza di carico non corrisponderà 
+più alla potenza massima. Mentre anche il comportamento dell'impedenza equivalente non è ricavabile dalle informazioni sul circuito espresse dalla rappresentazione equivalente 
+di Thevenin, poiché è necessaria la conoscenza del circuito completo per determinare in che modo varia al variare della frequenza. 
+
+\subsection{Esempi Applicativi}
+
+Calcolare i valori di resistenza e capacità equivalente, del seguente circuito in regime sinusoidale alla pulsazione di $\omega=2\,\mbox{rad}/s$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,2)node[above]{$A$} to[R=$R_1$,*-] (2,2)  
+                    to[L=$L_1$](4,2)
+                    to[R=$R_2$](4,0)
+                    to[short,-*](0,0)node[below]{$B$};
+        \draw (2,2) to[C=$C_2$](2,0);
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    C_2=0.5\,F\\
+    L_1=1\,H\\
+    R_1=R_2=1\,\Omega
+\end{gather*}
+Si può risolvere applicando trasformazioni in serie ed in parallelo dell'impedenza:
+\begin{gather*}
+    z_1=j\omega L_1+R_2=2j+1\\
+    z_2=-j\displaystyle\frac{1}{\omega C_2}=-j\\
+    z_3=R_1=1
+\end{gather*}
+Si considera il parallelo tra $z_1$ e $z_2$:
+\begin{gather*}
+    z_{p12}=\displaystyle\frac{z_1z_2}{z_1+z_2}=\frac{-j(1+2j)}{1+2j-j}=\frac{-j+2}{1+j}\cdot\frac{1-j}{1-j}\\
+    z_{p12}=\frac{1-3j}{2}
+\end{gather*}
+Si considera la serie tra $z_{p12}$ e $z_3$:
+\begin{gather*}
+    z_{AB}=z_{p12}+z_3=\displaystyle\frac{1}{2}+j\frac{3}{2}+1=\frac{3}{2}+j\frac{3}{2}\\
+    R_{eq}=\displaystyle\frac{3}{2}\,\Omega\\
+    C_{eq}=\frac{2}{3}\,\Omega\cdot \omega=\frac{1}{3} F
+\end{gather*}
+
+Alternativamente per trovare l'impedenza equivalente della rappresentazione Thevenin si considera un generatore che ergoa una tensione $\overline{V}_{in}$, e si risolve 
+mediante il metodo dei nodi o delle maglie:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,2) to[R=$R_1$,*-] (2,2)node[above]{$A$} 
+                    to[L=$L_1$](4,2)
+                    to[R=$R_2$](4,0)
+                    to[short,-*](0,0);
+        \draw (2,2) to[C=$C_2$](2,0);
+        \draw (0,0) to[short](-2,0)
+                    to[sV=$\overline{V}_{in}$](-2,2)
+                    to[short,i=$\overline{I}_{in}$](0,2);
+        \draw (2,0)node[below right]{$0$} to[short](2,-0.5)node[ground]{};
+    \end{circuitikz}
+\end{center}
+
+La matrice delle ammettenze modali diventa solamente l'autoammettenza del nodo $A$:
+\begin{gather*}
+    (y_1+y_2+y_3)\overline{V}_A=\overline{V}_{in}y_3\\
+    \overline{I}_{in}=\displaystyle\frac{\overline{V}_{in}-\overline{V}_A}{z_3}\\
+    z_{in}=\displaystyle\frac{\overline{V}_{in}}{\overline{I}_{in}}
+\end{gather*}
+Si calcola ora numericamente:
+\begin{gather*}
+    \overline{V}_{in}=1\,V\\
+    \overline{V}_A=\displaystyle\frac{y_3}{y_1+y_2+y_3}\cdot 1\,V\\
+    \overline{V}_A=\displaystyle\frac{1}{\frac{1}{1+2j}-\frac{1}{j}+1}=\displaystyle\frac{1}{\frac{j-1-2j-j(1+2j)}{j(1+2j)}}=\frac{j(1+2j)}{j-1-2j+j-2}\\
+    \overline{V}_A=\frac{j-2}{-3}\\
+    \overline{I}_{in}=1+\displaystyle\frac{j-2}{3}=\frac{3+j-2}{3}=\frac{1+j}{3}\\
+    z_{in}=\displaystyle\frac{1}{1+j}\cdot\frac{1-j}{1-j}\cdot3=\frac{3}{2}-j\frac{3}{2}
+\end{gather*}
+
+
+Calcolare l'espressione a regime della tensione di nodo $v_x$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[european voltage source=$10\cos(10t)$,i=$i_a$](0,2)
+                    to[R=$10\,\Omega$,-*](2,2)node[above]{$v_x$}
+                    to[short](4,2)
+                    to[european controlled voltage source=$10\,i_a$](6,2)
+                    to[R=$5\,\Omega$](8,2)
+                    to[L=$0.5\,H$](8,0)
+                    to[short](0,0);
+        \draw (3,0) to[short](3,-0.5)node[ground]{};
+        \draw (2,0) to[R=$10\,\Omega$](2,2);
+        \draw (4,0) to[C=$10\,mF$](4,2);
+    \end{circuitikz}
+\end{center}
+
+Si risolve mediante il metodo dei nodi. Si considerano per ogni lato le loro impedenze:
+\begin{gather*}
+    z_1=z_2=10\,\Omega\\
+    z_3=\displaystyle-\frac{j}{\omega C}=-\frac{j}{10\cdot 10\times10^{-3}}=-10j\,\Omega\\
+    z_4=5\,\Omega+\omega L=5\,\Omega+5j\,\Omega
+\end{gather*}
+Poiché oltre al nodo di salto è presente un solo nodo, per il metodo dei nodi si ottiene un'unica equazione:
+\begin{gather*}
+    (y_1+y_2+y_3+y_4)\overline{V}_x=\overline{V}_{in}y_1-10\overline{I}_ay_4
+\end{gather*}
+Si esprime il vincolo del pilota:
+\begin{gather*}
+    \overline{I}_a=(\overline{V}_{in}-\overline{V}_x)y_1
+\end{gather*}
+Per cui l'equazione dei nodi diventa:
+\begin{gather*}
+    (y_1+y_2+y_3+y_4)\overline{V}_x=\overline{V}_{in}y_1-10(\overline{V}_{in}-\overline{V}_x)y_1y_4\\
+    (y_1+y_2+y_3+y_4-10y_1y_4)\overline{V}_x=\overline{V}_{in}(y_1-10y_1y_4)\\
+    \overline{V}_{x}=\displaystyle\frac{\overline{V}_{in}(y_1-10y_1y_4)}{(y_1+y_2+y_3+y_4-10y_1y_4)}
+\end{gather*}
+Si calcolano le ammettenze:
+\begin{gather*}
+    y_1=y_2=\displaystyle\frac{1}{10}\,\Omega^{-1}\\
+    y_3=\displaystyle\frac{j}{10}\,\Omega^{-1}\\
+    y_4=\displaystyle\frac{1}{5+5j}\,\Omega^{-1}=\frac{1}{10}\,\Omega^{-1}-\frac{j}{10}\,\Omega^{-1}
+\end{gather*}
+Da cui si ottiene un fasore di nodo:
+\begin{gather*}
+    \overline{V}_x=2+4i\\
+    |\overline{V}_x|=\displaystyle\frac{10}{\sqrt{5}}\\
+    \varphi=\arctan\left(\displaystyle\frac{4}{2}\right)\cdot\frac{180^{\circ}}{\pi}=63.4^{\circ}
+\end{gather*}
+Per cui l'espressione del nodo corrisponde a:
+\begin{gather*}
+    v_x=|\overline{V}_x|\cos(\omega t+\varphi)=\displaystyle\frac{10}{\sqrt{5}}\cos(10t+63.4^{\circ})
+\end{gather*}
+
+
+
 
 
 \end{document}
