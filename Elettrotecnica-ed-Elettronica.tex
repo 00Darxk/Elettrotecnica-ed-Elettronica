@@ -5110,7 +5110,7 @@ Tramite il fasore si può esprimere la forzante sinusoidale come una combinazion
 In questo modo si può compattare l'informazione contenuta nella sinusoide, nel fasore $\overline{E}$, la fase $\alpha$ e la pulsazione $\omega$. In questo modo si lavora nel 
 dominio complesso dei fasori. 
 
-\subsubsection{Circuito RLC}
+\subsubsection{Circuito RLC Serie}
 
 Si considera una rete composta da un resistore $R$, un induttore $L$, ed un condensatore $C$, alimentati alla chiusura di un commutatore in $t=0$, da un generatore 
 di tensione che eroga una tensione $E$.
@@ -5470,7 +5470,7 @@ dipende dalle condizioni iniziali del circuito, ovvero dalla sua memoria. Il reg
 In generale il transitorio tende a valori nulli se il sistema si dice asintoticamente stabile, ovvero se ogni radice del polinomio caratteristico dell'equazione 
 differenziale associata al sistema ha parte reale negativa. Per cui può esistere un regime in un sistema solo se il sistema è asintoticamente stabile. 
 
-\subsubsection{Circuito RLC In Parallelo}
+\subsubsection{Circuito RLC Parallelo}
 
 Si considera ora un circuito dove gli elementi resistori, condensatori ed induttori sono montati in parallelo
 \begin{center}
@@ -6312,128 +6312,7 @@ Da notare che questa potenza massima è ottenuta rispetto ad una pulsazione di r
 più alla potenza massima. Mentre anche il comportamento dell'impedenza equivalente non è ricavabile dalle informazioni sul circuito espresse dalla rappresentazione equivalente 
 di Thevenin, poiché è necessaria la conoscenza del circuito completo per determinare in che modo varia al variare della frequenza. 
 
-\subsection{Esempi Applicativi}
-
-Calcolare i valori di resistenza e capacità equivalente, del seguente circuito in regime sinusoidale alla pulsazione di $\omega=2\,\mbox{rad}/s$:
-\begin{center}
-    \begin{circuitikz}
-        \draw (0,2)node[above]{$A$} to[R=$R_1$,*-] (2,2)  
-                    to[L=$L_1$](4,2)
-                    to[R=$R_2$](4,0)
-                    to[short,-*](0,0)node[below]{$B$};
-        \draw (2,2) to[C=$C_2$](2,0);
-    \end{circuitikz}
-\end{center}
-\begin{gather*}
-    C_2=0.5\,F\\
-    L_1=1\,H\\
-    R_1=R_2=1\,\Omega
-\end{gather*}
-Si può risolvere applicando trasformazioni in serie ed in parallelo dell'impedenza:
-\begin{gather*}
-    z_1=j\omega L_1+R_2=2j+1\\
-    z_2=-j\displaystyle\frac{1}{\omega C_2}=-j\\
-    z_3=R_1=1
-\end{gather*}
-Si considera il parallelo tra $z_1$ e $z_2$:
-\begin{gather*}
-    z_{p12}=\displaystyle\frac{z_1z_2}{z_1+z_2}=\frac{-j(1+2j)}{1+2j-j}=\frac{-j+2}{1+j}\cdot\frac{1-j}{1-j}\\
-    z_{p12}=\frac{1-3j}{2}
-\end{gather*}
-Si considera la serie tra $z_{p12}$ e $z_3$:
-\begin{gather*}
-    z_{AB}=z_{p12}+z_3=\displaystyle\frac{1}{2}+j\frac{3}{2}+1=\frac{3}{2}+j\frac{3}{2}\\
-    R_{eq}=\displaystyle\frac{3}{2}\,\Omega\\
-    C_{eq}=\frac{2}{3}\,\Omega\cdot \omega=\frac{1}{3} F
-\end{gather*}
-
-Alternativamente per trovare l'impedenza equivalente della rappresentazione Thevenin si considera un generatore che ergoa una tensione $\overline{V}_{in}$, e si risolve 
-mediante il metodo dei nodi o delle maglie:
-\begin{center}
-    \begin{circuitikz}
-        \draw (0,2) to[R=$R_1$,*-] (2,2)node[above]{$A$} 
-                    to[L=$L_1$](4,2)
-                    to[R=$R_2$](4,0)
-                    to[short,-*](0,0);
-        \draw (2,2) to[C=$C_2$](2,0);
-        \draw (0,0) to[short](-2,0)
-                    to[sV=$\overline{V}_{in}$](-2,2)
-                    to[short,i=$\overline{I}_{in}$](0,2);
-        \draw (2,0)node[below right]{$0$} to[short](2,-0.5)node[ground]{};
-    \end{circuitikz}
-\end{center}
-
-La matrice delle ammettenze modali diventa solamente l'autoammettenza del nodo $A$:
-\begin{gather*}
-    (y_1+y_2+y_3)\overline{V}_A=\overline{V}_{in}y_3\\
-    \overline{I}_{in}=\displaystyle\frac{\overline{V}_{in}-\overline{V}_A}{z_3}\\
-    z_{in}=\displaystyle\frac{\overline{V}_{in}}{\overline{I}_{in}}
-\end{gather*}
-Si calcola ora numericamente:
-\begin{gather*}
-    \overline{V}_{in}=1\,V\\
-    \overline{V}_A=\displaystyle\frac{y_3}{y_1+y_2+y_3}\cdot 1\,V\\
-    \overline{V}_A=\displaystyle\frac{1}{\frac{1}{1+2j}-\frac{1}{j}+1}=\displaystyle\frac{1}{\frac{j-1-2j-j(1+2j)}{j(1+2j)}}=\frac{j(1+2j)}{j-1-2j+j-2}\\
-    \overline{V}_A=\frac{j-2}{-3}\\
-    \overline{I}_{in}=1+\displaystyle\frac{j-2}{3}=\frac{3+j-2}{3}=\frac{1+j}{3}\\
-    z_{in}=\displaystyle\frac{1}{1+j}\cdot\frac{1-j}{1-j}\cdot3=\frac{3}{2}-j\frac{3}{2}
-\end{gather*}
-
-
-Calcolare l'espressione a regime della tensione di nodo $v_x$:
-\begin{center}
-    \begin{circuitikz}
-        \draw (0,0) to[european voltage source=$10\cos(10t)$,i=$i_a$](0,2)
-                    to[R=$10\,\Omega$,-*](2,2)node[above]{$v_x$}
-                    to[short](4,2)
-                    to[european controlled voltage source=$10\,i_a$](6,2)
-                    to[R=$5\,\Omega$](8,2)
-                    to[L=$0.5\,H$](8,0)
-                    to[short](0,0);
-        \draw (3,0) to[short](3,-0.5)node[ground]{};
-        \draw (2,0) to[R=$10\,\Omega$](2,2);
-        \draw (4,0) to[C=$10\,mF$](4,2);
-    \end{circuitikz}
-\end{center}
-
-Si risolve mediante il metodo dei nodi. Si considerano per ogni lato le loro impedenze:
-\begin{gather*}
-    z_1=z_2=10\,\Omega\\
-    z_3=\displaystyle-\frac{j}{\omega C}=-\frac{j}{10\cdot 10\times10^{-3}}=-10j\,\Omega\\
-    z_4=5\,\Omega+\omega L=5\,\Omega+5j\,\Omega
-\end{gather*}
-Poiché oltre al nodo di salto è presente un solo nodo, per il metodo dei nodi si ottiene un'unica equazione:
-\begin{gather*}
-    (y_1+y_2+y_3+y_4)\overline{V}_x=\overline{V}_{in}y_1-10\overline{I}_ay_4
-\end{gather*}
-Si esprime il vincolo del pilota:
-\begin{gather*}
-    \overline{I}_a=(\overline{V}_{in}-\overline{V}_x)y_1
-\end{gather*}
-Per cui l'equazione dei nodi diventa:
-\begin{gather*}
-    (y_1+y_2+y_3+y_4)\overline{V}_x=\overline{V}_{in}y_1-10(\overline{V}_{in}-\overline{V}_x)y_1y_4\\
-    (y_1+y_2+y_3+y_4-10y_1y_4)\overline{V}_x=\overline{V}_{in}(y_1-10y_1y_4)\\
-    \overline{V}_{x}=\displaystyle\frac{\overline{V}_{in}(y_1-10y_1y_4)}{(y_1+y_2+y_3+y_4-10y_1y_4)}
-\end{gather*}
-Si calcolano le ammettenze:
-\begin{gather*}
-    y_1=y_2=\displaystyle\frac{1}{10}\,\Omega^{-1}\\
-    y_3=\displaystyle\frac{j}{10}\,\Omega^{-1}\\
-    y_4=\displaystyle\frac{1}{5+5j}\,\Omega^{-1}=\frac{1}{10}\,\Omega^{-1}-\frac{j}{10}\,\Omega^{-1}
-\end{gather*}
-Da cui si ottiene un fasore di nodo:
-\begin{gather*}
-    \overline{V}_x=2+4i\\
-    |\overline{V}_x|=\displaystyle\frac{10}{\sqrt{5}}\\
-    \varphi=\arctan\left(\displaystyle\frac{4}{2}\right)\cdot\frac{180^{\circ}}{\pi}=63.4^{\circ}
-\end{gather*}
-Per cui l'espressione del nodo corrisponde a:
-\begin{gather*}
-    v_x=|\overline{V}_x|\cos(\omega t+\varphi)=\displaystyle\frac{10}{\sqrt{5}}\cos(10t+63.4^{\circ})
-\end{gather*}
-
-
+\clearpage
 
 
 

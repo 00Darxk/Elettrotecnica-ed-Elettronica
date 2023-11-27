@@ -1,0 +1,482 @@
+\documentclass{article}
+
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{amsfonts} 
+\usepackage{verbatim}
+\usepackage{mathrsfs}  
+\usepackage{lmodern}
+\usepackage{braket}
+\usepackage{bookmark}
+\usepackage{circuitikz}
+\usepackage[italian]{babel}
+
+
+%% segnati con un doppio segno percentuale ("%%") le correzioni o inserimenti da apportare al testo
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+}
+
+\renewcommand{\contentsname}{Indice}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+
+\title{Esercizi Svolti su Circuiti a Corrente Continua}
+\author{Giacomo Sturm}
+\date{AA: 2023/2024 - Ing. Informatica}
+
+
+\begin{document}
+
+\maketitle
+
+\vspace{10mm}
+
+\begin{center}
+    Sorgente del file LaTeX disponibile su \url{https://github.com/00Darxk/Elettrotecnica-ed-Elettronica}
+\end{center}
+
+\clearpage
+
+\tableofcontents
+
+\clearpage
+
+\section{Esercitazione del 27 Novembre: Circuiti del Primo Ordine}
+\subsection{Esercizio 1}
+Determinare l'espressione della tensione a vuoto $v_0(t)$ del seguente circuito:
+\begin{center}
+    \begin{circuitikz}
+        \draw (6,0)node[right]{$-$} to[short,*-] (0,0)
+                    to[european voltage source=$E$](0,2)
+                    to[closing switch](2,2)
+                    to[R=$R_1$](4,2)
+                    to[R=$R_2$,-*](6,2)node[right]{$+$};
+        \draw (4,2) to[R=$R_3$](4,0);
+        \draw (2,2)node[above left]{$A$} to[short,*-] (2,3)
+                    to[C=$C$](5.8,3)node[above]{$v_C(0^-)=4\,V$}
+                    to[short,-*](5.8,2)node[above right]{$B$};
+        \draw[->] (6,0.25)--(6,1.75)node[midway, right]{$v_0(t)$};
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    E=10\,V\\
+    R_1=R_2=2\,\Omega\\
+    R_3=1\,\Omega\\
+    C=1\,F
+\end{gather*}
+
+Per risolvere il circuito bisogna isolare l'elemento con memoria ed applciare il teoream di Thevenin o Northon sul circuito, considerando l'elemento con memoria esterno al 
+circuito. Dopo aver calcolato la tensione ai capi del condensatore, considerandolo in entrata ad un circuito nei morsetti $A$ e $B$, si può sostituire l'elemento con un 
+generatore di tensione equivalente. Per calcolare la tensione a vuoto tra i morsetti $A$ e $B$ si può riscrivere il circuito come:
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (2,0) to[short](0,0) 
+                    to[european voltage source=$E$](0,2)
+                    to[R=$R_1$](2,2)
+                    to[R=$R_2$](4,2);
+        \draw (2,2) to[R=$R_3$](2,0);
+        \draw (0,2) to[short,-*](0,2.5)node[above]{$A$};
+        \draw (4,2) to[short,-*](4,2.5)node[above]{$B$};
+    \end{circuitikz}
+\end{center}
+
+Si calcola la tensione a vuoto tramite la formula per i partitori di tensioni:
+\begin{gather*}
+    E_{th}=\displaystyle\frac{R_1}{R_1+R_3}E=\frac{20}{3}\,V
+\end{gather*}
+La resistenza $R_2$ non influisce poiché è connessa a vuoto, per cui non può agire sulla tensione, non essendo attraversata da una corrente. 
+
+Si rende la rete passiva per calcolare la resistenza equivalente: 
+\begin{center}
+    \begin{circuitikz}
+        \draw (2,0) to[short](0,0) 
+                    to[short](0,2)
+                    to[R=$R_1$](2,2)
+                    to[R=$R_2$](4,2);
+        \draw (2,2) to[R=$R_3$](2,0);
+        \draw (0,2) to[short,-*](0,2.5)node[above]{$A$};
+        \draw (4,2) to[short,-*](4,2.5)node[above]{$B$};
+    \end{circuitikz}
+\end{center}
+La resistenza equivalente risulta quindi: 
+\begin{gather*}
+    R_{eq}=\displaystyle\frac{R_1R_3}{R_1+R_3}+R_2=\frac{8}{3}\,\Omega
+\end{gather*}
+
+Si può esprimere la tensione ai capi del condensatore mediante la formula precedentemente dimostrata, oppure si può dimostrare la formula 
+in questo specifico caso. Si ottiene quindi:
+\begin{gather*}
+    v_C(t)=\left[v_C(0^-)-E_{th}\right]e^{-\frac{t}{R_{eq}C}}+E_{th}\\
+    v_C(t)=\left[\displaystyle 4-\frac{20}{3}\right]e^{-\frac{3}{8}t}+\frac{20}{3}\,V\\
+    v_C(t)=-\displaystyle\frac{8}{3}e^{-\frac{3}{8}t}+\frac{20}{3}\,V
+\end{gather*}
+
+Dopo aver sostituito il condensatore con un generatore di tensione equivalente si considera una maglia dove sia presente la tensione incognita, per applicare il 
+secondo principio di Kirchhoff:
+\begin{gather*}
+    E-v_C(t)=v_0(t)\\
+    10-v_C(t)=v_0(t)\\
+    10+\displaystyle\frac{8}{3}e^{-\frac{3}{8}t}-\frac{20}{3}\,V=v_0(t)
+\end{gather*}
+La tensione a vuoto è quindi:
+\begin{gather}
+    v_0(t)=\displaystyle\frac{8}{3}e^{-\frac{3}{8}t}+\frac{10}{3}\,V
+\end{gather}
+
+\subsection{Esercizio 2}
+Determinare l'espressione della tensione a vuoto del seguente circuito, a regime prima della chiusura dell'interruttore:
+\begin{center}
+    \begin{circuitikz}
+        \draw (4.2,0) to[short,*-](0,0)
+                    to[european voltage source=$E$](0,4)
+                    to[R=$R_1$](2,4)
+                    to[R=$R_2$](2,2)
+                    to[closing switch](2,0);
+        \draw (2,4) to[R=$R_3$](4,4)
+                    to[C=$C$](4,0);
+        \draw (4,4) to[short,-*](4.2,4);
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    R_1=3\,\Omega\\
+    R_2=R_3=6\,\Omega\\
+    E=3\,V\\
+    C=0.05\,F
+\end{gather*}
+
+A regime permanente la tensione del condensatore corrisponde alla tensione erogata dal generatore, per cui:
+\begin{gather*}
+    v_C(0^-)=3\,V
+\end{gather*}
+Si applica il teorema di Thevenin senza considerare il condensatore. Si ottiene una tensione equivalente:
+\begin{gather*}
+    E_{th}=\displaystyle\frac{R_2}{R_1+R_2}E=2\,V
+\end{gather*}
+La resistenza equivalente corrisponde a:
+\begin{gather*}
+    R_{eq}=\displaystyle\frac{R_1R_2}{R_1+R_2}+R_3=8\,\Omega
+\end{gather*}
+Per cui la tensione ai capi del condesnatore corrisponde a:
+\begin{gather}
+    v_C(t)=[v_C(0^-)]e^{-\frac{t}{R_{eq}C}}+E_{th}=2+e^{-2.5\,t}\,V
+\end{gather}
+
+\subsection{Esercizio 3}
+Determinare la tensione a vuoto del seguente cirucito:
+\begin{center}
+    \begin{circuitikz}
+        \draw (8,0)node[right]{$-$} to[short,*-](0,0)
+                    to[european current source=$I$](0,2)
+                    to[short](2,2)
+                    to[closing switch](2,0);
+        \draw (2,2) to[short](4,2)
+                    to[R=$R$](4,0);
+        \draw (4,2)node[above left]{$A$} to[R=$R$,*-*](6,2)node[above right]{$B$}
+                    to[R=$R$](6,0);
+        \draw (6,2) to[short,-*](8,2)node[right]{$+$};
+        \draw (4,2) to[short](4,4)
+                    to[L=$L$](6,4)
+                    to[short](6,2);
+        \draw (5,0)node[above]{$0$}--(5,-0.5)node[ground]{};
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    I=2\,A\\
+    R=2\,\Omega\\
+    L=2\,H
+\end{gather*}
+A regime l'induttore contiene tutta la carica erogata dal generatore:
+\begin{gather*}
+    i_L(0^-)=2\,A
+\end{gather*}
+Si risovle mediante il metodo dei nodi:
+\begin{gather*}
+    \begin{bmatrix}
+        2&-1\\-1&2
+    \end{bmatrix}\begin{bmatrix}
+        V_{A0}\\V_{B0}
+    \end{bmatrix}
+    =R\begin{bmatrix}
+        2\\0
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        V_{A0}\\V_{B0}
+    \end{bmatrix}=\displaystyle\frac{1}{3}
+    \begin{bmatrix}
+        2&1\\1&2
+    \end{bmatrix}\begin{bmatrix}
+        4\\0
+    \end{bmatrix}=\frac{1}{3}\begin{bmatrix}
+        8\\4
+    \end{bmatrix}\,V
+\end{gather*}
+Per cui la tensione equivalente della rappresentazione di Thevenin si ottiene come:
+\begin{gather*}
+    E_{th}=V_{A0}-V_{B0}=\displaystyle\frac{4}{3}\,V
+\end{gather*}
+Si misura la resistenza equivalente rendedno passiva la rete, si ottiene quindi:
+\begin{gather*}
+    R_{eq}=\displaystyle\frac{(R+R)R}{(R+R)+R}=\frac{4}{3}\,\Omega
+\end{gather*}
+
+La corrente di cortocircuito di una forma Thevenin collegata a vuoto corrispone alla corrente del generatore di una forma Northon equivalente:
+\begin{gather*}
+    I_{no}=\displaystyle\frac{E_{th}}{R_{eq}}=1\,A
+\end{gather*}
+Si determina la tensione ai capi dell'induttore alla chiusura dell'induttore: 
+\begin{gather*}
+    i_L(t)=\left[\displaystyle i_L(0^-)-\frac{E_{th}}{R_{eq}}\right]e^{-\frac{R_{eq}}{L}t}+\frac{E_{th}}{R_{eq}}=1e^{-\frac{2}{3}t}+1\,A
+\end{gather*}
+Si sostituisce ora l'induttore con un generatore di corrente che eroga la corrente equivalente ai capi dell'induttore. Si applica quindi di nuovo il metodo dei nodi in questa 
+nuova situazione:
+\begin{gather*}
+    \begin{bmatrix}
+        2&-1\\-1&2
+    \end{bmatrix}\begin{bmatrix}
+        V_{A}\\V_{B}=V_{out}
+    \end{bmatrix}=
+    R\begin{bmatrix}
+        2-i_L\\i_L
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        V_{A}\\V_{out}
+    \end{bmatrix}=\displaystyle\frac{1}{3}
+    \begin{bmatrix}
+        2&1\\1&2
+    \end{bmatrix}\begin{bmatrix}
+        4-2i_L\\i_L
+    \end{bmatrix}=\begin{bmatrix}
+        8-4i_L+2i_L\\
+        4-2i_L+4i_L
+    \end{bmatrix}
+\end{gather*}
+La tensione ai capi del circuito è quindi: 
+\begin{gather}
+    V_{out}=\displaystyle\frac{1}{3}\left(4+2i_L\right)=\frac{4}{3}+\frac{2}{3}e^{-\frac{2}{3}t}+\frac{2}{3}=2+\frac{2}{3}e^{-\frac{2}{3}t}\,V
+\end{gather}
+
+\subsection{Esercizio 4}
+Calcolare la corrente $i_0(t)$ considerando la memoria nulla per il condensatore:
+\begin{center}
+    \begin{circuitikz}
+        \draw (8,2) to[short,i=$i_0(t)$](8,0)
+                    to[short](0,0)
+                    to[european voltage source=$E$](0,2)
+                    to[closing switch](2,2)
+                    to[R=$R$](4,2)
+                    to[C=$C$](4,0);
+        \draw (4,2) to[short] (6,2)
+                    to[R=$R$](6,0);
+        \draw (6,2) to[R=$R$](8,2);    
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    R=1\,\Omega\\
+    C=1\,F\\
+    E=1\,V
+\end{gather*}
+
+Per le formule sui partitori di tensione si ottiene una tensione equivalente:
+\begin{gather*}
+    E_{th}=\displaystyle\frac{R\frac{RR}{R+R}}{R+\frac{RR}{R+R}}E=\frac{\frac{1}{2}}{1+\frac{1}{2}}\cdot1\,V=\frac{1}{3}\,V
+\end{gather*}
+La resistenza equivalente corrisponde a:
+\begin{gather*}
+    R_{eq}=\displaystyle\frac{R\frac{RR}{R+R}}{R+\frac{RR}{R+R}}\frac{1}{3}\,\Omega
+\end{gather*}
+Il tempo caratteristico corrisponde a:
+\begin{gather*}
+    \tau=R_{eq}C=\displaystyle\frac{1}{3}\,s
+\end{gather*}
+La tensione ai capi del condensatore si ottiene come:
+\begin{gather*}
+    v_C(t)=(v_C(0^-)-E_{th})e^{-\frac{t}{\tau}}-E_{th}=-\displaystyle\frac{1}{3}e^{-3t}+\frac{1}{3}\,V
+\end{gather*}
+Per cui l'espressione della corrente risulta essere il rapporto tra la tensione ed il valore della resistenza del resistore ai cui capi è presente questa tensione. 
+La corrente non cambia per il resistore in parallelo al lato dove fluisce $i_0$. 
+\begin{gather}
+    i_0(t)=\displaystyle\frac{v_c(t)}{R}=\frac{1}{3}\left(1-e^{-3t}\right)
+\end{gather}
+
+\subsection{Esercizio 5}
+Calcolare la tensione a vuoto $v_0(t)$ della seguente rete:
+\begin{center}
+    \begin{circuitikz}
+        \draw (8,0)node[right]{$-$} to[short,*-](0,0)
+                    to[european voltage source=$E$](0,2)
+                    to[closing switch](2,2)
+                    to[R=$R_1$](4,2)
+                    to[C=$C$](4,0)node[below]{$v_C(0^-)=0\,V$};
+        \draw (4,2) to[short] (6,2)
+                    to[R=$R_2$](6,0);
+        \draw (6,2) to[short,-*](8,2)node[right]{$+$};   
+        \draw[->] (8,0.25)--(8,1.75)node[midway, right]{$v_0(t)$};
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    E=10\,V\\
+    R_1=R_2=1\,\Omega\\
+    C=1\,F
+\end{gather*}
+Si considera la rappresentazione equivalente di Thevenin, per individuare la tensione ai capi del condensatore:
+\begin{gather*}
+    E_{th}=\displaystyle\frac{R_1}{R_1+R_2}E=5\,V
+\end{gather*}
+Mentre si ottiene una resistenza equivalente data dalle due resistenze in parallelo:
+\begin{gather*}
+    R_{eq}=\displaystyle\frac{R_1R_2}{R_1+R_2}=\frac{1}{2}\,\Omega
+\end{gather*}
+La tensione ai capi del condensatore è quindi:
+\begin{gather*}
+    v_C(t)=(v_C(0^-)-E_{th})e^{-\frac{t}{R_{eq}C}}+E_{th}=\displaystyle -5e^{-2t}+5\,V
+\end{gather*}
+Il condensatore è montato in parallelo ai morsetti in entrata al circuito, per cui l'espressione della tensione a vuoto coincide con l'espressione del condensatore:
+\begin{gather*}
+    v_0(t)=5(1-e^{-2t})\,V
+\end{gather*}
+
+\subsection{Esercizio 6}
+Calcolare la costante di tempo $\tau$ dei seguenti circuiti:
+\begin{center}
+    \begin{circuitikz}
+        \draw (2,2) to[short](2,1)
+                    to[R=$R_2$](4,1)
+                    to[short](4,0)
+                    to[short](0,0)
+                    to[european voltage source=$E$](0,2)
+                    to[R=$R_1$](2,2)
+                    to[short](2,3)
+                    to[C=$C$](4,3)
+                    to[short](4,1);
+    \end{circuitikz}
+\end{center}
+Per trovare il tempo caratteristico è necessario solamente determinare la resistenza equivalente, e l'eccitazione del circuito. Escludendo il condensatore dalla rete 
+resa passiva si trova una resistenza equivalente corrispondente alle due resistenze $R_1$ e $R_2$ in parallelo:
+\begin{gather*}
+    R_{eq}=\displaystyle\frac{R_1R_2}{R_1+R_2}
+\end{gather*}
+Per cui il tempo caratteristico $\tau$ è:
+\begin{gather}
+    \tau=CR_{eq}=\displaystyle\frac{CR_1R_2}{R_1+R_2}
+\end{gather}
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (2,2) to[short](4,2)
+                to[C=$C$](4,0)
+                to[short](0,0)
+                to[european current source=$I$](0,4)
+                to[short](2,4)
+                to[R=$R_1$](2,2)
+                to[R=$R_2$](2,0);
+    \end{circuitikz}
+\end{center}
+Rendendo passiva la rete si osserva che la resistenza $R_1$ è collegata al vuoto, per cui la resistenza equivalente coincide con la resistenza $R_2$, per cui il 
+tempo caratteristico corrisponde a:
+\begin{gather}
+    \tau=CR_2
+\end{gather}
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,3) to[R=$R$](2,3)
+                    to[R=$R$](4,3)
+                    to[short](4,1)
+                    to[R=$R$](2,1)
+                    to[R=$R$](0,1)
+                    to[short](0,0)
+                    to[european voltage source=$E$](8,0)
+                    to[short](8,3)
+                    to[R=$R$](6,3)
+                    to[short](6,1)
+                    to[L=$L$](8,1);
+        \draw (6,2) to[short](4,2);
+        \draw (2,3) to[R=$R$](2,1);
+        \draw (0,1) to[short](0,3);
+    \end{circuitikz}
+\end{center}
+Si considera la rete resa passiva, escludendo l'elemento con memoria:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[R,-*](2,0)
+                    to[R](4,0)
+                    to[short](4,2)
+                    to[R](2,2)
+                    to[R,*-*](0,2)node[left]{$A$}
+                    to[short](0,3)
+                    to[short](6,3)
+                    to[short](6,2)node[above right]{$A$}
+                    to[R,*-*](4,2)node[above]{$C$};
+        \draw (2,0)node[below]{$B$} to[R](2,2)node[above]{$D$};
+        \draw (6,2) to[short](6.5,2)
+                    to[short](6.5,1.5)node[ground]{};
+        \draw (0,0) to[short](0,2);
+    \end{circuitikz}
+\end{center}
+Si considera il nodo $A$ il nodo di salto. Si considera una corrente di $1\,A$ inserita tra i nodi $C$ e $A$, e si risolve mediante il metodo dei nodi:
+\begin{gather*}
+    \begin{bmatrix}
+        3&-1&-1\\-1&3&-1\\-1&-1&3
+    \end{bmatrix}\begin{bmatrix}
+        V_B\\V_C\\V_D
+    \end{bmatrix}=R\begin{bmatrix}
+        0\\1\\0
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        V_B\\V_C\\V_D
+    \end{bmatrix}=\begin{bmatrix}
+        0.5&0.25&0.25\\0.25&0.5&0.25\\0.25&0.25&0.5
+    \end{bmatrix}R\begin{bmatrix}
+        0\\1\\0 
+    \end{bmatrix}\\
+    V_C=\frac{R}{2}
+\end{gather*}
+Per cui la resistenza equivalente è:
+\begin{gather*}
+    R_{eq}=\displaystyle\frac{V_C}{1}=\frac{R}{2}
+\end{gather*}
+Allora il tempo caratteristico di questo circuito corrisponde a:
+\begin{gather}
+    \tau=\displaystyle\frac{L}{R_{eq}}=\frac{2L}{R}
+\end{gather}
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,3) to[R=$R$](2,3)
+                    to[R=$R$](4,3)
+                    to[short](4,1)
+                    to[R=$R$](2,1)
+                    to[R=$R$](0,1)
+                    to[short](0,0)
+                    to[european current source=$I$](8,0)
+                    to[short](8,3)
+                    to[R=$R$](6,3)
+                    to[short](6,1)
+                    to[L=$L$](8,1);
+        \draw (6,2) to[short](4,2);
+        \draw (2,3) to[R=$R$](2,1);
+        \draw (0,1) to[short](0,3);
+    \end{circuitikz}
+\end{center}
+Poiché in questo caso rendendo la rete passiva si sostituisce al generatore di corrente un cortocircuito, il lato formato da sole resistenze connesso in serie al generatore 
+di corrente sono connesse a vuoto. Per cui non forniscono contributi, per cui l'unica resistenza utile è quella montata in parallelo all'induttore, per cui la 
+resistenza equivalente coincide a questa resistenza:
+\begin{gather*}
+    R_{eq}=R
+\end{gather*}
+Per cui il tempo caratteristico corrisponde a:
+\begin{equation}
+    \tau=\displaystyle\frac{R_{eq}}{L}=\frac{R}{L}
+\end{equation}
+
+\end{document}
