@@ -4071,6 +4071,7 @@ Il vettore correnti di maglia si calcola tramite la risultante equazione risolut
 
 \subsubsection{Metodo per Semplice Ispezione}
 Si considera il seguente circuito. E si esprimono le equazioni senza passare per il grafo del circuito.
+%% sistemare grafico 9/11
 \begin{center}
     \begin{circuitikz}
         \draw (0,0) to[R=$R_1$] (0,3)
@@ -4093,8 +4094,8 @@ Si considera il seguente circuito. E si esprimono le equazioni senza passare per
                     to[short](5,3);
         \draw (5.5,3) to[R=$R_4$](5.5,1.5)
                     to[european voltage source=$E_4$](5.5,0);
-        \draw (7,0) to[R=$R_5$](7,3);
-        \draw (0,0) to[short](10,0);
+        \draw (10,0)to[short](5,0)
+                    to[european voltage source=$E_1$](0,0);
     \end{circuitikz}
 \end{center}
 
@@ -4388,10 +4389,10 @@ Si dimostra questa proprietà dato il seguente circuito:
 \end{center}
 Si risolve mediante il metodo degli anelli, per cui si considera un unico lato i componenti in parallelo $R_4$ e $I_g$, trasformati in forma Norton. 
 \begin{gather*}
-    \begin{bmatrix}
+    \left\{\begin{bmatrix}
         R_1+R_4+R_5&-R_5\\
         -R_5&R_2+R_3+R_5
-    \end{bmatrix}\left\{
+    \end{bmatrix}\right\}^{-1}
             \begin{bmatrix}
                 R_4Ig\\
                 0
@@ -4408,7 +4409,7 @@ Si risolve mediante il metodo degli anelli, per cui si considera un unico lato i
                 0\\
                 -E_3
             \end{bmatrix}^{(4)}
-    \right\}^{-1}=\begin{bmatrix}
+    =\begin{bmatrix}
         I_{m_1}\\
         I_{m_2}
     \end{bmatrix}
@@ -4431,9 +4432,9 @@ Si dimostra il teorema di Thevenin dato il seguente circuito:
     \begin{circuitikz}
         \draw (0,0) to[european voltage source=$10\,V$](0,3)node[left]{$b$}
                     to[R=$4\,\Omega$](2,3)
-                    to[R=$1\,\Omega$](2,1.5)
+                    to[R=$2\,\Omega$](2,1.5)
                     to[european voltage source=$20\,V$](2,0)
-                    to[R=$2\,\Omega$](0,0);
+                    to[R=$1\,\Omega$](0,0);
         \draw (2,3) to[short](2,4.5)
                     to[european current source=$2\,A$](0,4.5)
                     to[short](0,3);
@@ -5305,7 +5306,7 @@ sovrasmorzato ed il caso sottosmorzato. La radice $\alpha_1$, ha molteplicità $
 la soluzione dell'equazione differenziale è della forma:
 \begin{gather*}
     \alpha_1=\alpha_2=\displaystyle-\frac{R}{2L}\\
-    v_{Cg}(t)=k_1e^{\alpha_1t}+k_2e^{\alpha_1t}
+    v_{Cg}(t)=k_1te^{\alpha_1t}+k_2e^{\alpha_1t}
 \end{gather*}
 La soluzione totale corrisponde a:
 \begin{gather*}

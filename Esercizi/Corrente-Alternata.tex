@@ -174,5 +174,325 @@ Per cui l'espressione della tensione di nodo corrisponde a:
     v_x=|\overline{V}_x|\cos(\omega t+\varphi)=\displaystyle\frac{10}{\sqrt{5}}\cos(10t+63.4^{\circ})
 \end{gather}
 
+\clearpage
+
+\section{Esercitazione Svolta il 29 Novembre}
+
+\subsection{Esericzio 1}
+
+Determinare la tensione a regime dell'induttore $v_L$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short] (4,0)
+                    to[sV=$\overline{E}_{g2}$](4,2)
+                    to[C=$C$](2,2)
+                    to[R=$R$](2,0);
+        \draw (0,0) to[sV=$\overline{E}_{g1}$](0,2)
+                    to[L=$L$](2,2);
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    E_{g1}=20\cos(1000 t)\,V\\
+    E_{g2}=30\cos(1000t +90^{\circ})\,V\\
+    R=10\,\Omega\\
+    L=16\,mH\\
+    C=200\,\mu F
+\end{gather*}
+Si determina la pulsazione e ed i fasori dei generatori:
+\begin{gather*}
+    \omega=10^3\,\mbox{rad}/s\\
+    \overline{E}_{g1}=20\,V\\
+    \overline{E}_{g2}=30e^{-j\pi/2}=-30j\,V
+\end{gather*}
+Si determinano le impedenze del circuito:
+\begin{gather*}
+    z_1=j\omega L=10^3\cdot15\cdot10^{-3}j\,\Omega=15e^{j\pi/2}\Omega\\
+    z_2=R=10\,\Omega\\
+    z_3=\displaystyle-\frac{j}{\omega C}=-j\frac{1}{10^3\cdot200\cdot10^{-6}}\,\Omega=5e^{-j\pi/2}\Omega
+\end{gather*}
+Si risolve mediante il metodo dei nodi, ottenendo una singola equazione, questo caso coincide con il teorema di Millman:
+\begin{gather*}
+    \overline{V}_A=\displaystyle\frac{y_1\overline{E}_{g1}+y_3\overline{E}_{g2}}{y_1+y_2+y_3}=\frac{\frac{20}{15j}+\frac{-30j}{-5j}}{\frac{1}{15j}+\frac{1}{10}+\frac{1}{-5j}}\\
+    \displaystyle\frac{\frac{1}{5j}\left[\frac{20}{3}+30j\right]}{\frac{10-30+15j}{150j}}=\frac{30\left[\frac{20}{3}+30j\right]}{-20+15j}=\frac{30\left[\frac{20}{3}+30j\right]}{20^2+15^2}(-20-15j)\\
+    \displaystyle-\frac{30}{625}\left(\frac{400}{3}+600j+100j-450\right)=15.2-33.6j\,V
+\end{gather*}
+Si determina ora la tensione ai capi dell'induttore:
+\begin{gather*}
+    \overline{V}_L=\overline{E}_{g1}-\overline{V}_A=20-15.2+33.6j\,V=4.8+33.6j\,V
+\end{gather*}
+Si determina ora la fase ed il modulo:
+\begin{gather*}
+    |V_L|=\sqrt{4.8^2+33.6^2}=33.941\\
+    \varphi=\arctan\left(\displaystyle\frac{33.6}{4.8}\right)=81.2^{\circ}
+\end{gather*}
+Per cui l'espressione a regime della tensione corrisponde a:
+\begin{gather}
+    v_L(t)=33.941\cos(1000t+81.2^{\circ})\,V
+\end{gather}
+
+Si risolve ora mediante il metodo delle maglie:
+\begin{gather*}
+    \begin{bmatrix}
+        z_1+z_2&-z_2\\-z_2&z_2+z_3
+    \end{bmatrix}\begin{bmatrix}
+        \overline{I}_{m_1}\\\overline{I}_{m_2}
+    \end{bmatrix}=\begin{bmatrix}
+        \overline{E}_{g1}\\
+        -\overline{E}_{g2}
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        \overline{I}_{m_1}\\\overline{I}_{m_2}
+    \end{bmatrix}=\begin{bmatrix}
+        10+15j&-10\\-10&10-5j
+    \end{bmatrix}^{-1}\begin{bmatrix}
+        20\\-30j
+    \end{bmatrix}=\begin{bmatrix}
+        -1.6-3.2j\\1.2-5.6j
+    \end{bmatrix}
+\end{gather*}
+Si calcola ora il fasore della tensione dell'induttore:
+\begin{gather*}
+    \overline{V}_L=\overline{E}_{g1}-(\overline{I}_{m_1}-\overline{I}_{m_2})z_1=4.8+33.6j\,V
+\end{gather*}
+Corrisponde allo stesso fasore calcolato precedentemente mediante il metodo dei nodi.
+
+\subsection{Esercizio 2}
+Determinare la potenza attiva erogaata dal generatore:
+\begin{center}
+    \begin{circuitikz}
+        \draw (6,0) to[short](0,0)
+                    to[sV=$\overline{E}_g$](0,2)
+                    to[R=$R_1$](2,2)
+                    to[short](6,2)
+                    to[C=$C$](6,0);
+        \draw (2,2) to[R=$R_2$](2,0);
+        \draw (4,2) to[L=$L$](4,0);
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    E_g=5\cos(2t)\,V\\
+    R_1=2\,\Omega\\
+    R_2=1\,\Omega\\
+    C=0.5,F\\
+    L=2H
+\end{gather*}
+Si calcolano le impedenze ed il fasore della tensione:
+\begin{gather*}
+    z_1=2\,\Omega\\
+    z_2=1\,\Omega\\
+    z_3=4j\,\Omega\\
+    z_4=-j\,\Omega\\
+    \overline{E}_g=5\,V
+\end{gather*}
+
+Si considera il parallelo tra $z_2$, $z_3$ e $z_4$:
+\begin{gather*}
+    y_p=\displaystyle1+\frac{1}{4j}+\frac{1}{-j}=\frac{4j+1-4}{4j}=\frac{-3+4j}{4j}\\
+    z_p=\displaystyle\frac{4j}{-3+4j}=\frac{4j(-3-4j)}{25}=\frac{16}{25}-\frac{12}{25}j\,\Omega
+\end{gather*}
+Si applica il metodo delle maglie:
+\begin{gather*}
+    (z_1+z_p)\overline{I}_{m_1}=\overline{E}_g\\
+    \overline{I}_{m_1}=\overline{I}_g=\displaystyle\frac{\overline{E}_g}{z_1+z_p}=\frac{5}{\frac{16}{25}-\frac{12}{25}j+2}\\
+    \overline{I}_g=\displaystyle\frac{125}{66-12j}=\frac{125}{4500}(66+12j)\,A
+\end{gather*}
+La potenza complessa erogata dal generatore si ottiene come:
+\begin{gather*}
+    P_C=\displaystyle\frac{1}{2}\overline{E}_g\overline{I}_g^*=\frac{1}{2}5\frac{125}{4500}(66-12j)=4.5833-0.8333j
+\end{gather*}
+
+\subsection{Esercizio 3}
+
+\begin{quotation}
+    Un'impedenza $Z$ alimentata da un generatore sinusoidale da $120\,V$ efficaci, assorbe la potenza apparente di $12\,kVA$, con un fattore di potenza di $0.856$ induttivo. 
+    Determinare modulo e fase di $Z$. 
+\end{quotation}
+Dato il fattore di potenza si può determinare la fase della potenza complessa:
+\begin{gather*}
+    \varphi\arccos(0.856)=31.1296^{\circ}
+\end{gather*}
+
+Si può esprimere la corrente che attraverso l'impedenza come il rapporto tra la potenza apparente e la tensione erogata:
+\begin{gather*}
+    \overline{I}=\displaystyle\frac{P_a}{\overline{E}_g}=\frac{12\cdot10^3}{120}=100\,A
+\end{gather*}
+Si ricorda che l'impedenza di un dato bipolo, tramite la legge di Ohm complessa, si può ricavare dal fasore della corrente e della tensione:
+\begin{gather*}
+    |Z|=\displaystyle\frac{\overline{E}_{g}}{\overline{I}_g}\frac{120\,V}{100\,A}=1.2\,\Omega
+\end{gather*}
+
+\subsection{Esercizio 4}
+
+Determinare la potenza complessiva assorbita dall'impedenza $z_1$ composta dal resistore e dall'induttore in serie:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[sV=$220V$](0,4)
+                    to[R=$4\,\Omega$](2,4)
+                    to[L=$2j\,\Omega$](4,4)
+                    to[R=$15\,\Omega$](4,2)
+                    to[C=$-10j\,\Omega$](4,0)
+                    to[short](0,0);
+    \end{circuitikz}
+\end{center}
+
+Si calcola il fasore della corrente:
+\begin{gather*}
+    \overline{I}=\displaystyle\frac{\overline{E}_g}{z_1+z_2}=\frac{220}{4+15+(2-10)j}=\frac{220}{425}(19+8j)
+\end{gather*}
+
+La potenza assorbita dall'impedenza $z_1$ si calcola come:
+\begin{gather*}
+    P_{C1}=z_1|\overline{I}|^2=(4+2j)\left|\frac{220}{425}(19+8j)\right|^2=455.4\,W+227.7j\,VA
+\end{gather*}
+Per cui questo circuito risulta ohmico-capacitivo, e per metterlo in risonanza bisognerebbe inserire un'induttore in parallelo. 
+
+\subsection{Esercizio 5}
+
+Determinare il circuito equivalente di Thevenin tra i terminali $A$ e $B$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (6,0)node[right]{$B$} to[short,*-](0,0)
+                    to[sV=$\overline{E}_{g1}$](0,2)
+                    to[short,i=$\overline{I}$](0.5,2)
+                    to[R=$R$](2.5,2)
+                    to[C=$C$](2.5,0);
+        \draw (2.5,2) to[european controlled voltage source=$1/2\overline{I}$](4.5,2)
+                    to[L=$L$](4.5,0);
+        \draw (4.5,2) to[short,-*](6,2)node[right]{$A$};
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    \overline{E}_g=5\,V\\
+    z_R=1\,\Omega\\
+    z_C=-3j\,\Omega\\
+    z_L=2j\,\Omega
+\end{gather*}
+Si risolve mediante il metodo delle maglie:
+\begin{gather*}
+    \begin{bmatrix}
+        z_R+z_C&-z_C\\-z_C&z_L
+    \end{bmatrix}\begin{bmatrix}
+        \overline{I}_{m_1}\\\overline{I}_{m_2}
+    \end{bmatrix}=\begin{bmatrix}
+        \overline{E}_{g1}\\\overline{E}_{g2}
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        1-3j&3j\\3j&-j
+    \end{bmatrix}\begin{bmatrix}
+        \overline{I}_{m_1}\\\overline{I}_{m_2}
+    \end{bmatrix}=\begin{bmatrix}
+        5\\\displaystyle\frac{1}{2}\overline{I}
+    \end{bmatrix}
+\end{gather*}
+Il vincolo del pilota è banale, poiché la corrente di riferimento corrisponde alla corrente della maglia $1$:
+\begin{gather*}
+    \overline{I}=\overline{I}_{m_1}\\
+    \begin{bmatrix}
+        1-3j&+3j\\\displaystyle-\frac{1}{2}+3j&-j
+    \end{bmatrix}\begin{bmatrix}
+        \overline{I}_{m_1}\\\overline{I}_{m_2}
+    \end{bmatrix}=\begin{bmatrix}
+        5\\0
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        \overline{I}_{m_1}\\\overline{I}_{m_2}
+    \end{bmatrix}=\begin{bmatrix}
+        1-3j&+3j\\\displaystyle-\frac{1}{2}+3j&-j
+    \end{bmatrix}^{-1}\begin{bmatrix}
+        5\\0
+    \end{bmatrix}=\begin{bmatrix}
+        -0.069-0.8276j\\0.2069-2.5172j
+    \end{bmatrix}
+\end{gather*}
+La tensione di Thevenin equivalente si ottiene come:
+\begin{gather*}
+    \overline{E}_{th}=z_L\overline{I}_{m_2}=2j(0.2069-2.5172j)=5.0345+0.4138j\,V
+\end{gather*}
+Si rappresenta in coordinate polari:
+\begin{gather*}
+    |\overline{E}_{th}|=\sqrt{5.0345^2+0.4138^2}=5.0515\\
+    \varphi=\arctan\left(\displaystyle\frac{0.4138}{5.0345}\right)=4.6897^{\circ}
+\end{gather*}
+\begin{equation}
+    \overline{E}_g=5.0515e^{j4.6897^{\circ}}
+\end{equation}
+Applicando il metodo dei nodi si ottiene una risposta analoga:
+\begin{gather*}
+    \overline{V}_A=\displaystyle\frac{\overline{E}gz_R-\frac{1}{2}\overline{I}y_L}{y_R+y_C+y_L}
+\end{gather*}
+Dove l'equazione del pilota in questo caso si ottiene come:
+\begin{gather*}
+    \overline{I}=(\overline{E}_g-\overline{V}_A)y_R
+\end{gather*}
+Per cui si ottiene un'equazione per la tensione:
+\begin{gather*}
+    \overline{V}_A=\displaystyle\frac{\overline{E}gz_R}{y_R+y_C+y_L}-\frac{1}{2}y_Ly_R\frac{\overline{E}_g}{y_R+y_C+y_L}+\frac{1}{2}y_LyR\frac{\overline{V}_A}{y_R+y_C+y_L}\\
+    \overline{V}_A\left(\displaystyle1-\frac{1}{2}\frac{y_Ry_L}{y_R+y_C+y_L}\right)=\frac{\overline{E}gz_R-\frac{1}{2}y_Ly_R\overline{E}_g}{y_R+y_C+y_L}
+\end{gather*}
+
+Per calcolare l'impedenza di Thevenin si spengono solo i generatori passivi:
+\begin{center}
+    \begin{circuitikz}
+        \draw (6,0)node[below]{$B$} to[short,*-](0,0)
+                    to[short](0,2)
+                    to[short,i=$\overline{I}$](0.5,2)
+                    to[R=$R$](2.5,2)
+                    to[C=$C$](2.5,0);
+        \draw (2.5,2) to[european controlled voltage source=$1/2\overline{I}$](4.5,2)
+                    to[L=$L$](4.5,0);
+        \draw (4.5,2) to[short,-*](6,2)node[above]{$A$};
+        \draw (6.1,0) to[short](8,0)
+                    to[sV=$\overline{E}_C$](8,2)
+                    to[short,i=$\overline{I}_C$](6.1,2);
+    \end{circuitikz}
+\end{center}
+Si inserisce dall'esterno un generatore indipendente in base al metodo di risoluzione, per cui in questo caso si inserisce un generatore di tensione esterno per applicare il 
+metodo delle maglie, che eroga $\overline{E}_C=1\,V$. L'induttore non influisce sulla tensione in ingresso, per cui si può calcolare prima un sistema di due equazioni, per 
+trovare due correnti di maglia $\overline{I}_{m_1}$ e $\overline{I}_{m_2}$: 
+\begin{gather*}
+    \begin{bmatrix}
+        z_R+z_C&-z_C\\-z_C&z_C
+    \end{bmatrix}\begin{bmatrix}
+        \overline{I}_{m_1}\\\overline{I}_{m_2}
+    \end{bmatrix}=\begin{bmatrix}
+        0\\\displaystyle\frac{1}{2}\overline{I}-\overline{E}_C
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        z_R+z_C&-z_C\\-\displaystyle\frac{1}{2}-z_C&z_C
+    \end{bmatrix}\begin{bmatrix}
+        \overline{I}_{m_1}\\\overline{I}_{m_2}
+    \end{bmatrix}=\begin{bmatrix}
+        0\\-\overline{E}_C
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        \overline{I}_{m_1}\\\overline{I}_{m_2}
+    \end{bmatrix}=\begin{bmatrix}
+        1-3j&+3j\\\displaystyle-\frac{1}{2}+3j&-3j
+    \end{bmatrix}^{-1}\begin{bmatrix}
+        0\\-1
+    \end{bmatrix}=\begin{bmatrix}
+        -2\\
+        -2-\displaystyle\frac{2}{3}j
+    \end{bmatrix}
+\end{gather*}
+
+La corrente che si vuole misurare corrisponde alla corrente della seconda maglia sommata alla corrente 
+attraverso l'induttore $\overline{I}_C=\overline{I}_{m_1}+\overline{I}_L=\overline{I}_{m_1}+\frac{\overline{E}_C}{z_L}$:
+\begin{gather*}
+    \overline{I}_C=2+\displaystyle\frac{2}{3}j-\frac{1}{2}j=2-\frac{1}{6}j
+\end{gather*}
+L'impedenza equivalente si ottiene dal rapporto tar la tensione inserita nel circuito e la corrente calcolata:
+\begin{gather*}
+    z_{eq}=\displaystyle\frac{\overline{E}_C}{\overline{I}_C}=\frac{1}{2-\frac{1}{6}j}=\frac{1}{4+\frac{1}{36}}\left(2-\frac{1}{6}j\right)=\frac{36}{145}\left(2+\frac{1}{6}j\right)
+\end{gather*}
+Rappresentandola in modulo e fase:
+\begin{gather*}
+    |z_{eq}|=\displaystyle\frac{36}{145}\sqrt{4+\frac{1}{6}}=0.4983\\
+    \varphi=\arctan\left(\frac{\frac{1}{6}}{2}\right)=4.7636^{\circ}
+\end{gather*}
+Per cui l'impedenza equivalente della rappresentazione esterna di Thevenin risulta essere:
+\begin{gather}
+    z_{eq}=0.4983e^{4.7636^{\circ}}
+\end{gather}
 
 \end{document}
