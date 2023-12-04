@@ -51,7 +51,8 @@
 \clearpage
 
 \section{Esercitazione del 27 Novembre: Circuiti del Primo Ordine}
-\subsection{Esercizio 1}
+
+\subsection{Esercizio 6.3}
 Determinare l'espressione della tensione a vuoto $v_0(t)$ del seguente circuito:
 \begin{center}
     \begin{circuitikz}
@@ -74,7 +75,7 @@ Determinare l'espressione della tensione a vuoto $v_0(t)$ del seguente circuito:
     C=1\,F
 \end{gather*}
 
-Per risolvere il circuito bisogna isolare l'elemento con memoria ed applciare il teoream di Thevenin o Northon sul circuito, considerando l'elemento con memoria esterno al 
+Per risolvere il circuito bisogna isolare l'elemento con memoria ed applciare il teorema di Thevenin o Northon sul circuito, considerando l'elemento con memoria esterno al 
 circuito. Dopo aver calcolato la tensione ai capi del condensatore, considerandolo in entrata ad un circuito nei morsetti $A$ e $B$, si può sostituire l'elemento con un 
 generatore di tensione equivalente. Per calcolare la tensione a vuoto tra i morsetti $A$ e $B$ si può riscrivere il circuito come:
 
@@ -133,7 +134,7 @@ La tensione a vuoto è quindi:
     v_0(t)=\displaystyle\frac{8}{3}e^{-\frac{3}{8}t}+\frac{10}{3}\,V
 \end{gather}
 
-\subsection{Esercizio 2}
+\subsection{Esercizio 6.4}
 Determinare l'espressione della tensione a vuoto del seguente circuito, a regime prima della chiusura dell'interruttore:
 \begin{center}
     \begin{circuitikz}
@@ -171,7 +172,7 @@ Per cui la tensione ai capi del condesnatore corrisponde a:
     v_C(t)=[v_C(0^-)]e^{-\frac{t}{R_{eq}C}}+E_{th}=2+e^{-2.5\,t}\,V
 \end{gather}
 
-\subsection{Esercizio 3}
+\subsection{Esercizio 6.5}
 Determinare la tensione a vuoto del seguente cirucito:
 \begin{center}
     \begin{circuitikz}
@@ -265,7 +266,7 @@ La tensione ai capi del circuito è quindi:
     V_{out}=\displaystyle\frac{1}{3}\left(4+2i_L\right)=\frac{4}{3}+\frac{2}{3}e^{-\frac{2}{3}t}+\frac{2}{3}=2+\frac{2}{3}e^{-\frac{2}{3}t}\,V
 \end{gather}
 
-\subsection{Esercizio 4}
+\subsection{Esercizio 6.6}
 Calcolare la corrente $i_0(t)$ considerando la memoria nulla per il condensatore:
 \begin{center}
     \begin{circuitikz}
@@ -308,7 +309,7 @@ La corrente non cambia per il resistore in parallelo al lato dove fluisce $i_0$.
     i_0(t)=\displaystyle\frac{v_c(t)}{R}=\frac{1}{3}\left(1-e^{-3t}\right)
 \end{gather}
 
-\subsection{Esercizio 5}
+\subsection{Esercizio 6.2}
 Calcolare la tensione a vuoto $v_0(t)$ della seguente rete:
 \begin{center}
     \begin{circuitikz}
@@ -330,7 +331,7 @@ Calcolare la tensione a vuoto $v_0(t)$ della seguente rete:
 \end{gather*}
 Si considera la rappresentazione equivalente di Thevenin, per individuare la tensione ai capi del condensatore:
 \begin{gather*}
-    E_{th}=\displaystyle\frac{R_1}{R_1+R_2}E=5\,V
+    E_{th}=\displaystyle\frac{R_2}{R_1+R_2}E=5\,V
 \end{gather*}
 Mentre si ottiene una resistenza equivalente data dalle due resistenze in parallelo:
 \begin{gather*}
@@ -345,7 +346,7 @@ Il condensatore è montato in parallelo ai morsetti in entrata al circuito, per 
     v_0(t)=5(1-e^{-2t})\,V
 \end{gather*}
 
-\subsection{Esercizio 6}
+\subsection{Esercizio 6.1}
 Calcolare la costante di tempo $\tau$ dei seguenti circuiti:
 \begin{center}
     \begin{circuitikz}
@@ -478,5 +479,7 @@ Per cui il tempo caratteristico corrisponde a:
 \begin{equation}
     \tau=\displaystyle\frac{R_{eq}}{L}=\frac{R}{L}
 \end{equation}
+
+
 
 \end{document}

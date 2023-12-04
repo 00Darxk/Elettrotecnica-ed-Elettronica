@@ -5231,7 +5231,7 @@ Si considerano $\alpha_{1,2}=\sigma\pm\sqrt\Delta$, l'equazione allora diventa:
     \end{bmatrix}\\
     \begin{cases}
         k_1=\displaystyle-\frac{1}{2\sqrt{\Delta} C}\{\alpha_2C[v_C(0^-)-E]-i(0^-)\}\\
-        k_2=\displaystyle-\frac{1}{2\sqrt{\Delta} C}\{-\alpha_1C[v_C(0^-)-E]-i(0^-)\}
+        k_2=\displaystyle-\frac{1}{2\sqrt{\Delta} C}\{-\alpha_1C[v_C(0^-)-E]+i(0^-)\}
     \end{cases}
 \end{gather*}
 %Si esprime la tensione e la corrente rispetto a queste costanti:
@@ -6314,6 +6314,261 @@ più alla potenza massima. Mentre anche il comportamento dell'impedenza equivale
 di Thevenin, poiché è necessaria la conoscenza del circuito completo per determinare in che modo varia al variare della frequenza. 
 
 \clearpage
+
+\clearpage
+
+\section{Dominio di Laplace}
+
+Si considera una generica funzione nel domino del tempo $f(x)$ che rappresenta una grandezza tensione o corrente, variante nel tempo. 
+Si definisce la trasformata di Laplace $F(s)$ della funzione $f(x)$ un funzionale $\mathscr{L}\{f(x)\}=F(s)$ che trasferisce una funzione dal dominio del tempo al domino 
+complesso $s\in\mathbb{C}$ della frequenza. Si considera solamente la trasformata unilatera destra, definita come l'integrale di trasformazione da $0^-$ a $+\infty$:
+\begin{gather}
+    F(s)=\displaystyle\int_{0^-}^{+\infty}f(t)e^{-st}dt
+\end{gather}
+Questa funzione restituisce un valore definito se il so argomento tende asintoticamente a $0$, per tempi matematicamente infiniti:
+\begin{gather*}
+    |f(s)e^{\sigma t}|\to0
+\end{gather*}
+Dove $\sigma$ è la parte reale della variabile complessa $s$:
+\begin{gather*}
+    s=\sigma+j\omega
+\end{gather*}
+Si definiscono ora una serie di trasformate notevoli. Si considera il segnale gradino unitario $u_{-1}(t)$:
+%% grafico 
+\begin{gather*}
+    f(t)=u_{-1}(t)=\begin{cases}
+        0&t\leq 0^-\\
+        1&t\geq 0^+
+    \end{cases}
+\end{gather*}
+La sua trasformata di Laplace corrisponde all'integrale di un esponenziale, cambiando i limiti di integrazione:
+\begin{gather*}
+    F(s)=\displaystyle\int_{0^-}^{+\infty}u_{-1}(t)e^{-st}dt=\int_{0^+}^{+\infty}e^{-st}dt=\left[-\frac{1}{s}e^{-st}\right]_{0^+}^{+\infty}=-\frac{1}{s}\cancelto{0}{e^{-\infty t}}+\frac{1}{s}
+\end{gather*}
+
+Per cui la trasformata di un gradino nel tempo è un'iperbole in frequenza:
+\begin{equation}
+    \mathscr{L}\{u_{-1}(t)\}=\displaystyle\frac{1}{s}
+\end{equation}
+
+Si considera un segnale esponenziale convergente $\alpha\in\mathbb{R}^-$:
+\begin{gather*}
+    F(s)=\displaystyle\int_{0^-}^{+\infty}e^{\alpha t}e^{-st}dt=\int_{0^-}^{+\infty}e^{-(s-\alpha)t}dt=\left[-\frac{s-\alpha}e^{-(s-\alpha)t}\right]^{+\infty}_{0^-}=\frac{1}{s-\alpha}
+\end{gather*}
+Quindi la sua trasformata è:
+\begin{gather}
+    \mathscr{L}\{e^{-\alpha t}\}=\displaystyle\frac{1}{s-\alpha}
+\end{gather}
+
+
+Data una funzione $f$ e la sua trasformata $F$, si vuole determinare se sia possibile esprimere la trasformata della sua derivata $\dot f(t)$ rispetto alla trasformata $F$:
+\begin{gather*}
+    \mathscr{L}\{f(t)\}=F(s)\\
+    \mathscr{L}\left\{\displaystyle\frac{d}{dt}f(t)\right\}=G(s)\\
+    G(s)=\displaystyle\int_{0^-}^{+\infty}\frac{d}{dt}f(t)e^{-st}dt
+\end{gather*}
+Si risolve questo integrale per parti e si ottiene la seguente espressione:
+\begin{gather*}
+    \displaystyle\int_{0^-}^{+\infty}\frac{d}{dt}f(t)e^{-st}dt=\left[f(t)e^{-st}\right]^{+\infty}_{0^-}-\int_{0^-}^{+\infty}f(t)(-se^{-st})dt\\
+    \displaystyle-f(0^-)+s\left(\int_{0^-}^{+\infty}f(t)e^{-st}dt\right)=sF(s)-f(0^-) 
+\end{gather*}
+Per cui nota la trasformata di una funzione $f$, si può calcolare la trasformata della sua derivata come:
+\begin{equation}
+    \mathscr{L}\left\{\displaystyle\frac{df(t)}{dt}\right\}=s\mathscr{L}\{f(t)\}-f(0^-)
+\end{equation}
+
+La trasformata di una combinazione lineare è una combinazione lineare delle trasformate:
+\begin{gather*}
+    \mathscr{L}\{Af(t)+Bg(t)\}=\displaystyle\int_{0^-}^{+\infty}\left(Af(t)+Bg(t)\right)dt=A\int_{0^-}^{+\infty}f(t)dt+B\int_{0^-}^{+\infty}g(t)dt=aF(s)+bG(s)
+\end{gather*}
+Quindi vale la seguente proprietà:
+\begin{equation}
+    \mathscr{L}\{A(f)+Bg(t)\}=A\mathscr{L}\{f(t)\}+B\mathscr{L}\{g(T)\}
+\end{equation}
+
+Si considera la proprietà della derivazione considerando una funzione integrale $f(t)$:
+\begin{gather*}
+    f(t)=\displaystyle\int_{0^-}^tg(\tau)d\tau\\
+    \mathscr{L}\{f(t)\}=F(s)=\mathscr{L}\left\{\displaystyle\int_{0^-}^tg(\tau)d\tau\right\}\\
+    \mathscr{L}\left\{\displaystyle\frac{df(t)}{dt}\right\}=sF(s)=G(s)=\mathscr{L}\{g(t)\}
+\end{gather*}
+A memoria nulla quindi $g(0^-)=0$, la trasformata di un integrale si ottiene come:
+\begin{equation}
+    \mathscr{L}\left\{\displaystyle\int_{0^-}^tg(\tau)d\tau\right\}=\frac{\mathscr{L}\{g(t)\}}{s}
+\end{equation}
+
+
+Si applicano queste prorpietà nell'analisi di un circuito RLC serie:
+\begin{center}
+    \begin{circuitikz}
+        \draw(-1,0) to[short,i=$i(t)$,*-](0,0)
+                    to[R=$R$](2,0)
+                    to[L=$L$](4,0)
+                    to[C=$C$,-*](6,0);
+        \draw[->] (5.5,-0.5)--(-0.5,-0.5)node[midway, below]{$v(t)$};
+    \end{circuitikz}
+\end{center}
+Si applica il secondo principio di Kirchhoff e si ottiene la seguente espressione nel dominio del tempo:
+\begin{gather*}
+    v(t)=Ri(t)+L\displaystyle\frac{di(t)}{dt}+\frac{1}{C}\int_{0^-}^ti(\tau)d\tau+v_C(0^-)
+\end{gather*}
+Si trasforma ora quest'equazione integro-differenziale, portandola nel dominio di Laplace:
+\begin{gather*}
+    V(s)=RI(s)+LsI(s)-Li(0^-)+\displaystyle\frac{1}{sC}I(s)+\frac{v_C(0^-)}{s}
+\end{gather*}
+All'interno dell'equazione espressa nel dominio di Laplace è presente la memoria della corrente, oggetto non presente nell'espressione a tempo continuo, per cui non sarà 
+necessario risolvere un problema di Cauchy per determinare le costanti nel dominio di Laplace. Si considera ora un caso a memoria nulla:
+\begin{gather*}
+    V(s)=RI(s)+LsI(s)+\displaystyle\frac{1}{sC}I(s)=\left(R+sL+\frac{1}{sC}\right)I(s)
+\end{gather*}
+Si individua quindi l'impedenza nel dominio di Laplace del circuito RLC serie:
+\begin{gather*}
+    z(s)R+sL+\displaystyle\frac{1}{sC}
+\end{gather*}
+Mentre l'ammettenza nel dominio di Laplace:
+\begin{gather*}
+    y(s)=\displaystyle\frac{1}{z(s)}
+\end{gather*} 
+
+L'argomento della funzione esponenziale deve essere adimensionale, per cui la variabile complessa $s$ ha una dimensione tale da rendere l'argomento adimensionale:
+\begin{gather*}
+    [s]=\displaystyle\frac{1}{[t]}=s^{-1}=Hz
+\end{gather*}
+
+Si vuole determinare la dimensione delle grandezze nel dominio di Laplace, per cui si conisderano i componenti singolarmente. Dato un solo induttore nell convenzione degli 
+utilizzatori si ottiene la seguente espressione:
+%% circuito
+\begin{gather*}
+    v(t)=L\displaystyle\frac{di(t)}{dt}\\
+    V(s)=sLI(s)-Li(0^-)
+\end{gather*}
+La grandezza $Li$ è stata definita inizialmente come un flusso:
+\begin{gather*}
+    Li=[\phi]=[V\cdot s]
+\end{gather*}
+Analogamente si considera un singolo condensatore:
+%% circuito
+\begin{gather*}
+    i(t)=C\displaystyle\frac{dv(t)}{dt}\\
+    I(s)=sCV(s)-Cv(0^-)
+\end{gather*}
+La grandezza $Cv$ rappresenta una carica, per cui:
+\begin{gather*}
+    Cv=[A\cdot s]=[Q]
+\end{gather*}
+Per cui la grandezza dell'impedenza nel dominio di Laplace si ottiene come il rapporto tra la dimensione della tensione e della corrente:
+\begin{gather*}
+    [z]=\displaystyle\frac{V\cdot s}{A\cdot s}=\Omega
+\end{gather*}
+Per cui si può considerare il componente $z(s)$ un'impedenza, poiché mantiente la sua grandezza nel trasferimento dal tempo continuo al dominio di Laplace. Mentre la tensione 
+e la corrente cambiano le loro dimensioni nel dominio di Laplace. 
+
+
+Dato un singolo resistore, l'impedenza coincide con il valore della resistenza:
+%% circuito
+\begin{gather*}
+    z(s)=R
+\end{gather*}
+
+Si considera l'espressione ottenuta da un'induttore:
+\begin{gather*}
+    V(s)=sLI(s)-Li(0^-)\\
+    sLI(s)=V(s)+Li(0^-)\\
+    I(s)=\displaystyle\frac{1}{sL}V(s)+\frac{L}{L}\frac{i(0^-)}{s}
+\end{gather*}
+Si considera la forma integrale della legge costitutiva dell'induttore e la sua trasformata:
+\begin{gather*}
+    i(t)=\displaystyle\frac{1}{L}\int_{0^+}^tv(\tau)d\tau+i(0^-)\\
+\end{gather*}
+Si è quindi dimostrata la validità della proprietà integrale di Laplace sui circuiti. 
+
+
+\subsection{Esempio Applicativo}
+
+Si considera il seguente circuito e si vuole determinare la tensione a vuoto tra i morsetti: 
+\begin{center}
+    \begin{circuitikz}
+        \draw (5,0)node[right]{$-$} to[short,*-](0,0)
+                    to[european voltage source=$e(t)$](0,4)
+                    to[R=$R_1$](2,4)
+                    to[R=$R_3$](4,4)
+                    to[short,-*](5,4)node[right]{$+$};
+        \draw (4,0) to[C=$C$](4,4);
+        \draw (2,0) to[closing switch](2,2)
+                    to[R=$R_2$](2,4);
+    \end{circuitikz}
+\end{center}
+Si considerano queste grandezze nel dominio di Laplace:
+\begin{gather*}
+    e(t)=3\,u_{-1}(t)\,V\to E(s)=\displaystyle\frac{3}{s}\\
+    R_1=3\,\Omega\\
+    R_2=6\,\Omega\\
+    R_3=6\,\Omega
+\end{gather*}
+La tensione ai capi del condesnatore si esprime considerando un generatore di tensione per la memoria:
+\begin{gather}
+    C=0.05\,F\\
+    z_C(s)=\displaystyle\frac{1}{sC}\\
+    v_C(0^-)=3\,V\\
+    V_C(s)=\displaystyle\frac{v_C(0^-)}{s}+\frac{1}{sC}I(s)
+\end{gather}
+%% fix
+%% circuito laplace
+Si applica il metodo dei nodi in questo circuito:
+\begin{gather*}
+    \left[\displaystyle\frac{1}{3}+\frac{1}{6}+\frac{sC}{sC R_3+1}\right]V_A(s)=\frac{3}{s}\frac{1}{3}+\frac{3}{s}\frac{sC}{sCR_3+1}
+\end{gather*}
+
+
+
+Si considera un circuito RLC serie a regime permanente, e si vuole determinare la sua espressione a regime nel dominio di Laplace. Precedentemente è stato analizzato nel domino 
+dei fasori:
+\begin{gather*}
+    \overline{V}=\left(R+j\omega-\displaystyle\frac{j}{\omega C}\right)\overline{I}
+\end{gather*}
+A memorie nulle nel dominio di Laplace lo stesso circuito si esprime tramite la seguente espressione:
+\begin{gather*}
+    V(s)=\left[R+sL+\displaystyle\frac{1}{sC}\right]I(s)
+\end{gather*}
+Fissata una pulsazione $\omega$ ed assegnando alla variable complessa $s$ il valore $s=j\omega$, si ottiene l'impedenza a regime permanente:
+\begin{gather*}
+    z(j\omega)=z
+\end{gather*}
+Ma i fasori non possono espressi rispetto alle grandezze in Laplace con $s=j\omega$:
+\begin{gather*}
+    \overline{V}\neq V(j\omega)\\
+    \overline{I}\neq I(j\omega)
+\end{gather*}
+Ma poiché i valori delle impedenze sono gli stessi, allora i rapporti tra le grandezze rimangono invariati nei due domini:
+\begin{gather*}
+    \displaystyle\frac{\overline{V}}{\overline{I}}=\frac{V(j\omega)}{I(j\omega)}
+\end{gather*}
+Per dimostrare questa relazione si considera la trasformata di una grandezza sinusoidale, per semplicità si considera a fase nulla $\gamma=0$: 
+\begin{gather*}
+    \mathscr{L}\{V_M\sin\omega t\}=\mathscr{L}\left\{\displaystyle\frac{V_M}{2j}\left(e^{j\omega t}-e^{-j\omega t}\right)\right\}\\
+    \frac{V_M}{2j}\left[\frac{1}{s-j\omega}-\frac{1}{s+j\omega}\right]=\frac{V_M}{2j}\frac{2j\omega}{s^2+\omega^2}=V_M\frac{\omega}{s^2+\omega^2}
+\end{gather*}
+Data la trasformata della tensione, si sostituisce $j\omega$:
+\begin{gather*}
+    V(j\omega)=V_M\displaystyle\frac{\omega}{(j\omega)^2+\omega^2}=V_M\frac{\omega}{-\omega^2+\omega^2}
+\end{gather*}
+Si ottiene quindi una forma indeterminata. Analogamente per la trasformata della corrente (considerata a fase nulla $\beta=0$): 
+\begin{gather*}
+    I(s)=\displaystyle I_M\frac{\omega}{s^2+\omega^2}\\
+    I(j\omega)=\displaystyle {I_M}\frac{\omega}{-\omega^2+\omega^2}
+\end{gather*}
+I valori che annullano il denominatore di una funzione nel dominio di Laplace si definiscono poli. Mentre considerando il rapporto tra i due, i poli si eliminano a vicenda:
+\begin{gather*}
+    \displaystyle\frac{V(j\omega)}{I(j\omega)}=\displaystyle\frac{V_M\displaystyle\frac{\omega}{(j\omega)^2+\omega^2}}{I_M\displaystyle\frac{\omega}{(j\omega)^2+\omega^2}}=\frac{V_M}{I_M}
+\end{gather*}
+Per cui è leggittimo definire l'impedenza a regime come rapporto tra queste due grandezze, calcolato al valore dei poli. Questa relazione persiste anche tra due grandezze 
+sfasate di un fattore $\varphi$, in quel caso il rapporto tra le due grandezze restituisce un numero complesso. 
+
+
+
+
+
+
 
 
 

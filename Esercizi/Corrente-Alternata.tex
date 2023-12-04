@@ -52,7 +52,7 @@
 
 \section{Esercizi Svolti il 24 Novembre}
 
-\subsection{Esercizio 1}
+\subsection{Esercizio 7.1}
 Calcolare i valori di resistenza e capacità equivalente, del seguente circuito in regime sinusoidale alla pulsazione di $\omega=2\,\mbox{rad}/s$:
 \begin{center}
     \begin{circuitikz}
@@ -120,7 +120,7 @@ Si calcola ora numericamente:
     z_{in}=\displaystyle\frac{1}{1+j}\cdot\frac{1-j}{1-j}\cdot3=\frac{3}{2}+j\frac{3}{2}
 \end{gather*}
 
-\subsection{Esercizio 2}
+\subsection{Esercizio 7.2}
 Calcolare l'espressione a regime della tensione di nodo $v_x$:
 \begin{center}
     \begin{circuitikz}
@@ -178,7 +178,7 @@ Per cui l'espressione della tensione di nodo corrisponde a:
 
 \section{Esercitazione Svolta il 29 Novembre}
 
-\subsection{Esericzio 1}
+\subsection{Esericzio 7.3}
 
 Determinare la tensione a regime dell'induttore $v_L$:
 \begin{center}
@@ -193,7 +193,7 @@ Determinare la tensione a regime dell'induttore $v_L$:
 \end{center}
 \begin{gather*}
     E_{g1}=20\cos(1000 t)\,V\\
-    E_{g2}=30\cos(1000t +90^{\circ})\,V\\
+    E_{g2}=30\cos(1000t -90^{\circ})\,V\\
     R=10\,\Omega\\
     L=16\,mH\\
     C=200\,\mu F
@@ -256,7 +256,7 @@ Si calcola ora il fasore della tensione dell'induttore:
 \end{gather*}
 Corrisponde allo stesso fasore calcolato precedentemente mediante il metodo dei nodi.
 
-\subsection{Esercizio 2}
+\subsection{Esercizio 7.4}
 Determinare la potenza attiva erogaata dal generatore:
 \begin{center}
     \begin{circuitikz}
@@ -273,7 +273,7 @@ Determinare la potenza attiva erogaata dal generatore:
     E_g=5\cos(2t)\,V\\
     R_1=2\,\Omega\\
     R_2=1\,\Omega\\
-    C=0.5,F\\
+    C=0.5\,F\\
     L=2H
 \end{gather*}
 Si calcolano le impedenze ed il fasore della tensione:
@@ -301,7 +301,7 @@ La potenza complessa erogata dal generatore si ottiene come:
     P_C=\displaystyle\frac{1}{2}\overline{E}_g\overline{I}_g^*=\frac{1}{2}5\frac{125}{4500}(66-12j)=4.5833-0.8333j
 \end{gather*}
 
-\subsection{Esercizio 3}
+\subsection{Esercizio 7.6}
 
 \begin{quotation}
     Un'impedenza $Z$ alimentata da un generatore sinusoidale da $120\,V$ efficaci, assorbe la potenza apparente di $12\,kVA$, con un fattore di potenza di $0.856$ induttivo. 
@@ -321,7 +321,7 @@ Si ricorda che l'impedenza di un dato bipolo, tramite la legge di Ohm complessa,
     |Z|=\displaystyle\frac{\overline{E}_{g}}{\overline{I}_g}\frac{120\,V}{100\,A}=1.2\,\Omega
 \end{gather*}
 
-\subsection{Esercizio 4}
+\subsection{Esercizio 7.7}
 
 Determinare la potenza complessiva assorbita dall'impedenza $z_1$ composta dal resistore e dall'induttore in serie:
 \begin{center}
@@ -346,7 +346,7 @@ La potenza assorbita dall'impedenza $z_1$ si calcola come:
 \end{gather*}
 Per cui questo circuito risulta ohmico-capacitivo, e per metterlo in risonanza bisognerebbe inserire un'induttore in parallelo. 
 
-\subsection{Esercizio 5}
+\subsection{Esercizio 7.21}
 
 Determinare il circuito equivalente di Thevenin tra i terminali $A$ e $B$:
 \begin{center}
@@ -483,16 +483,147 @@ attraverso l'induttore $\overline{I}_C=\overline{I}_{m_1}+\overline{I}_L=\overli
 \end{gather*}
 L'impedenza equivalente si ottiene dal rapporto tar la tensione inserita nel circuito e la corrente calcolata:
 \begin{gather*}
-    z_{eq}=\displaystyle\frac{\overline{E}_C}{\overline{I}_C}=\frac{1}{2-\frac{1}{6}j}=\frac{1}{4+\frac{1}{36}}\left(2-\frac{1}{6}j\right)=\frac{36}{145}\left(2+\frac{1}{6}j\right)
+    z_{eq}=\displaystyle\frac{\overline{E}_C}{\overline{I}_C}=\frac{1}{2-\frac{1}{6}j}=\frac{1}{4+\frac{1}{36}}\left(2-\frac{1}{6}j\right)=\frac{36}{145}\left(2-\frac{1}{6}j\right)
 \end{gather*}
 Rappresentandola in modulo e fase:
 \begin{gather*}
     |z_{eq}|=\displaystyle\frac{36}{145}\sqrt{4+\frac{1}{6}}=0.4983\\
-    \varphi=\arctan\left(\frac{\frac{1}{6}}{2}\right)=4.7636^{\circ}
+    \varphi=\arctan\left(\frac{-\frac{1}{6}}{2}\right)=-4.7636^{\circ}
 \end{gather*}
 Per cui l'impedenza equivalente della rappresentazione esterna di Thevenin risulta essere:
 \begin{gather}
-    z_{eq}=0.4983e^{4.7636^{\circ}}
+    z_{eq}=0.4983e^{-j4.7636^{\circ}}
 \end{gather}
+
+\clearpage 
+
+\section{Esercitazione del 30 Novembre}
+
+\subsection{Esercizio 7.8}
+
+Determinare l'ammettenza equivalente del seguente circuito:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,2) to[short,i=$\overline{I}_1$,*-] (0.5,2)
+                    to[R=$R$](2.5,2)
+                    to[L=$L$](2.5,0)
+                    to[short,-*](0,0);
+        \draw (2.5,0) to[short](5,0)
+                    to[european controlled voltage source=$0.5\overline{I}_1$](5,2)
+                    to[C=$C$](2.5,2);
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    |z_R|=0.5\,\Omega\\
+    |z_C|=0.25\,\Omega\\
+    |z_L|=1\,\Omega
+\end{gather*}
+
+Si inserisce un generatore di tensione esterno $\overline{E}_e=1\,V$. 
+Si applica quindi il metodo delle maglie:
+\begin{gather*}
+    \begin{bmatrix}
+        z_R+z_L&-z_C\\-z_C&z_C+z_L
+    \end{bmatrix}\begin{bmatrix}
+        \overline{I}_{m_1}\\\overline{I}_{m_2}
+    \end{bmatrix}=\begin{bmatrix}
+        \overline{E}_e\\-0.5\overline{I}_1
+    \end{bmatrix}=\begin{bmatrix}
+        \overline{E}_e\\0
+    \end{bmatrix}+\begin{bmatrix}
+        0\\-0.5\overline{I}_1
+    \end{bmatrix}
+\end{gather*}
+Si può notare come la corrente di lato $\overline{I}_1$ coincide con la corrente di maglia $\overline{I}_{m_1}$, per cui l'equazione diventa:
+\begin{gather*}
+    \begin{bmatrix}
+        z_R+z_L&-z_C\\-z_C+0.5&z_C+z_L
+    \end{bmatrix}\begin{bmatrix}
+        \overline{I}_{m_1}\\\overline{I}_{m_2}
+    \end{bmatrix}=\begin{bmatrix}
+        \overline{E}_e\\0
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        \overline{I}_{m_1}\\\overline{I}_{m_2}
+    \end{bmatrix}=\displaystyle\frac{1}{(z_R+z_L)(z_C+z_L)-(-z_C+0.5)(-z_C)}\begin{bmatrix}
+        z_C+z_L&z_C-0.5\\z_C&z_R+z_L
+    \end{bmatrix}\begin{bmatrix}
+        \overline{E}_e\\0
+    \end{bmatrix}
+\end{gather*}
+Dopo aver calcolato la corrente di maglia $\overline{I}_{m_1}$, si esprime l'ammettenza equivalente come:
+\begin{gather}
+    y_{eq}=\displaystyle\frac{\overline{I}_{m_1}}{\overline{E}_e}=0.792+j0.226\,\Omega^{-1}
+\end{gather}
+
+
+Alternativamente si può calcolare tramite il metodo dei Nodi, o per il teorema di Millman:
+\begin{gather*}
+    \overline{V}_A=\displaystyle\frac{\overline{E}_ey_R+0.5\overline{I}_1y_C}{y_R+y_C+y_L}
+\end{gather*}
+Si inserisce il vincolo del pilota come combinazione lineare dei potenziali modali:
+\begin{gather*}
+    \overline{I}_1=(\overline{E}_e-\overline{V}_A)y_R
+\end{gather*}
+Per cui l'equazione diventa:
+\begin{gather*}
+    \overline{V}_A=\displaystyle\frac{\overline{E}_ey_R+0.5(\overline{E}_e-\overline{V}_A)y_Ry_C}{y_R+y_C+y_L}\\
+    \overline{V}_A\left(1+\displaystyle\frac{0.5y_Ry_C}{y_R+y_C+y_L}\right)=\frac{\overline{E}_ey_R+0.5\overline{E}_ey_Ry_C}{y_R+y_C+y_L}\\
+    \overline{V}_A=\displaystyle\frac{\frac{\overline{E}_ey_R+0.5\overline{E}_ey_Ry_C}{y_R+y_C+y_L}}{1+\frac{0.5y_Ry_C}{y_R+y_C+y_L}}
+\end{gather*}
+L'ammettenza equivalente si ottiene come:
+\begin{gather}
+    y_{eq}=\displaystyle\frac{\overline{I}_1}{\overline{V}_A}=\frac{\overline{E}_e-\overline{V}_A}{\overline{V}_A}y_R=0.792+j0.226\,\Omega^{-1}
+\end{gather}
+
+
+Invece inserendo un generatore di corrente $\overline{I}_g=1\,A$, allora in questo caso assume un valore di $0.5\,V$. Per cui in questo caso il potenziale nodale di $A$ si 
+calcola come:
+\begin{gather*}
+    \overline{V}_A=\displaystyle\frac{1+0.5y_3}{y_2+y_3}
+\end{gather*}
+Calcolando l'impedenza equivalente si considera anche in serie l'impedenza $z_R$:
+\begin{gather*}
+    z_{eq}=\displaystyle\frac{\overline{V}_A}{\overline{I}_g}+z_R
+\end{gather*}
+Per cui l'ammattenza si ottiene come il reciproco di quest'impedenza così calcolata:
+\begin{gather*}
+    y_{eq}=\displaystyle\frac{1}{z_{eq}}
+\end{gather*}
+
+\subsection{Esercizio 7.9}
+
+Determinare la rappresentazione equivalente di Thevenin del seguente circuito:
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (4,0) to[short,*-](0,0)
+                    to[european voltage source=$\overline{E}$](0,2)
+                    to[L=$L$](2,2)
+                    to[R=$R$,i=$\overline{I}_0$,-*](4,2);
+        \draw (2,0) to[european controlled current source=$3\overline{I}_0$](2,2);
+    \end{circuitikz}
+\end{center}
+
+Per calcolare la tensione di Thevenin, poiché il resistore è collegato a vuoto, la corrente pilota è nulla $\overline{I}_0=0\,A$, per cui la tensione di Thevenin equivalente 
+corrisponde alla tensione del generatore montato in parallelo:
+\begin{gather*}
+    \overline{E}_{th}=1+j0\,V
+\end{gather*}
+Si rende passiva la rete e si inserisce un generatore di tensione in entrata $\overline{I}_g=1\,A$, in modo che la corrente pilotata coincida con la corrente inserita:
+\begin{gather*}
+    \overline{I}_0=\overline{I}_g
+\end{gather*}
+Si considera il metodo dei nodi:
+\begin{gather*}
+    \overline{V}_A=\displaystyle\frac{3\overline{I}_0-\overline{I}_0}{y_L}=j4\,V
+\end{gather*}
+
+Per cui l'impedenza equivalente si ottiene come:
+\begin{gather}
+    z_{eq}=\displaystyle\frac{\overline{V}_A}{\overline{I}_g}+1=1-j4
+\end{gather}
+
+\subsection{Esercizio 7.10}
 
 \end{document}
