@@ -6327,7 +6327,7 @@ complesso $s\in\mathbb{C}$ della frequenza. Si considera solamente la trasformat
 \end{gather}
 Questa funzione restituisce un valore definito se il so argomento tende asintoticamente a $0$, per tempi matematicamente infiniti:
 \begin{gather*}
-    |f(s)e^{\sigma t}|\to0
+    |f(t)e^{\sigma t}|\to0
 \end{gather*}
 Dove $\sigma$ è la parte reale della variabile complessa $s$:
 \begin{gather*}
@@ -6376,14 +6376,20 @@ Per cui nota la trasformata di una funzione $f$, si può calcolare la trasformat
 \begin{equation}
     \mathscr{L}\left\{\displaystyle\frac{df(t)}{dt}\right\}=s\mathscr{L}\{f(t)\}-f(0^-)
 \end{equation}
+Tramite questa definizione è possibile calcoalre ricorsivamente la trasformata di una derivata $n-$esima di una funzione $f$ di trasformata nota:
+\begin{gather*}
+    \mathscr{L}\left\{\displaystyle\frac{d}{dt}\frac{df}{dt}\right\}=s\left[sF(s)-f(0^-)\right]-\dot f(0^-)=s^2F(s)-sf(0^-)-\dot f(0^-)\\
+    \mathscr{L}\left\{\displaystyle\frac{d^nf}{dt^n}\right\}=s^nF(s)-\sum_{k=0}^{n-1}s^{n-1-k}\frac{d^kf}{dt^k}\Bigg|_{t=0^-}
+\end{gather*}
 
 La trasformata di una combinazione lineare è una combinazione lineare delle trasformate:
 \begin{gather*}
-    \mathscr{L}\{Af(t)+Bg(t)\}=\displaystyle\int_{0^-}^{+\infty}\left(Af(t)+Bg(t)\right)dt=A\int_{0^-}^{+\infty}f(t)dt+B\int_{0^-}^{+\infty}g(t)dt=aF(s)+bG(s)
+    \mathscr{L}\{Af(t)+Bg(t)\}=\displaystyle\int_{0^-}^{+\infty}\left(Af(t)+Bg(t)\right)dt\\
+    A\int_{0^-}^{+\infty}f(t)dt+B\int_{0^-}^{+\infty}g(t)dt=AF(s)+BG(s)
 \end{gather*}
 Quindi vale la seguente proprietà:
 \begin{equation}
-    \mathscr{L}\{A(f)+Bg(t)\}=A\mathscr{L}\{f(t)\}+B\mathscr{L}\{g(T)\}
+    \mathscr{L}\{A(f)+Bg(t)\}=A\mathscr{L}\{f(t)\}+B\mathscr{L}\{g(t)\}
 \end{equation}
 
 Si considera la proprietà della derivazione considerando una funzione integrale $f(t)$:
@@ -6423,14 +6429,14 @@ necessario risolvere un problema di Cauchy per determinare le costanti nel domin
 \end{gather*}
 Si individua quindi l'impedenza nel dominio di Laplace del circuito RLC serie:
 \begin{gather*}
-    z(s)R+sL+\displaystyle\frac{1}{sC}
+    z(s)=R+sL+\displaystyle\frac{1}{sC}
 \end{gather*}
 Mentre l'ammettenza nel dominio di Laplace:
 \begin{gather*}
     y(s)=\displaystyle\frac{1}{z(s)}
 \end{gather*} 
 
-L'argomento della funzione esponenziale deve essere adimensionale, per cui la variabile complessa $s$ ha una dimensione tale da rendere l'argomento adimensionale:
+L'argomento della funzione esponenziale deve essere adimensionale, per cui la variabile complessa $s$ ha una dimensione adeguata:
 \begin{gather*}
     [s]=\displaystyle\frac{1}{[t]}=s^{-1}=Hz
 \end{gather*}
@@ -6479,6 +6485,7 @@ Si considera l'espressione ottenuta da un'induttore:
 Si considera la forma integrale della legge costitutiva dell'induttore e la sua trasformata:
 \begin{gather*}
     i(t)=\displaystyle\frac{1}{L}\int_{0^+}^tv(\tau)d\tau+i(0^-)\\
+    I(s)=\displaystyle\frac{1}{sL}V(s)+\frac{i(0^-)}{s}
 \end{gather*}
 Si è quindi dimostrata la validità della proprietà integrale di Laplace sui circuiti. 
 
@@ -6519,7 +6526,7 @@ Si applica il metodo dei nodi in questo circuito:
     \left[\displaystyle\frac{1}{3}+\frac{1}{6}+\frac{sC}{sC R_3+1}\right]V_A(s)=\frac{3}{s}\frac{1}{3}+\frac{3}{s}\frac{sC}{sCR_3+1}
 \end{gather*}
 
-
+\subsection{RLC Serie in Laplace}
 
 Si considera un circuito RLC serie a regime permanente, e si vuole determinare la sua espressione a regime nel dominio di Laplace. Precedentemente è stato analizzato nel domino 
 dei fasori:
@@ -6548,7 +6555,27 @@ Per dimostrare questa relazione si considera la trasformata di una grandezza sin
     \mathscr{L}\{V_M\sin\omega t\}=\mathscr{L}\left\{\displaystyle\frac{V_M}{2j}\left(e^{j\omega t}-e^{-j\omega t}\right)\right\}\\
     \frac{V_M}{2j}\left[\frac{1}{s-j\omega}-\frac{1}{s+j\omega}\right]=\frac{V_M}{2j}\frac{2j\omega}{s^2+\omega^2}=V_M\frac{\omega}{s^2+\omega^2}
 \end{gather*}
-Data la trasformata della tensione, si sostituisce $j\omega$:
+Si ottiene una trasformata simile per un coseno:
+\begin{gather*}
+    \mathscr{L}\{A\cos(\omega t)\}=A\displaystyle\frac{e^{j\omega t}+e^{-j\omega t}}{2}=\frac{A}{2}\frac{s+j\omega+s-j\omega}{s^2+\omega^2}=\frac{As}{s^2+\omega^2}
+\end{gather*}
+
+Si considera ora una sinusoide sfasata di un fattore $\varphi$ e si vuole determinare la sua trasformata:
+\begin{gather*}
+    \mathscr{L}\{A\sin(\omega t+\varphi)\}=\mathscr{L}\{A\cos\varphi\sin(\omega t)+A\sin\varphi\cos(\omega t)\}=\displaystyle A\cos\varphi\frac{\omega}{s^2+\omega^2}+A\sin\varphi\frac{s}{s^2+\omega^2}\\
+    \mathscr{L}\{A\sin(\omega t+\varphi)\}=\displaystyle\frac{A\cos\varphi \omega+A\sin\varphi s}{s^2+\omega^2}
+\end{gather*}
+
+
+Si considera una funzione esponenziale moltiplicata per un fattore lineare:
+\begin{gather*}
+    \mathscr{L}\{Ate^{\alpha t}\}=F(s)\\
+    \mathscr{L}\left\{\displaystyle\frac{d}{dt}\left(Ate^{\alpha t}\right)\right\}=\mathscr{L}\{Ae^{\alpha t}+A\alpha te^{\alpha t}\}=A\mathscr{L}\{e^{\alpha t}\}+\alpha\mathscr{L}\{Ate^{\alpha t}\}=sF(s)-f(0^-)\\
+    \displaystyle\frac{A}{s-\alpha}+\alpha F(s)=sF(s)\\
+    \mathscr{L}\{Ate^{\alpha t}\}=\frac{A}{(s-\alpha)^2}
+\end{gather*}
+
+Data la trasformata della tensione, anch'essa scarica, si sostituisce $j\omega$:
 \begin{gather*}
     V(j\omega)=V_M\displaystyle\frac{\omega}{(j\omega)^2+\omega^2}=V_M\frac{\omega}{-\omega^2+\omega^2}
 \end{gather*}
@@ -6565,9 +6592,180 @@ Per cui è leggittimo definire l'impedenza a regime come rapporto tra queste due
 sfasate di un fattore $\varphi$, in quel caso il rapporto tra le due grandezze restituisce un numero complesso. 
 
 
+Esistono quindi due rappresentazioni nel dominio dei numeri complessi per i circuiti. Il dominio dei fasori, numerico, ad una pulsazione $\omega$ fissata; ed il dominio 
+simbolico di Laplace, dove la pulsazione $\omega$ è variabile. Il passaggio da una grandezza in Laplace ad un nel dominio dei fasori, tramite la sostituzione $s=j\omega$ è 
+possible solo se $j\omega$ non rappresenta un polo nel dominio di Laplace. Dove un polo $s_p$ è definito come un valore per cui la trasformata tende a valori infiniti:
+\begin{gather*}
+    \lim_{s\to s_p}F(s)=\pm\infty
+\end{gather*}
+Nella trasformata di una funzione sinusdoiale i poli sono esattamente pari a $\pm j\omega$, per cui non è possibile determinare l'espressione di una grandezza nel domino 
+dei fasori, data la sua trasformata di Laplace, se nel tempo continuo la sua espressione a regime è una sinusoide. 
 
+\subsection{Bipoli in Laplace}
 
+Tra i due domini non si mantiene lo stesso simbolo nella loro rappresentazione circuitale. Per un resistore la legge costitutiva tra i due domini diventa:
+\begin{gather*}
+    v(t)=Ri(t)\to V(s)=RI(s)
+\end{gather*}
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short, i=$i(t)$,*-](0.5,0)
+                    to[R=$R$,-*](2.5,0);
+        \draw[->](2.25,-0.5)--(0.25,-0.5)node[midway, below]{$v(t)$};
 
+        \draw (3,0) to[short,i=$I(s)$,*-](3.5,0)
+                    to[generic=$z(s)$,-*] (5.5,0);
+        \draw[->] (5.25,-0.5)--(3.25,-0.5)node[midway, below]{$V(s)$};
+    \end{circuitikz}
+\end{center}
+Per un induttore:
+\begin{gather*}
+    v=\displaystyle L\frac{di}{dt}\to V(s)=sLI(s)-Li(0^-)\\
+    i=\displaystyle\frac{1}{L}\int_{0^-}^tvd\tau+i(0^-)\to I(s)=\frac{1}{sL}V(s)+\frac{i(0^-)}{s}
+\end{gather*}
+Per cui nel dominio di Laplce corrisponde ad un lato Thevenin/Norton:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short, i=$i(t)$,*-](0.5,0)
+                    to[L=$L$,-*](2.5,0);
+        \draw[->](2.25,-0.5)--(0.25,-0.5)node[midway, below]{$v(t)$};
+
+        \draw (3,0) to[short,i=$I(s)$,*-](3.5,0)
+                    to[generic=$sL$] (5.5,0)
+                    to[european voltage source=$Li(0^-)$,-*](7.5,0);
+        \draw[->] (7.25,-0.5)--(3.25,-0.5)node[midway, below]{$V(s)$};
+        
+        \draw (8,0) to[short,i=$I(s)$,*-](8.5,0)
+                    to[short](8.5,1);
+        \draw(10.5,1) to[european current source=$Cv(0^-)$](8.5,1);
+        \draw (10.5,1)to[short](10.5,0)
+                    to[short,-*](11,0);
+        \draw(8.5,0)to[short](8.5,-1)
+                    to[generic=$sL$](10.5,-1)
+                    to[short](10.5,0);
+        \draw[->] (10.75,-1.5)--(8.25,-1.5)node[midway, below]{$V(s)$};
+            
+    \end{circuitikz}
+\end{center}
+
+Per un condensatore:
+\begin{gather*}
+    i=\displaystyle C\frac{dv}{dt}\to I(s)=sCV(s)-Cv(0^-)\\
+    v=\displaystyle\frac{1}{C}\int_{0^-}^tid\tau+v(0^-)\to V(s)=\frac{1}{sC}I(s)+\frac{v(0^-)}{s}
+\end{gather*}
+Per cui nel dominio di Laplce corrisponde ad un lato Thevenin/Norton:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short, i=$i(t)$,*-](0.5,0)
+                    to[C=$C$,-*](2.5,0);
+        \draw[->](2.25,-0.5)--(0.25,-0.5)node[midway, below]{$v(t)$};
+
+        \draw (3,0) to[short,i=$I(s)$,*-](3.5,0)
+                    to[generic=$\displaystyle\frac{1}{sC}$,-*] (5.5,0)
+                    to[european voltage source=$\displaystyle\frac{v(0^-)}{s}$](7.5,0);
+        \draw[->] (5.25,-0.5)--(3.25,-0.5)node[midway, below]{$V(s)$};
+        
+        \draw (8,0) to[short,i=$I(s)$,*-](8.5,0)
+                    to[short](8.5,1);
+        \draw(10.5,1) to[european current source=$Cv(0^-)$](8.5,1);
+        \draw(10.5,1) to[short](10.5,0)
+                    to[short,-*](11,0);
+        \draw(8.5,0)to[short](8.5,-1)
+                    to[generic=$\displaystyle\frac{1}{sC}$](10.5,-1)
+                    to[short](10.5,0);
+        \draw[->] (10.75,-1.5)--(8.25,-1.5)node[midway, below]{$V(s)$};
+            
+    \end{circuitikz}
+\end{center}
+
+\subsection{Circuito RC}
+
+Si considera un circuito RC e si trasferisce nel dominio di Laplace. Nel tempo continuo si ha il seguente circuito:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[european voltage source=$E$](0,2)
+                    to[closing switch](2,2)node[above]{$t=0$}
+                    to[R=$R$](4,2)
+                    to[C=$C$](4,0)
+                    to[short,i_=$i(t)$](0,0);
+    \end{circuitikz}
+\end{center}
+Nel dominio di Laplace si ottiene:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[european voltage source=$\displaystyle\frac{E}{s}$](0,4)
+                    to[generic=$R$,-*](2,4)node[above]{$A$};
+        \draw (0,0) to[short,-*](2,0)node[below left]{$B$}
+                    to[european voltage source=$\displaystyle\frac{v_C(0^-)}{s}$](2,2)
+                    to[generic=$\displaystyle\frac{1}{sC}$](4,2);
+        \draw (2,0) to[short](2,-0.5)
+                    to[short](2.5,-0.5)
+                    to[short](2.5,-0.75)node[ground]{};
+    \end{circuitikz}
+\end{center}
+Si risolve mediante il metodo dei nodi, considerando il nodo $B$ di calcolo, il nodo di salto:
+\begin{gather*}
+    \left(\displaystyle\frac{1}{R}+sC\right)V_A(s)=\left(\frac{1+sCR}{R}\right)V_A(s)=\displaystyle\frac{E}{sR}+Cv_c(0^-)\\
+    V_A(s)=\displaystyle\frac{R}{R}\frac{E}{s(1+sCR)}+\frac{RCv_C(0^-)}{1+sCR}\\
+    \mathscr{L}^{-1}\{V_A(s)\}=v_A(t)= v_C(t)
+\end{gather*}
+Si determina ora un algoritmo per antitrasformata le grandezze ottenute senza effettuare l'integrale di antitrasformazione. 
+Nei circuiti le espressioni delle grandezze si presentano sempre come frazioni tra polinomi:
+\begin{gather*}
+    F(s)=\displaystyle\frac{N(s)}{D(s)}=\frac{a_ns^n+\cdots a_0}{b_ms^m+\cdots b_0}
+\end{gather*}
+Le frazioni si dicono proprie se il grado del denominatore è maggiore del grado del numeratore $m>n$, altrimenti se il grado del numeratore è maggiore si dicono impriorie $n>m$. 
+In caso siano improrie bisogna prima effettuare una divisione tra polinomi, ritornando una frazione propria ed polinomio.
+
+Si definiscono poli al finito di una frazione propria, dei valori di $s=s_p$ tali che la funzione in Laplace tende a valori infiniti:
+\begin{gather*}
+    \lim_{s\to s_p}F(s)=\infty
+\end{gather*} 
+In una frazioni impropria i valori di $s\to\infty$ si definiscono poli all'infinito: 
+\begin{gather*}
+    \lim_{s\to\infty}s=\infty
+\end{gather*}
+
+Per attuare un'antitrasformazione si considera la frazione propria decomposizione in fratti semplici, considerando tutti i poli della funzione. In seguito si possono attuare delle 
+antitrasformate notevoli per ottenere una funzione nel dominio del tempo. 
+Considerando l'espressione ottenuta per la tensione si applica una suddivisione in fratti semplici:
+\begin{gather*}
+    V_A(s)=\displaystyle\frac{E}{RC\left(s+\frac{1}{RC}\right)s}+\frac{RCv_C(0^-)}{RC\left(s+\frac{1}{RC}\right)}
+\end{gather*}
+Poiché la trasformata è un'operazione lineare si considerano entrambi i componenti separatamente. Il secondo oggetto corrisponde alla trasformata di un esponenziale di 
+ampiezza $A=v_C(0^-)$ e di costante $\alpha=-\frac{1}{RC}$, per cui la sua antitrasformata corrisponde a:
+\begin{gather*}
+    \displaystyle\frac{RC}{RC}\frac{v_C(0^-)}{s+\frac{1}{RC}}=v_C(0^-)e^{-\frac{t}{RC}}
+\end{gather*}
+Si individua un primo polo $s_p=-\frac{1}{RC}$, al finito. Con molteplicità uno. Coincide alla soluzione dell'equazione caratteristica associata all'equazione differnziale 
+omogenea del circuito. Si considera ora il primo oggetto, e si decompone in fratti semplici. Si individuano i fratti semplici di numero pari alla somma tra la molteplicità di 
+tutti i poli della frazione originaria. In questo caso sono presenti due poli, entrambi di molteplicità uno, per cui sono presenti due fratti semplici:
+\begin{gather*}
+    \displaystyle\frac{E}{RC\left(s+\frac{1}{RC}\right)s}=\frac{A}{s+\frac{1}{RC}}+\frac{B}{RC}
+\end{gather*}
+Dopo aver trovato i fratti semplici bisogna determinare il valore numerico delle incognite $A$ e $B$. Senza sapere il valore delle incognite è nota la forma che assume 
+quest'espressione nel dominio del tempo:
+\begin{gather*}
+    Ae^{-\frac{t}{RC}}+Bu_{-1}(t)
+\end{gather*}
+Si considera la somma tra i due fratti semplici e si applica il principio di identità dei polinomi per trovare i valori di $A$ e $B$:
+\begin{gather*}
+    As+Bs+\displaystyle\frac{B}{RC}=\frac{E}{RC}\\
+    \begin{cases}
+        A+B=0\\
+        \displaystyle\frac{B}{RC}=\frac{E}{RC}
+    \end{cases}\\
+    \begin{cases}
+        A=-E\\
+        B=E
+    \end{cases}\\
+    -Ee^{-\frac{t}{RC}}+Eu_{-1}(t)
+\end{gather*}
+Per ottenere la soluzione completa si sommano i due oggetti appena antitrasformati, si considera $t\geq0^+$, per cui si omette il gradino:
+\begin{gather*}
+    v_C(t)=v_C(0^-)e^{-\frac{t}{RC}}-Ee^{-\frac{t}{RC}}+E=(v_C(0^-)-E)e^{-\frac{t}{RC}}+E
+\end{gather*}
+Quest'espressione coincide con l'espressione ottenuta dall'analisi nel tempo del circuito RC. 
 
 
 
