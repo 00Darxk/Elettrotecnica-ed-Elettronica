@@ -3,7 +3,7 @@
 \usepackage{cancel}
 \usepackage{tikz}
 \usepackage{amsmath}
-\usepackage{geometry}
+\usepackage[includehead,nomarginpar]{geometry}
 \usepackage{graphicx}
 \usepackage{amsfonts} 
 \usepackage{verbatim}
@@ -13,7 +13,13 @@
 \usepackage{bookmark}
 \usepackage{circuitikz}
 \usepackage[italian]{babel}
+\usepackage{pgfplots}
+\usepackage{fancyhdr}
+\usepackage{romanbarpagenumber}
+\pgfplotsset{compat=1.18}
 
+\setlength{\headheight}{12.0pt}
+\addtolength{\topmargin}{-12.0pt}
 
 %% numerare equazioni nella versione finale
 %% segnati con un doppio segno percentuale ("%%") le correzioni o inserimenti da apportare al testo
@@ -31,18 +37,20 @@
 
 \numberwithin{equation}{subsection}
 
+
+\begin{document}
+
 \title{Appunti di Elettrotecnica ed Elettronica}
 \author{Giacomo Sturm}
 \date{AA: 2023/2024 - Ing. Informatica}
 
 
-% cose che ha detto e non so dove inserire: 
-% Viene definito il parametro concentrato mem, rapporto tra la carica ed il flusso, parametro dei mem-sistori, nuovo componente dell'elettrotecnica. (17/10)
-% Da Aggiungere:
-% Esempio Topologia dei Circuiti (25/10) oppure semplificato;
+\pagenumbering{Roman}
 
-
-\begin{document}
+\pagestyle{fancy}
+\fancyhead{}\fancyfoot{}
+\fancyhead[C]{Elettrotecnica ed Elettronica - Giacomo Sturm}
+\fancyfoot[C]{\thepage}
 
 \maketitle
 
@@ -57,6 +65,8 @@
 \tableofcontents
 
 \clearpage
+
+\pagenumbering{arabic}
 
 \section{Nozioni di Base sull'Elettro-Magnetismo}
 
@@ -5552,7 +5562,7 @@ di colore blu:
     \end{tikzpicture}
 \end{center}
 
-\subsection{Generatore Sinusoidale}
+\subsection{Dominio dei Fasori}
 
 Continuare l'analisi nel dominio del tempo può rendere difficile lo studio di equazioni integro-differenziali di ordine elevato, per cui si vuole determinare un domino dove 
 queste equazioni vengono risolte in maniare molto più semplice. Questo domini di calcolo sono il domino dei fasori o domino della frequenza o della pulsazione. Si considera 
@@ -6320,7 +6330,7 @@ di Thevenin, poiché è necessaria la conoscenza del circuito completo per deter
 \section{Dominio di Laplace}
 
 Si considera una generica funzione nel domino del tempo $f(x)$ che rappresenta una grandezza tensione o corrente, variante nel tempo. 
-Si definisce la trasformata di Laplace $F(s)$ della funzione $f(x)$ un funzionale $\mathscr{L}\{f(x)\}=F(s)$ che trasferisce una funzione dal dominio del tempo al domino 
+Si definisce la trasformata di Laplace $F(s)$ della funzione $f(x)$ un funzionale $\mathcal{L}\{f(x)\}=F(s)$ che trasferisce una funzione dal dominio del tempo al domino 
 complesso $s\in\mathbb{C}$ della frequenza. Si considera solamente la trasformata unilatera destra, definita come l'integrale di trasformazione da $0^-$ a $+\infty$:
 \begin{gather}
     F(s)=\displaystyle\int_{0^-}^{+\infty}f(t)e^{-st}dt
@@ -6334,7 +6344,13 @@ Dove $\sigma$ è la parte reale della variabile complessa $s$:
     s=\sigma+j\omega
 \end{gather*}
 Si definiscono ora una serie di trasformate notevoli. Si considera il segnale gradino unitario $u_{-1}(t)$:
-%% grafico 
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-0.25,0)--(1.5,0)node[above]{$t$};
+        \draw[->](0,-0.25)--(0,1.5)node[right]{$u_{-1}(t)$};
+        \draw (0,1)node[left]{$1$}--(1.4,0);
+    \end{tikzpicture}
+\end{center}
 \begin{gather*}
     f(t)=u_{-1}(t)=\begin{cases}
         0&t\leq 0^-\\
@@ -6348,7 +6364,7 @@ La sua trasformata di Laplace corrisponde all'integrale di un esponenziale, camb
 
 Per cui la trasformata di un gradino nel tempo è un'iperbole in frequenza:
 \begin{equation}
-    \mathscr{L}\{u_{-1}(t)\}=\displaystyle\frac{1}{s}
+    \mathcal{L}\{u_{-1}(t)\}=\displaystyle\frac{1}{s}
 \end{equation}
 
 Si considera un segnale esponenziale convergente $\alpha\in\mathbb{R}^-$:
@@ -6357,14 +6373,14 @@ Si considera un segnale esponenziale convergente $\alpha\in\mathbb{R}^-$:
 \end{gather*}
 Quindi la sua trasformata è:
 \begin{gather}
-    \mathscr{L}\{e^{-\alpha t}\}=\displaystyle\frac{1}{s-\alpha}
+    \mathcal{L}\{e^{-\alpha t}\}=\displaystyle\frac{1}{s-\alpha}
 \end{gather}
 
 
 Data una funzione $f$ e la sua trasformata $F$, si vuole determinare se sia possibile esprimere la trasformata della sua derivata $\dot f(t)$ rispetto alla trasformata $F$:
 \begin{gather*}
-    \mathscr{L}\{f(t)\}=F(s)\\
-    \mathscr{L}\left\{\displaystyle\frac{d}{dt}f(t)\right\}=G(s)\\
+    \mathcal{L}\{f(t)\}=F(s)\\
+    \mathcal{L}\left\{\displaystyle\frac{d}{dt}f(t)\right\}=G(s)\\
     G(s)=\displaystyle\int_{0^-}^{+\infty}\frac{d}{dt}f(t)e^{-st}dt
 \end{gather*}
 Si risolve questo integrale per parti e si ottiene la seguente espressione:
@@ -6373,36 +6389,121 @@ Si risolve questo integrale per parti e si ottiene la seguente espressione:
     \displaystyle-f(0^-)+s\left(\int_{0^-}^{+\infty}f(t)e^{-st}dt\right)=sF(s)-f(0^-) 
 \end{gather*}
 Per cui nota la trasformata di una funzione $f$, si può calcolare la trasformata della sua derivata come:
-\begin{equation}
-    \mathscr{L}\left\{\displaystyle\frac{df(t)}{dt}\right\}=s\mathscr{L}\{f(t)\}-f(0^-)
-\end{equation}
-Tramite questa definizione è possibile calcoalre ricorsivamente la trasformata di una derivata $n-$esima di una funzione $f$ di trasformata nota:
+\begin{gather}
+    \mathcal{L}\left\{\displaystyle\frac{df(t)}{dt}\right\}=s\mathcal{L}\{f(t)\}-f(0^-)
+\end{gather}
+Tramite questa definizione è possibile calcolare ricorsivamente la trasformata di una derivata $n-$esima di una funzione $f$ di trasformata nota:
 \begin{gather*}
-    \mathscr{L}\left\{\displaystyle\frac{d}{dt}\frac{df}{dt}\right\}=s\left[sF(s)-f(0^-)\right]-\dot f(0^-)=s^2F(s)-sf(0^-)-\dot f(0^-)\\
-    \mathscr{L}\left\{\displaystyle\frac{d^nf}{dt^n}\right\}=s^nF(s)-\sum_{k=0}^{n-1}s^{n-1-k}\frac{d^kf}{dt^k}\Bigg|_{t=0^-}
+    \mathcal{L}\left\{\displaystyle\frac{d}{dt}\frac{df}{dt}\right\}=s\left[sF(s)-f(0^-)\right]-\dot f(0^-)=s^2F(s)-sf(0^-)-\dot f(0^-)\\
+    \mathcal{L}\left\{\displaystyle\frac{d^nf}{dt^n}\right\}=s^nF(s)-\sum_{k=0}^{n-1}s^{n-1-k}\frac{d^kf}{dt^k}\Bigg|_{t=0^-}
 \end{gather*}
 
 La trasformata di una combinazione lineare è una combinazione lineare delle trasformate:
 \begin{gather*}
-    \mathscr{L}\{Af(t)+Bg(t)\}=\displaystyle\int_{0^-}^{+\infty}\left(Af(t)+Bg(t)\right)dt\\
+    \mathcal{L}\{Af(t)+Bg(t)\}=\displaystyle\int_{0^-}^{+\infty}\left(Af(t)+Bg(t)\right)dt\\
     A\int_{0^-}^{+\infty}f(t)dt+B\int_{0^-}^{+\infty}g(t)dt=AF(s)+BG(s)
 \end{gather*}
 Quindi vale la seguente proprietà:
 \begin{equation}
-    \mathscr{L}\{A(f)+Bg(t)\}=A\mathscr{L}\{f(t)\}+B\mathscr{L}\{g(t)\}
+    \mathcal{L}\{A(f)+Bg(t)\}=A\mathcal{L}\{f(t)\}+B\mathcal{L}\{g(t)\}
 \end{equation}
 
 Si considera la proprietà della derivazione considerando una funzione integrale $f(t)$:
 \begin{gather*}
     f(t)=\displaystyle\int_{0^-}^tg(\tau)d\tau\\
-    \mathscr{L}\{f(t)\}=F(s)=\mathscr{L}\left\{\displaystyle\int_{0^-}^tg(\tau)d\tau\right\}\\
-    \mathscr{L}\left\{\displaystyle\frac{df(t)}{dt}\right\}=sF(s)=G(s)=\mathscr{L}\{g(t)\}
+    \mathcal{L}\{f(t)\}=F(s)=\mathcal{L}\left\{\displaystyle\int_{0^-}^tg(\tau)d\tau\right\}\\
+    \mathcal{L}\left\{\displaystyle\frac{df(t)}{dt}\right\}=sF(s)=G(s)=\mathcal{L}\{g(t)\}
 \end{gather*}
 A memoria nulla quindi $g(0^-)=0$, la trasformata di un integrale si ottiene come:
 \begin{equation}
-    \mathscr{L}\left\{\displaystyle\int_{0^-}^tg(\tau)d\tau\right\}=\frac{\mathscr{L}\{g(t)\}}{s}
+    \mathcal{L}\left\{\displaystyle\int_{0^-}^tg(\tau)d\tau\right\}=\frac{\mathcal{L}\{g(t)\}}{s}
 \end{equation}
 
+
+
+La trasformata di una funzione $f$ tempo continua per il tempo, corrisponde nel dominio di Laplace all'opposto della derivata della sua funzione di 
+trasferimento $F$:
+\begin{gather*}
+    \mathcal{L}\{tf(t)\}=\displaystyle\int_{0^-}^{+\infty}tf(t)e^{-st}dt\\
+    \displaystyle-\frac{dF(s)}{ds}=-\frac{d}{ds}\int_{0^-}^{+\infty}f(t)e^{-st}dt=-\int_{0^-}^{+\infty}f(t)\frac{\partial }{\partial s}\left[e^{-st}\right]dt\\
+    -\int_{0^-}^{+\infty}f(t)(-te^{-st})dt=\int_{0^-}^{+\infty}tf(t)e^{-st}dt=\mathcal{L}\{tf(t)\}
+\end{gather*}
+\begin{equation}
+    \mathcal{L}\{tf(t)\}=\displaystyle-\frac{dF(s)}{ds}
+\end{equation}
+
+
+Data una funzione nel tempo $f$ e la sua trasformata $F$, si può esprimere la trasformata della funzione originiaria ritardata di un fattore $t_0$ mediante 
+la funzione $F$. 
+\begin{gather*}
+    y(t)=f(t-t_0)u_{-1}(t-t_0)\\
+    \mathcal{L}\{y(t)\}=\displaystyle\int_{0^-}^{+\infty}f(t-t_0)u_{-1}(t-t_0)e^{-st}dt=\int_{t_0}^{+\infty}f(t-t_0)e^{-st}dt\\
+    \tau=t-t_0\\
+    \displaystyle\int_{0}^{+\infty}f(\tau)e^{-s(\tau+t_0)}d\tau=e^{-st_0}\int_0^{+\infty}f(\tau)e^{-s\tau}d\tau=e^{-st_0}F(s)
+\end{gather*}
+Per cui la trasformata di una funzione $f$ ritardata nel tempo corrisponde alla trasforamta della funzione $f$ moltiplicata per un esponenziale complesso di argomento $t_0$:
+\begin{equation}
+    \mathcal{L}\{f(t-t_0)u_{-1}(t-t_0)\}=e^{-st_0}F(s)
+\end{equation}
+
+
+La trasformata della convoluzione nel dominio del tempo corrisponde al prodotto tra le due trasformate nel dominio di Laplace:
+\begin{gather*}
+    \mathcal{L}\{f(t)* g(t)\}=\displaystyle\int_{0^-}^{+\infty}f(t)*g(t)e^{-st}dt\\
+    \displaystyle\int_{0^-}^{+\infty}\left(\int_{0^-}^{+\infty}f(t-\tau)g(\tau)d\tau\right)e^{-st}dt=\int_{0^-}^{+\infty}g(\tau)\left(\int_{0^-}^{+\infty}f(t-\tau)e^{-st}dt\right)d\tau\\
+    \displaystyle\int_{0^-}^{+\infty}g(\tau)F(s)e^{-s\tau}d\tau=F(s)\int_{0^-}^{+\infty}g(\tau)e^{-s\tau}d\tau=F(s)G(s)
+\end{gather*}
+\begin{equation}
+    \mathcal{L}\{f(t)*g(t)\}F(s)\cdot G(s)
+\end{equation}
+La trasformata del prodotto nel dominio del tempo corrisponde al prodotto di convoluzione tra le due trasformate:
+\begin{gather*}
+    \mathcal{L}^{-1}\{F(s)*G(s)\}=\displaystyle\int_{0^-}^{+\infty}F(s)*G(s)e^{st}ds=\int_{0^-}^{+\infty}\left(\int_{0^-}^sG(s-\xi)F(\xi)d\xi\right)e^{st}ds\\
+    \displaystyle\int_{0^-}^{s}\left(\int_{0^-}^{+\infty}G(s-\xi)e^{st}ds\right)F(\xi)d\xi=\int_{0^-}^sg(t)e^{-\xi t}F(\xi)d\xi\\
+    g(t)\displaystyle\int_{0^-}^{s}F(\xi)e^{-\xi t}d\xi=f(-t)\cdot g(t)
+\end{gather*}
+\begin{equation}
+    \mathcal{L}\{f(t)\cdot g(t)\}=F(s)*G(s)
+\end{equation}
+
+
+\subsection{Esempio Applicativo}
+
+Si considera il seguente circuito e si vuole determinare la tensione a vuoto tra i morsetti: 
+\begin{center}
+    \begin{circuitikz}
+        \draw (5,0)node[right]{$-$} to[short,*-](0,0)
+                    to[european voltage source=$e(t)$](0,4)
+                    to[R=$R_1$](2,4)
+                    to[R=$R_3$](4,4)
+                    to[short,-*](5,4)node[right]{$+$};
+        \draw (4,0) to[C=$C$](4,4);
+        \draw (2,0) to[closing switch](2,2)
+                    to[R=$R_2$](2,4);
+    \end{circuitikz}
+\end{center}
+Si considerano queste grandezze nel dominio di Laplace:
+\begin{gather*}
+    e(t)=3\,u_{-1}(t)\,V\to E(s)=\displaystyle\frac{3}{s}\\
+    R_1=3\,\Omega\\
+    R_2=6\,\Omega\\
+    R_3=6\,\Omega
+\end{gather*}
+La tensione ai capi del condesnatore si esprime considerando un generatore di tensione per la memoria:
+\begin{gather}
+    C=0.05\,F\\
+    z_C(s)=\displaystyle\frac{1}{sC}\\
+    v_C(0^-)=3\,V\\
+    V_C(s)=\displaystyle\frac{v_C(0^-)}{s}+\frac{1}{sC}I(s)
+\end{gather}
+%% fix
+%% circuito laplace
+Si applica il metodo dei nodi in questo circuito:
+\begin{gather*}
+    \left[\displaystyle\frac{1}{3}+\frac{1}{6}+\frac{sC}{sC R_3+1}\right]V_A(s)=\frac{3}{s}\frac{1}{3}+\frac{3}{s}\frac{sC}{sCR_3+1}
+\end{gather*}
+
+\subsection{RLC Serie in Laplace}
 
 Si applicano queste prorpietà nell'analisi di un circuito RLC serie:
 \begin{center}
@@ -6489,121 +6590,8 @@ Si considera la forma integrale della legge costitutiva dell'induttore e la sua 
 \end{gather*}
 Si è quindi dimostrata la validità della proprietà integrale di Laplace sui circuiti. 
 
-
-\subsection{Esempio Applicativo}
-
-Si considera il seguente circuito e si vuole determinare la tensione a vuoto tra i morsetti: 
-\begin{center}
-    \begin{circuitikz}
-        \draw (5,0)node[right]{$-$} to[short,*-](0,0)
-                    to[european voltage source=$e(t)$](0,4)
-                    to[R=$R_1$](2,4)
-                    to[R=$R_3$](4,4)
-                    to[short,-*](5,4)node[right]{$+$};
-        \draw (4,0) to[C=$C$](4,4);
-        \draw (2,0) to[closing switch](2,2)
-                    to[R=$R_2$](2,4);
-    \end{circuitikz}
-\end{center}
-Si considerano queste grandezze nel dominio di Laplace:
-\begin{gather*}
-    e(t)=3\,u_{-1}(t)\,V\to E(s)=\displaystyle\frac{3}{s}\\
-    R_1=3\,\Omega\\
-    R_2=6\,\Omega\\
-    R_3=6\,\Omega
-\end{gather*}
-La tensione ai capi del condesnatore si esprime considerando un generatore di tensione per la memoria:
-\begin{gather}
-    C=0.05\,F\\
-    z_C(s)=\displaystyle\frac{1}{sC}\\
-    v_C(0^-)=3\,V\\
-    V_C(s)=\displaystyle\frac{v_C(0^-)}{s}+\frac{1}{sC}I(s)
-\end{gather}
-%% fix
-%% circuito laplace
-Si applica il metodo dei nodi in questo circuito:
-\begin{gather*}
-    \left[\displaystyle\frac{1}{3}+\frac{1}{6}+\frac{sC}{sC R_3+1}\right]V_A(s)=\frac{3}{s}\frac{1}{3}+\frac{3}{s}\frac{sC}{sCR_3+1}
-\end{gather*}
-
-\subsection{RLC Serie in Laplace}
-
-Si considera un circuito RLC serie a regime permanente, e si vuole determinare la sua espressione a regime nel dominio di Laplace. Precedentemente è stato analizzato nel domino 
-dei fasori:
-\begin{gather*}
-    \overline{V}=\left(R+j\omega-\displaystyle\frac{j}{\omega C}\right)\overline{I}
-\end{gather*}
-A memorie nulle nel dominio di Laplace lo stesso circuito si esprime tramite la seguente espressione:
-\begin{gather*}
-    V(s)=\left[R+sL+\displaystyle\frac{1}{sC}\right]I(s)
-\end{gather*}
-Fissata una pulsazione $\omega$ ed assegnando alla variable complessa $s$ il valore $s=j\omega$, si ottiene l'impedenza a regime permanente:
-\begin{gather*}
-    z(j\omega)=z
-\end{gather*}
-Ma i fasori non possono espressi rispetto alle grandezze in Laplace con $s=j\omega$:
-\begin{gather*}
-    \overline{V}\neq V(j\omega)\\
-    \overline{I}\neq I(j\omega)
-\end{gather*}
-Ma poiché i valori delle impedenze sono gli stessi, allora i rapporti tra le grandezze rimangono invariati nei due domini:
-\begin{gather*}
-    \displaystyle\frac{\overline{V}}{\overline{I}}=\frac{V(j\omega)}{I(j\omega)}
-\end{gather*}
-Per dimostrare questa relazione si considera la trasformata di una grandezza sinusoidale, per semplicità si considera a fase nulla $\gamma=0$: 
-\begin{gather*}
-    \mathscr{L}\{V_M\sin\omega t\}=\mathscr{L}\left\{\displaystyle\frac{V_M}{2j}\left(e^{j\omega t}-e^{-j\omega t}\right)\right\}\\
-    \frac{V_M}{2j}\left[\frac{1}{s-j\omega}-\frac{1}{s+j\omega}\right]=\frac{V_M}{2j}\frac{2j\omega}{s^2+\omega^2}=V_M\frac{\omega}{s^2+\omega^2}
-\end{gather*}
-Si ottiene una trasformata simile per un coseno:
-\begin{gather*}
-    \mathscr{L}\{A\cos(\omega t)\}=A\displaystyle\frac{e^{j\omega t}+e^{-j\omega t}}{2}=\frac{A}{2}\frac{s+j\omega+s-j\omega}{s^2+\omega^2}=\frac{As}{s^2+\omega^2}
-\end{gather*}
-
-Si considera ora una sinusoide sfasata di un fattore $\varphi$ e si vuole determinare la sua trasformata:
-\begin{gather*}
-    \mathscr{L}\{A\sin(\omega t+\varphi)\}=\mathscr{L}\{A\cos\varphi\sin(\omega t)+A\sin\varphi\cos(\omega t)\}=\displaystyle A\cos\varphi\frac{\omega}{s^2+\omega^2}+A\sin\varphi\frac{s}{s^2+\omega^2}\\
-    \mathscr{L}\{A\sin(\omega t+\varphi)\}=\displaystyle\frac{A\cos\varphi \omega+A\sin\varphi s}{s^2+\omega^2}
-\end{gather*}
-
-
-Si considera una funzione esponenziale moltiplicata per un fattore lineare:
-\begin{gather*}
-    \mathscr{L}\{Ate^{\alpha t}\}=F(s)\\
-    \mathscr{L}\left\{\displaystyle\frac{d}{dt}\left(Ate^{\alpha t}\right)\right\}=\mathscr{L}\{Ae^{\alpha t}+A\alpha te^{\alpha t}\}=A\mathscr{L}\{e^{\alpha t}\}+\alpha\mathscr{L}\{Ate^{\alpha t}\}=sF(s)-f(0^-)\\
-    \displaystyle\frac{A}{s-\alpha}+\alpha F(s)=sF(s)\\
-    \mathscr{L}\{Ate^{\alpha t}\}=\frac{A}{(s-\alpha)^2}
-\end{gather*}
-
-Data la trasformata della tensione, anch'essa scarica, si sostituisce $j\omega$:
-\begin{gather*}
-    V(j\omega)=V_M\displaystyle\frac{\omega}{(j\omega)^2+\omega^2}=V_M\frac{\omega}{-\omega^2+\omega^2}
-\end{gather*}
-Si ottiene quindi una forma indeterminata. Analogamente per la trasformata della corrente (considerata a fase nulla $\beta=0$): 
-\begin{gather*}
-    I(s)=\displaystyle I_M\frac{\omega}{s^2+\omega^2}\\
-    I(j\omega)=\displaystyle {I_M}\frac{\omega}{-\omega^2+\omega^2}
-\end{gather*}
-I valori che annullano il denominatore di una funzione nel dominio di Laplace si definiscono poli. Mentre considerando il rapporto tra i due, i poli si eliminano a vicenda:
-\begin{gather*}
-    \displaystyle\frac{V(j\omega)}{I(j\omega)}=\displaystyle\frac{V_M\displaystyle\frac{\omega}{(j\omega)^2+\omega^2}}{I_M\displaystyle\frac{\omega}{(j\omega)^2+\omega^2}}=\frac{V_M}{I_M}
-\end{gather*}
-Per cui è leggittimo definire l'impedenza a regime come rapporto tra queste due grandezze, calcolato al valore dei poli. Questa relazione persiste anche tra due grandezze 
-sfasate di un fattore $\varphi$, in quel caso il rapporto tra le due grandezze restituisce un numero complesso. 
-
-
-Esistono quindi due rappresentazioni nel dominio dei numeri complessi per i circuiti. Il dominio dei fasori, numerico, ad una pulsazione $\omega$ fissata; ed il dominio 
-simbolico di Laplace, dove la pulsazione $\omega$ è variabile. Il passaggio da una grandezza in Laplace ad un nel dominio dei fasori, tramite la sostituzione $s=j\omega$ è 
-possible solo se $j\omega$ non rappresenta un polo nel dominio di Laplace. Dove un polo $s_p$ è definito come un valore per cui la trasformata tende a valori infiniti:
-\begin{gather*}
-    \lim_{s\to s_p}F(s)=\pm\infty
-\end{gather*}
-Nella trasformata di una funzione sinusdoiale i poli sono esattamente pari a $\pm j\omega$, per cui non è possibile determinare l'espressione di una grandezza nel domino 
-dei fasori, data la sua trasformata di Laplace, se nel tempo continuo la sua espressione a regime è una sinusoide. 
-
-\subsection{Bipoli in Laplace}
-
-Tra i due domini non si mantiene lo stesso simbolo nella loro rappresentazione circuitale. Per un resistore la legge costitutiva tra i due domini diventa:
+Tra il dominio del tempo e di Laplace si mantiene lo stesso simbolo nella loro rappresentazione circuitale, anche se è sconsigliato l'usco dello 
+stesso simbolo per domini differenti. Per cui si considera nelle seguenti rappresentazioni un bipolo generico per rappresentare i bipoli in Laplace. Per un resistore la legge costitutiva tra i due domini diventa:
 \begin{gather*}
     v(t)=Ri(t)\to V(s)=RI(s)
 \end{gather*}
@@ -6637,7 +6625,7 @@ Per cui nel dominio di Laplce corrisponde ad un lato Thevenin/Norton:
         
         \draw (8,0) to[short,i=$I(s)$,*-](8.5,0)
                     to[short](8.5,1);
-        \draw(10.5,1) to[european current source=$Cv(0^-)$](8.5,1);
+        \draw(10.5,1) to[european current source=$\frac{i(0^-)}{s}$](8.5,1);
         \draw (10.5,1)to[short](10.5,0)
                     to[short,-*](11,0);
         \draw(8.5,0)to[short](8.5,-1)
@@ -6653,7 +6641,7 @@ Per un condensatore:
     i=\displaystyle C\frac{dv}{dt}\to I(s)=sCV(s)-Cv(0^-)\\
     v=\displaystyle\frac{1}{C}\int_{0^-}^tid\tau+v(0^-)\to V(s)=\frac{1}{sC}I(s)+\frac{v(0^-)}{s}
 \end{gather*}
-Per cui nel dominio di Laplce corrisponde ad un lato Thevenin/Norton:
+Per cui nel dominio di Laplace corrisponde ad un lato Thevenin/Norton:
 \begin{center}
     \begin{circuitikz}
         \draw (0,0) to[short, i=$i(t)$,*-](0.5,0)
@@ -6661,9 +6649,9 @@ Per cui nel dominio di Laplce corrisponde ad un lato Thevenin/Norton:
         \draw[->](2.25,-0.5)--(0.25,-0.5)node[midway, below]{$v(t)$};
 
         \draw (3,0) to[short,i=$I(s)$,*-](3.5,0)
-                    to[generic=$\displaystyle\frac{1}{sC}$,-*] (5.5,0)
-                    to[european voltage source=$\displaystyle\frac{v(0^-)}{s}$](7.5,0);
-        \draw[->] (5.25,-0.5)--(3.25,-0.5)node[midway, below]{$V(s)$};
+                    to[generic=$\frac{1}{sC}$] (5.5,0)
+                    to[european voltage source=$\frac{v(0^-)}{s}$,-*](7.5,0);
+        \draw[->] (7.25,-0.5)--(3.25,-0.5)node[midway, below]{$V(s)$};
         
         \draw (8,0) to[short,i=$I(s)$,*-](8.5,0)
                     to[short](8.5,1);
@@ -6671,14 +6659,86 @@ Per cui nel dominio di Laplce corrisponde ad un lato Thevenin/Norton:
         \draw(10.5,1) to[short](10.5,0)
                     to[short,-*](11,0);
         \draw(8.5,0)to[short](8.5,-1)
-                    to[generic=$\displaystyle\frac{1}{sC}$](10.5,-1)
+                    to[generic=$\frac{1}{sC}$](10.5,-1)
                     to[short](10.5,0);
         \draw[->] (10.75,-1.5)--(8.25,-1.5)node[midway, below]{$V(s)$};
             
     \end{circuitikz}
 \end{center}
 
-\subsection{Circuito RC}
+Si considera ora un'analisi nel dominio dei fasori, per determinare relazioni tra i due domini: 
+\begin{gather*}
+    \overline{V}=\left(R+j\omega-\displaystyle\frac{j}{\omega C}\right)\overline{I}
+\end{gather*}
+A memorie nulle nel dominio di Laplace lo stesso circuito si esprime tramite la seguente espressione:
+\begin{gather*}
+    V(s)=\left[R+sL+\displaystyle\frac{1}{sC}\right]I(s)
+\end{gather*}
+Fissata una pulsazione $\omega$ ed assegnando alla variable complessa $s$ il valore $s=j\omega$, si ottiene l'impedenza a regime permanente:
+\begin{gather*}
+    z(j\omega)=z
+\end{gather*}
+Ma i fasori non possono espressi rispetto alle grandezze in Laplace con $s=j\omega$:
+\begin{gather*}
+    \overline{V}\neq V(j\omega)\\
+    \overline{I}\neq I(j\omega)
+\end{gather*}
+Ma poiché i valori delle impedenze sono gli stessi, allora i rapporti tra le grandezze rimangono invariati nei due domini:
+\begin{gather*}
+    \displaystyle\frac{\overline{V}}{\overline{I}}=\frac{V(j\omega)}{I(j\omega)}
+\end{gather*}
+Per dimostrare questa relazione si considera la trasformata di una grandezza sinusoidale, per semplicità si considera a fase nulla $\gamma=0$: 
+\begin{gather*}
+    \mathcal{L}\{V_M\sin\omega t\}=\mathcal{L}\left\{\displaystyle\frac{V_M}{2j}\left(e^{j\omega t}-e^{-j\omega t}\right)\right\}\\
+    \frac{V_M}{2j}\left[\frac{1}{s-j\omega}-\frac{1}{s+j\omega}\right]=\frac{V_M}{2j}\frac{2j\omega}{s^2+\omega^2}=V_M\frac{\omega}{s^2+\omega^2}
+\end{gather*}
+Si ottiene una trasformata simile per un coseno:
+\begin{gather*}
+    \mathcal{L}\{A\cos(\omega t)\}=A\displaystyle\frac{e^{j\omega t}+e^{-j\omega t}}{2}=\frac{A}{2}\frac{s+j\omega+s-j\omega}{s^2+\omega^2}=\frac{As}{s^2+\omega^2}
+\end{gather*}
+
+Si considera ora una sinusoide sfasata di un fattore $\varphi$ e si vuole determinare la sua trasformata:
+\begin{gather*}
+    \mathcal{L}\{A\sin(\omega t+\varphi)\}=\mathcal{L}\{A\cos\varphi\sin(\omega t)+A\sin\varphi\cos(\omega t)\}=\displaystyle A\cos\varphi\frac{\omega}{s^2+\omega^2}+A\sin\varphi\frac{s}{s^2+\omega^2}\\
+    \mathcal{L}\{A\sin(\omega t+\varphi)\}=\displaystyle\frac{A\cos\varphi \omega+A\sin\varphi s}{s^2+\omega^2}
+\end{gather*}
+
+
+Si considera una funzione esponenziale moltiplicata per un fattore lineare:
+\begin{gather*}
+    \mathcal{L}\{Ate^{\alpha t}\}=F(s)\\
+    \mathcal{L}\left\{\displaystyle\frac{d}{dt}\left(Ate^{\alpha t}\right)\right\}=\mathcal{L}\{Ae^{\alpha t}+A\alpha te^{\alpha t}\}=A\mathcal{L}\{e^{\alpha t}\}+\alpha\mathcal{L}\{Ate^{\alpha t}\}=sF(s)-f(0^-)\\
+    \displaystyle\frac{A}{s-\alpha}+\alpha F(s)=sF(s)\\
+    \mathcal{L}\{Ate^{\alpha t}\}=\frac{A}{(s-\alpha)^2}
+\end{gather*}
+
+Data la trasformata della tensione, anch'essa scarica, si sostituisce $j\omega$:
+\begin{gather*}
+    V(j\omega)=V_M\displaystyle\frac{\omega}{(j\omega)^2+\omega^2}=V_M\frac{\omega}{-\omega^2+\omega^2}
+\end{gather*}
+Si ottiene quindi una forma indeterminata. Analogamente per la trasformata della corrente (considerata a fase nulla $\beta=0$): 
+\begin{gather*}
+    I(s)=\displaystyle I_M\frac{\omega}{s^2+\omega^2}\\
+    I(j\omega)=\displaystyle {I_M}\frac{\omega}{-\omega^2+\omega^2}
+\end{gather*}
+I valori che annullano il denominatore di una funzione nel dominio di Laplace si definiscono poli. Mentre considerando il rapporto tra i due, i poli si eliminano a vicenda:
+\begin{gather*}
+    \displaystyle\frac{V(j\omega)}{I(j\omega)}=\displaystyle\frac{V_M\displaystyle\frac{\omega}{(j\omega)^2+\omega^2}}{I_M\displaystyle\frac{\omega}{(j\omega)^2+\omega^2}}=\frac{V_M}{I_M}
+\end{gather*}
+Per cui è leggittimo definire l'impedenza a regime come rapporto tra queste due grandezze, calcolato al valore dei poli. Questa relazione persiste anche tra due grandezze 
+sfasate di un fattore $\varphi$, in quel caso il rapporto tra le due grandezze restituisce un numero complesso. 
+
+
+Esistono quindi due rappresentazioni nel dominio dei numeri complessi per i circuiti. Il dominio dei fasori, numerico, ad una pulsazione $\omega$ fissata; ed il dominio 
+simbolico di Laplace, dove la pulsazione $\omega$ è variabile. Il passaggio da una grandezza in Laplace ad un nel dominio dei fasori, tramite la sostituzione $s=j\omega$ è 
+possible solo se $j\omega$ non rappresenta un polo nel dominio di Laplace. Dove un polo $s_p$ è definito come un valore per cui la trasformata tende a valori infiniti:
+\begin{gather*}
+    \lim_{s\to s_p}F(s)=\pm\infty
+\end{gather*}
+Nella trasformata di una funzione sinusdoiale i poli sono esattamente pari a $\pm j\omega$, per cui non è possibile determinare l'espressione di una grandezza nel domino 
+dei fasori, data la sua trasformata di Laplace, se nel tempo continuo la sua espressione a regime è una sinusoide. 
+
+\subsection{RC Serie}
 
 Si considera un circuito RC e si trasferisce nel dominio di Laplace. Nel tempo continuo si ha il seguente circuito:
 \begin{center}
@@ -6693,11 +6753,11 @@ Si considera un circuito RC e si trasferisce nel dominio di Laplace. Nel tempo c
 Nel dominio di Laplace si ottiene:
 \begin{center}
     \begin{circuitikz}
-        \draw (0,0) to[european voltage source=$\displaystyle\frac{E}{s}$](0,4)
+        \draw (0,0) to[european voltage source=$\frac{E}{s}$](0,4)
                     to[generic=$R$,-*](2,4)node[above]{$A$};
         \draw (0,0) to[short,-*](2,0)node[below left]{$B$}
-                    to[european voltage source=$\displaystyle\frac{v_C(0^-)}{s}$](2,2)
-                    to[generic=$\displaystyle\frac{1}{sC}$](4,2);
+                    to[european voltage source=$\frac{v_C(0^-)}{s}$](2,2)
+                    to[generic=$\frac{1}{sC}$](2,4);
         \draw (2,0) to[short](2,-0.5)
                     to[short](2.5,-0.5)
                     to[short](2.5,-0.75)node[ground]{};
@@ -6707,7 +6767,7 @@ Si risolve mediante il metodo dei nodi, considerando il nodo $B$ di calcolo, il 
 \begin{gather*}
     \left(\displaystyle\frac{1}{R}+sC\right)V_A(s)=\left(\frac{1+sCR}{R}\right)V_A(s)=\displaystyle\frac{E}{sR}+Cv_c(0^-)\\
     V_A(s)=\displaystyle\frac{R}{R}\frac{E}{s(1+sCR)}+\frac{RCv_C(0^-)}{1+sCR}\\
-    \mathscr{L}^{-1}\{V_A(s)\}=v_A(t)= v_C(t)
+    \mathcal{L}^{-1}\{V_A(s)\}=v_A(t)= v_C(t)
 \end{gather*}
 Si determina ora un algoritmo per antitrasformata le grandezze ottenute senza effettuare l'integrale di antitrasformazione. 
 Nei circuiti le espressioni delle grandezze si presentano sempre come frazioni tra polinomi:
@@ -6766,6 +6826,122 @@ Per ottenere la soluzione completa si sommano i due oggetti appena antitrasforma
     v_C(t)=v_C(0^-)e^{-\frac{t}{RC}}-Ee^{-\frac{t}{RC}}+E=(v_C(0^-)-E)e^{-\frac{t}{RC}}+E
 \end{gather*}
 Quest'espressione coincide con l'espressione ottenuta dall'analisi nel tempo del circuito RC. 
+
+
+
+Si considera un circuito RC con un'eccitazione in entrata pari ad un periodo di un'onda quadra:
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[->](-0.25,0)--(1.25,0)node[right]{$t$};
+        \draw[->](0,-1)--(0,1)node[right]{$e(t)$};
+
+        \draw[-](0,0.5)node[left]{$E$}--(0.5,0.5)--(0.5,-0.5)--(1,-0.5)--(1,0)node[above]{$T$};
+        \draw[dashed](0,-0.5)node[left]{$-E$}--(0.5,-0.5);
+    \end{tikzpicture}
+\end{center}
+\begin{gather*}
+    e(t)=e_1(t)+e_2(t)\\
+    e_1(t)=E[u_{-1}(t)-u_{-1}(t-t_0)]\\
+    e_2(t)=-E[u_{-1}(t-t_0)-u_{-1}(t-T)]
+\end{gather*}
+Si può analizzare la risposta del sistema ad intervalli, per rendere meno dispendiosa l'analisi da effettuare nel dominio di Laplace:
+\begin{gather*}
+    \begin{cases}
+        \mbox{per }0^+\leq t\leq t_0^-& v_C(t)=E\left(1-e^{-\frac{t}{RC}}\right)\\
+        \mbox{per }t_0^+\leq t\leq T^-& v_C(t)=-E\left(1-e^{-\frac{t}{RC}}\right)
+    \end{cases}
+\end{gather*}
+
+
+Nel caso in cui sia presente una periodicità nell'onda quadra in entrata al circuito, con un periodo $T=T_H+T_L$ dove $T_H$ è la base della finestra che assume valore positivo, 
+mentre $T_L$ è il tempo per cui assume valore nullo, la sua Laplace trasformata può essere espressa come:
+\begin{gather*}
+    F(s)=\displaystyle\frac{1}{s}\frac{1-e^{-sT_H}}{1-e^{-sT}}
+\end{gather*}
+
+Nel caso di un onda quadra simmetrica a valor medio nullo, che alterna tra valori positivi e negativi di stessa base $T/2$, si può esprimere la sua trasformata come:
+\begin{gather*}
+    F(s)=\displaystyle\frac{1}{s}\frac{1-e^{-sT/2}}{1+e^{-sT/2}}
+\end{gather*}
+
+\subsection{Stabilità di Una Rete}
+
+Le proprietà di una risposta dovute ad un eccitazione consentono di definire gli operatori funzioni di rete. Dipendono dal rapporto tra due 
+trasformate di Laplace, la trasformata della risposta $R$ e dell'eccitazione $E$:
+\begin{gather*}
+    F_R(s)=\displaystyle\frac{R(s)}{E(s)}
+\end{gather*}
+Considerando un partitore di tensione, si può esprimere la grandezza in uscita tra i due morsetti $V_{out}(s)$ come modulata delle impedenze interne $z_i(s)$, 
+rispetto alla tensione in ingresso $V_{in}(s)$:
+\begin{gather*}
+    \displaystyle V_{out}(s)=\frac{z_{out}(s)}{\sum_{i=1}^nz_i(s)}V_{in}(s)
+\end{gather*}
+La funzione di rete $F_R(s)$ o di trasferimento $H(s)$ è un operatore, nel caso di questo partitore di tensione definito da un rapporto in tensione:
+\begin{gather*}
+    F_R(s)=H(s)=\displaystyle\frac{V_{out}(s)}{V_{in}(s)}=\frac{z_{out}(s)}{\sum_{i=1}^nz_i(s)}
+\end{gather*}
+Anche l'impedenza e l'ammettenza sono due funzioni di rete, essendo il rapporto tra due grandezze, la tensione e la corrente. 
+
+Se fossero presenti dei poli instabili, ovvero a parte reale positiva, allora la tensione in uscita crescerebbe indefinitivamente, tendendo all'infinito. Il sistema sarebbe 
+quindi instabile. 
+Quando si tratta della stabilità bisogna analizzare la natura dei poli della funzione di rete o di trasferimento della rete associata, in basa ad una data eccitazione. 
+Se i poli hanno parte reale negativa, allora la risposta tende a valori nulli all'infinito, quindi il sistema è asintoticamente stabile. 
+
+Se la molteplicità del polo in $0$ è maggiore di uno $\nu>1$, allora sono presenti delle situazioni divergenti, ovvero instabili, nel dominio del tempo. Poiché un singolo 
+polo in zero rappresenta un gradino nel dominio del tempo, se sono presenti più di un polo nell'origine, si possono calcolare integrando $\nu-1$ volte il gradino, per la 
+proprietà dell'integrale della trasformata di Laplace:
+\begin{gather*}
+    \displaystyle\frac{1}{s^{\nu-1}}\frac{1}{s}\to\int_{0^-}^t\cdots\int_{0^-}^tu_{-1}(t)dt^{\nu-1}
+\end{gather*}
+Poiché il gradino assume valore costante, integrandolo si ottengono delle funzioni strettamente crescenti, per cui rappresentano delle dinamiche instabili. 
+
+
+L'antitrasformata può essere interpretata come un funzionale per trasferire una determinata funzione nel dominio del tempo. Altrimenti si può analizzare nell'ambito della 
+funzione di rete, senza antitrasformare l'operatore, tramite interpretazione diretta sulla natura dei poli della funzione di rete, questo fornisce informazioni sulla 
+natura delle grandezze associate nel dominio del tempo, per cui non è strettamente necessario attuare un'antitrasformata per determinare il comportamento di una rete 
+nel tempo. 
+
+Per ritornare ad una forma nel tempo, data una serie di fratti semplici si può applicare il metodo dei residui. 
+Il limite all'infinito diventa finito, quando viene moltiplicato per il fattore $s-s_i$. %% dimostrazione 
+\begin{gather*}
+    F(s)=\displaystyle\frac{a_ns^n+\cdots+a_0}{b_ms^m+\cdots+b_0}=\frac{\displaystyle\frac{1}{b_m}\left[a_ns^n+\cdots+a_0\right]}{(s-s_m)\cdots(s-s_0)}
+\end{gather*}
+Scomponendo in poli semplici si può esprimere una qualsiasi funzione di rete nella forma:
+\begin{gather*}
+    F(s)=\displaystyle\frac{A_m}{s-s_m}+\cdots+\frac{A_1}{s-s_1}
+\end{gather*}
+Se il polo $s_i$ ha molteplicità $1$, allora il residuo $A_i$ associato al suo fratto semplice si calcola come:
+\begin{gather*}
+    \lim_{s\to s_i}(s-s_i)F(s)=(s-s_i)\left(\displaystyle\frac{A_m}{s-s_m}+\cdots+\frac{A_i}{s-s_i}+\cdots+\frac{A_1}{s-s_1}\right)\\
+    \displaystyle\cancelto{0}{\sum_{j=1}^{i-1}(s-s_i)\frac{A_j}{s-s_j}}+A_i\cancelto{1}{\frac{s-s_i}{s-s_i}}+\cancelto{0}{\sum_{j=i+1}^{m}(s-s_i)\frac{A_j}{s-s_j}}=A_1
+\end{gather*}
+\begin{equation}
+    A_1=\lim_{s\to s_i}(s-s_i)F(s)=\left[\displaystyle\frac{1}{b_m}\frac{a_ns^n+\cdots+a_0}{(s-s_m)\cdots(s-s_{i-1})(s-s_{i+1})\cdots(s-s_0)}\right]_{s=s_i}
+\end{equation}
+
+Per un polo $s_i$ di molteplicità $\nu_i$, si determina il $k-$esimo residuo tramite la seguente espressione:
+\begin{gather*}
+    A_{ik}=\displaystyle\frac{1}{k!}\left[\frac{d^k}{ds^k}\left[(s+s_i)^{\nu_i}F(s)\right]\right]_{s=s_i}
+\end{gather*}
+
+\subsubsection{Esempio Applicativo}
+
+Sia data la seguente funzione di rete con un polo di molteplicità due, determinare la sua antitrasformata: 
+\begin{gather*}
+    F(s)=\displaystyle\frac{10s+3}{(s+2)^2(s+5)}=\frac{A_1}{(s+2)^2}+\frac{A_2}{s+2}+\frac{B}{s+5}\\
+    \left[(s+2)^2F(s)\right]_{s=-2}=A_1+A_2(s+2)+\displaystyle\frac{B(s+2)^2}{s+5}=A_1=\frac{10(-2)+3}{(-2+5)}\\
+    G(s)=(s+2)^2F(s)\\
+    \displaystyle\left[\frac{dG(s)}{ds}\right]_{s=-2}=\left[\frac{10(s+5)-(10s+3)}{(s+5)^2}\right]_{s=-2}=A_2
+\end{gather*}
+Sia data la seguente funzione di rete assegnata con un polo di molteplicità tre:
+\begin{gather*}
+    F(s)=\displaystyle\frac{3s+5}{(s+1)^3(s+2)(s+3)}=\frac{A_{13}}{(s+1)^3}+\frac{A_{12}}{(s+1)^2}+\frac{A_{11}}{s+1}+\frac{B}{s+2}+\frac{C}{s+3}\\
+    (s+1)^3F(s)\bigg|_{s=-1}=A_{13}=\displaystyle\frac{-3+5}{(-1+2)(-1+3)}\\
+    \displaystyle\frac{d}{ds}\left[(s+1)^3F(s)\right]_{s=-1}=A_{12}=\frac{d}{ds}\left[\frac{(s+1)^3(3s+5)}{(s+2)(s+5)}\right]_{s=-1}\\
+    \frac{1}{2}\displaystyle\frac{d^2}{ds^2}\left[(s+1)^3F(s)\right]_{s=-1}=A_{11}=\frac{1}{2}\frac{d^2}{ds^2}\left[\frac{(s+1)^3(3s+5)}{(s+2)(s+5)}\right]_{s=-1}
+\end{gather*}
+
+\clearpage
 
 
 

@@ -3,7 +3,7 @@
 \usepackage{cancel}
 \usepackage{tikz}
 \usepackage{amsmath}
-\usepackage{geometry}
+\usepackage[includehead,nomarginpar]{geometry}
 \usepackage{graphicx}
 \usepackage{amsfonts} 
 \usepackage{verbatim}
@@ -13,7 +13,11 @@
 \usepackage{bookmark}
 \usepackage{circuitikz}
 \usepackage[italian]{babel}
+\usepackage{fancyhdr}
+\usepackage{romanbarpagenumber}
 
+\setlength{\headheight}{12.0pt}
+\addtolength{\topmargin}{-12.0pt}
 
 %% segnati con un doppio segno percentuale ("%%") le correzioni o inserimenti da apportare al testo
 
@@ -36,6 +40,13 @@
 
 \begin{document}
 
+\pagenumbering{Roman}
+
+\pagestyle{fancy}
+\fancyhead{}\fancyfoot{}
+\fancyhead[C]{Elettrotecnica ed Elettronica - Giacomo Sturm}
+\fancyfoot[C]{\thepage}
+
 \maketitle
 
 \vspace{10mm}
@@ -49,6 +60,8 @@
 \tableofcontents
 
 \clearpage
+
+\pagenumbering{arabic}
 
 \section{Esercizi Svolti il 24 Novembre}
 

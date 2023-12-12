@@ -1,0 +1,165 @@
+\documentclass{article}
+
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage[includehead,nomarginpar]{geometry}
+\usepackage{graphicx}
+\usepackage{amsfonts} 
+\usepackage{verbatim}
+\usepackage{mathrsfs}  
+\usepackage{lmodern}
+\usepackage{braket}
+\usepackage{bookmark}
+\usepackage{circuitikz}
+\usepackage[italian]{babel}
+\usepackage{fancyhdr}
+\usepackage{romanbarpagenumber}
+
+\setlength{\headheight}{12.0pt}
+\addtolength{\topmargin}{-12.0pt}
+
+%% segnati con un doppio segno percentuale ("%%") le correzioni o inserimenti da apportare al testo
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+}
+
+\renewcommand{\contentsname}{Indice}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+
+\title{Esercizi Svolti su Reti Dinamiche nel Dominio di Laplace}
+\author{Giacomo Sturm}
+\date{AA: 2023/2024 - Ing. Informatica}
+
+
+\begin{document}
+
+\pagenumbering{Roman}
+
+\pagestyle{fancy}
+\fancyhead{}\fancyfoot{}
+\fancyhead[C]{Elettrotecnica ed Elettronica - Giacomo Sturm}
+\fancyfoot[C]{\thepage}
+
+\maketitle
+
+\vspace{10mm}
+
+\begin{center}
+    Sorgente del file LaTeX disponibile su \url{https://github.com/00Darxk/Elettrotecnica-ed-Elettronica}
+\end{center}
+
+\clearpage
+
+\tableofcontents
+
+\clearpage
+
+\pagenumbering{arabic}
+
+\section{Esercizi Svolti l'11 Dicembre}
+
+\subsection{Esercizio 2.5}
+
+Calcolare la tensione ai capi dei morsetti $v_0(t)$ del seguente cirucito, dopo la commutazione da $A$ e $B$: 
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (4.5,0)node[above]{$-$}to[short,*-](0,0)
+                    to[european voltage source=$12\,V$](0,2)
+                    to[short,-*](0.75,2)node[above]{$A$};
+        \draw (1,0) to[short,-*](1,1.75)node[right]{$B$};
+        \draw (1.25,2) to[L=$0.5\,H$,*-](3,2);
+        \draw (3,0) to[R=$0.2\,\Omega$](3,2);
+        \draw (3,2) to[short](4,2)
+                    to[C=$3\,F$](4,0);
+        \draw (4,2) to[short,-*](4.5,2)node[below]{$+$};
+        \draw[dashed](0.75,2)--(1.25,2);
+        \draw[-](1.25,2)--(1,1.75);
+    \end{circuitikz}
+\end{center}
+
+Il circuito prima della commutazione si trova a regime, per cui la tensione ai capi del condensatore corrisponde alla tensione erogata dal generatore:
+\begin{gather*}
+    v_C(0^-)=12\,V
+\end{gather*}
+La memoria dell'induttore invece corrisponde a:
+\begin{gather*}
+    i(0^-)=\displaystyle\frac{12\,V}{0.2\,\Omega}=60\,A
+\end{gather*}
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short] (6,0) 
+                    to[european voltage source=$\frac{v_C(0^-)}{s}$](6,2)
+                    to[generic=$\frac{1}{sC}$](6,4)
+                    to[short](4,4)
+                    to[generic=$0.2\,\Omega$](4,0);
+        \draw (0,0) to[short](0,4)
+                    to[generic=$sL$](2,4)
+                    to[european voltage source=$Li(0^-)$,-*](4,4);
+        \draw (4,0) to[short,*-](4,-0.5)node[ground]{};
+    \end{circuitikz}
+\end{center}
+Si applica il metodo dei nodi, corrispondente al teorema di Millman in questo caso:
+\begin{gather*}
+    V_{out}(s)=\displaystyle\frac{\displaystyle\frac{Li(0^-)}{sL}+\frac{sCv_C(0^-)}{s}}{\displaystyle\frac{1}{sL}+\frac{1}{R}+sC}=\frac{\displaystyle\frac{Li(0^-)+sLCv_C(0^-)}{sL}}{\displaystyle\frac{1+sGL+s^2LC}{sL}}\\
+    V_{out}(s)=\displaystyle\frac{Li(0^-)+sLCv_C(0^-)}{LC\left(s^2+s\displaystyle\frac{1}{RC}+\frac{1}{LC}\right)}
+\end{gather*}
+Si considera il denominatore e si individuano i poli $s_1$ e $s_2$:
+\begin{gather*}
+    D(s)=LC\left(s^2+s\displaystyle\frac{1}{RC}+\frac{1}{LC}\right)=LC(s-s_1)(s-s_2)
+\end{gather*}
+Si considerano i valori delle grandezze:
+\begin{gather*}
+    Li(0^-)=30\\
+    LC=\displaystyle\frac{3}{2}\\
+    \displaystyle\frac{1}{RC}=\frac{5}{3}
+\end{gather*}
+Sostituendo i valori ottenuti nella funzione, si ottiene:
+\begin{gather*}
+    \displaystyle D(s)=\frac{3}{2}\left[s^2+\frac{5}{3}s+\frac{2}{3}\right]\\
+    s_{1,2}=\displaystyle\frac{1}{2}\left(-\frac{5}{3}\pm\sqrt{\frac{25}{9}-\frac{8}{3}}\right)=-\frac{5}{6}\pm\sqrt{\frac{25-24}{9}}=-\frac{5}{6}\pm\frac{1}{6}\\
+    s_1=-1\\
+    s_2=\displaystyle-\frac{2}{3}\\
+    F(s)=\displaystyle\frac{30+s\displaystyle\frac{3}{2}12}{\displaystyle\frac{3}{2}(s+1)\left(s+\frac{2}{3}\right)}
+\end{gather*}
+Si scompone la funzione di rete in fratti semplici:
+\begin{gather*}
+    F(s)=\displaystyle\frac{A_1}{s-s_1}+\frac{A_2}{s-s_2}=\frac{20+12s}{(s+1)\left(s+\displaystyle\frac{2}{3}\right)}
+\end{gather*}
+Si considerano due metodi per risolvere:
+\begin{gather*}
+    A_1(s-s_1)+A_2(s-s_2)=20+12s\\
+    \begin{cases}
+        A_1+A_2=12\\
+        A_1s_1+A_2s_2=-20
+    \end{cases}\\
+    f(t)=A_1e^{s_1t}+A_2e^{s_2t}
+\end{gather*}
+Poiché i poli hanno parte reale negativa, per cui la funzione di rete è asintoticamente stabile. 
+Alternativamente si applica il metodo dei residui per determinare $A_1$ e $A_2$:
+\begin{gather*}
+    \lim_{s\to s_1}(s-s_1)F(s)=\lim_{s\to s_1}\displaystyle\frac{20+12s}{s-s_2}=\lim_{s\to s_1}\left(A_1+A_2\frac{s-s_1}{s-s_2}\right)=A_1\\
+    A_1=\displaystyle\frac{20+12s_1}{s_1-s_2}=\frac{20-12}{-1+\displaystyle\frac{2}{3}}=-24\\
+    A_2=\displaystyle\frac{20+12s_2}{s_2-s_1}=\frac{20-8}{-\displaystyle\frac{2}{3}+1}=36
+\end{gather*}
+Per cui la funzione nel dominio del tempo risulta essere:
+\begin{gather*}
+    f(t)=-24e^{-t}+36^{-\frac{2}{3}t}=v_0(t)
+\end{gather*}
+Corrisponde alla tensione ai capi del condensatore, e coincide alla tensione ai capi dei morsetti del circuito, poiché la commutazione avviene in un tempo $t=0$, questa 
+espressione è valida solo per un tempo $t\geq0^+$:
+\begin{equation}
+    v_0(t)=(36e^{-\frac{2}{3}t}-24e^{-t})u_{-1}(t)
+\end{equation}
+
+
+
+\end{document}
