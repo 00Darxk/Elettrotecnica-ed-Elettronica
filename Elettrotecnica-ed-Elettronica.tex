@@ -100,7 +100,7 @@ si trova la massa:
     \end{tikzpicture}
 \end{center}
 
-Poiché le cariche possono appartenere a due classi diverse per convenzione una carica positiva crea una deformazione concava, mentre una negativa una deformarzione convessa: 
+Poiché le cariche possono appartenere a due classi diverse per convenzione una carica positiva crea una deformazione concava, mentre una negativa una deformazione convessa: 
 \begin{center}
     \begin{tikzpicture}[scale=2]
         \node[sum](o1)at(0,0){$+$};
@@ -156,8 +156,8 @@ ed il campo elettrico:
 \end{equation}
 
 L'unità di misura fondamentale usata per analizzare fenomeni elettrici nel SI è l'Ampere $A$, intensità di corrente, che ha sostituito il Coulomb $C$, unità di carica, 
-entrambe sono cognomi di scienziati che hanno studiato l'elettricità, a differenza delle restanti grandezze fondamentali. Ciò spiega come non fosse chiaramanete 
-idefntificabile la causa dei fenomeni elettrici in passato. 
+entrambe sono cognomi di scienziati che hanno studiato l'elettricità, a differenza delle restanti grandezze fondamentali. Ciò spiega come non fosse chiaramente 
+identificabile la causa dei fenomeni elettrici in passato. 
 
 
 In caso sia presente più di una carica stazionaria nel vuoto, per determinare il campo elettrico in un dato punto si considera il principio di sovrapposizione degli effetti 
@@ -247,7 +247,7 @@ Il differenziale $dV$ è un differenziale totale di un campo scalare $V(x,y,z)$,
 \begin{equation*}
     dV=\displaystyle\frac{\partial V}{\partial x}dx+\frac{\partial V}{\partial y}dy+\frac{\partial V}{\partial z}dz
 \end{equation*}
-Per il principio di indentità dei polinomi risulta:
+Per il principio di identità dei polinomi risulta:
 \begin{equation*}
     \displaystyle\frac{\partial V}{\partial x}=-E_x,\:\frac{\partial V}{\partial y}=-E_y,\:\frac{\partial V}{\partial z}=-E_z
 \end{equation*}
@@ -332,7 +332,7 @@ Analogamente alla portata di un liquido attraverso una superficie, il flusso $\P
         \filldraw[black](1.5,2)circle(0.5pt);
     \end{tikzpicture}
 \end{center}
-Il flusso è massimo quando il campo e la superficie sono tra di loro perpendicolari: $\Phi_S(\vec{v})=|\vec{v}|\cdot S$. Per determinare il flusso attraverso una superfecie $S$ 
+Il flusso è massimo quando il campo e la superficie sono tra di loro perpendicolari: $\Phi_S(\vec{v})=|\vec{v}|\cdot S$. Per determinare il flusso attraverso una superficie $S$ 
 inclinata rispetto al campo $\vec{v}$ bisogna considerare la componente del campo che passa perpendicolarmente attraverso la superficie, per cui si definisce il versore 
 giuntura di una superficie $\hat{n}_S$ come il vettore di modulo unitario, direzione normale alla superficie nel punto e di verso uscente se la superficie è concava, ed 
 entrante se è convessa: $\Phi_S(\vec{v})=\vec{v}\cdot\hat{n}S$. 
@@ -382,8 +382,8 @@ flusso totale sarebbe dato dalla somma del flusso entrante e del flusso uscente 
 
 \subsubsection{Teorema della Divergenza e I Legge di Maxwell}
 
-Il flusso attraverso una superficie chiusa è dato dalla somma del flusso per ogni faccia della superficie. Considerando un cubo infinitesimo con faccie parallele ai piani 
-cartesiani ed un campo elettrico $\vec{E}$ passante per quel cubo, si calcola il flusso totale sommando il flusso sulle sue sei faccie. 
+Il flusso attraverso una superficie chiusa è dato dalla somma del flusso per ogni faccia della superficie. Considerando un cubo infinitesimo con facce parallele ai piani 
+cartesiani ed un campo elettrico $\vec{E}$ passante per quel cubo, si calcola il flusso totale sommando il flusso sulle sue sei facce. 
 \begin{center}
     \begin{tikzpicture}[scale=2]
         \draw[-,very thick](0,0)node[left]{$P_2$}--(1,0)node[right]{$P_3$}--(1,1)node[right]{$P_8$}--(0,1)node[left]{$P_7$}--(0,0);
@@ -410,7 +410,7 @@ Il flusso attraverso la faccia $P_1P_2P_3P_4$ risulta essere:
 Poiché il campo elettrico è antiparallelo alla giuntura della superficie. 
 
 
-Consdierando la faccia $P_5P_6P_7P_8$, il campo elettrico varia prima di attraversare la faccia. La variazione dipende dalla variazione lungo l'asse $z$, per cui il cambiamento 
+Considerando la faccia $P_5P_6P_7P_8$, il campo elettrico varia prima di attraversare la faccia. La variazione dipende dalla variazione lungo l'asse $z$, per cui il cambiamento 
 del campo elettrico dipende dalla sua derivata parziale $\displaystyle\frac{\partial\vec{E}}{\partial z}$. Il cambiamento effettivo è dato dalla derivata parziale 
 moltiplicata per lo spostamento effettuato sull'asse $z$, trattandosi di un cubo infinitesimo lo spostamento è infinitesimo $dz$. Per cui il campo che attraversa la faccia 
 risulta essere:
@@ -422,12 +422,12 @@ Per cui il flusso risulta essere:
     \Phi_2=\left(E_z+\displaystyle\frac{\partial E_z}{\partial z}dz\right)dxdy
 \end{equation*}
 
-Analogamente alla prima faccia, il flusso attraverso le due faccie $P_1P_2P_6P_7$ e $P_1P_4P_5P_6$ risultano essere:
+Analogamente alla prima faccia, il flusso attraverso le due facce $P_1P_2P_6P_7$ e $P_1P_4P_5P_6$ risultano essere:
 \begin{gather*}
     \Phi_3=-E_ydxdz\\
     \Phi_5=-E_xdydz
 \end{gather*}
-Analogamente alla seconda faccia, il campo elettrico varia prima di attraversare le faccie $P_3P_4P_5P_8$ e $P_2P_3P_7P_8$, ed il loro flusso risulta essere:
+Analogamente alla seconda faccia, il campo elettrico varia prima di attraversare le facce $P_3P_4P_5P_8$ e $P_2P_3P_7P_8$, ed il loro flusso risulta essere:
 \begin{gather*}
     \Phi_4=\left(E_y+\displaystyle\frac{\partial E_y}{\partial y}dy\right)dxdz\\
     \Phi_6=\left(E_x+\displaystyle\frac{\partial E_x}{\partial x}dx\right)dydz
@@ -444,17 +444,17 @@ Il flusso totale attraverso il cubo infinitesimo risulta quindi essere:
     \Phi=\left(\displaystyle\frac{\partial E_x}{\partial x}+\frac{\partial E_y}{\partial y}+\frac{\partial E_z}{\partial z}\right)dxdydz
 \end{gather*}
 
-Si cosidera il volume del cubo infinitesimo $d\tau=dxdydz$, mentre la superficie infinitesime che racchiude il volume $dS$. Il flusso attraverso il cubo equivale alla 
+Si considera il volume del cubo infinitesimo $d\tau=dxdydz$, mentre la superficie infinitesime che racchiude il volume $dS$. Il flusso attraverso il cubo equivale alla 
 divergenza del campo elettrico: 
 \begin{equation*}
     \Phi_{dS}(\vec{E})={\nabla}\cdot\vec{E}d\tau=d\Phi_S(\vec{E})
 \end{equation*}
-Per cui è possibile determinare il flusso di un campo elettrico (stazionario) $\vec{E}$ attraverso una superficie chiusa $S$, consideranro l'integrale sul volume 
+Per cui è possibile determinare il flusso di un campo elettrico (stazionario) $\vec{E}$ attraverso una superficie chiusa $S$, considerando l'integrale sul volume 
 racchiuso dalla superficie $\tau$ della divergenza del campo. Ciò viene chiamato teorema della divergenza. 
 \begin{equation}
     \displaystyle\oint_S\vec{E}\cdot\hat{n}dS=\int_{\tau}{\nabla}\cdot\vec{E}d\tau
 \end{equation} 
-Per il teroema di Gauss il flusso di un campo elettrico $\vec{E}$ attraverso una qualsiasi superficie chiusa $S$ è dato dal rapporto delle carica totale $Q$ interna alla superficie 
+Per il teorema di Gauss il flusso di un campo elettrico $\vec{E}$ attraverso una qualsiasi superficie chiusa $S$ è dato dal rapporto delle carica totale $Q$ interna alla superficie 
 e la permettività dielettrica nel vuoto $\varepsilon_0$. Dato un mezzo con densità uniforme di carica $\rho_Q$, la carica totale può essere espressa come l'integrale sull'intero 
 volume della densità: 
 \begin{equation*}
@@ -499,7 +499,7 @@ antiorario.
     &P_4(x,y+dy,z)
 \end{align*}
 
-Sul lato $P_1P_2$, il campo elettrico varia con l'aumento della coordinata $x$, poiché ogni componte del campo elettrico dipende dalle $3$ coordinate, la variazione di una 
+Sul lato $P_1P_2$, il campo elettrico varia con l'aumento della coordinata $x$, poiché ogni componente del campo elettrico dipende dalle $3$ coordinate, la variazione di una 
 coordinate implica una variazione di tutte le componenti del campo. La circuitazione risulta quindi essere:
 \begin{equation*}
     \Gamma_1=\vec{E}\cdot d\vec{\lambda}=\left(E_x\hat{x}+\displaystyle\frac{\partial E_x}{\partial x}dx\hat{x}+E_y\hat{y}+\frac{\partial E_y}{\partial x}dy\hat{y}+E_z\hat{z}+\frac{\partial E_z}{\partial x}dz\hat{z}\right)\cdot d\vec{x}=\left(E_x+\frac{\partial E_x}{\partial x}dx\right)dx
@@ -527,7 +527,7 @@ La circuitazione totale risulta essere quindi:
 \end{gather*}
 La circuitazione totale equivale alla componente del rotore del campo elettrico parallela alla normale al piano individuato dalla superficie descritta dal percorso $\lambda$. 
 Poiché la circuitazione è uno scalare, per conservare solo questa componente si considera il prodotto scalare tra il rotore del campo elettrico ed il versore giacitura. 
-Considerando il differenziale della superficie $dS=dxdy$, la circuitazione totale su una superficie infinetesimale è:
+Considerando il differenziale della superficie $dS=dxdy$, la circuitazione totale su una superficie infinitesimale è:
 \begin{equation*}
     \Gamma_{d\lambda}=\vec{E}\cdot d\vec{\lambda}=({\nabla}\times\vec{E})\cdot \hat{n}dS=d\Gamma_\lambda
 \end{equation*}
@@ -559,7 +559,7 @@ limite per l'intervallo di tempo di osservazione $\Delta t\to0$, in questo modo 
 
 II) Si può formulare la corrente considerando il concetto del mezzo continuo, visione della fisica classica secondo cui il materiale è continuo. Questa visione è paradossale 
 poiché a livello microscopico è stato osservato che diverse grandezze non sono continue, ma per i fini prefissati non si incontra questo paradosso. Si considera un volume 
-continuo con una certa densità di carica $\rho_Q$, e in moto con una certa velocità $\vec{v}$. La corrente allora corriponde alla portata attraverso una certa superficie $S$, 
+continuo con una certa densità di carica $\rho_Q$, e in moto con una certa velocità $\vec{v}$. La corrente allora corrisponde alla portata attraverso una certa superficie $S$, 
 ovvero corrisponde al flusso del vettore $\rho_Q\vec{v}$ attraverso la superficie $S$: 
 \begin{equation}
     i:=\displaystyle\int_S\rho_Q\vec{v}\cdot\hat{n}dS
@@ -584,12 +584,12 @@ Il vettore $\rho_Q\vec{v}$ corrisponde al vettore densità di corrente $\vec{J}\
 
 
 
-Come una cairca è in grado di generare un campo elettrico, una corrente è in grado di generare un campo magnetico. Nei magneti permanenti la corrente generatrice di campo 
+Come una carica è in grado di generare un campo elettrico, una corrente è in grado di generare un campo magnetico. Nei magneti permanenti la corrente generatrice di campo 
 dipende dal movimento degli elettroni all'interno del materiale. 
 
 Si considera un mezzo filiforme, ovvero monodimensionale, composto di materiale conduttore, tipicamente un qualche 
 metallo, dove gli elettroni sono liberi di muoversi all'interno. Si considera che un effetto esterno non definito abbia causato uno spostamento degli elettroni all'interno del filo, 
-può essere dobuto all'avvicinamento di una carica negativa, spostando gli elettroni in un'altra zona del filo. Ciò crea due zone nel filo, una carica positivamente, l'altra 
+può essere dovuto all'avvicinamento di una carica negativa, spostando gli elettroni in un'altra zona del filo. Ciò crea due zone nel filo, una carica positivamente, l'altra 
 carica negativamente, questa differenza di potenziale interna al filo si rappresenta come una corrente di spostamento di cariche $i$, in una certa direzione. 
 
 Ampere ha sperimentalmente dimostrato che intorno al filo si può misurare un campo di forze, formato da linee di campo concentriche con il filo come centro. Il vero di questo 
@@ -620,7 +620,7 @@ campo si ottiene mediante la regola della mano destra: se la corrente si muove d
 
 Il campo generato dalla corrente è il campo magnetico $\vec{H}$. Le circonferenza generate sono il luogo dei punti dello spazio tangenti al campo $\vec{H}$ 
 in quel punto. La circuitazione del campo $\vec{H}$ su una sua circonferenza corrisponde alla corrente concatenata $i_c$ moltiplicata per un fattore $n$, poiché potrebbero essere presenti multiple 
-correnti passanti all'intrerno di quel percorso $\lambda$: 
+correnti passanti all'interno di quel percorso $\lambda$: 
 \begin{equation*}
     \displaystyle\oint_{\lambda}\vec{H}\cdot d\vec{\lambda}=(n)i_c
 \end{equation*}
@@ -650,11 +650,11 @@ stesso flusso per la superficie individuata dalla circonferenza $\lambda$, poich
     \end{tikzpicture}
 \end{center}
 
-Questa relazione tra rotore del campo magentico e vettore densità di carica viene chiamato teorema di Ampere, ed in forma locale si presenta come:
+Questa relazione tra rotore del campo magnetico e vettore densità di carica viene chiamato teorema di Ampere, ed in forma locale si presenta come:
 \begin{equation*}
     \nabla\times\vec{H}=\vec{J}
 \end{equation*}
-Considerando il vettore di induzione magnetica $\vec{B}=\mu_0\vec{H}$, dove $\mu_0$ è la costante di permabilità magnetica nel vuoto:
+Considerando il vettore di induzione magnetica $\vec{B}=\mu_0\vec{H}$, dove $\mu_0$ è la costante di permeabilità magnetica nel vuoto:
 \begin{equation*}
     \mu_0=4\pi\cdot10^{-7}
 \end{equation*}
@@ -668,8 +668,8 @@ A questo risultato ottenuto da Ampere verrà aggiunto il fattore di corrente di 
 Il teorema da Ampere da solo descrive una situazione paradossale, per cui l'intervento di Maxwell perfezionò l'analisi compiuta da Ampere. 
 
 Per descrivere il paradosso contenuto nel teorema di Ampere si considera un filo dove scorre una certa corrente $i$. Il filo è reciso in una sezione e vengono poste due 
-lamine metalliche ad ambo le parti della sezione tagliata. Maxwell osservò sperimentalmente che la corrente continuna a fluire nel resto del filo, per cui deve essere 
-necessariamente presente qualcosa nella zona di vuoto tra il filo capace di muovere le cariche, per cui paradossalemente la corrente attraversa il vuoto, ma è stato descritto 
+lamine metalliche ad ambo le parti della sezione tagliata. Maxwell osservò sperimentalmente che la corrente continua a fluire nel resto del filo, per cui deve essere 
+necessariamente presente qualcosa nella zona di vuoto tra il filo capace di muovere le cariche, per cui paradossalmente la corrente attraversa il vuoto, ma è stato descritto 
 precedentemente come sia impossibile per la corrente fluire per un mezzo non conduttore come il vuoto. 
 
 Per spiegare il paradosso, si considera che la corrente deposita sulla lamina cariche positive, mentre la corrente dall'altra parte del vuoto preleva cariche positive dalla lamina, 
@@ -709,8 +709,8 @@ Si considera inoltre un volume di base la superficie su cui si è effettuato l'o
 
 La corrente poiché è continua dovrebbe trovarsi anche tra le due armature, ma nel volume individuato il campo magnetico è nullo, per cui non è presente un flusso di cariche. 
 Per spiegare questo paradosso si considera la corrente come variazione di carica per unità di tempo: $i=\displaystyle\frac{dQ}{dt}$. Sull'armatura considerata si accumulano 
-cariche, percui è presenta una variazione di carica nel tempo. L'armatura carica produce quindi un campo elettrico, individuabile tramite il teorema di Gauss, considerando un 
-cubo avente due faccie parallele alla lamina. Se la lamina è succifientemente estesa, il campo elettrico $\vec{E}$ generato è sempre ortogonale alle due faccie parallele 
+cariche, per cui è presenta una variazione di carica nel tempo. L'armatura carica produce quindi un campo elettrico, individuabile tramite il teorema di Gauss, considerando un 
+cubo avente due facce parallele alla lamina. Se la lamina è sufficientemente estesa, il campo elettrico $\vec{E}$ generato è sempre ortogonale alle due facce parallele 
 alla lamina, e costante su tutta la superficie. Per simmetria la lamina genera due campi di modulo e direzione uguale e verso opposto:
 
 \begin{center}
@@ -738,7 +738,7 @@ Per il teorema di Gauss lo stesso flusso corrisponde al rapporto tra le carica d
 \end{equation*}
 
 Si considera con un processo analogo anche l'armatura carica negativamente, poiché su entrambe le armature è presenta la stessa carica in modulo, i campi generati dalla due 
-armature non si annulano solo nella zona tra le due, dove il campo totale è doppio. 
+armature non si annullano solo nella zona tra le due, dove il campo totale è doppio. 
 \begin{center}
     \begin{tikzpicture}[scale=2]
         \draw[-,very thick](-0.75,0)--(0.25,0)node[above left]{$+$};
@@ -778,7 +778,7 @@ di integrazione diventa aperta:
 \begin{equation*}
     i=\displaystyle\frac{d}{dt}\int_{S_A}\varepsilon_0\vec{E}\cdot\hat{n}dS
 \end{equation*}
-Poiché non si deriva per la stessa variabile di integrazione, si può invertire l'ordine delle operzaioni, considerano la derivata parziale rispetto al tempo, invece di una 
+Poiché non si deriva per la stessa variabile di integrazione, si può invertire l'ordine delle operazioni, considerano la derivata parziale rispetto al tempo, invece di una 
 derivata totale, poiché il campo è una funzione multivariabile:
 \begin{equation*}
     i=\displaystyle\int_{S_A}\varepsilon_0\frac{\partial \vec{E}}{\partial t}\cdot\hat{n}dS
@@ -827,8 +827,8 @@ In forma locale, si esprime mediante il rotore campo di induzione magnetica $\ve
 \subsection{Campo Elettro-Motore}
 
 Il campo elettro-motore è un tipo di campo fondamentale in elettronica ed elettronica, può essere generato da conversioni energetiche, tramite induzione magnetica o un'operazione 
-ibrida tra le due, come una turbina che ruota meccanicamente, insieme ad un campo magnetico per generare un campo elettro-motore che genera elettriticà. Un campo elettro-motore 
-genera una differenza di potenziale o tensione, ma non è garantito che queste due grandezze coincidino. 
+ibrida tra le due, come una turbina che ruota meccanicamente, insieme ad un campo magnetico per generare un campo elettro-motore che genera elettricità. Un campo elettro-motore 
+genera una differenza di potenziale o tensione, ma non è garantito che queste due grandezze coincidono. 
 
 A differenza del campo elettrico, non è un campo conservativo: $\nabla\times\vec{E}_m\neq0$. Il lavoro per unità di carica del campo elettro-motrice, equivale alla 
 forza elettro-motrice, ma non corrisponde alla grandezza fisica forza:
@@ -841,7 +841,7 @@ Poiché non è un campo conservativo, cambiando il percorso $\lambda$ su cui vie
 
 Si considera una situazione dove sono presenti due cariche a contatto, una positiva, l'altra negativa. Quando sono a contatto il campo elettro-statico complessivo generato 
 dalle cariche è nullo, mentre se vengono separate mediante un campo elettro-motore $\vec{E}_m$, sarà generato anche un campo elettro-statico $\vec{E}_S$ opposto del precedente: 
-$\vec{E}_m=^*-\vec{E}_S$. Questa relazione di equvialenza tra i due campi non è generale, poiché uno è un campo conservativo, mentre l'altro non conservativo. Il campo 
+$\vec{E}_m=^*-\vec{E}_S$. Questa relazione di equivalenza tra i due campi non è generale, poiché uno è un campo conservativo, mentre l'altro non conservativo. Il campo 
 elettro-statico è presente solo se un campo elettro-motore ha separato le due cariche. 
 La forza elettro motrice generata, per un certo percorso $\lambda$ è:
 \begin{equation*}
@@ -859,11 +859,11 @@ Quindi la forza elettro-motrice per un certo percorso $\lambda$ è uguale alla d
 
 
 Una batteria è un oggetto che, mantenendo separate cariche positive e negative mediante reazioni chimiche all'interno, è in grado di generare una differenza di potenziale 
-ed un campo elettrico-stazionario tra i due morsetti, punti di accesso di materiale conduttore, necessasari per poter usufruire della differenza di potenziale generata. 
+ed un campo elettrico-stazionario tra i due morsetti, punti di accesso di materiale conduttore, necessari per poter usufruire della differenza di potenziale generata. 
 
-Per misurare una differenza di potenziale si usa un volmetro, uno strumento che presenta due puntali, uno positivo ed uno negativo, resitituisce la differenza tra il potenziale 
+Per misurare una differenza di potenziale si usa un voltmetro, uno strumento che presenta due puntali, uno positivo ed uno negativo, restituisce la differenza tra il potenziale 
 al puntale positivo ed il puntale negativo $V_+-V_-$. Il segno della differenza di potenziale fornisce informazione sulla carica dei morsetti della batteria. Se i due morsetti 
-vengono coperti con un materiale isolante come la plastica, il campo elettro-statico non ne influisce, ma il volmetro registra una tensione nulla. Per cui per misurare una 
+vengono coperti con un materiale isolante come la plastica, il campo elettro-statico non ne influisce, ma il voltmetro registra una tensione nulla. Per cui per misurare una 
 differenza di potenziale sono necessarie delle porte di accesso di materiali conduttori, dello strumento di misura e dell'oggetto, per poter misurare il campo elettro-statico. 
 
 
@@ -911,7 +911,7 @@ In forma locale si presenta come:
     \nabla\times\vec{E}=\displaystyle-\frac{\partial \vec{B}}{\partial t}
 \end{equation*}
 Poiché si parla di rotore, si può esprimere il campo elettrico come la somma del campo elettro-motore indotto e del campo elettro-statico tra la differenza di potenziale, 
-anche se la loro somma è nulla, dato che il campo elettro-statio è irrotazionale:
+anche se la loro somma è nulla, dato che il campo elettro-statico è irrotazionale:
 \begin{equation}
     \nabla\times\vec{E}_m+\nabla\times\vec{E}_s=-\displaystyle\frac{\partial \vec{B}}{\partial t}
 \end{equation} 
@@ -920,8 +920,8 @@ Quest'equazione rappresenta la terza legge di Maxwell.
 \subsubsection{IV Legge di Maxwell}
 
 Rispetto ad un campo elettrico, un campo magnetico, generato da un magnete permanente o indotto da una corrente, presenta delle differenza considerevoli. Considerando un 
-magnete permanetne, si definiscono nord e sud magentico le zone di comportamento del materiale, non è presenta una divisione netta tra le due zone poiché questo comportamento 
-dpende da andamenenti microscopici. Il nord magnetico è la zona del mezzo dove escono linee di forza, mentre il 
+magnete permanente, si definiscono nord e sud magnetico le zone di comportamento del materiale, non è presenta una divisione netta tra le due zone poiché questo comportamento 
+dipende da andamenti microscopici. Il nord magnetico è la zona del mezzo dove escono linee di forza, mentre il 
 sud magnetico è la zona del materiale dove entrano linee di forza. Queste linee di forza si propagano nel mezzo, senza interruzione di continuità:
 
 \begin{center}
@@ -949,7 +949,7 @@ il flusso del campo del campo magnetico $\vec{B}$ è nullo. Per il teorema della
     \displaystyle\oint_{S}\vec{B}\cdot\hat{n}dS=\int_{\tau}\nabla\cdot\vec{B}d\tau=0
 \end{equation}
 
-Di conseguenza non può esistere un monoplo magnetico, a differenza del campo elettrico, le cui sorgenti possono esistere singolarmente. Un campo la cui divergenza è nulla 
+Di conseguenza non può esistere un monopolo magnetico, a differenza del campo elettrico, le cui sorgenti possono esistere singolarmente. Un campo la cui divergenza è nulla 
 viene chiamato campo solenoidale. In forma locale si esprime la quarta ed ultima equazione di Maxwell:
 \begin{equation}
     \nabla\cdot\vec{B}=0
@@ -967,8 +967,8 @@ Vengono riportata in forma locale le quattro equazioni di Maxwell, precedentemen
     \end{cases}
 \end{equation*}
 Possono anche essere espresse in forma integrale, oppure considerando i campi di spostamento elettrico nel vuoto $\vec{D}=\varepsilon_0\vec{E}$ e di induzione magnetica nel 
-vuoto $\vec{B}=\mu_0\vec{H}$. Non sempre questi campi si trovano nel vuoto, per cui si definiscono le costanti di permettività dielttrica relativa al mezzo $\varepsilon_r>1$ 
-e di perambilità magnetica relativa al mezzo $\mu_r>1$. Quando vengono usate le costanti di perambilità e permettività per un mezzo diverso dal vuoto si considera $\varepsilon=\varepsilon_0\cdot\varepsilon_r$ 
+vuoto $\vec{B}=\mu_0\vec{H}$. Non sempre questi campi si trovano nel vuoto, per cui si definiscono le costanti di permettività dielettrica relativa al mezzo $\varepsilon_r>1$ 
+e di permeabilità magnetica relativa al mezzo $\mu_r>1$. Quando vengono usate le costanti di permeabilità e permettività per un mezzo diverso dal vuoto si considera $\varepsilon=\varepsilon_0\cdot\varepsilon_r$ 
 e $\mu=\mu_0\cdot\mu_r$. Maggiore è la costante dielettrica relativa, più il materiale si dice dielettrico. 
 
 Per determinare le grandezze fisiche dei campi analizzati, si considera la circuitazione del campo magnetico:
@@ -976,7 +976,7 @@ Per determinare le grandezze fisiche dei campi analizzati, si considera la circu
     \displaystyle\oint_{\lambda}\vec{H}\cdot d\vec{\lambda}=i_c\to[H]=\displaystyle\frac{A}{m}
 \end{gather*}
 Per cui risulta che il campo magnetico si misura in Ampere per 
-metro, si considera Ampere-spire, quando la corrente è concatenata più volte per la presenza di spiere sovrapposte tra di loro. Il rotore del campo magnetico $\vec{H}$ 
+metro, si considera Ampere-spire, quando la corrente è concatenata più volte per la presenza di spire sovrapposte tra di loro. Il rotore del campo magnetico $\vec{H}$ 
 corrisponde ad una derivata spaziale, per cui si misura in Ampere su metro quadro:
 \begin{equation*}
     [\nabla\times\vec{H}]=\displaystyle\frac{A}{m^2}
@@ -995,11 +995,11 @@ Viene definita la grandezza Henry $H$ come Newton per metro su Ampere quadro, se
 
 Un vettore di intensità di corrente $\vec{J}$ può esistere solo in un mezzo conduttivo, rappresenta l'unico elemento riferito al mezzo nelle equazioni di Maxwell. La corrente 
 si muove nello stesso verso del vettore $\vec{J}$, ma trattandosi di uno scalare non fornisce informazioni aggiuntive sulla grandezza, poiché la direzione di una corrente è 
-solo una convenzione, e le sue proprietà non cambierebbo se fluisse nel verso opposto. Una corrente si misura con un amperometro montato in serie su di un circuito, la freccia 
+solo una convenzione, e le sue proprietà non cambierebbero se fluisse nel verso opposto. Una corrente si misura con un amperometro montato in serie su di un circuito, la freccia 
 della corrente indica solamente la direzione dell'amperometro. Inoltre il verso della corrente indica una differenza di potenziale, dal potenziale più basso a quello 
-più alto. All'interno di un materiale conduttore le cariche non si muovono spontanemanete, per cui affinché sia presente una differenza di potenziale $\Delta V=v$, deve essere 
+più alto. All'interno di un materiale conduttore le cariche non si muovono spontaneamente, per cui affinché sia presente una differenza di potenziale $\Delta V=v$, deve essere 
 presenta un campo elettro-statico $\vec{E}$, dovuto ad un campo elettro-motore $\vec{E}_m$. La direzione verso il potenziale più basso, ovvero il minimo del campo scalare 
-potenziale è individuato dal gradiende $\nabla V$. Il gradiente è un vettore che indica il punto di minimo, per cui la direzione del vettore densità di corrente $\vec{J}$ 
+potenziale è individuato dal gradiente $\nabla V$. Il gradiente è un vettore che indica il punto di minimo, per cui la direzione del vettore densità di corrente $\vec{J}$ 
 dipende dall'opposto del gradiente del potenziale, ovvero dal campo elettrico: $\vec{J}\propto-\nabla V\propto=\vec{E}$. 
 
 \begin{center}
@@ -1024,7 +1024,7 @@ La presenza della resistività rappresenta la maggiore differenza tra lo studio 
 
 \subsection{Onde Elettro-Magnetiche}
 All'interno delle equazioni di Maxwell sono presenti dei componenti incrociati del campo elettrico $\vec{E}$ e del campo magnetico $\vec{B}$, per cui descrivono un fenomeno 
-che si autosostiene, ovvero si propaga. Per determinare in che modo questo campo elettro-magnetico si propaga nello spazio, si considerano le necessarie ipotesi per poter 
+che si auto-sostiene, ovvero si propaga. Per determinare in che modo questo campo elettro-magnetico si propaga nello spazio, si considerano le necessarie ipotesi per poter 
 descrivere semplicemente le sue proprietà. Da notare che le proprietà di questo campo si mantengono anche senza le ipotesi che considereremo. Per ottenere queste proprietà 
 è sufficiente considerare solo le equazioni del rotore di Maxwell. Si studia la situazione nel vuoto, senza la presenza di conduttori, per cui la corrente di conduzione $\vec{J}$ 
 è nulla e la densità di carica $\rho_Q$ è nulla: 
@@ -1036,13 +1036,13 @@ descrivere semplicemente le sue proprietà. Da notare che le proprietà di quest
 \end{equation*}
 
 Per ipotesi il campo elettrico è presente solo sulla coordinata $x$ e la variazione del campo elettrico sulle $x$ rispetto alla coordinata $z$ è nulla. Le ulteriori ipotesi 
-verrano discusse solo quando saranno rilevanti:
+verranno discusse solo quando saranno rilevanti:
 \begin{align*}
     &1)\vec{E}(x,y,z,t)=E_x(x,y,z,t)\hat{x}\\
     &2)\displaystyle\frac{\partial E_x}{\partial z}=0
 \end{align*}
 
-Dalla prima ipotesi segue che il rotore del campo elettrico ha un'unica componente $z$, per cui, per il principio di indentità dei polinomi e per la terza l'equazione di Maxwell, 
+Dalla prima ipotesi segue che il rotore del campo elettrico ha un'unica componente $z$, per cui, per il principio di identità dei polinomi e per la terza l'equazione di Maxwell, 
 anche il campo magnetico $\vec{B}$ varia solo sulla coordinata $z$: 
 \begin{gather*}
     \nabla\times\vec{E}=
@@ -1079,25 +1079,25 @@ Si deriva rispetto al tempo la seconda equazione e invertendo l'ordine di deriva
 Quest'equazione ottenuta descrive il comportamento di un'onda. Per ipotesi l'onda si propaga solo sulla coordinata $y$, e si considera sempre per ipotesi solamente l'onda 
 diretta e si esclude quella riflessa. Le soluzioni di questo tipo di equazione d'onda sono tutte le possibili funzioni, che presentano come argomento le coordinate su cui 
 l'onda si propaga, in questo caso $y$. Come argomento della soluzione si considera la traslazione dell'onda nello spazio e si inserisce il fattore correttivo $ct$, dove 
-$c$ è la velocità di propagazione dell'onga:
+$c$ è la velocità di propagazione dell'onda:
 \begin{equation*}
     Sol:=\{f(y-ct)+g(y+ct):t\geq0\}
 \end{equation*}  
 Per ipotesi si esclude la funzione riflessa $g$. Si sceglie la funzione più semplice come soluzione dell'onda diretta, una funzione sinusoidale. Non si può considerare $y-ct$ 
 come argomento della funzione sinusoidale, poiché l'argomento deve essere monodimensionale. Si considera la relazione tra l'argomento $\alpha$, misurato in radianti e la 
-variabile $y$, in metri. Viene defintia $\lambda$ lunghezza d'onda, e rappresenta la distanza tra due punti uguali dell'onda: 
+variabile $y$, in metri. Viene definita $\lambda$ lunghezza d'onda, e rappresenta la distanza tra due punti uguali dell'onda: 
 \begin{equation*}
     \displaystyle\frac{y}{\alpha}=\frac{\lambda}{2\pi}\to\alpha=\frac{2\pi y}{\lambda}
 \end{equation*}
-Questo valore viene chimato numero d'onda. Si considera l'ampiezza massima $E_{max}$, per cui il campo elettrico si esprime come:
+Questo valore viene chiamato numero d'onda. Si considera l'ampiezza massima $E_{max}$, per cui il campo elettrico si esprime come:
 \begin{equation}
-    E_x=E_{max}sin\left(\displaystyle\frac{2\pi (y-ct)}{\lambda}\right)
+    E_x=E_{max}\sin\left(\displaystyle\frac{2\pi (y-ct)}{\lambda}\right)
 \end{equation}
 
 Inserendo questa funzione d'onda nell'equazione d'onda precedentemente si ottiene:
 \begin{gather*}
-    \displaystyle\frac{\partial^2}{\partial y^2}\left(E_{max}sin\left(\displaystyle\frac{2\pi (y-ct)}{\lambda}\right)\right)=\mu_0\varepsilon_0\frac{\partial^2}{\partial t^2}\left(E_{max}sin\left(\displaystyle\frac{2\pi (y-ct)}{\lambda}\right)\right)\\
-    \displaystyle E_{max}\frac{4\pi^2}{\lambda^2}sin\left(\frac{2\pi (y-ct)}{\lambda}\right)=\mu_0\varepsilon_0E_{max}\frac{4\pi^2c^2}{\lambda^2}sin\left(\frac{2\pi (y-ct)}{\lambda}\right)\\
+    \displaystyle\frac{\partial^2}{\partial y^2}\left(E_{max}\sin\left(\displaystyle\frac{2\pi (y-ct)}{\lambda}\right)\right)=\mu_0\varepsilon_0\frac{\partial^2}{\partial t^2}\left(E_{max}\sin\left(\displaystyle\frac{2\pi (y-ct)}{\lambda}\right)\right)\\
+    \displaystyle E_{max}\frac{4\pi^2}{\lambda^2}\sin\left(\frac{2\pi (y-ct)}{\lambda}\right)=\mu_0\varepsilon_0E_{max}\frac{4\pi^2c^2}{\lambda^2}\sin\left(\frac{2\pi (y-ct)}{\lambda}\right)\\
     1=\mu_0\varepsilon_0c^2
 \end{gather*}
 \begin{equation}
@@ -1123,7 +1123,7 @@ da questo tipo di onde.
 
 Si considerano diverse situazione per ricavare l'energia e la potenza del campo elettrico e magnetico.
 
-Dato un materiale condutore, si esprime la forza elettrica come la carica $q$ traspostata che interagisce con un certo campo elettrico $\vec{E}$, per cui si può esprimere 
+Dato un materiale conduttore, si esprime la forza elettrica come la carica $q$ trasportata che interagisce con un certo campo elettrico $\vec{E}$, per cui si può esprimere 
 la potenza come:
 \begin{equation*}
     P=\vec{F}\cdot\vec{u}=q\vec{E}\cdot\vec{u}=\rho_Q\tau\vec{E}\cdot\vec{u}
@@ -1138,7 +1138,7 @@ Si definisce la densità di potenza $P_\tau$ come la potenza $P$ generata in un 
 \end{equation}
 
 
-Dato un materiale dielettrico nel continuo, dotato di una certa densità di carica $\rho_Q$. Per ricavare l'energia prodatta dal campo elettrico, si considera l'integrale 
+Dato un materiale dielettrico nel continuo, dotato di una certa densità di carica $\rho_Q$. Per ricavare l'energia prodotta dal campo elettrico, si considera l'integrale 
 di linea, poiché potrebbe essere presente un campo elettro-motore non conservativo, su un tratto $\lambda$ del materiale:
 \begin{equation*}
     \mathscr{E}=\displaystyle\int_{\lambda}\vec{F}\cdot d\vec{\lambda}=q\int_{\lambda}\vec{E}\cdot d\vec{\lambda}
@@ -1203,7 +1203,7 @@ La potenza si può esprimere, in questa situazione favorevole, come:
 \begin{equation*}
     P=\displaystyle\frac{\partial \phi(\vec{B})}{\partial t}\oint_{\lambda}\vec{H}\cdot d\vec{\lambda}
 \end{equation*}
-Poiché il percorso, il campo magnetio ed il campo di induzione magnetica sono paralleli si ottiene la seguente formula:
+Poiché il percorso, il campo magnetico ed il campo di induzione magnetica sono paralleli si ottiene la seguente formula:
 \begin{gather*}
     P=\displaystyle\frac{dBS}{dt}H\lambda=\frac{dB}{dt}H\tau\\
     P_{\tau}=\displaystyle\frac{dB}{dt}H=\frac{d\mathscr{E}_{tot}}{dt}\\
@@ -1219,7 +1219,7 @@ Questa può essere espressa come:
 
 \section{Modello Circuitale a Parametri Concentrati}
 
-Quando si studia la propagazione dei campi elettro-magnetici all'interno di materiali e circuiti, si considerano le leggi cositutive del mezzo materiale:
+Quando si studia la propagazione dei campi elettro-magnetici all'interno di materiali e circuiti, si considerano le leggi costitutive del mezzo materiale:
 \begin{equation}
     \begin{cases}
         \vec{D}=\varepsilon\vec{D}\\
@@ -1242,8 +1242,8 @@ La costante $\sigma$ si può misurare in siemens $S$ per metro:
     [\sigma]=\displaystyle\left[\frac{1}{\rho_e}\right]=\frac{1}{\Omega\cdot m}=\frac{S}{m}
 \end{equation*}
 
-Il modello circuitale viene definito tramite osservazione sperimentali, per produrre un modello matematico, con cui è possible simulare rappresentazioni fisiche non realizzabili 
-o distanti dall'elettro-magnetismo. Questo modello così creato è un'approsimmazione dei fenomeni fisici in atto all'interno del circuito, ma sotto certe condizioni può 
+Il modello circuitale viene definito tramite osservazione sperimentali, per produrre un modello matematico, con cui è possibile simulare rappresentazioni fisiche non realizzabili 
+o distanti dall'elettro-magnetismo. Questo modello così creato è un'approssimazione dei fenomeni fisici in atto all'interno del circuito, ma sotto certe condizioni può 
 descrivere con considerevole precisione gli andamenti del circuito reale. 
 
 \subsection{Principi Cardinali di Kirchhoff}
@@ -1265,7 +1265,7 @@ In forma integrale, si considera la circuitazione del campo elettrico su un qual
     \displaystyle\oint_{\lambda}\vec{E}\cdot d\vec{\lambda}=0
 \end{equation*}
 Si separa il percorso $\lambda$ in $n$ diverse sezioni $\lambda_k$. La direzione su ogni sezione identifica sia la sezione di percorso $\lambda_k$ che il potenziale $v_k$ tra 
-l'inizio e la fine del percorso $\lambda_k$. Questi potenziali vengono misurati senza mai cambiare il verso del volmetro usato. 
+l'inizio e la fine del percorso $\lambda_k$. Questi potenziali vengono misurati senza mai cambiare il verso del voltmetro usato. 
 
 Il percorso chiuso $\lambda$ corrisponde all'unione di tutti i $n$ percorsi $\lambda_k$:
 \begin{equation*}
@@ -1283,7 +1283,7 @@ del percorso chiuso è nulla:
     \displaystyle\sum_{k=1}^nv_k=0
 \end{equation}
 Quest'equazione si identifica come secondo principio di Kirchhoff, o principio di Kirchhoff alle tensioni. 
-Se non si cambia mai il verso del volmetro, non sarà necessario cambiare il segno del potenziale $v_k$ nella sommatoria. Se il verso non fosse uguale per ogni potenziale, 
+Se non si cambia mai il verso del voltmetro, non sarà necessario cambiare il segno del potenziale $v_k$ nella sommatoria. Se il verso non fosse uguale per ogni potenziale, 
 bisognerebbe considerare per ogni potenziale $v_k$ il suo segno nella somma algebrica. 
 
 \begin{center}
@@ -1325,7 +1325,7 @@ qualsiasi superficie chiusa $S$:
     \displaystyle\int_{\tau}\nabla\cdot\vec{J}d\tau=\oint_{S}\vec{J}\cdot\hat{n}dS=0
 \end{equation*}
 
-Scomponendo la superficie $S$ in $n$ superfici esterne $S_k$, si può esprimere il flusso della densità di carica attravero $S$ come la somma dei flussi di $\vec{J}$ attraverso 
+Scomponendo la superficie $S$ in $n$ superfici esterne $S_k$, si può esprimere il flusso della densità di carica attraverso $S$ come la somma dei flussi di $\vec{J}$ attraverso 
 le superfici esterne $S_k$:
 \begin{equation*}
     \displaystyle\oint_{S}\vec{J}\cdot\hat{n}dS=\sum_{k=1}^n\int_{S_k}\vec{J}\cdot\hat{n}dS=0
@@ -1410,12 +1410,12 @@ Si considera un ciclo, una singola riproduzione della sinusoide. Per determinare
 \begin{equation*}
     f=\displaystyle\frac{1}{T}
 \end{equation*}
-Consdierando una qualsiasi superficie chiusa che contiene il canale $AB$, la densità elettrica è prima entrante in $A$ e poi uscente in $B$, per cui la divergenza di $\vec J$ 
+Considerando una qualsiasi superficie chiusa che contiene il canale $AB$, la densità elettrica è prima entrante in $A$ e poi uscente in $B$, per cui la divergenza di $\vec J$ 
 è nulla.
 
 
 Il sistema si dice sia quasi-stazionario se il lettore $A$ legge la stessa corrente del lettore $B$, ovvero è presente un errore accettabile o trascurabile. 
-Per cui le due correnti sono approsimativamente congruenti:
+Per cui le due correnti sono approssimativamente congruenti:
 \begin{gather*}
     i_A\cong i_B\\
     I\sin\displaystyle\left(\frac{2\pi}{T}t\right)\cong I\sin\left(\frac{2\pi}{T}t-\frac{2\pi}{T}\tau\right)\\
@@ -1423,16 +1423,15 @@ Per cui le due correnti sono approsimativamente congruenti:
     \tau\to 0\iff \lambda>>d
 \end{gather*}
 L'errore è trascurabile se la lunghezza d'onda è considerevolmente maggiore della distanza tra il trasmettitore ed il ricevitore. 
-L'uso del modello adatto dipende dal valore delle grandezze trattate, in elettrotecnica si studiano frequenze nell'
-ordine dei $GHz$, per cui si considerano modelli di circuiti adimensionali, nei quali, dal punto di vista euclidiano, tutti i punti coincidono. In questo modo si possono 
+L'uso del modello adatto dipende dal valore delle grandezze trattate, in elettrotecnica si studiano frequenze nell'ordine dei $GHz$, per cui si considerano modelli di circuiti adimensionali, nei quali, dal punto di vista euclideo, tutti i punti coincidono. In questo modo si possono 
 trattare i campi in un ambiente quasi-stazionario, quindi usando le leggi di Kirchhoff; poiché ancora non disponiamo di modelli di calcolo abbastanza avanzati per poter 
 descrivere sistemi elettro-magnetici molto complessi che richiedono l'uso delle equazioni di campo. 
 
 Si può rappresentare quest'approssimazione 
 nei termini dei tempi o degli spazi, oppure tramite la velocità come $c\to\infty$, per 
 esplicitare l'impossibilità fisica di questa situazione, considerando la formula per la velocità di propagazione delle onde elettro-magnetiche attraverso un mezzo materiale, 
-ciò si ottiene solo se il prodotto tra la permettività e la permabilità è nullo: $\mu\cdot\varepsilon=0$. In base a quale delle costanti è nulla si determinano diverse 
-regioni, caratterizzate da diverse propietà fisiche. Un circuito è formato da varie regioni collegate l'una tra l'altra, come fosse un mosaico. 
+ciò si ottiene solo se il prodotto tra la permettività e la permeabilità è nullo: $\mu\cdot\varepsilon=0$. In base a quale delle costanti è nulla si determinano diverse 
+regioni, caratterizzate da diverse proprietà fisiche. Un circuito è formato da varie regioni collegate l'una tra l'altra, come fosse un mosaico. 
 La denominazione di queste regioni che ne segue è arbitraria:
 
 \subsubsection{Regione N}
@@ -1450,7 +1449,7 @@ Ciò permette di scegliere arbitrariamente due punti per poter definire una diff
 \end{equation*}
 
 \subsubsection{Regione EQP}
-Si considera il duale di una regione, una regione che presenta delle proprietà opposte rispetto ad un'altra regione. La regione di equipotenzialtità, o conduttore perfetto o 
+Si considera il duale di una regione, una regione che presenta delle proprietà opposte rispetto ad un'altra regione. La regione di equipotenzialità, o conduttore perfetto o 
 corto circuito ideale è la regione duale della regione nulla. Presenta anch'essa la quasi-stazionarietà del campo elettro-magnetico, ma la conducibilità è infinita. Il campo 
 elettrico è nullo $\vec{E}=0$ e la densità di corrente impressa è nulla $\vec{J}_m=0$. La terza legge costitutiva del mezzo da 
 luogo ad una forma indeterminata, per cui il valore della densità di corrente, non nullo e finito, non può essere determinato mediante le equazioni di Maxwell. Sapendo con 
@@ -1478,7 +1477,7 @@ e la densità di corrente indotta è nulla $\vec{J}_m=0$. La permettività elett
     \end{cases}
 \end{equation*}
 
-Per le equazioni di Maxwell si ottiene che il campo elettrio in questa regione è conservativo $\nabla\times\vec{E}=0$, e il rotore del campo magnetico dipende dal solo campo 
+Per le equazioni di Maxwell si ottiene che il campo elettrico in questa regione è conservativo $\nabla\times\vec{E}=0$, e il rotore del campo magnetico dipende dal solo campo 
 di spostamento elettrico $\nabla\times\vec{H}=\displaystyle\frac{\partial D}{\partial t}$. In questa regione è presente un materiale puramente dielettrico, verrà in seguito 
 identificata come un condensatore, caratterizzato dalla grandezza fisica capacità $C$.
 
@@ -1541,7 +1540,7 @@ Verrà identificata da un parametro concentrato, la tensione erogata.
 \subsubsection{Region IG}
 
 Questa regione rappresenta un generatore ideale di corrente, in uno stato di quasi-stazionarietà elettro-magnetica $\mu=0$ e $\varepsilon=0$. La conducibilità è nulla $\sigma=0$, 
-il campo elettro-motore è nullo $\vec{E}_m=0$, e la densità di corrente idotta è non nulla e definita $\vec{J}_m=0$. 
+il campo elettro-motore è nullo $\vec{E}_m=0$, e la densità di corrente indotta è non nulla e definita $\vec{J}_m=0$. 
 
 \begin{equation*}
     \begin{cases}
@@ -1560,7 +1559,7 @@ mezzo genera una corrente, verrò in seguito identificato dal parametro concentr
 
 Introducendo parametri concentrati è possibile ricomporre il problema della quasi-stazionarietà. 
 
-Un bipolo viene definito come una o più regioni che colloquiano dall'esterno tra due poli. Un polo viene sempre identificato con una regione di equipotenzialtità. Poiché in 
+Un bipolo viene definito come una o più regioni che colloquiano dall'esterno tra due poli. Un polo viene sempre identificato con una regione di equipotenzialità. Poiché in 
 queste regioni non è presente una differenza di potenziale, tra due di queste regioni è possibile esista $v$. In elettrotecnica si riferisce ai poli con il termine morsetti, 
 rappresentano un ingresso ad una regione. Una porta viene definita come una o più regioni dove la corrente di entrata di uscita sono uguali $\nabla\cdot\vec{J}=0$.
 
@@ -1576,7 +1575,7 @@ rappresentano un ingresso ad una regione. Una porta viene definita come una o pi
 Questa struttura a bipoli non è accessibile all'interno, le proprietà e le caratteristiche interne vengono definite a priori, e non possono essere ricavate dalle leggi 
 dell'elettro-magnetismo. Dall'esterno si osserva solo un campo elettro-statico $\vec{E}_s$. Le informazioni note di un bipolo sono dovute ai parametri concentrati. 
 
-Viene definito un multipolo come una o più regioni aaccessibile da una sequenza di morsetti. Viene definita multiporta un moltipolo con un numero pari di morsetti i quali 
+Viene definito un multipolo come una o più regioni accessibile da una sequenza di morsetti. Viene definita multiporta un multipolo con un numero pari di morsetti i quali 
 a coppie rispettano le condizioni di una porta. 
 
 \begin{center}
@@ -1596,7 +1595,7 @@ a coppie rispettano le condizioni di una porta.
 \end{center}
 
 Per convenzione si considerano le correnti sempre entranti, ovvero si considera costante il verso dell'amperometro, per cui le correnti uscenti si indicano con il segno 
-opposto. Il verso delle correnti indica solo la direzione di riferimento dell'amperometro, risptto a cui vengono misurate le correnti, che possono essere concordi, per cui 
+opposto. Il verso delle correnti indica solo la direzione di riferimento dell'amperometro, rispetto a cui vengono misurate le correnti, che possono essere concordi, per cui 
 si trovano con segno positivo, o discordi, quindi si rappresentano con segno negativo. In questo modo si possono rappresentare tutte le correnti come entranti. Per cui bisogna 
 essere metodici nell'assegnazione dei segni alle grandezze fisiche misurate, poiché cambiano in base al riferimento scelto. 
 
@@ -1616,7 +1615,7 @@ essere metodici nell'assegnazione dei segni alle grandezze fisiche misurate, poi
     \end{tikzpicture}
 \end{center}
 
-Dato un dipolo, si esprime il riferimento del volmetro come una freccia che indica il morsetto positivo. La differenza di potenziale si calcola come la differenza tra il 
+Dato un dipolo, si esprime il riferimento del voltmetro come una freccia che indica il morsetto positivo. La differenza di potenziale si calcola come la differenza tra il 
 morsetto positivo ed il morsetto negativo $v=V_+-V_-$. Si individuano due convenzioni a seconda se il verso della corrente è concorde o discorde al verso del potenziale, questi 
 versi rappresentano i riferimenti usati dagli strumenti di misura. Le modalità di misura cambiano il segno all'interno delle equazioni, queste due convenzioni rappresentano 
 due letture opposte della stessa situazione. 
@@ -1664,7 +1663,7 @@ Analogamente per la convenzione degli utilizzatori, se la potenza è positiva, s
 
 
 Si determinano le leggi costitutive e i parametri concentrati dei bipoli. Le uniche regioni che non hanno leggi costitutive del mezzo sono il vuoto ed il suo duale l'
-equipotenziale, poiché l'unico elemento in queste regioni è rispettivamente il volmetro e l'amperometro, che non influiscono sulle leggi costitutive. 
+equipotenziale, poiché l'unico elemento in queste regioni è rispettivamente il voltmetro e l'amperometro, che non influiscono sulle leggi costitutive. 
 
 \subsubsection{Condensatore Ideale}
 
@@ -1698,51 +1697,51 @@ In forma circuitale si rappresenta come:
     \end{tikzpicture}
 \end{center}
 
-Si è analizzato precedentemente la situazione di un condensatore a faccie piane e parallele su cui si deposita una carica $+Q$ su una faccia, accumulata per un flusso di 
+Si è analizzato precedentemente la situazione di un condensatore a facce piane e parallele su cui si deposita una carica $+Q$ su una faccia, accumulata per un flusso di 
 cariche positive $i$, e un accumulo di cariche negative $-Q$ sull'altra, poiché la stessa corrente ne sottrae cariche positive. Il campo elettrico generato tra le due 
-faccie del condensatore corrisponde al rapporto tra la densità superficiale $\sigma$ delle lamine e della costante di permettività $\varepsilon$:
+facce del condensatore corrisponde al rapporto tra la densità superficiale $\sigma$ delle lamine e della costante di permettività $\varepsilon$:
 \begin{equation*}
     E=\displaystyle\frac{\sigma}{\varepsilon}
 \end{equation*}
-Le due faccie si trovano ad una distanza $d$ tra di loro, il campo elettrico è monodimensionale, poiché ha solo componenti sulla direzionee $x$. Il gradiente del potenziale 
+Le due facce si trovano ad una distanza $d$ tra di loro, il campo elettrico è monodimensionale, poiché ha solo componenti sulla direzione $x$. Il gradiente del potenziale 
 in un caso monodimensionale corrisponde alla derivata rispetto all'unica direzione:
 \begin{equation*}
     -\nabla V=-\displaystyle\frac{dV}{dx}=E_x
 \end{equation*}
 Si considera in forma integrale, dove i limiti di integrazione corrispondo al potenziale in $A$ ed in $B$, e le coordinate sulle $x$ dei due punti. Si considera per semplicità 
-il punto $A$ cooincidente con l'origine dell'asse $x_A=0$, mentre il punto $B$ corrisponde alla distanza $x_B=d$:
+il punto $A$ coincidente con l'origine dell'asse $x_A=0$, mentre il punto $B$ corrisponde alla distanza $x_B=d$:
 \begin{equation*}
     -\displaystyle\int_{A}^BdV=\int_0^dE_xdx
 \end{equation*}
 
-Poiché si misura la densità di carica sulla piastra positiva, il campo elettrico è strettamente positivo, affinché il potenziale sia positivo si impone il volmetro come 
+Poiché si misura la densità di carica sulla piastra positiva, il campo elettrico è strettamente positivo, affinché il potenziale sia positivo si impone il voltmetro come 
 morsetto positivo sul punto $A$. Quindi il condensatore rappresenta un utilizzatore. Il potenziale risulta:
 \begin{equation*}
     v=\displaystyle\frac{\sigma}{\varepsilon}d
 \end{equation*}
 
-Il calcolo della capacità dipende dalla geometria del singolo condensatore. Per evitare questo passagio si esprime la densità di carica $\sigma$ rispetto alla quantità 
+Il calcolo della capacità dipende dalla geometria del singolo condensatore. Per evitare questo passaggio si esprime la densità di carica $\sigma$ rispetto alla quantità 
 accumulata sulla faccia positiva:
 \begin{equation*}
     \sigma=\displaystyle\frac{Q}{S}\to v=\frac{QS}{\varepsilon}d
 \end{equation*}
-La capacità viene definita come il rapporto tra la carica positiva accumulata e la lettura positiva del volmetro:
+La capacità viene definita come il rapporto tra la carica positiva accumulata e la lettura positiva del voltmetro:
 \begin{equation}
     C:=\displaystyle\frac{Q}{v}=\varepsilon\frac{S}{d}\,[F]
 \end{equation}
-Si può esprimere la grandezza fisica della permittività dielettrica rispetto alla capacità:
+Si può esprimere la grandezza fisica della permettività dielettrica rispetto alla capacità:
 \begin{equation*}
     [\varepsilon]=\displaystyle\frac{A\cdot s}{V\cdot m}
 \end{equation*} 
-Per cui per una data superficie, la carica accumulata su di essa p pari alla sua capacità per la lettura positiva del volmetro:
+Per cui per una data superficie, la carica accumulata su di essa p pari alla sua capacità per la lettura positiva del voltmetro:
 \begin{equation*}
     Q=Cv
 \end{equation*}
-In questo modo non si ottentono informazioni sulle dimensioni del circuito, ovvero la distanza tra i morsetti. Queste informazioni sono criptate all'interno della regione, 
+In questo modo non si ottengono informazioni sulle dimensioni del circuito, ovvero la distanza tra i morsetti. Queste informazioni sono criptate all'interno della regione, 
 non determinabili a posteriori. 
 
 
-Vengono definiti le leggi costitutive del condensatore ideale, rappresentano le realzioni tra il potenziale e la corrente, misurate dall'esterno della regione. 
+Vengono definiti le leggi costitutive del condensatore ideale, rappresentano le relazioni tra il potenziale e la corrente, misurate dall'esterno della regione. 
 Si considera la definizione della corrente come variazione di carica nel tempo:
 \begin{equation*}
     i=\displaystyle\frac{dQ}{dt}=\frac{d(Cv)}{dt}=\cancelto{0}{v\frac{dC}{dt}}+C\frac{dv}{dt}
@@ -1766,7 +1765,7 @@ potenziale rispetto al tempo è (generalmente) continua quindi $v(0^-)=v(0^+)$. 
 La componente integrale rappresenta l'evoluzione del potenziale al fluire della corrente all'interno del condensatore, ma risente del valore del potenziale all'inizio della misura, 
 chiamato fattore di memoria. Per cui i bipoli dotati di un fattore che dipende dall'inizio della misurazione vengono chiamati bipoli con memoria, presentano o il potenziale 
 o la corrente in forma differenziale. Se la memoria è nulla, si dice che il bipolo parte scarico, altrimenti si dice carico al valore assunto. In questa rappresentazione non 
-sono limitati gli intervalli di tensioni possibili all'interno del condensatore, ma nella realtà non si può creare un oggetto fisico capace di avere una tensione illimiata. 
+sono limitati gli intervalli di tensioni possibili all'interno del condensatore, ma nella realtà non si può creare un oggetto fisico capace di avere una tensione illimitata. 
 
 La potenza (istantanea) del condensatore ideale è come il potenziale e la corrente dipendente dal tempo:
 \begin{equation*}
@@ -1802,7 +1801,8 @@ La capacità è definita come una grandezza positiva, per cui l'energia è stret
 
 Il bipolo induttore ideale è il duale del condensatore ideale, presenta uno stato di quasi-stazionarietà elettrica. La dualità permette di mantenere la forma delle equazioni 
 e cambiare solamente le grandezze fisiche usate. L'induttanza $L$ è il duale della capacità $C$. In generale i parametri concentrati vengono definiti tra il rapporto di due 
-grandezze elettro-magnetiche.Considerando la legge costitutiva del mezzo del condensatore, si ottiene dualmente la legge costitutiva dell'induttore ideale:
+grandezze elettro-magnetiche.Considerando la legge costitutiva del mezzo del condensatore, si ottiene la legge costitutiva dell'induttore ideale come la duale alla legge 
+costitutiva del condensatore:
 \begin{equation*}
     i(t)=\displaystyle C\frac{dv(t)}{dt}\to v(t)=L\frac{di(t)}{dt}
 \end{equation*}
@@ -1819,10 +1819,10 @@ associato a diversi parametri di mutua induttanza $M$, tanti quante le coppie di
 \end{center}
 Si considera un filo avvolto in una bobina composta da $N$ spire, ogni spira rappresenta un giro del filo su sé stesso. Si suppone esista una corrente $i$ iniettata dall'esterno. 
 Presenta una conducibilità infinita, per cui la corrente non è vincolata se non dalla legge di Faraday-Neumann-Lenz. Si definisce un percorso chiuso $\lambda$, per semplificare 
-i calcoli poiché il valode della circuitazione non varia, formato da quattro segmenti. Uno di questi coincide con l'asse della bobina, chiamata in questa situazione solenoide, 
-altri due segmenti sono paralelli tra di loro e all'asse $x$. Questo percorso presenta una chiusura all'infinito, ovvero i due segmenti paralleli sono estesi all'infinito 
+i calcoli poiché il valore della circuitazione non varia, formato da quattro segmenti. Uno di questi coincide con l'asse della bobina, chiamata in questa situazione solenoide, 
+altri due segmenti sono paralleli tra di loro e all'asse $x$. Questo percorso presenta una chiusura all'infinito, ovvero i due segmenti paralleli sono estesi all'infinito 
 matematico, dove sono connessi da un altro segmento, per descrivere un percorso chiuso. La spira viene attraversata da una corrente e produce quindi un campo magnetico $\vec{H}$, 
-all'interndo della spira il campo magnetico è concorde alla direzione dell'asse $y$, mentre all'esterno è discorde. Per cui il campo magnetico è sempre normale alle sezioni del 
+all'interno della spira il campo magnetico è concorde alla direzione dell'asse $y$, mentre all'esterno è discorde. Per cui il campo magnetico è sempre normale alle sezioni del 
 percorso parallele all'asse $x$. Il modulo campo magnetico è inversamente proporzionale alla distanza dal filo $H=\displaystyle\frac{i}{2\pi r}$ per cui sulla chiusura all'infinito 
 il campo magnetico è nullo. 
 
@@ -1850,14 +1850,14 @@ il campo magnetico è nullo.
 \end{center}
 
 Il campo magnetico è uniformemente distribuito all'interno della superficie $S$ individuata da una spira, per cui si può considerare un qualsiasi percorso che passi parallelamente 
-all'asse della bobina all'interndo di essa. Si calcola la circuitazione in senso orario per questo percorso chiuso:
+all'asse della bobina all'interno di essa. Si calcola la circuitazione in senso orario per questo percorso chiuso:
 \begin{gather*}
     \displaystyle\oint_{\lambda}\vec{H}\cdot d\vec{\lambda}=\int_{\lambda_{1x}}H\cancelto{0}{-\hat{y}\cdot\hat{x}}dx+\int_{\lambda_{1y}}\cancelto{0}{\vec{H}}\cdot d\vec{y}+\int_{\lambda_{2x}}H\cancelto{0}{-\hat{y}\cdot\hat{x}}dx+\int_{\lambda_{2y}}H\cancelto{1}{\hat{y}\cdot\hat{y}}dy\\
     \displaystyle\oint_{\lambda}\vec{H}\cdot d\vec{\lambda}=H\int_0^ldy=Hl
 \end{gather*}
 Dove $l$ rappresenta la lunghezza tra la prima e l'ultima spira del solenoide. La circuitazione del campo magnetico attraverso un percorso equivale al 
 flusso della densità di carica attraverso la superficie individuata da quel percorso, ovvero alla corrente concatenata a quel percorso. In questo caso la superficie 
-viene attraversata tante volte quante sono le spire della bobina, per cui il flusso attravrso la superficie corrispondere ad $N$ volte la corrente che passa per una sola spira, 
+viene attraversata tante volte quante sono le spire della bobina, per cui il flusso attraverso la superficie corrispondere ad $N$ volte la corrente che passa per una sola spira, 
 poiché la corrente è la stessa per tutte le spire, perché sono elementi collegati in serie. La corrente concatenata è quindi pari ad $N$ volta la corrente che fluisce 
 attraverso la bobina $i_c=N\cdot i$. La circuitazione risulta quindi:
 \begin{gather*}
@@ -1869,7 +1869,7 @@ Il campo di induzione magnetica è quindi:
 \end{equation*}
 
 
-Se la corrente fluisse liberamente per la bobina, ci si troverebbe in una situazione di corcocircuito, ma è presente un elemento che limita il valore della corrente, questo 
+Se la corrente fluisse liberamente per la bobina, ci si troverebbe in una situazione di cortocircuito, ma è presente un elemento che limita il valore della corrente, questo 
 elemento è la forza elettro motrice. 
 Se il flusso del campo magnetico, quindi se quest'ultimo è variabile nel tempo, viene generata, ai capi di ciascuna spira, una forza elettro motrice che si oppone alla variazione 
 del flusso, generato dalla corrente. Quindi questa forza elettro motrice generata dalla variazione del flusso si oppone alla corrente, per cui ha verso discorde. Ma nella 
@@ -1902,7 +1902,7 @@ tutte le tensioni delle singole spire e la differenza di potenziale totale, vien
         \draw[-,very thick]plot[smooth, domain=0.05:0.137](\x,{0.5-(0.0025-(\x-0.1)^2)^0.5});
     \end{tikzpicture}
 \end{center}
-Per cui le letture delle singole tensioni risultano di segno positivo, mentre la lettura totale risulta di sengo negativo, e la loro somma è nulla per il secondo principio. 
+Per cui le letture delle singole tensioni risultano di segno positivo, mentre la lettura totale risulta di segno negativo, e la loro somma è nulla per il secondo principio. 
 Quindi la lettura totale si può esprimere come la somma delle singole differenze di potenziale tra due spire:
 \begin{equation*}
     \displaystyle\sum_{k=1}^Nv_k-v=0\to v=\sum_{k=1}^Nv_k=\sum_{k=1}^N\frac{d\phi}{dt}=N\frac{d\phi}{dt}
@@ -1946,7 +1946,7 @@ Questo bipolo è con memoria, per cui in forma integrale è presenta un fattore 
 
 
 
-Per determinare se questo bipolo è passivo si esprime la potenza mediante la formza differenziale della legge costitutiva. Nella convenzione degli utilizzatori, se l'energia 
+Per determinare se questo bipolo è passivo si esprime la potenza mediante la forma differenziale della legge costitutiva. Nella convenzione degli utilizzatori, se l'energia 
 è strettamente positiva allora si tratta di un bipolo passivo, altrimenti se non si riesce a dimostrate la passività si deduce che è attivo. Questo processo è analogo 
 anche nella convenzione dei generatori, poiché si può dimostrare solo se è un bipolo è passivo, ed in caso dedurre se si tratti di un bipolo attivo. In questo caso si 
 considera:
@@ -1967,7 +1967,7 @@ Mentre la capacità si misura in Farad $F$, l'induttanza si misura in Henry $H$,
 \begin{equation*}
     [L]=\displaystyle\frac{V\cdot s}{A}=H
 \end{equation*}
-Le grandezze base in elettrotecnica sono l'Amper ed il Volt, per cui tutte le grandezze trattate si esprimono mediante in base a queste due. 
+Le grandezze base in elettrotecnica sono l'Ampere ed il Volt, per cui tutte le grandezze trattate si esprimono mediante in base a queste due. 
 
 \subsubsection{Resistore Ideale}
 
@@ -2057,7 +2057,7 @@ Quindi l'energia assorbita dal resistore non può che aumentare. Questa energia 
 descritto poco prima, una resistenza provoca un aumento di temperatura, per cui l'energia elettrica viene convertita in energia termica grazie al resistore. Questo fenomeno 
 viene definito effetto Joule. Successivamente questa energia termica può essere convertita in altre forme di energia, ma queste forme, diverse da quella elettrica, non possono 
 essere considerate direttamente in simulazioni di circuiti. Per questo vengono usati i resistori all'interno delle simulazioni dei circuiti per identificare queste 
-conversioni di energia. Da ciò si può dedurre che un resistore, un oggeto che converte energia elettrica in altre forme di energia, è un vettore energetico per l'energia 
+conversioni di energia. Da ciò si può dedurre che un resistore, un oggetto che converte energia elettrica in altre forme di energia, è un vettore energetico per l'energia 
 elettrica; inoltre rappresenta il duale passivo del generatore, un oggetto che converte altre forme di energia in energia elettrica. 
 
 
@@ -2066,7 +2066,7 @@ rispetto al quadrato del potenziale $v$.
 \begin{equation*}
     P=Ri^2=Gv^2
 \end{equation*}
-Se si voelsse aumentare l'effetto Joule, ovvero aumentare la potenza del resistore bisognerebbe aumentare o diminuire la resistenza. Poiché entrambe le azioni comporterebbero, 
+Se si volesse aumentare l'effetto Joule, ovvero aumentare la potenza del resistore bisognerebbe aumentare o diminuire la resistenza. Poiché entrambe le azioni comporterebbero, 
 senza ulteriori ipotesi l'aumento della potenza e quindi dell'energia convertita. Questo problema si risolve guardando a quale grandezza, tra la corrente e la tensione, 
 viene iniettata dall'esterno all'interno di questa regione, tramite dei generatori di corrente o di tensione. La grandezza che viene iniettata determina quale delle due 
 forme della potenza da applicare per determinarne il suo aumento. Poiché la grandezza inserita dall'esterno rappresenta una variabile indipendente, mentre l'altra 
@@ -2131,7 +2131,7 @@ del campo elettro-motore dipende dal percorso $\lambda_f$ definito per erogare l
 La corrente che attraversa il generatore può essere limitata o illimitata, mantenendo costante i valori di tensione tra i due morsetti, per cui anche questo generatore è vincolato. 
 Il generatore di corrente ideale non può essere collegato ad un cortocircuito ideale, poiché si misurerebbe tra i due morsetti una tensione nulla, ma ciò è impossibile, poiché 
 deve necessariamente essere erogata una tensione, ciò non può avvenire in una regione di equipotenzialità. Rappresenterebbe un modello paradossale, dove il valore della 
-tensione misurata assume due valori, uno nullo misurato tra i due morsetti nel cortocircuito, ed uno non nullo definto dal generatore di tensione, equivalente all'opposto 
+tensione misurata assume due valori, uno nullo misurato tra i due morsetti nel cortocircuito, ed uno non nullo definito dal generatore di tensione, equivalente all'opposto 
 della forza elettro-motrice. 
 Può erogare una tensione nulla, in questo caso simula un cortocircuito ideale, analogo ad un resistore con un valore nullo di $0\,\Omega$: 
 \begin{center}
@@ -2154,15 +2154,15 @@ sono misure esterne.
 Viene definito lato un insieme di bipoli che stanno tra loro in serie o in parallelo, e sono uniti a formare un solo elemento. Questo elemento chiamato lato, ha la proprietà di avere 
 una tensione, in caso siano in parallelo, oppure una corrente, in caso siano in serie. 
 
-Questi bipoli possono essere sia attivi e passivi. In base a questa differenza si definiscono le reti senza memoria, dove sono presenti bipooli attivi e resistori, ovvero tutti 
+Questi bipoli possono essere sia attivi e passivi. In base a questa differenza si definiscono le reti senza memoria, dove sono presenti bipoli attivi e resistori, ovvero tutti 
 gli elementi che non presentano memoria, nelle loro leggi costitutive; mentre le reti con memoria comprendono elementi come gli induttori ed i condensatori, che presentano 
 uno stato iniziale da considerare. Si analizzano per ora solo reti senza memoria, poiché richiedono ulteriori modellazioni matematiche 
 quando vari elementi con memoria sono uniti tra di loro. Elementi omogenei corrispondono ad un elemento equivalente con la stessa unità di misura, mentre tra elementi diversi 
 si ottiene un elemento con grandezze fisiche diverse, per cui è necessario tenerli separati, queste grandezze possono essere uniformate introducendo il concetto di impedenza, 
-ed il suo inverso l'ammettenza, concetti più estesi che verrano discussi successivamente. Si comincia analizzando gli elementi più semplici ovvero i resistori ed i generatori 
-ideali. Le proprietà descritte da questi seplici elementi, descrivono comportamenti di circuiti più complessi, per cui si cercano delle proprietà fondamentali dei circuiti 
+ed il suo inverso l'ammettenza, concetti più estesi che verranno discussi successivamente. Si comincia analizzando gli elementi più semplici ovvero i resistori ed i generatori 
+ideali. Le proprietà descritte da questi semplici elementi, descrivono comportamenti di circuiti più complessi, per cui si cercano delle proprietà fondamentali dei circuiti 
 dall'analisi di questi bipoli. Le proprietà fondamentali dei circuiti già analizzate sono i due principi di Kirchhoff, queste proprietà non dipendono dal tipo di bipolo trattato, 
-ma sono prorpietà del circuito in quanto tale e corrispondono alle proprietà dei campi. Mentre le leggi costitutive descrivono il comportamento del campo attraverso uno 
+ma sono proprietà del circuito in quanto tale e corrispondono alle proprietà dei campi. Mentre le leggi costitutive descrivono il comportamento del campo attraverso uno 
 specifico bipolo.   
 
 \subsubsection{Resistori in Serie e Parallelo}
@@ -2194,8 +2194,8 @@ questo lato avrà anche una tensione, in convenzione degli utilizzatori $v=V_A-V
 
 
 Su ogni elemento si può considerare la differenza di potenziale relativa al solo resistore $R_k$, per ogni resistore. 
-Bisogna cercare percorsi utili al calcolo per i principi di Kirchhoff, in questo caso si considera un percorso chiuso composto dal lato e dal volmetro, unico oggetto 
-rappresentato da freccie, ma si trova nel vuoto circuitale.  Se si considera una circuitazione in senso orario, concorde al volmetro nel percorso così definito, si può 
+Bisogna cercare percorsi utili al calcolo per i principi di Kirchhoff, in questo caso si considera un percorso chiuso composto dal lato e dal voltmetro, unico oggetto 
+rappresentato da frecce, ma si trova nel vuoto circuitale.  Se si considera una circuitazione in senso orario, concorde al voltmetro nel percorso così definito, si può 
 applicare il principio di Kirchhoff alle tensioni. 
 \begin{equation*}
     v-\displaystyle\sum_{k=1}^nv_k=0\to v=\displaystyle\sum_{k=1}^nv_k
@@ -2207,8 +2207,8 @@ Per ogni resistore si può considerare la relazione $v_k=R_ki$, la corrente è c
 
 Al posto della serie di resistori si inserisce un singolo resistore con resistenza $R_s$ pari alla somma algebrica delle resistenza dei singoli resistori. Questa 
 rappresentazione si chiama rappresentazione equivalente, questa equivalenza è valida solo per l'esterno, poiché le singoli tensioni tra i 
-resistori non sono più determinabili da questa rappresentazione, vegono perse le informazioni interne al lato. L'informazione è stata entropicizzata, è stata disordinata, e 
-non può essere determinata senza le infomrazioni precedenti alla rappresentazione equivalente. 
+resistori non sono più determinabili da questa rappresentazione, vengono perse le informazioni interne al lato. L'informazione è stata entropicizzata, è stata disordinata, e 
+non può essere determinata senza le informazioni precedenti alla rappresentazione equivalente. 
 \begin{equation}
     v=R_si
 \end{equation}
@@ -2224,7 +2224,7 @@ non può essere determinata senza le infomrazioni precedenti alla rappresentazio
 
 
 Il caso di resistori montati in parallelo corrisponde al duale dei resistori in serie. Il lato corrisponde ad una serie di $m$ resistori montati in parallelo tra due elementi, 
-per cui la tensione è uguale per ogni resistore $R_k$. All'ingresso di tutta la configurazione del paralleo si inseriscono i morsetti, poiché devono essere esterni. 
+per cui la tensione è uguale per ogni resistore $R_k$. All'ingresso di tutta la configurazione del parallelo si inseriscono i morsetti, poiché devono essere esterni. 
 
 \begin{center}
     \begin{circuitikz}
@@ -2282,7 +2282,7 @@ Gli strumenti di misura esterni individuano solamente $R_p$, per ottenere l'info
 
 \subsubsection{Generatori Ideali in Serie e Parallelo}
 
-Generatori di tensione in parallelo o presentano tensione uguale tra di loro, altrimenti ci troviamo in una situazione paradossle, poiché in paralleo non possono essere presenti 
+Generatori di tensione in parallelo o presentano tensione uguale tra di loro, altrimenti ci troviamo in una situazione paradossale, poiché in parallelo non possono essere presenti 
 generatori di tensione con tensioni differenti tra di loro. Analogamente non possono essere legati in serie generatori di corrente in serie, poiché oltre al caso banale si 
 arriva ad una situazione paradossale. 
 
@@ -2320,10 +2320,10 @@ primo principio di Kirchhoff si ottiene:
     v=\displaystyle\sum_{k=1}^nv_k=\sum_{k=1}^n(\pm)e_{gk}
 \end{equation*}
 I valori numerici, compresi il segno, vengono inseriti nel momento del calcolo della tensione complessiva generata da questo lato. Segue che se sono montati in serie, 
-ed i generatori di tensione sono tali che la tensione complessiva è nulla, ci si trova in una situazione di cortocircuito ideale. La formza elettro-motrice totale 
-corrrisponde alla forza elettro-motrice equivalente $e_{gs}$ misurata dall'esterno. La sua polarità dipende dalla convenzione usata per misurare ogni singola $v_k$
-Se invece fossero montati in paralello, ciò porterebbe ad una situazione paradossale, poiché la tensione tra ogni elemento montato in parallelo è uguale e, escludendo il caso 
-banale dove ogni generatore di tensione genera la stessa tensione, le tensioni generate da ogni generatore non sono necessariemente uguali tra di loro, per cui ciò risulta 
+ed i generatori di tensione sono tali che la tensione complessiva è nulla, ci si trova in una situazione di cortocircuito ideale. La forma elettro-motrice totale 
+corrisponde alla forza elettro-motrice equivalente $e_{gs}$ misurata dall'esterno. La sua polarità dipende dalla convenzione usata per misurare ogni singola $v_k$
+Se invece fossero montati in parallelo, ciò porterebbe ad una situazione paradossale, poiché la tensione tra ogni elemento montato in parallelo è uguale e, escludendo il caso 
+banale dove ogni generatore di tensione genera la stessa tensione, le tensioni generate da ogni generatore non sono necessariamente uguali tra di loro, per cui ciò risulta 
 in un paradosso, poiché la stessa tensione deve sia essere uguale ad un valore arbitrario e uguale al valore di ogni altra tensione generata. 
 
 
@@ -2541,7 +2541,7 @@ Per facilitarne l'analisi si considera il componente tensione iniziale nulla per
     \end{circuitikz}
 \end{center}
 
-Non si considera l'elastanza poiché le grandezze analizzate in questi casi circuitali verrano collegate direttamente alla corrente ed alla tensione tramite le impedenze. 
+Non si considera l'elastanza poiché le grandezze analizzate in questi casi circuitali verranno collegate direttamente alla corrente ed alla tensione tramite le impedenze. 
 I circuiti con bipoli con memoria sono tempo varianti e l'uso delle impedenze ne facilita l'analisi. 
 
 
@@ -2582,7 +2582,7 @@ Si ottiene quindi:
     i-\displaystyle\sum_{k=1}^mi_k=0\to i=\sum_{k=1}^mi_k=\sum_{k=1}^m\left(C_k\frac{dv}{dt}\right)=\frac{dv}{dt}\sum_{k=1}^mC_k
 \end{equation*}
 
-Si definisce capaità equivalente $C_p$ la somma algebrica di tutte le capacità dei condensatori posti in parallelo:
+Si definisce capacità equivalente $C_p$ la somma algebrica di tutte le capacità dei condensatori posti in parallelo:
 \begin{equation*}
     C_p=\displaystyle\sum_{k=1}^nC_k
 \end{equation*}
@@ -2608,7 +2608,7 @@ duale per i condensatori in parallelo, mentre per gli induttori in parallelo, la
 Date le leggi costitutive dell'induttore ideale in forma locale ed integrale:
 \begin{gather*}
     v=L\displaystyle\frac{di}{dt}\\
-    i=\displaystyle\frac{1}{L}\int_{0^-}^tvdt+i(0^-)
+    i=\displaystyle\frac{1}{L}\int_{0^-}^t vdt+i(0^-)
 \end{gather*}
 
 
@@ -2662,7 +2662,7 @@ Si può quindi rappresentare questo lato come un singolo induttore di induttanza
 
 
 
-Per un lato composto da $m$ induttori montati in parallelo si considera la forma integrale della legge costitutiva, e si applica il principiod i Kirchhoff alle correnti su una 
+Per un lato composto da $m$ induttori montati in parallelo si considera la forma integrale della legge costitutiva, e si applica il principio i Kirchhoff alle correnti su una 
 superficie $S$, analogamente al caso dei resistori e dei condensatori:
 
 \begin{center}
@@ -2686,10 +2686,10 @@ superficie $S$, analogamente al caso dei resistori e dei condensatori:
 \end{center}
 
 \begin{equation*}
-    i-\displaystyle\sum_{k=1}^mi_k=0\to i=\sum_{k=1}^mi_k=\sum_{k=1}^m\left(\frac{1}{L_k}\int_{0^-}^tvdt+i_k(0^-)\right)=\int_{0^-}^tvdt\sum_{k=1}^m\frac{1}{L_k}+\sum_{k=1}^mi_k(0^-)
+    i-\displaystyle\sum_{k=1}^mi_k=0\to i=\sum_{k=1}^mi_k=\sum_{k=1}^m\left(\frac{1}{L_k}\int_{0^-}^t vdt+i_k(0^-)\right)=\int_{0^-}^t vdt\sum_{k=1}^m\frac{1}{L_k}+\sum_{k=1}^mi_k(0^-)
 \end{equation*}
 
-Si definisce l'indutanza equivalente come:
+Si definisce l'induttanza equivalente come:
 
 \begin{equation*}
     \displaystyle\frac{1}{L_p}=\sum_{k=1}^n\frac{1}{L_k}
@@ -2697,7 +2697,7 @@ Si definisce l'indutanza equivalente come:
 
 Per cui la legge costitutiva di un lato composto da induttori in parallelo, considerati per semplicità tutti scarichi, corrisponde a:
 \begin{equation}
-    i=\displaystyle\frac{1}{L_p}\int_{0^-}^tvdt
+    i=\displaystyle\frac{1}{L_p}\int_{0^-}^t vdt
 \end{equation}
 
 \begin{center}
@@ -2712,7 +2712,7 @@ Per cui la legge costitutiva di un lato composto da induttori in parallelo, cons
 Altrimenti sarebbe necessario inserire un componente generatore ideale di corrente, che eroga una quantità di corrente pari alla memoria complessiva di ogni induttore:
 \begin{gather*}
     i_p=\displaystyle\sum_{k=1}^mi_k(0^-)\\
-    i_L=\displaystyle\frac{1}{L_p}\int_{0^-}^tvdt\\
+    i_L=\displaystyle\frac{1}{L_p}\int_{0^-}^t vdt\\
     i=i_L+i_p
 \end{gather*}
 Considerando il principio di Kirchhoff alle correnti è possibile costruire il circuito equivalente a quest'espressione:
@@ -2768,7 +2768,7 @@ Forma Norton:
 \subsubsection{Passaggio da Norton a Thevenin}
 
 Le forme Norton e Thevenin sono duali tra di loro, si cerca un modo per trasformale tra di loro. Le forme estreme per la loro definizione non possono essere trasformate. 
-Si considerano le due forme, con la stessa convenzione di misura (utilizzatori) e si considera una rappresentazione esterna tramite la quale è possible passare tra le due 
+Si considerano le due forme, con la stessa convenzione di misura (utilizzatori) e si considera una rappresentazione esterna tramite la quale è possibile passare tra le due 
 forme. 
 Si esprimono le leggi costitutive delle due forme:
 \begin{gather*}
@@ -2809,7 +2809,7 @@ un grafo orientato esprime un circuito nella convenzione dei generatori.
 
 
 
-Dato un grafo, un albero è rappresentato da un percorso di lati aperto che tocca ogni nodo del grafo. L'albbero risultante contiene un numero al massimo uguale al numero di lati 
+Dato un grafo, un albero è rappresentato da un percorso di lati aperto che tocca ogni nodo del grafo. L'albero risultante contiene un numero al massimo uguale al numero di lati 
 del grafo meno uno. Dato un albero, un co-albero è dato dai nodi del grafo e tutti i lati non considerati dall'albero. Gli elementi dell'albero si chiamano rami, mentre gli 
 elementi del co-albero si chiamano corde, mentre gli elementi del grafo mantengono la loro nomenclatura, questo rappresenta una rinominazione degli stessi elementi quando 
 vengono inseriti in un albero o un co-albero. Il numero delle corde non è vincolato al numero dei lati. Questi due grafi così creati sono non comunicanti tra di loro. 
@@ -2817,12 +2817,12 @@ vengono inseriti in un albero o un co-albero. Il numero delle corde non è vinco
 
 
 Per determinare le correnti e tensioni per ogni lato, si considerano le relazioni su ogni lato, e le leggi costitutive di ogni lato. Per cui dato $l$ numero dei lati, si 
-ottengono $2l$ equazioni, ma è possible determinare la corrente data la tensione e la legge costitutiva del lato e viceversa, per cui sono necessarie $l$ equazioni. 
-Inoltre si adoperano i prinicpi di Kirchhoff, ma sorge il problema di determinare per quali percorsi chiusi si applicano i principi. Bisogna usarne abbastanza per risolvere le 
+ottengono $2l$ equazioni, ma è possibile determinare la corrente data la tensione e la legge costitutiva del lato e viceversa, per cui sono necessarie $l$ equazioni. 
+Inoltre si adoperano i principio di Kirchhoff, ma sorge il problema di determinare per quali percorsi chiusi si applicano i principi. Bisogna usarne abbastanza per risolvere le 
 equazioni delle leggi costitutive in funzione della tensione e delle correnti. Per determinare il numero di volte da applicare i principi e per quali percorsi chiusi, si 
 aggiunge all'albero una ed una sola corda del co-albero, per ogni corda, in modo da creare un nuovo percorso chiuso ogni volta. Su questi percorsi chiusi così creati si 
 applicano i principi di Kirchhoff alle tensioni, rispetto al verso della corda inserita. Se i versi dei rami sono opposti, le loro tensioni si indicano di segno opposto. 
-In questo modo si ottengono $c$ equazioni di tensioni, dove $c$ è il numero di corde del co-allbero, necessariamente indipendenti tra di loro, poiché in ciascuna di esse è 
+In questo modo si ottengono $c$ equazioni di tensioni, dove $c$ è il numero di corde del co-albero, necessariamente indipendenti tra di loro, poiché in ciascuna di esse è 
 presente solo una volta le tensioni delle corde, poiché non possono essere riscritte come combinazioni lineari. Si esprime in forma matriciale come:
 \begin{equation*}
     \begin{bmatrix}
@@ -2850,7 +2850,7 @@ Si usano le parentesi quadre per denotare la natura matriciale dei componenti, p
 
 
 Sul grafo si evidenzia, per ogni ramo uno alla volta, quale si sta trattando. Considerando questo ramo si cerca una superficie che ingloba una parte di circuito comprendente 
-solo corde e come unico ramo quello scelto. In questo modo si ottentono $r$ equazioni di correnti, dove $r$ è il numero dei rami dell'albero. Questo processo rappresenta il duale 
+solo corde e come unico ramo quello scelto. In questo modo si ottengono $r$ equazioni di correnti, dove $r$ è il numero dei rami dell'albero. Questo processo rappresenta il duale 
 di quello appena svolto. Si ottiene quindi un sistema del tipo:
 \begin{equation*}
     \begin{bmatrix}
@@ -2904,9 +2904,9 @@ Si considera un circuito generico:
     \end{circuitikz}
 \end{center}
 I nodi $A$, $B$ e $E$ non corrispondo esattamente a quei punti nel circuito, ma all'intera zona dove i tre o più lati si incontrano poiché la zona equipotenziale che 
-rappresenta un cavo nel circuito non è un lato. Ma nella rappresentazione grafica si rappresentano come dei singoli punti, e i lati vengon orappresentati come degli archi 
-orientati, di verso scelto arbitrariamente. Per semplicità si opera nelal convenzione dei generatori, in modo che il verso degli archi indichi sia il verso di misura dell'
-amperometro che del volmetro. Per cui il circuito considerato si esprime in forma grafica come:
+rappresenta un cavo nel circuito non è un lato. Ma nella rappresentazione grafica si rappresentano come dei singoli punti, e i lati vengono rappresentati come degli archi 
+orientati, di verso scelto arbitrariamente. Per semplicità si opera nella convenzione dei generatori, in modo che il verso degli archi indichi sia il verso di misura dell'
+amperometro che del voltmetro. Per cui il circuito considerato si esprime in forma grafica come:
 \begin{center}
     \begin{tikzpicture}[scale=1.5]
         \filldraw[black](0,0)circle(1pt);
@@ -2942,7 +2942,7 @@ amperometro che del volmetro. Per cui il circuito considerato si esprime in form
 \end{center}
 
 Per creare un albero si scelgono i lati $2$, $3$, $6$, e $8$. In questo caso è solo una coincidenza che il numero dei rami corrisponde al numero delle corde. Il co-albero 
-è quindi composto dai lati $1$, $4$, $5$ e $7$. Questi lati si rinominano in base alla loro posizione nei due nuovi grafi (albero a sinitra e co-albero a destra):
+è quindi composto dai lati $1$, $4$, $5$ e $7$. Questi lati si rinominano in base alla loro posizione nei due nuovi grafi (albero a sinistra e co-albero a destra):
 \begin{gather*}
     \begin{cases}
         l_2=r_1\\
@@ -3022,7 +3022,7 @@ Per creare un albero si scelgono i lati $2$, $3$, $6$, e $8$. In questo caso è 
     \end{tikzpicture}
 \end{center}
 
-Si applica il secondo teorema di Kirchhoff sulle circuitazioni create inserendo una corda alla volta nel grafo albero, di verso concorde alla conrda inserita. Queste 
+Si applica il secondo teorema di Kirchhoff sulle circuitazioni create inserendo una corda alla volta nel grafo albero, di verso concorde alla corda inserita. Queste 
 circuitazioni si chiamano maglie fondamentali. 
 \begin{center}
     \begin{tikzpicture}
@@ -3330,16 +3330,16 @@ La matrice di incidenza rami-corde così ottenuta risulta essere:
 \end{equation*}
 
 Per cui per risolvere il circuito, non è necessario adoperare entrambi i principi di Kirchhoff, poiché producono due sistemi duali. Una volta ottenuta la matrice di incidenza 
-corde-rami, invece di individuare tutti i tagli fondamentali si usa direttametne la sua trasposta per impostare l'equazione delle correnti. 
+corde-rami, invece di individuare tutti i tagli fondamentali si usa direttamente la sua trasposta per impostare l'equazione delle correnti. 
 
 \subsection{Teorema di Tellegen}
 
 Il teorema di Tellegen rappresenta un teorema fondamentale per la topologia dei circuiti. Questo teorema definisce la proprietà di conservatività delle potenze virtuali 
 di un circuito. 
-Si vuole determinare se un circuito generico rispetta il bilancio energetico, ovvero la somma algebria dell'energia del sistema istante per istante, che equivale alla 
+Si vuole determinare se un circuito generico rispetta il bilancio energetico, ovvero la somma algebrica dell'energia del sistema istante per istante, che equivale alla 
 somma della potenza erogata e assorbita dal circuito durante l'intervallo di funzionamento, è nulla. Poiché si rappresenta il grafo di un circuito rispetto alla convenzione 
 dei generatori, la potenza assorbita è negativa, mentre la potenza erogata è positiva. 
-Si considear per ogni lato generico $k$ del circuito la sua potenza $P_k$, e si applica una sommatoria per tutti i lati $l$ del circuito:
+Si considera per ogni lato generico $k$ del circuito la sua potenza $P_k$, e si applica una sommatoria per tutti i lati $l$ del circuito:
 \begin{equation*}
     \displaystyle\sum_{k=1}^lP_k=\sum_{k=1}^lv_ki_k
 \end{equation*}
@@ -3369,11 +3369,11 @@ Considerando le equazioni in forma matriciale individuate precedentemente si pu�
     -[A]^T[v_r]^T[i_c]+[A]^T[v_r]^T[i_c]=0
 \end{gather*}
 
-Per cui il bilancio energetico di un qualsiasi circuito è sempre verificato, poiché la somma delle sue potenze per ogni lato sarà sempre nulla, ma hanno disaccopiati 
+Per cui il bilancio energetico di un qualsiasi circuito è sempre verificato, poiché la somma delle sue potenze per ogni lato sarà sempre nulla, ma hanno disaccoppiati 
 i campi, poiché sono solo delle approssimazioni formate dall'unione di regioni quasi-stazionarie tra di loro. 
 
 Si considerano ora due circuiti aventi lo stesso grafo, ma potenzialmente lati diversi. Si indicano questi due circuiti come $\alpha$ e $\beta$. Si considera ora il 
-bilancio energetico, usando le tensioni del circuito $\alpha$ e le correnti di $\beta$. Le potenze individuate da questo prodotto per ogni $k-$esimo lato prendeno il nome 
+bilancio energetico, usando le tensioni del circuito $\alpha$ e le correnti di $\beta$. Le potenze individuate da questo prodotto per ogni $k-$esimo lato prendono il nome 
 di potenze virtuali. Da notare che la matrice di incidenza rimane invariate, poiché è funzione della sola topologia del circuito. 
 
 \begin{gather*}
@@ -3398,7 +3398,7 @@ Si è determinato precedentemente che i principi di Kirchhoff non sono dipendent
     [A]=-[B]^T
 \end{equation*}
 
-Per cui è possible risolvere il circuito usando meno equazioni. Uno dei metodi che permettono di usare un numero di equazioni minore dei due principi di Kirchhoff è il metodo 
+Per cui è possibile risolvere il circuito usando meno equazioni. Uno dei metodi che permettono di usare un numero di equazioni minore dei due principi di Kirchhoff è il metodo 
 del Tableau. Questo metodo permette di avere solo $r$ o $c$ equazioni nel sistema, ciò è favorevole in situazioni dove è presente un numero considerevolmente maggiore di 
 corde rispetto ai rami, diminuendo il tempo necessario alla risoluzione del circuito. Un circuito di questo tipo presenta molti lati in parallelo tra di loro. 
 
@@ -3455,7 +3455,7 @@ Si crea ora il grafo rappresentativo del circuito, considerando sempre la conven
     \end{tikzpicture}
 \end{center}
 
-Nel grafo, il verso dei lati corisponde al verso dei generatori, in modo da non discutere i segni. In caso siano presenti più di un generatore, si sceglie il verso risultante 
+Nel grafo, il verso dei lati corrisponde al verso dei generatori, in modo da non discutere i segni. In caso siano presenti più di un generatore, si sceglie il verso risultante 
 della somma algebrica dei generatori. % "regola del pigro"
 
 
@@ -3560,7 +3560,7 @@ conduttanza di lato:
     [i_l]=[I_g]-[G_l][v_l]
 \end{gather*}
 Analizzando la dimensione delle matrici, si nota che necessariamente per ritornare alla forma generica della corrente di lato, gil unici elementi della matrice di 
-conduttnza che possono non essere nulli sono sulla diagonale, per cui la matrice di conduttanza di lato $G_l$ è una matrice diagonale:
+conduttanza che possono non essere nulli sono sulla diagonale, per cui la matrice di conduttanza di lato $G_l$ è una matrice diagonale:
 \begin{gather*}
     [G_l]\in D(l,\mathbb{R})\\
     [G_l]=\begin{bmatrix}
@@ -3590,7 +3590,7 @@ nodali:
 \begin{equation*}
     [A][I_g]=[I_{no}]
 \end{equation*}
-Viene definita invece la matrice dele conduttanze nodali $[G_{no}]$ come:
+Viene definita invece la matrice delle conduttanze nodali $[G_{no}]$ come:
 \begin{equation*}
     [G_{no}]=[A][G_l][A]^T
 \end{equation*}
@@ -3606,7 +3606,7 @@ Dopo aver determinato questi vettori e matrici nodali, si risolvono le equazioni
     [i_l]=[I_g]-[G_l][v_l]
 \end{gather*}
 
-In seguito bisogna verificare il bilanco energetico del circuito per verificare sia una soluzione valida. 
+In seguito bisogna verificare il bilancio energetico del circuito per verificare sia una soluzione valida. 
 \begin{gather*}
     [v_l]^T[i_l]=\displaystyle\sum_{k=1}^lv_ki_k=0
 \end{gather*}
@@ -3711,7 +3711,7 @@ sommando tutte le $n_{j}$ conduttanze dei lati $l_k$ che affiorano su quel nodo:
 \begin{equation*}
     g_{{no}_{ij}}=\displaystyle\sum_{k=1}^{n_j}G_{l_k}\,\forall i= j
 \end{equation*}
-Gli elmenti che non si trovano sulla diagonale principale si chiamano mutue- o trans-conduttanze, e rappresentano una somma cambiata di segno delle $n_{ij}$ conduttanze dei lati 
+Gli elementi che non si trovano sulla diagonale principale si chiamano mutue- o trans-conduttanze, e rappresentano una somma cambiata di segno delle $n_{ij}$ conduttanze dei lati 
 $l_k$ che collegano due nodi:
 \begin{equation*}
     g_{{no}_{ij}}=-\displaystyle\left(\sum_{k=1}^{n_{ij}}G_{l_k}\right)\,\forall i\neq j
@@ -3728,7 +3728,7 @@ espressione:
 Da considerare che se il resistore è collegato a vuoto, ovvero non può fluire corrente, non potrà assorbirla e quindi il suo effetto sarà nullo. Per cui non bisogna considerare 
 la conduttanza di resistori collegati a vuoto, oppure in serie ad un generatore di corrente, poiché non sono in grado di alterare la corrente erogata. Per il calcolo della potenza 
 invece, bisogna considerare il contributo di ogni lato. Quindi solo nella risoluzione con la matrice delle conduttanze nodali, e delle resistenze nodali per il metodo 
-delle maglie, non bisogna consideare resistori in serie a generatori di corrente, o connessi a vuoto, rappresentabile come un generatore di corrente che eroga corrente nulla. 
+delle maglie, non bisogna considerare resistori in serie a generatori di corrente, o connessi a vuoto, rappresentabile come un generatore di corrente che eroga corrente nulla. 
 
 
 Per esprimere il vettore delle correnti nodali si considerano solo i lati con un generatore di corrente, e si attua una somma, tenendo conto del verso delle correnti. 
@@ -3872,7 +3872,7 @@ Si vuole determinare la corrente $I_x$ passante per un lato di questo circuito:
 \end{center}
 
 Si inseriscono due resistori di resistenza rispettivamente $8\,\Omega$ e $-8\,\Omega$, invece di un cortocircuito, in serie al lato contenente la forma Thevenin estrema 
-poiché entrambi presentano una resistenza equivalente pari a zero. In questo modo è presente nel circuito un lato Thevenin trasformabile in Norhton. Viene quindi aggiunto un 
+poiché entrambi presentano una resistenza equivalente pari a zero. In questo modo è presente nel circuito un lato Thevenin trasformabile in Norton. Viene quindi aggiunto un 
 nodo fittizio $C$ all'interno del circuito:
 \begin{center}
     \begin{circuitikz}
@@ -4031,7 +4031,7 @@ Per cui l'equazione di utilità è:
     \end{bmatrix}
 \end{gather*}
 
-Questa matrice $[H]$ risulta essere esattamente la trasposta della matrice di incidenza magile-lati:
+Questa matrice $[H]$ risulta essere esattamente la trasposta della matrice di incidenza maglie-lati:
 \begin{equation*}
     [H]=[B]^T
 \end{equation*}
@@ -4053,7 +4053,7 @@ forme. In forma matriciale si può esprimere come:
     [v_l]=[E_l]-[R_l][i_l]
 \end{gather*}
 La matrice delle resistenze di lato presenta degli zeri solo in presenta di lati Thevenin estremi, può presentare elementi non nulli solo sulla sua diagonale. 
-Si moltiplicano ambo i membri per la matrice di incidenca maglie-lati:
+Si moltiplicano ambo i membri per la matrice di incidenza maglie-lati:
 \begin{gather*}
     [B][v_l]=[B]\left([E_l]-[R_l][i_l]\right)\\
     [0]=[B][E_l]-[B][R_l][i_l]
@@ -4186,7 +4186,7 @@ e resistori in serie, equivale al rapporto tra il valore della resistenza $R_k$ 
 \end{gather*}
 
 
-Come esiste il partitore di tensione, esiste il suo duale il paritore di corrente, dove tutti gli elementi, resistori e generatori di corrente, sono montati in parallelo:
+Come esiste il partitore di tensione, esiste il suo duale il partitore di corrente, dove tutti gli elementi, resistori e generatori di corrente, sono montati in parallelo:
 \begin{center}
     \begin{circuitikz}
         \draw (0,0)node[below]{$B$} to[short,*-](1,0)
@@ -4229,7 +4229,7 @@ solamente un modello, non possono essere realizzati.
 Esprimono una grandezza, che può essere una tensione o una corrente. Possono essere controllati in corrente o in tensione o in entrambi, ma generalmente sono controllati 
 rispetto ad un'unica grandezza. La grandezza che controlla il generatore si chiama pilota, per cui si indicano anche come generatori pilotati. Non sono quindi indipendenti. 
 
-I generatori non controllati, erogano una grandezza costante dovuta ad una trasformazione energetica. Questo oggeto è pilotato da una grandezza, per cui non può essere 
+I generatori non controllati, erogano una grandezza costante dovuta ad una trasformazione energetica. Questo oggetto è pilotato da una grandezza, per cui non può essere 
 un bipolo, poiché è necessario un altro ingresso per la grandezza di controllo. La grandezza erogata dal generatore si rappresenta come una funzione, dipendente dalle 
 grandezze di controllo, e presenta tante porte quante sono queste grandezze. Non si può dimostrare la passività di questi elementi, per cui si considerano come degli oggetti 
 attivi. 
@@ -4252,7 +4252,7 @@ In caso siano di tensione:
 
 
 Per risolvere reti dove sono presenti generatori controllati, in prima analisi vengono analizzati come fossero dei generatori indipendenti. 
-Si considera un circuito dov'è presente un generatore controllato, il metodo risolutivo ottenuto da quesst'analisi varrà per ogni rete dov'è presente un generatore pilotato: 
+Si considera un circuito dov'è presente un generatore controllato, il metodo risolutivo ottenuto da quest'analisi varrà per ogni rete dov'è presente un generatore pilotato: 
 \begin{center}
     \begin{circuitikz}
         \draw (0,0) to[short] (2,0)
@@ -4358,7 +4358,7 @@ Si definisce così un nuovo vettore dei termini noti $[T_{no}]$, per risolvere i
 
 \subsection{Teorema di Thevenin e Norton}
 
-Considerando la forma Thevenin, rappresentaziona esterna equivalente di resistenze e generatori di tensione posti in serie, e la forma Norton, rappresentazione 
+Considerando la forma Thevenin, rappresentazione esterna equivalente di resistenze e generatori di tensione posti in serie, e la forma Norton, rappresentazione 
 esterna equivalente di una serie di resistori e generatori di corrente posti in parallelo, e le regole di passaggio tra le due forme, si può descrivere una rappresentazione 
 equivalente di un intero circuito.  
 Per ottenere tale rappresentazione, si considera come fosse un bipolo, accessibile dall'esterno da soli due morsetti di accesso $A$ e $B$.
@@ -4427,7 +4427,7 @@ Si risolve mediante il metodo degli anelli, per cui si considera un unico lato i
 Se ogni generatore è indipendente dagli altri allora si possono considerare quattro cause separate, oppure si possono considerare i generatori di tensione insieme tra di loro, 
 oppure si possono considerare tutti insieme come unica causa. Per cui le cause non sono sempre dei singoli elementi, possono rappresentare invece degli insiemi. 
 
-Per cui ogni corrente di maglia avrà compomenti che dipendono da ogni singola causa nel sistema, dato che il sistema di risoluzione è lineare rispetto alle cause, ovvero 
+Per cui ogni corrente di maglia avrà componenti che dipendono da ogni singola causa nel sistema, dato che il sistema di risoluzione è lineare rispetto alle cause, ovvero 
 rispetto ai generatori di tensione o di corrente. Ciò vale poiché la corrente e la tensione sono due grandezze legate da una relazione lineare tra di loro. Infatti non si può 
 applicare il principio di sovrapposizione degli effetti sulla potenza, poiché ha una relazione quadratica tra le grandezze. Ogni corrente di maglia $I_{m_k}$ si può esprime come:
 \begin{gather*}
@@ -4458,7 +4458,7 @@ Si dimostra il teorema di Thevenin dato il seguente circuito:
 \end{center}
 Si risolve tramite il metodo dei nodi, e si considera il nodo $0$ di potenziale nullo, ovvero a terra. Per cui si esprime il lato contenente un generatore di corrente nella 
 forma Thevenin equivalente. 
-La tensione tra i due morsetti $in_1$ e $in_2$ corrisponde al potenziale tra i due nodi $a$ e $o$ $V_{a0}$, poiché il resistore a valle di $in_1$ è un compomente passivo. 
+La tensione tra i due morsetti $in_1$ e $in_2$ corrisponde al potenziale tra i due nodi $a$ e $o$ $V_{a0}$, poiché il resistore a valle di $in_1$ è un componente passivo. 
 Fino a quando tra i due morsetti è presente il vuoto, quindi non passa corrente, il resistore presenta una tensione nulla, per cui non deve essere considerato nella matrice 
 delle conduttanze di maglia:  
 \begin{gather*}
@@ -4535,7 +4535,7 @@ Segue il teorema di Thevenin:
     Una qualsiasi rete può essere rappresentata dall'esterno come un generatore di tensione che eroga una tensione pari alla tensione misurata a vuoto nel circuito, in serie 
     con un resistore di resistenza, pari alla resistenza equivalente misurata nella rete resa passiva
 \end{quotation}
-Poiché la rete non è un oggetto passsivo, per determinare la resistenza equivalente di Thevenin, la si rende passiva: 
+Poiché la rete non è un oggetto passivo, per determinare la resistenza equivalente di Thevenin, la si rende passiva: 
 \begin{center}
     \begin{circuitikz}
         \draw (0,0) to[short](0,2)
@@ -4553,8 +4553,8 @@ Poiché la rete non è un oggetto passsivo, per determinare la resistenza equiva
     \end{circuitikz}
 \end{center}
 La resistenza Thevenin corrisponde alla resistenza equivalente, misurata dall'esterno, tra i due 
-morsetti di ingresso della rete, quando esse viane resa passiva. Ovvero quando viene sostituito ai generatori di corrente il vuoto, ed ai generatori di tensione il 
-cortocircuito. L'unico genratore rimasto, è un generatore di tensione esterno che eroga una tensione $V_{ge}$ nel circuito. 
+morsetti di ingresso della rete, quando esse viene resa passiva. Ovvero quando viene sostituito ai generatori di corrente il vuoto, ed ai generatori di tensione il 
+cortocircuito. L'unico generatore rimasto, è un generatore di tensione esterno che eroga una tensione $V_{ge}$ nel circuito. 
 
 Per cui risolvendo tramite il metodo dei nodi, dopo aver eliminato il nodo $b$, ora solo di calcolo si ottiene la seguente equazione:
 \begin{gather*}
@@ -4575,9 +4575,9 @@ amperometro, richiede di rendere passiva la rete, per poi risolverla.
 Alternativamente, invece di risolvere il circuito inserendo in entrata un generatore di tensione noto e fittizio, è possibile attuare diverse trasformazioni serie-parallelo 
 fino ad arrivare ad un circuito equivalente composto di un singolo resistore collegato ai due morsetti. In questo modo si ottiene la stessa resistenza equivalente.  
 %% circuito equivalente 
-Se nella rete originaria sono presenti generatori pilotati, la rete diventa attiva. Rendendo passiva la rete, per misurara la resistenza equivalente, bisogna considerare 
+Se nella rete originaria sono presenti generatori pilotati, la rete diventa attiva. Rendendo passiva la rete, per misurata la resistenza equivalente, bisogna considerare 
 che i generatori controllati si accendono in base ad altre grandezze dei lati della rete, e non possono essere quindi mai spenti. Allora non si può usufruire del metodo delle 
-trasformazioni in serie ed in parallelo, poiché sono presneti elementi diversi dai resistori. L'unico metodo è quello dell'amperotmetro, inserendo un generatore noto e fittizio 
+trasformazioni in serie ed in parallelo, poiché sono presenti elementi diversi dai resistori. L'unico metodo è quello dell'amperometro, inserendo un generatore noto e fittizio 
 dall'esterno tra i due morsetti in entrata. 
 
 
@@ -4618,8 +4618,8 @@ equivalente esterna del circuito:
 % 15/11
 Per dimostrare la validità generale di questa situazione, si considera una rete generica con due morsetti di ingresso $A$ e $B$. 
 Si inserisce tra i due morsetti $A$ e $B$ un resistore $R_C$. Si vuole calcolare la corrente $I_C$ assorbita 
-dal resistore. Invece di inserire un cortociruito, si inseriscono due generatori di tensione di polarità opposta, indipendenti ed esterni al circuito, in modo che la tensione 
-generata complessivamente risulta nulla, analogamente all'inserimento di un corcocircuito. La tensione erogata corrisponde alla tensione misurata a vuota tra i due morsetti 
+dal resistore. Invece di inserire un cortocircuito, si inseriscono due generatori di tensione di polarità opposta, indipendenti ed esterni al circuito, in modo che la tensione 
+generata complessivamente risulta nulla, analogamente all'inserimento di un cortocircuito. La tensione erogata corrisponde alla tensione misurata a vuota tra i due morsetti 
 $V_{AB0}$: 
 \begin{center}
     \begin{circuitikz}
@@ -4693,15 +4693,15 @@ Per il principio di sovrapposizione degli effetti la corrente totale assorbita d
 \end{gather*}
 
 
-Come già noto, la forma Thevevnin è la duale della forma Norhton, ed è possibile passare tra le due forme. Per cui è possibile, nota la rappresentazione Thevenin esterna di 
-un circuito, passare ad una rappresentazione Norhton esterna. Da notare che il processo per arrivare a questa forma Norhton equivalente è indipendente dal 
+Come già noto, la forma Thevenin è la duale della forma Norton, ed è possibile passare tra le due forme. Per cui è possibile, nota la rappresentazione Thevenin esterna di 
+un circuito, passare ad una rappresentazione Norton esterna. Da notare che il processo per arrivare a questa forma Norton equivalente è indipendente dal 
 processo dimostrato precedentemente per la rappresentazione Thevenin. Per calcolare la corrente erogata tra i due morsetti $I_{No}$ invece del vuoto, bisogna inserire un 
 cortocircuito tra i due. Mentre per misurare la resistenza equivalente $R_{No}$, si rende passiva la rete, e si applicano trasformazioni in serie e parallelo, oppure tramite 
 il metodo dell'amperometro. Quando sono presenti generatori pilotati nella rete, si applicano le stesse considerazioni per il calcolo nella forma Thevenin. 
 
 
 Questi due calcoli arrivano allo stesso risultato, per cui sono intercambiabili le due rappresentazioni 
-Thevnin e Norton, secondo le formule di passaggio già note:
+Thevenin e Norton, secondo le formule di passaggio già note:
 \begin{gather*}
     R_{th}=R_{No}\\
     I_{No}=\displaystyle\frac{E_{th}}{R_{th}}
@@ -4770,12 +4770,12 @@ Poiché il valore delle resistenza è sempre strettamente positivo. Per cui il v
 \begin{gather*}
     V_{AB}=\displaystyle\frac{R_M}{R_M+R_M}E_{th}=\frac{E_{th}}{2}
 \end{gather*}
-Si vuole caloclare il rendimento di questo circuito. In generale il rendimento di un sistema è dato dal rapporto tra la potenza utile e la potenza totale del sistema. In questo 
+Si vuole calcolare il rendimento di questo circuito. In generale il rendimento di un sistema è dato dal rapporto tra la potenza utile e la potenza totale del sistema. In questo 
 caso la potenza utile, è la potenza assorbita dalla resistenza $R_M$, mentre la potenza totale è quella generata dal generatore $E_{th}$:
 \begin{gather*}
     \eta=\displaystyle\frac{P_{utile}}{P_{totale}}=\frac{R_{M}I^2}{E_{th}I}=\frac{1}{2}\frac{E_{th}}{E_{th}}=\frac{1}{2}
 \end{gather*}
-Erogando la massima potenza, il rendimento del circuito è la metà. Aumentando il numero di resisenza poste in paralleo in entrata al circuito, la tensione tra i morsetti 
+Erogando la massima potenza, il rendimento del circuito è la metà. Aumentando il numero di resistenza poste in parallelo in entrata al circuito, la tensione tra i morsetti 
 comincia a diminuire sempre di più. Questo fenomeno si chiama caduta di tensione. La tensione diminuisce fino ad un valore tale che nessuno degli oggetti posti in parallelo 
 sia in grado di assorbire corrente. Per cui anche la potenza, con il rendimento del sistema, diminuisce all'aumentare del numero degli oggetti inseriti in parallelo. I 
 generatori indipendenti sono elementi a potenza infinita, non realizzabili in natura. Per cui per evitare il fenomeno del collasso della tensione, si investe nell'aggiunta di 
@@ -4788,7 +4788,7 @@ sempre ad un livello di potenza molto lontano dalla potenza massima trasferibile
 
 \section{Reti Dinamiche}
 
-Si analizzano in questa sezione una serie di circuiti conententi bipoli con memoria: condensatori ed induttori. Si risolveranno questo tipo di reti, distinguendo 
+Si analizzano in questa sezione una serie di circuiti contenenti bipoli con memoria: condensatori ed induttori. Si risolveranno questo tipo di reti, distinguendo 
 circuiti di primo e di secondo ordine. Si considerano parametri concentrati tempo invarianti, per cui le leggi costitutive di questi bipoli con memoria, duali tra di loro, sono:
 \begin{gather*}
     i=\displaystyle C\frac{dv_C}{dt}\\
@@ -4836,16 +4836,16 @@ differenziale di primo ordine:
     E=Ri+v_C\\
     E=RC\displaystyle\frac{dv_C}{dt}+v_C
 \end{gather*}
-La soluzione di questo tipo di equazione differenziale è formata da un combinazione lineare della soluzione o integrale generale, soluzione dell'equazione omogena, e 
+La soluzione di questo tipo di equazione differenziale è formata da un combinazione lineare della soluzione o integrale generale, soluzione dell'equazione omogenea, e 
 della soluzione o integrale particolare, dalla stessa classe di funzioni della forzante:
 \begin{equation*}
     v_C(t)=v_{Cg}(t)+v_{Cp}(t)
 \end{equation*}
-Si risolve l'equazione omogena:
+Si risolve l'equazione omogenea:
 \begin{gather*}
     RC\displaystyle\frac{dv_C}{dt}+v_C=0
 \end{gather*}
-Per risolvere un'equazione differenziale omogena, lineare e di ordine $k$ a parametri costanti, si passa per il suo polinomio caratteristico associato. Questo polinomio 
+Per risolvere un'equazione differenziale omogenea, lineare e di ordine $k$ a parametri costanti, si passa per il suo polinomio caratteristico associato. Questo polinomio 
 si ottiene sostituendo ad ogni derivata $k-$esima una variabile di appoggio $\alpha$ elevata all'ordine della derivata $k$:
 \begin{gather*}
     \displaystyle a_k\frac{d^ky}{dt^k}+\cdots+a_1\frac{dy}{dt}+a_0y=0\\
@@ -4859,7 +4859,7 @@ Questo è il caso dove ogni radice ha molteplicità pari ad uno. Per ogni radice
 \begin{gather*}
     \displaystyle\sum_{n=0}^{m(\alpha_i)}k_{i+n}t^ne^{\alpha_it}=k_ie^{\alpha_it}+\cdots+k_{i+m(\alpha_i)}t^{m(\alpha_i)}e^{\alpha_1t}
 \end{gather*}
-Quindi il polinomio caratteristico associato all'equazione di Kirchhoff del circuito, resa omogena, corrisponde ad un'equazione lineare, con una sola radice:
+Quindi il polinomio caratteristico associato all'equazione di Kirchhoff del circuito, resa omogenea, corrisponde ad un'equazione lineare, con una sola radice:
 \begin{gather*}
     RC\alpha+1=0\\
     \alpha=\displaystyle-\frac{1}{RC}\\
@@ -4923,7 +4923,7 @@ Si è verificato che la grandezza $RC$ è un tempo. Si definisce questa grandezz
     \tau=RC
 \end{gather*}
 
-Graficando l'andamento rispetto al tempo della tensione e la corrente del circuito si può osservare l'importanza di questo tempo caratteristico. La retta tangente alla corrente 
+Rappresentando l'andamento rispetto al tempo della tensione e la corrente del circuito si può osservare l'importanza di questo tempo caratteristico. La retta tangente alla corrente 
 $v_C$ in $t=0$ interseca l'asintoto orizzontale $E$ in $t=\tau$, allo stesso modo la retta passante per $i(0)$ ed il tempo caratteristico $\tau$ risulta essere tangente alla 
 funzione della corrente nel tempo. 
 \begin{center}
@@ -4943,7 +4943,7 @@ funzione della corrente nel tempo.
         \draw[dashed](1,1.5)--(1,0)node[below right]{$\tau$}--(1,-3)node[below]{$\tau$};
     \end{tikzpicture}
 \end{center}
-Si dimostra che l'interesezione tra la retta tangente a $v_C(0)$ e l'asintoto $E$ corrisponde esattamente al tempo caratteristico $\tau$:
+Si dimostra che l'intersezione tra la retta tangente a $v_C(0)$ e l'asintoto $E$ corrisponde esattamente al tempo caratteristico $\tau$:
 \begin{gather*}
     mt^*=E\\
     m=\displaystyle\frac{dv_C}{dt}\\
@@ -4999,7 +4999,6 @@ completamente duali:
     i_{Lp}(t)=k_2
 \end{gather*}
 La soluzione totale è quindi:
-%% sistemare l'overfull
 \begin{gather*}
     i_L(t)=k_1e^{-\frac{1}{GL}t}+k_2
 \end{gather*}
@@ -5085,7 +5084,7 @@ Dato un numero complesso $z$, si considera la sua derivata e si moltiplicano ent
     jz=j|z|(\cos\theta+j\sin\theta)=|z|(-\sin\theta+j\cos\theta)\\
     \displaystyle\frac{dz}{d\theta}=jz
 \end{gather*}
-Si integra per separazione delle variabili, e si semplifca $z$, ottenendo la rappresentazione di Eulero dell'esponenziale: 
+Si integra per separazione delle variabili, e si semplifica $z$, ottenendo la rappresentazione di Eulero dell'esponenziale: 
 \begin{gather*}
     \displaystyle\int_{z(0)}^{z(\theta)}\frac{dz}{z}=\int_{0}^{\theta}jd\theta\\
     \ln\left(\displaystyle\frac{z(\theta)}{|z|}\right)=j\theta\\
@@ -5104,7 +5103,7 @@ valore massimo della forzante.
     e(t)=E_m\sin(\omega t+\alpha)=\displaystyle\frac{E_m}{2j}\left[e^{j(\omega t+\alpha)}-e^{-j(\omega t +\alpha)}\right]\\
     e(t)=\displaystyle\frac{E_m}{2j}\left[e^{j\omega t}e^{j\alpha}-e^{-j\omega t}e^{-j\alpha}\right]
 \end{gather*}
-Si definisce il fasore, in elettrotecnia, della data forzante, come il numero complesso:
+Si definisce il fasore, in elettrotecnica, della data forzante, come il numero complesso:
 \begin{gather*}
     \overline{E}=\displaystyle\frac{E_m}{2j}e^{j\alpha}
 \end{gather*}
@@ -5147,7 +5146,7 @@ Essendo presente un'unica maglia, si può applicare direttamente il principio di
     E=RC\displaystyle\frac{dv_C}{dt}+LC\frac{d^2v_C}{dt^2}+v_C
 \end{gather*}
 L'aggiunta di un elemento con memoria corrisponde ad un aumento dell'ordine dell'equazione differenziale del sistema. 
-Per calcolare la soluzione $v_C(t)$, si considera prima l'integrale generale $v_{Cg}(t)$, esprimendo l'equazione omogenea associata. In seguito tramite la variabile ausialiaria 
+Per calcolare la soluzione $v_C(t)$, si considera prima l'integrale generale $v_{Cg}(t)$, esprimendo l'equazione omogenea associata. In seguito tramite la variabile ausiliaria 
 $\alpha$, si esprime l'equazione caratteristica:
 \begin{gather*}
     LC\frac{d^2v_C}{dt^2}+RC\displaystyle\frac{dv_C}{dt}+v_C=0\\
@@ -5255,7 +5254,7 @@ Poiché non sono presenti oscillazioni che cambiano il segno delle grandezze, il
 
 \subsubsection{Caso Sottosmorzato}
 Considerando un valore di resistenza $R_2<R_{cr}$, valore subcritico, le radici $\alpha_{1,2}$ sono complesse, così come le costanti $k_1$ e $k_2$. Queste costanti sono anch'essi 
-complessi e coiungati $k_1=k_2^*$. Per dimostrare che sono coniugati, in ogni caso simile:
+complessi e coniugati $k_1=k_2^*$. Per dimostrare che sono coniugati, in ogni caso simile:
 \begin{gather*}
     \begin{cases}
         v_C(0^-)-E=k_1+k_2\\
@@ -5353,7 +5352,7 @@ Mentre le costanti $k_1$ e $k_2$ sono:
 
 \subsubsection{Caso Oscillatorio Puro}
 
-Il quarto caso corrisponde ad inserire un resistore di resistenza nulla $R=0\,\Omega$, e corrisponed ad un circuito LC serie:
+Il quarto caso corrisponde ad inserire un resistore di resistenza nulla $R=0\,\Omega$, e corrisponde ad un circuito LC serie:
 \begin{gather*}
     v_C(t)=L\displaystyle\frac{di}{dt}+v_C=LC\frac{d^2v_C}{dt}+v_C\\
     i(t)=C\displaystyle\frac{dv_C}{dt}\\
@@ -5415,7 +5414,6 @@ Attuando lo stesso procedimento del caso sottosmorzato, si ottiene una sinusoide
 Per cui eccitare in continuo un circuito puramente reattivo, con componenti induttori e condensatori, senza componenti smorzati produce un oscillazione. 
 
 \subsubsection{Andamenti del Circuito RLC}
-%% graficare i quattro casi per la tensione e tre per la corrente
 %Si considera un circuito con le seguenti grandezze:
 %\begin{gather*}
 %    v_C(0^-)=0\,V\\
@@ -5448,7 +5446,7 @@ Si considera l'andamento del caso sovrasmorzato, la curva di colore nero, il cas
         \draw[black]plot[smooth, domain=0:2.8](\x,{1-e^(-1.3*\x)});
     \end{tikzpicture}
 \end{center}
-Si considerano inoltre i tre andamenenti possibili della corrente nel caso sovrasmorzato, rappresentato dalla curva di colore nero, nel caso sottosmorzato, 
+Si considerano inoltre i tre andamenti possibili della corrente nel caso sovrasmorzato, rappresentato dalla curva di colore nero, nel caso sottosmorzato, 
 rappresentato dalla curva di colore rosso, ed il caso critico, rappresentato dalla curva di colore blu. 
 \begin{align*}
     &i(t)^{(1)}=C\alpha_1k_1e^{\alpha_1t}+C\alpha_2k_2e^{\alpha_2t}\\
@@ -5565,7 +5563,7 @@ di colore blu:
 \subsection{Dominio dei Fasori}
 
 Continuare l'analisi nel dominio del tempo può rendere difficile lo studio di equazioni integro-differenziali di ordine elevato, per cui si vuole determinare un domino dove 
-queste equazioni vengono risolte in maniare molto più semplice. Questo domini di calcolo sono il domino dei fasori o domino della frequenza o della pulsazione. Si considera 
+queste equazioni vengono risolte in maniera molto più semplice. Questo domini di calcolo sono il domino dei fasori o domino della frequenza o della pulsazione. Si considera 
 un generatore di tensione sinusoidale inserito in un circuito RLC in serie:
 \begin{center}
     \begin{circuitikz}
@@ -5582,7 +5580,7 @@ Dove la tensione erogata dal generatore è una funzione sinusoidale:
     v_g(t)=E_M\sin(\omega t+\gamma)u_{-1}(t)
 \end{gather*}
 Per il principio di Kirchhoff alle tensioni si ottiene la stessa equazione differenziale di un circuito RLC con tensione erogata costante. L'unico componente della soluzione 
-totale della tensione che differeisce è l'integrale particoalre, poiché deve appartenere alla stessa classe delle funzioni della forzante:
+totale della tensione che differisce è l'integrale particolare, poiché deve appartenere alla stessa classe delle funzioni della forzante:
 \begin{gather*}
     \begin{cases}
         v_g(t)=Ri(t)+\displaystyle L\frac{di(t)}{dt}+v_C(t)\\
@@ -5610,7 +5608,7 @@ Per la proprietà di similarità l'integrale particolare è anch'esso una sinuso
     v_{Cp}(0^-)=V_M\sin(\theta)
 \end{gather*}
 Le costanti incognite di questo integrale particolare sono la tensione massima $V_M$ e la sua fase $\theta$. Il resto dell'analisi sull'andamento dell'integrale generale 
-corrisponde esattamente all'analisi effetuttata per una forzante costante. Poiché l'evoluzione libera tende a valori trascurabili, in un sistema asintoticamente stabile, per 
+corrisponde esattamente all'analisi effettuata per una forzante costante. Poiché l'evoluzione libera tende a valori trascurabili, in un sistema asintoticamente stabile, per 
 valori di tempo sufficientemente elevati. 
 %% inserire grafico se possibile
 %L'andamento di un circuito RLC serie corrisponde alle curve qui rappresentando il caso sovrasmorzato, con la curva di colore nero, 
@@ -5654,7 +5652,7 @@ teorema di Ohm solo sulla risposta a regime. Si vuole esprimere la tensione risp
 \end{gather*}
 Poiché si analizzano un tempo molto distante dello stato transitorio, non si può considerare la memoria $v_C(0^-)$. Per ottenere una sinusoide non bisogna quindi effettuare 
 un integrale definito poiché risulterebbe in una costante, ma per la similarità la risposta forzata deve essere una sinusoide. 
-Si esprimono la corrente a regime e la tensione erogata nel dominio dei fasori. Questa trasformata è bionivoca, e l'unica informazione persa da questo passaggio, che deve 
+Si esprimono la corrente a regime e la tensione erogata nel dominio dei fasori. Questa trasformata è biunivoca, e l'unica informazione persa da questo passaggio, che deve 
 essere nota a priori per ritornare in tempo continuo è la pulsazione $\omega$:
 \begin{gather*}
     i_p(t)=\displaystyle\frac{\overline{I}e^{j\omega t}-\overline{I}^*e^{-j\omega t}}{2j}\\
@@ -5691,7 +5689,7 @@ $z$ in forma esponenziale:
     E_Me^{j\gamma}=|z|e^{j\varphi}I_Me^{j\beta}\\
     I_Me^{j\beta}=\displaystyle\frac{E_M}{|z|}\frac{e^{j\gamma}}{e^{j\phi}}=\frac{E_M}{|z|}e^{j(\gamma-\varphi)}
 \end{gather*} 
-Si ottiene quindi l'integrale particolare in corrente, applicando una sostituzione dal domnio dei fasori al dominio del tempo:
+Si ottiene quindi l'integrale particolare in corrente, applicando una sostituzione dal dominio dei fasori al dominio del tempo:
 \begin{gather*}
     i_p(t)=\displaystyle\frac{E_M}{|z|}\sin(\omega t+\gamma-\varphi)
 \end{gather*}
@@ -5699,7 +5697,7 @@ Dato che tutta l'informazione del regime permanente è contenuta nei fasori, non
 
 \subsection{Impedenza}
 
-Si definisce quindi la legge di Ohm complessa, o lege di Ohm nel dominio dei fasori:
+Si definisce quindi la legge di Ohm complessa, o legge di Ohm nel dominio dei fasori:
 \begin{gather*}
     \overline{V_g}=z\overline{I}
 \end{gather*}
@@ -5713,7 +5711,7 @@ Nell'equazione di Ohm nei reali, le grandezze sono collegate dalla resistenza $R
     v=Ri
 \end{gather*}
 Si definisce l'impedenza $z$, la grandezza che lega la tensione e la corrente nella legge di Ohm complessa, poiché le grandezze fisiche si conservano nei trasferimenti di 
-dominii sempre calcolata in Ohm. 
+dominio sempre calcolata in Ohm. 
 Tramite le impedenze si possono descrivere circuiti dinamici tramite relazioni lineari, definite dalle impedenze di ogni elemento del circuito con la legge di Ohm complessa, 
 supponendo si conosca la pulsazione della sinusoide in entrata. 
 Si definisce l'ammettenza, il reciproco dell'impedenza:
@@ -5761,7 +5759,7 @@ Si considerano due componenti RL e RC in parallelo:
         \draw (4,2) to[short](4,0);
     \end{circuitikz}
 \end{center}
-Collegati ad un generatore di tensione che varia tra due pulsazioni $\omega_{1,2}$. Per arrivare al valore di un'impedenza equvialente $R_{eq}+jX_{eq}$ si considerano due 
+Collegati ad un generatore di tensione che varia tra due pulsazioni $\omega_{1,2}$. Per arrivare al valore di un'impedenza equivalente $R_{eq}+jX_{eq}$ si considerano due 
 casi estremi:
 \begin{gather*}
     \omega_1=0\\
@@ -5771,7 +5769,7 @@ Nel caso $\omega_1$, la corrente non può passare per il condensatore $C$, poich
 \begin{gather*}
     I_{M_1}=\displaystyle\frac{E_M}{R_1}
 \end{gather*}
-Nel caso $\omega_2$, la corrente non può passare per l'induttore $L$, poiché presneta un'impedenza infinita, quindi la corrente ha ampiezza massima:
+Nel caso $\omega_2$, la corrente non può passare per l'induttore $L$, poiché presenta un'impedenza infinita, quindi la corrente ha ampiezza massima:
 \begin{gather*}
     I_{M_2}=\displaystyle\frac{E_M}{R_2}
 \end{gather*}
@@ -5852,11 +5850,11 @@ L'oggetto fasore moltiplicato per l'esponenziale complesso corrisponde ad un vet
     \overline{V}e^{j\omega t}=V_Me^{j(\omega t+\gamma)}\\
     \overline Ie^{j\omega t}=I_Me^{j(\omega t+\beta)}
 \end{gather*}
-Il fasore codifica l'informazione a pulsazione costante, se fossero presenti più di una sorgente con pulsazione $\omega'\neq\omega$, i fasori non manterebbero il rapporto di 
+Il fasore codifica l'informazione a pulsazione costante, se fossero presenti più di una sorgente con pulsazione $\omega'\neq\omega$, i fasori non manterrebbero il rapporto di 
 fase tra di loro; ruoterebbero con velocità diverse tra di loro. Questo non permetterebbe di sommare tra di loro fasori a pulsazione diversa, se non ad un istante fisso. 
 
 I generatori analizzati sono isofrequenziali, proprietà richiesta a tutti i generatori sinusoidali di avere la stessa pulsazione $\omega=2\pi f$. 
-Per un lato passivo RLC si è precedentemente ottenuta la legge di Ohm complessa, legata dall'operatore compelsso $z$, identificato come impedenza: 
+Per un lato passivo RLC si è precedentemente ottenuta la legge di Ohm complessa, legata dall'operatore complesso $z$, identificato come impedenza: 
 \begin{gather*}
     \overline V=z\overline I
 \end{gather*}
@@ -5864,12 +5862,12 @@ Si ottiene quindi che il modulo di questo operatore equivale al rapporto tra i d
 \begin{gather*}
     |z|=\displaystyle\frac{V_M}{I_M}\,[\Omega]
 \end{gather*}
-Nel caso trattato l'impedenza corrisponde ad una parte reale resitenza $R$ ed una parte immaginaria reattanza $X$:
+Nel caso trattato l'impedenza corrisponde ad una parte reale resistenza $R$ ed una parte immaginaria reattanza $X$:
 \begin{gather*}
     z=R+j\left(\displaystyle\omega L-\frac{1}{\omega C}\right)
 \end{gather*}
 
-In questo caso la parte reale dell'impedenza è immune alla pulsaazione $\omega$, ma è stato notato come in circuiti più complessi la parte reale può essere una funzione della 
+In questo caso la parte reale dell'impedenza è immune alla pulsazione $\omega$, ma è stato notato come in circuiti più complessi la parte reale può essere una funzione della 
 pulsazione. Per cui di regola la parte reale ed immaginaria dell'impedenza dipendono dalla pulsazione:
 \begin{gather*}
     \Re\{z\}=f(\omega)\\
@@ -5878,8 +5876,8 @@ pulsazione. Per cui di regola la parte reale ed immaginaria dell'impedenza dipen
 
 
 Quando si vuole indicare l'impedenza come une un elemento generico, si ritorna alla rappresentazione di bipolo. In forma Thevenin equivalente di una rete, alternata 
-sinusodale, l'impedenza equivalente $z_{th}$ è l'impedenza misurata dopo aver reso passiva la rete. Per attuare il metodo dell'amperometro, bisogna inseire dall'esterno un 
-fasore noto, sinusoidale e isofrequente. 
+sinusoidale, l'impedenza equivalente $z_{th}$ è l'impedenza misurata dopo aver reso passiva la rete. Per attuare il metodo dell'amperometro, bisogna inserire dall'esterno un 
+fasore noto, sinusoidale e isofrequenziale. 
 \begin{center}
     \begin{circuitikz}
         \draw (2,0)node[right]{$B$}to[short](0,0)
@@ -5894,7 +5892,7 @@ Si è poi definita l'ammettenza, l'inverso dell'impedenza:
     G=\displaystyle\frac{R}{R^2+X^2}\\
     B=-j\displaystyle\frac{X}{R^2+X^2}
 \end{gather*}
-La dimensione dell'ammettenza deriva dalla stessa legge di Ohm complessa, ed il suo modulo corrisponde al rapporot tra i due picchi di grandezze:
+La dimensione dell'ammettenza deriva dalla stessa legge di Ohm complessa, ed il suo modulo corrisponde al rapporto tra i due picchi di grandezze:
 \begin{gather*}
     \overline{I}=y\overline{V}\\
     |y|=\displaystyle\frac{I_M}{V_M}\,[\Omega^{-1}]
@@ -5902,15 +5900,15 @@ La dimensione dell'ammettenza deriva dalla stessa legge di Ohm complessa, ed il 
 
 \subsection{Risposta Armonica}
 
-Si considera un circuito RLC serie, con genreatori sempre isofrequenti, esprimendo l'impedenza in funzione della pulsazione:
+Si considera un circuito RLC serie, con generatori sempre isofrequenziali, esprimendo l'impedenza in funzione della pulsazione:
 \begin{gather*}
     z(\omega)=R+j\displaystyle\left(\omega L-\frac{1}{\omega C}\right)\\
     |z(\omega)|=\displaystyle\sqrt{R^2+\left(\omega L-\frac{1}{\omega C}\right)^2}\\
     \varphi(\omega)=\arctan\left(\displaystyle\frac{\displaystyle\omega L-\frac{1}{\omega C}}{R}\right)
 \end{gather*}
 Si somma alla fase un fattore $\pi$, in alcuni casi, per mantenere la continuità della funzione. Si esprime la variazione dei valori dell'impedenza, al variare della 
-pulsazione. Si considera l'effetto di ogni componente singolarmente. La parte reale di modulo è sempre costante in questo caso ripspetto alla pulsazione, quindi il suo 
-contributo è costante, mentre il suo contributo alla fase rimane nullo, poiché è puramente reale. L'induttore contribuise linearmente all'aumento del modulo, mentre presenta 
+pulsazione. Si considera l'effetto di ogni componente singolarmente. La parte reale di modulo è sempre costante in questo caso rispetto alla pulsazione, quindi il suo 
+contributo è costante, mentre il suo contributo alla fase rimane nullo, poiché è puramente reale. L'induttore contribuisce linearmente all'aumento del modulo, mentre presenta 
 sempre uno sfasamento di $\pi/2$. Il condensatore presenta un andamento iperbolico nel modulo, mentre presenta una sfasatura costante di $-\pi/2$
 \begin{center}
     \begin{tikzpicture}[scale=2]
@@ -5936,7 +5934,7 @@ sempre uno sfasamento di $\pi/2$. Il condensatore presenta un andamento iperboli
 \end{center}
 
 
-Si individua il punto di interesezione delle curve dell'andamento del modulo del solo condensatore e del solo induttore $\omega_0$:
+Si individua il punto di intersezione delle curve dell'andamento del modulo del solo condensatore e del solo induttore $\omega_0$:
 \begin{gather*}
     \displaystyle\frac{1}{\omega_0C}=\omega_0L\\
     \omega_0=\displaystyle\sqrt{\frac{1}{LC}}
@@ -5960,16 +5958,16 @@ La fase corrispondente alla pulsazione di risonanza è nulla. Per pulsazioni min
 l'unico contributo di fase non nullo è fornito dalla capacità e corrisponde ad una fase di $\pi/2$. Mentre per pulsazioni maggiori di della pulsazione di risonanza, 
 il circuito presenta un comportamento ohmico-induttivo, e per valori di pulsazioni tendenti all'infinito, la fase tende asintoticamente alla fase dell'induttore $\pi/2$. 
 In assenza di una resistenza, ci si trova in una situazione di cortocircuito, corrispondente ad un generatore di corrente nulla, ma non si può montare in serie ad un 
-generatore di tensione, per cui non si potrebbe parlare del caso $\omega=\omega_0$ con una resistenza nulla. Per $R=0$, per pulsazioni minodi di $\omega_0$ il circuito 
-si comporta come un condensatore puro, e la fasa rimane costante al contributo del condensatore $-\pi/2$. Analogamente per $R=0$ e $\omega>\omega_0$ si avrebbe un 
-comprotamento induttivo, in questo caso si avrebbe un valore di induttanza equivalente misurato, e la fase rimane costante al valore della fase dell'induttore $\pi/2$. 
+generatore di tensione, per cui non si potrebbe parlare del caso $\omega=\omega_0$ con una resistenza nulla. Per $R=0$, per pulsazioni minori di $\omega_0$ il circuito 
+si comporta come un condensatore puro, e la fase rimane costante al contributo del condensatore $-\pi/2$. Analogamente per $R=0$ e $\omega>\omega_0$ si avrebbe un 
+comportamento induttivo, in questo caso si avrebbe un valore di induttanza equivalente misurato, e la fase rimane costante al valore della fase dell'induttore $\pi/2$. 
 Il comportamento della fase per $R=0$, corrisponde ad un gradino con una discontinuità nella pulsazione $\omega=\omega_0$, mentre mantenendo i valori di induttanza e capacità 
 costanti e variando la resistenza, all'aumentare di R la curva della fase si allontana dall'andamento a $R=0$, mentre al diminuire di R la curva si avvicina. 
 
 
 %% in teoria corretti, per la dualità, ma ricontrollare
 Si può attuare un'analisi duale per un circuito RLC parallelo, in questo caso si analizza invece che l'impedenza l'ammettenza $y$, e la sua fase $\alpha$. Valgono le stesse 
-considerazioni ottenute per il circuito RLC serie, ma sono invertiti i comprotamenti ohmico induttivi e capacitivi, poiché si inverte il ruolo della capacità e dell'induttanza 
+considerazioni ottenute per il circuito RLC serie, ma sono invertiti i comportamenti ohmico induttivi e capacitivi, poiché si inverte il ruolo della capacità e dell'induttanza 
 dal passaggio da circuiti RLC serie a RLC parallelo, e viceversa. 
 \begin{gather*}
     y(\omega)=G+j\displaystyle\left(\omega C-\frac{1}{\omega L}\right)\\
@@ -6040,8 +6038,8 @@ mentre l'altra costante:
     P=\displaystyle\frac{1}{2}V_MI_M\cos\varphi
 \end{gather*}
 Si definisce il primo componente , variante nel tempo, potenza fluttuante $p_f(t)$ di pulsazione doppia rispetto alla pulsazione di corrente e tensione di lato, mentre la seconda 
-componente costante, potenza attiva $P$ del lato. Si definisce il compomente $\cos\varphi$ fattore di potenza che indica quale percentuale della potenza apparente, prodotto 
-tra la lettura del volmetro e dell'amperometro, viene ad essere convertita in potenza attiva. 
+componente costante, potenza attiva $P$ del lato. Si definisce il componente $\cos\varphi$ fattore di potenza che indica quale percentuale della potenza apparente, prodotto 
+tra la lettura del voltmetro e dell'amperometro, viene ad essere convertita in potenza attiva. 
 Poiché il lato è passivo, la potenza non potrà mai essere negativa, nella convenzione dei generatori, poiché non può erogare potenza. Per cui la potenza attiva corrisponde 
 ai minimi valori assunti dalla potenza fluttuante, per ottenere una potenza sempre positiva. 
 Si definisce il periodo di un'oscillazione $T=2\pi/\omega$, e data la precedente considerazione si può esprimere la potenza attiva come il valore medio della potenza 
@@ -6085,7 +6083,7 @@ Si esprimono i fasori tramite i valori efficaci di tensione e corrente, invece d
         \overline{I}=\displaystyle\frac{I_{M}}{\sqrt{2}}e^{j\beta}=I_{eff}e^{j\beta}\implies I=I_{eff}
     \end{cases}
 \end{gather*}
-Si consdiera per semplicità $V$ e $I$ il modulo dei fasori corrispondenti. 
+Si considera per semplicità $V$ e $I$ il modulo dei fasori corrispondenti. 
 Si esprime la potenza attiva mediante questi nuovi fasori: 
 \begin{gather*}
     P=\displaystyle\frac{1}{2}V_MI_M\cos\varphi=\frac{1}{2}V_{eff}\sqrt{2}\,I_{eff}\sqrt{2}\cos\varphi=V_{eff}I_{eff}\cos\varphi
@@ -6115,7 +6113,7 @@ Si definisce questo prodotto tra i due fasori efficaci potenza complessa:
     \dot P_C=\overline{V}\overline{I}^*
 \end{gather*}
 La potenza reattiva può essere positiva o negativa sulla base della natura capacitiva o induttiva della reattanza. 
-Dove il modulo della potenza complessa corrisponde alla potenza apparente, il prodotto tra i valori efficaci delle due letture del volmetro e dell'amperometro, ma non forniscono 
+Dove il modulo della potenza complessa corrisponde alla potenza apparente, il prodotto tra i valori efficaci delle due letture del voltmetro e dell'amperometro, ma non forniscono 
 informazioni sulla fase, che indica quanta parte viene trasformata in potenza attiva e quanta in potenza reattiva, che rimane interna al circuito, usata come potenza di 
 calcolo per determinare il valore dello sfasamento tra tensione e corrente $\varphi$: 
 \begin{gather*}
@@ -6162,7 +6160,7 @@ In un resistore i fasori sono in fase, per cui la potenza attiva corrisponde all
     Q=0
 \end{gather*}
 
-Si considera un condesatore nella convenzione degli utilizzatori: 
+Si considera un condensatore nella convenzione degli utilizzatori: 
 \begin{center}
     \begin{circuitikz}
         \draw (0,0)to[C,i=$\overline{I}$,*-*](2,0);
@@ -6175,7 +6173,7 @@ La sua impedenza ha un'argomento di $-\pi/2$, poiché la tensione è in quadratu
     P=VI\cos\varphi=0\\
     Q=VI\sin\varphi=-|\dot P_C|
 \end{gather*}
-In questo caso la potenza attiva è nulla, e la potenza reattiva è negativa e corisponde alla potenza apparente. 
+In questo caso la potenza attiva è nulla, e la potenza reattiva è negativa e corrisponde alla potenza apparente. 
 \begin{gather*}
     X_C=\displaystyle-\frac{1}{\omega C}\implies Q<0
 \end{gather*} 
@@ -6237,7 +6235,7 @@ Per dualità un lato ohmico-induttivo, nella convenzione degli utilizzatori, ero
     Q=\omega LI^2
 \end{gather*}
 Da notare che un circuito RLC serie corrisponde ad una di questi due lati in base alla pulsazione della forzante sinusoidale in entrata, per cui le grandezze di capacità ed 
-induttanza presenti corrispondno a grandezze equivalenti dall'esterno, mentre la resistenza corrisponde alla stessa resistenza del circuito RLC. 
+induttanza presenti corrispondono a grandezze equivalenti dall'esterno, mentre la resistenza corrisponde alla stessa resistenza del circuito RLC. 
 
 
 In generale in un modello di una macchina elettrica monofase, per trasformare una potenza elettrica in meccanica, bisogna considerare che la potenza trasferita alla macchina 
@@ -6263,7 +6261,7 @@ circuito dinamico, accessibile dall'esterno da due morsetti:
     \end{circuitikz}
 \end{center}
 
-Si vuole determinare la massima potenza attiva estrabile da un qualsiasi circuito dinamico, in funzione dell'impedenza. Tutto ciò che è stato tratato nelle reti adinamiche 
+Si vuole determinare la massima potenza attiva estraibile da un qualsiasi circuito dinamico, in funzione dell'impedenza. Tutto ciò che è stato trattato nelle reti adinamiche 
 può essere riportato in una situazione dinamica nel dominio di fasori considerando impedenze e generatori dinamici. Per cui si può esprimere un qualsiasi circuito 
 tramite il teorema di Thevenin a regime sinusoidale, con un generatore di tensione sinusoidale che presenta un fasore di tensione $\overline{E}_th$ equivalente al fasore 
 di tensione misurato a vuoto tra i due morsetti $\overline{V}_{AB0}$, ed un'impedenza equivalente $z_{eq}$, misurata rendendo passiva la rete. Si considera quindi un'impedenza 
@@ -6304,7 +6302,7 @@ Se si analizzasse solamente in ambiente matematico, poiché è una funzione a du
     \end{cases}
 \end{gather*}
 
-Invece ci si può avvalere in ambito elettrotecnico dello stesso ragionamento effettuato per determinare il massimo trasferimeto di potenza in una rete adinamica. Si 
+Invece ci si può avvalere in ambito elettrotecnico dello stesso ragionamento effettuato per determinare il massimo trasferimento di potenza in una rete adinamica. Si 
 considera il massimo della potenza quando si ha massimizzato la corrente, a parità di resistenza. Per tornare a questa situazione analoga, bisogna diminuire il contributo 
 della reattanza $X$. Per cui si considera la reattanza di carico:
 \begin{gather*}
@@ -6312,7 +6310,7 @@ della reattanza $X$. Per cui si considera la reattanza di carico:
     X_{tot}=0
 \end{gather*}
 Avendo una reattanza nulla ci si trova in una condizione di risonanza. Per cui si inserisce un'impedenza esterna per risonare il circuito. Questa è quindi la prima 
-condizione per il teorema. In questa situaizone dove il circuito si comporta come una rete adinamica, vale il teorma del massimo trasferimento di potenza, dimostratato 
+condizione per il teorema. In questa situazione dove il circuito si comporta come una rete adinamica, vale il teorema del massimo trasferimento di potenza, dimostrato 
 per le reti adinamiche $R_C=R_{eq}$. 
 Per cui per estrarre la massima potenza da una rete dinamica bisogna inserire un'impedenza di carico pari al coniugato dell'impedenza equivalente del circuito:
 \begin{gather*}
@@ -6433,7 +6431,7 @@ trasferimento $F$:
 \end{equation}
 
 
-Data una funzione nel tempo $f$ e la sua trasformata $F$, si può esprimere la trasformata della funzione originiaria ritardata di un fattore $t_0$ mediante 
+Data una funzione nel tempo $f$ e la sua trasformata $F$, si può esprimere la trasformata della funzione originaria ritardata di un fattore $t_0$ mediante 
 la funzione $F$. 
 \begin{gather*}
     y(t)=f(t-t_0)u_{-1}(t-t_0)\\
@@ -6441,7 +6439,7 @@ la funzione $F$.
     \tau=t-t_0\\
     \displaystyle\int_{0}^{+\infty}f(\tau)e^{-s(\tau+t_0)}d\tau=e^{-st_0}\int_0^{+\infty}f(\tau)e^{-s\tau}d\tau=e^{-st_0}F(s)
 \end{gather*}
-Per cui la trasformata di una funzione $f$ ritardata nel tempo corrisponde alla trasforamta della funzione $f$ moltiplicata per un esponenziale complesso di argomento $t_0$:
+Per cui la trasformata di una funzione $f$ ritardata nel tempo corrisponde alla trasformata della funzione $f$ moltiplicata per un esponenziale complesso di argomento $t_0$:
 \begin{equation}
     \mathcal{L}\{f(t-t_0)u_{-1}(t-t_0)\}=e^{-st_0}F(s)
 \end{equation}
@@ -6489,7 +6487,7 @@ Si considerano queste grandezze nel dominio di Laplace:
     R_2=6\,\Omega\\
     R_3=6\,\Omega
 \end{gather*}
-La tensione ai capi del condesnatore si esprime considerando un generatore di tensione per la memoria:
+La tensione ai capi del condensatore si esprime considerando un generatore di tensione per la memoria:
 \begin{gather}
     C=0.05\,F\\
     z_C(s)=\displaystyle\frac{1}{sC}\\
@@ -6505,7 +6503,7 @@ Si applica il metodo dei nodi in questo circuito:
 
 \subsection{RLC Serie in Laplace}
 
-Si applicano queste prorpietà nell'analisi di un circuito RLC serie:
+Si applicano queste proprietà nell'analisi di un circuito RLC serie:
 \begin{center}
     \begin{circuitikz}
         \draw(-1,0) to[short,i=$i(t)$,*-](0,0)
@@ -6542,7 +6540,7 @@ L'argomento della funzione esponenziale deve essere adimensionale, per cui la va
     [s]=\displaystyle\frac{1}{[t]}=s^{-1}=Hz
 \end{gather*}
 
-Si vuole determinare la dimensione delle grandezze nel dominio di Laplace, per cui si conisderano i componenti singolarmente. Dato un solo induttore nell convenzione degli 
+Si vuole determinare la dimensione delle grandezze nel dominio di Laplace, per cui si considerano i componenti singolarmente. Dato un solo induttore nella convenzione degli 
 utilizzatori si ottiene la seguente espressione:
 %% circuito
 \begin{gather*}
@@ -6567,7 +6565,7 @@ Per cui la grandezza dell'impedenza nel dominio di Laplace si ottiene come il ra
 \begin{gather*}
     [z]=\displaystyle\frac{V\cdot s}{A\cdot s}=\Omega
 \end{gather*}
-Per cui si può considerare il componente $z(s)$ un'impedenza, poiché mantiente la sua grandezza nel trasferimento dal tempo continuo al dominio di Laplace. Mentre la tensione 
+Per cui si può considerare il componente $z(s)$ un'impedenza, poiché mantiene la sua grandezza nel trasferimento dal tempo continuo al dominio di Laplace. Mentre la tensione 
 e la corrente cambiano le loro dimensioni nel dominio di Laplace. 
 
 
@@ -6611,7 +6609,7 @@ Per un induttore:
     v=\displaystyle L\frac{di}{dt}\to V(s)=sLI(s)-Li(0^-)\\
     i=\displaystyle\frac{1}{L}\int_{0^-}^tvd\tau+i(0^-)\to I(s)=\frac{1}{sL}V(s)+\frac{i(0^-)}{s}
 \end{gather*}
-Per cui nel dominio di Laplce corrisponde ad un lato Thevenin/Norton:
+Per cui nel dominio di Laplace corrisponde ad un lato Thevenin/Norton:
 \begin{center}
     \begin{circuitikz}
         \draw (0,0) to[short, i=$i(t)$,*-](0.5,0)
@@ -6725,17 +6723,17 @@ I valori che annullano il denominatore di una funzione nel dominio di Laplace si
 \begin{gather*}
     \displaystyle\frac{V(j\omega)}{I(j\omega)}=\displaystyle\frac{V_M\displaystyle\frac{\omega}{(j\omega)^2+\omega^2}}{I_M\displaystyle\frac{\omega}{(j\omega)^2+\omega^2}}=\frac{V_M}{I_M}
 \end{gather*}
-Per cui è leggittimo definire l'impedenza a regime come rapporto tra queste due grandezze, calcolato al valore dei poli. Questa relazione persiste anche tra due grandezze 
+Per cui è legittimo definire l'impedenza a regime come rapporto tra queste due grandezze, calcolato al valore dei poli. Questa relazione persiste anche tra due grandezze 
 sfasate di un fattore $\varphi$, in quel caso il rapporto tra le due grandezze restituisce un numero complesso. 
 
 
 Esistono quindi due rappresentazioni nel dominio dei numeri complessi per i circuiti. Il dominio dei fasori, numerico, ad una pulsazione $\omega$ fissata; ed il dominio 
 simbolico di Laplace, dove la pulsazione $\omega$ è variabile. Il passaggio da una grandezza in Laplace ad un nel dominio dei fasori, tramite la sostituzione $s=j\omega$ è 
-possible solo se $j\omega$ non rappresenta un polo nel dominio di Laplace. Dove un polo $s_p$ è definito come un valore per cui la trasformata tende a valori infiniti:
+possibile solo se $j\omega$ non rappresenta un polo nel dominio di Laplace. Dove un polo $s_p$ è definito come un valore per cui la trasformata tende a valori infiniti:
 \begin{gather*}
     \lim_{s\to s_p}F(s)=\pm\infty
 \end{gather*}
-Nella trasformata di una funzione sinusdoiale i poli sono esattamente pari a $\pm j\omega$, per cui non è possibile determinare l'espressione di una grandezza nel domino 
+Nella trasformata di una funzione sinusoidale i poli sono esattamente pari a $\pm j\omega$, per cui non è possibile determinare l'espressione di una grandezza nel domino 
 dei fasori, data la sua trasformata di Laplace, se nel tempo continuo la sua espressione a regime è una sinusoide. 
 
 \subsection{RC Serie}
@@ -6774,8 +6772,8 @@ Nei circuiti le espressioni delle grandezze si presentano sempre come frazioni t
 \begin{gather*}
     F(s)=\displaystyle\frac{N(s)}{D(s)}=\frac{a_ns^n+\cdots a_0}{b_ms^m+\cdots b_0}
 \end{gather*}
-Le frazioni si dicono proprie se il grado del denominatore è maggiore del grado del numeratore $m>n$, altrimenti se il grado del numeratore è maggiore si dicono impriorie $n>m$. 
-In caso siano improrie bisogna prima effettuare una divisione tra polinomi, ritornando una frazione propria ed polinomio.
+Le frazioni si dicono proprie se il grado del denominatore è maggiore del grado del numeratore $m>n$, altrimenti se il grado del numeratore è maggiore si dicono improprie $n>m$. 
+In caso siano improprie bisogna prima effettuare una divisione tra polinomi, ritornando una frazione propria ed polinomio.
 
 Si definiscono poli al finito di una frazione propria, dei valori di $s=s_p$ tali che la funzione in Laplace tende a valori infiniti:
 \begin{gather*}
@@ -6797,7 +6795,7 @@ ampiezza $A=v_C(0^-)$ e di costante $\alpha=-\frac{1}{RC}$, per cui la sua antit
 \begin{gather*}
     \displaystyle\frac{RC}{RC}\frac{v_C(0^-)}{s+\frac{1}{RC}}=v_C(0^-)e^{-\frac{t}{RC}}
 \end{gather*}
-Si individua un primo polo $s_p=-\frac{1}{RC}$, al finito. Con molteplicità uno. Coincide alla soluzione dell'equazione caratteristica associata all'equazione differnziale 
+Si individua un primo polo $s_p=-\frac{1}{RC}$, al finito. Con molteplicità uno. Coincide alla soluzione dell'equazione caratteristica associata all'equazione differenziale 
 omogenea del circuito. Si considera ora il primo oggetto, e si decompone in fratti semplici. Si individuano i fratti semplici di numero pari alla somma tra la molteplicità di 
 tutti i poli della frazione originaria. In questo caso sono presenti due poli, entrambi di molteplicità uno, per cui sono presenti due fratti semplici:
 \begin{gather*}
@@ -6859,7 +6857,7 @@ mentre $T_L$ è il tempo per cui assume valore nullo, la sua Laplace trasformata
     F(s)=\displaystyle\frac{1}{s}\frac{1-e^{-sT_H}}{1-e^{-sT}}
 \end{gather*}
 
-Nel caso di un onda quadra simmetrica a valor medio nullo, che alterna tra valori positivi e negativi di stessa base $T/2$, si può esprimere la sua trasformata come:
+Nel caso di un onda quadra simmetrica a valore medio nullo, che alterna tra valori positivi e negativi di stessa base $T/2$, si può esprimere la sua trasformata come:
 \begin{gather*}
     F(s)=\displaystyle\frac{1}{s}\frac{1-e^{-sT/2}}{1+e^{-sT/2}}
 \end{gather*}
@@ -6882,7 +6880,7 @@ La funzione di rete $F_R(s)$ o di trasferimento $H(s)$ è un operatore, nel caso
 \end{gather*}
 Anche l'impedenza e l'ammettenza sono due funzioni di rete, essendo il rapporto tra due grandezze, la tensione e la corrente. 
 
-Se fossero presenti dei poli instabili, ovvero a parte reale positiva, allora la tensione in uscita crescerebbe indefinitivamente, tendendo all'infinito. Il sistema sarebbe 
+Se fossero presenti dei poli instabili, ovvero a parte reale positiva, allora la tensione in uscita crescerebbe indefinitamente, tendendo all'infinito. Il sistema sarebbe 
 quindi instabile. 
 Quando si tratta della stabilità bisogna analizzare la natura dei poli della funzione di rete o di trasferimento della rete associata, in basa ad una data eccitazione. 
 Se i poli hanno parte reale negativa, allora la risposta tende a valori nulli all'infinito, quindi il sistema è asintoticamente stabile. 
@@ -6921,14 +6919,14 @@ Se il polo $s_i$ ha molteplicità $1$, allora il residuo $A_i$ associato al suo 
 
 Per un polo $s_i$ di molteplicità $\nu_i$, si determina il $k-$esimo residuo tramite la seguente espressione:
 \begin{gather*}
-    A_{ik}=\displaystyle\frac{1}{k!}\left[\frac{d^k}{ds^k}\left[(s+s_i)^{\nu_i}F(s)\right]\right]_{s=s_i}
+    A_{ik}=\displaystyle\frac{1}{(\nu_i-k)!}\left[\frac{d^{\nu_i-k}}{ds^{\nu_i-k}}\left[(s-s_i)^{\nu_i}F(s)\right]\right]_{s=s_i}
 \end{gather*}
 
 \subsubsection{Esempio Applicativo}
 
 Sia data la seguente funzione di rete con un polo di molteplicità due, determinare la sua antitrasformata: 
 \begin{gather*}
-    F(s)=\displaystyle\frac{10s+3}{(s+2)^2(s+5)}=\frac{A_1}{(s+2)^2}+\frac{A_2}{s+2}+\frac{B}{s+5}\\
+    F(s)=\displaystyle\frac{10s+3}{(s+2)^2(s+5)}=\frac{A_{11}}{(s+2)^2}+\frac{A_{12}}{s+2}+\frac{B}{s+5}\\
     \left[(s+2)^2F(s)\right]_{s=-2}=A_1+A_2(s+2)+\displaystyle\frac{B(s+2)^2}{s+5}=A_1=\frac{10(-2)+3}{(-2+5)}\\
     G(s)=(s+2)^2F(s)\\
     \displaystyle\left[\frac{dG(s)}{ds}\right]_{s=-2}=\left[\frac{10(s+5)-(10s+3)}{(s+5)^2}\right]_{s=-2}=A_2
@@ -6943,7 +6941,573 @@ Sia data la seguente funzione di rete assegnata con un polo di molteplicità tre
 
 \clearpage
 
+\section{Multiporta}
 
+\subsection{Due-Porte}
+
+Anche chiamati quadripoli o doppi bipoli, sono degli oggetti che presentano quattro correnti in entrata. Queste correnti sono tali da rispettare il primo principio di 
+Kirchhoff:
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \node[lblock](c)at(-0.25,0){};
+        \draw[->,very thick](-1.5,0.25)--(-1,0.25)node[below]{$i_3$};
+        \draw[-,very thick](-1,0.25)--(-0.5,0.25);
+        \draw[->,very thick](-1.5,0.5)--(-1,0.5);
+        \draw[-,very thick](-1,0.5)node[above]{$i_1$}--(-0.5,0.5);
+        \draw[->,very thick](-1.5,-0.25)--(-1,-0.25)node[above]{$i_2$};
+        \draw[-,very thick](-1,-0.25)--(-0.5,-0.25);
+        \draw[->,very thick](-1.5,-0.5)--(-1,-0.5)node[below]{$i_4$};
+        \draw[-,very thick](-1,-0.5)--(-0.5,-0.5);
+    \end{tikzpicture}
+\end{center}
+\begin{gather*}
+    \displaystyle\sum_{k=1}^4i_k=0
+\end{gather*}
+
+Un quadriporta presente due coppie di correnti, se ogni porta rispetta il primo principio di Kirchhoff, allora si dice due-porte o doppio bipolo:
+\begin{gather*}
+    \begin{cases}
+        i_3=-i_1\\
+        i_4=-i_2
+    \end{cases}
+\end{gather*}
+Per cui nella rappresentazione di un due-porte si omette una delle due correnti in una porta, poiché è ridondante. 
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[-,ultra thick](-0.5,-0.5)--(-0.5,0.5)--(0.5,0.5)--(0.5,-0.5)--(-0.5,-0.5);
+
+        \draw[->,very thick](-1.5,0.25)--(-1,0.25)node[above]{$i_1$};
+        \draw[-,very thick](-1,0.25)--(-0.5,0.25);
+        \draw[-,very thick](-1.5,-0.25)--(-0.5,-0.25);
+        \draw[->](-1.6,-0.25)--(-1.6,0.25)node[midway, left]{$v_1$};
+
+
+        \draw[->,very thick](1.5,0.25)--(1,0.25)node[above]{$i_2$};
+        \draw[-,very thick](1,0.25)--(0.5,0.25);
+        \draw[-,very thick](1.5,-0.25)--(0.5,-0.25);
+        \draw[->](1.6,-0.25)--(1.6,0.25)node[midway, right]{$v_2$};
+    \end{tikzpicture}
+\end{center}
+
+Nel caso di un multiporta per determinare la tensione tra un'entrata di riferimento, e le altre entrate. Mentre per un due porte, dove si usa la convenzione degli utilizzatori 
+sono presenti due tensioni alle due porte del'oggetto. Per determinare se sia un generatore o un utilizzatore si considerano 
+le potenze istantanee generate da entrambe le porte:
+\begin{gather*}
+    v_1i_1+v_2i_2=p\\
+    \displaystyle\int_{-\infty}^tp dt:\begin{cases}
+        \geq0&\mbox{passivo}\\
+        <0&\mbox{attivo}
+    \end{cases}
+\end{gather*} 
+Poiché è un oggetto a sé, sono necessarie delle leggi costitutive per il due porte:
+\begin{equation*}
+    \begin{cases}
+        f(i_1,i_2,i_3,i_4)=0\\
+        f(v_1,v_2,v_3,v_4)=0
+    \end{cases}
+\end{equation*}
+Queste espressioni vengono chiamate leggi costitutive implicite. 
+
+
+Si dice due porte bilanciato se tutte le entrate sono accoppiate ad univocamente, se invece sono presenti solo tre entrate in corrente, si chiama due-porte sbilanciato, 
+un transistor è un tipo di due-porte sbilanciato. Si può ricondurre questo due porte sbilanciato ad un due porte bilanciato, considerando il resto del circuito connesso 
+ad una delle entrate. Ciò che verrà identificato in seguito come una rappresentazione stella. 
+
+
+Per i multiporta vengono fornite sette diverse rappresentazioni esplicite, le leggi costitutive esplicite di un multiporta vengono rappresentate in forma matriciale. Si elencano 
+le rappresentazioni di due-porte, senza le rappresentazioni a parametri indiretti ed a parametri $S$ ("Scattering"), usata nello studio dei campi e per le guide d'onda:
+
+\subsubsection{Rappresentazione a Parametri Z}
+
+\begin{gather*}
+    \begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}=\begin{bmatrix}
+        z_{11}&z_{12}\\z_{21}&z_{22}
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}\\
+    V_1=z_{11}I_1+z_{12}I_2\\
+    V_2=z_{21}I_1+z_{22}I_2
+\end{gather*}
+Le grandezze vengono espresse nel dominio di Laplace o dei fasori, per considerare le relazioni integro-differenziali tramite combinazioni lineari. Viene anche chiamata 
+rappresentazione controllata in corrente. 
+
+Una delle rappresentazioni più comuni di un due-porte si ottiene tramite generatori controllati, in una rappresentazione Thevenin, che tengono conto del contributo dell'altra 
+porta:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,2) to[short,i=$I_1$,-*](1,2);
+        \draw (3,2) to[generic=$z_{11}$](1,2);
+        \draw (0,0) to[short,-*](1,0)
+                    to[short](3,0) 
+                    to[european controlled voltage source=$z_{12}I_2$](3,2);
+
+        \draw (8.2,2) to[short,i=$I_2$,-*](7.2,2)
+                    to[generic=$z_{11}$](5.2,2);
+        \draw (8.2,0) to[short,-*](7.2,0)
+                    to[short](5.2,0) 
+                    to[european controlled voltage source=$z_{12}I_2$](5.2,2);
+
+        \draw[very thick](1.2,2.25)--(1.2,-0.25)--(7,-0.25)--(7,2.25)--(1.2,2.25);
+
+        \draw[->](-0.25,0)--(-0.25,2)node[midway, left]{$V_1$};
+        \draw[->](8.25,0)--(8.25,2)node[midway, right]{$V_2$};
+    \end{circuitikz}
+\end{center}
+
+Le due porte sono speculari tra di loro, poiché le grandezze controllate sono omogenee. 
+
+\subsubsection{Rappresentazione a Parametri Y}
+
+\begin{gather*}
+    \begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}=\begin{bmatrix}
+        y_{11}&y_{12}\\y_{21}&y_{22}
+    \end{bmatrix}\begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}\\
+    I_1=y_{11}V_1+y_{12}V_2\\
+    I_2=y_{21}V_1+y_{22}V_2
+\end{gather*}
+
+Si indica anche come rappresentazione controllata in tensione. 
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (1,2)to[short,i=$I_1$,-*](2,2)
+                    to[short](3,2);
+        \draw (3,0) to[generic=$y_{11}$](3,2);
+        \draw (3,0) to[short,-*](2,0)
+                    to[short](1,0);
+        \draw (3,2) to[short](4,2)
+                    to[european controlled current source=$y_{12}V_2$](4,0)
+                    to[short](3,0);
+
+        \draw (9,2)to[short,i=$I_2$,-*](8,2)
+                    to[short](7,2)
+                    to[generic=$y_{22}$](7,0)
+                    to[short,-*](8,0)
+                    to[short](9,0);
+        \draw (7,2) to[short](6,2)
+                    to[european controlled current source=$y_{21}V_1$](6,0)
+                    to[short](7,0);
+
+        \draw[very thick](2.2,2.25)--(2.2,-0.25)--(7.8,-0.25)--(7.8,2.25)--(2.2,2.25);
+
+        \draw[->](0.75,0)--(0.75,2)node[midway, left]{$V_1$};
+        \draw[->](9.25,0)--(9.25,2)node[midway, right]{$V_2$};
+    \end{circuitikz}
+\end{center}
+
+\subsubsection{Rappresentazione a Paremtri Ibridi (Diretti) H}
+
+Ogni elemento della matrice presenta una sua unità di misura, per cui non può essere costruita a priori. 
+\begin{gather*}
+    \begin{bmatrix}
+        V_1\\I_2
+    \end{bmatrix}=\begin{bmatrix}
+        h_{11}&h_{12}\\h_{21}&h_{22}
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\V_2
+    \end{bmatrix}\\
+    \begin{cases}
+        [h_{11}]=\Omega\\
+        [h_{12}]=1\\
+        [h_{21}]=1\\
+        [h_{22}]=\Omega^{-1}
+    \end{cases}\\
+    V_1=h_{11}I_21+h_{12}V_2\\
+    I_2=h_{21}I_1+h_{22}V_2
+\end{gather*}
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,2) to[short,i=$I_1$,-*](1,2);
+        \draw (3,2) to[generic=$h_{11}$](1,2);
+        \draw (0,0) to[short,-*](1,0)
+                    to[short](3,0) 
+                    to[european controlled voltage source=$h_{12}V_2$](3,2);
+        \draw[->](-0.25,0)--(-0.25,2)node[midway, left]{$V_1$};
+
+        \draw (8,2)to[short,i=$I_2$,-*](7,2)
+                    to[short](6,2)
+                    to[generic=$h_{22}$](6,0)
+                    to[short,-*](7,0)
+                    to[short](8,0);
+        \draw (6,2) to[short](5,2)
+                    to[european controlled current source=$h_{21}I_1$](5,0)
+                    to[short](6,0);
+
+        \draw[->](8.25,0)--(8.25,2)node[midway, right]{$V_2$};
+        \draw[very thick](1.2,2.25)--(1.2,-0.25)--(6.8,-0.25)--(6.8,2.25)--(1.2,2.25);
+        \end{circuitikz}
+\end{center}
+
+\subsubsection{Rappresentazione a Parametri di Trasmissione Diretta}
+
+Si considera una matrice $[T]$, detto parametro di trasmissione:
+\begin{gather*}
+    \begin{bmatrix}
+        V_1\\I_1
+    \end{bmatrix}=\begin{bmatrix}
+        A&B\\C&D
+    \end{bmatrix}\begin{bmatrix}
+        V_2\\-I_2
+    \end{bmatrix}
+    \begin{cases}
+        [A]=1\\
+        [B]=\Omega\\
+        [C]=\Omega^{-1}\\
+        [D]=1
+    \end{cases}
+\end{gather*}
+
+Vengono usate nella rappresentazione di linee lunghe, dove è necessario adoperare parametri distribuiti e non concentrati. Ma, se fissata una lunghezza immutabile 
+di un tratto di linea, è possibile modellarla come una partenza ed un arrivo tramite un 
+due-porte particolare a parametri concentrati da cui entra una corrente $I_1$ ed esce una corrente $I_2$, questo è in conflitto con la convenzione elettrotecnica di considerare 
+tutte le correnti entranti in un multiporta, per cui si usa $-I_2$. 
+
+\subsection{Proprietà Generali}
+
+A prescindere dalla rappresentazione tutti i due-porte godono delle proprietà qui descritte. 
+
+\begin{center}
+    \begin{tikzpicture}[scale=2]
+        \draw[-,ultra thick](-0.5,-0.5)--(-0.5,0.5)--(0.5,0.5)--(0.5,-0.5)--(-0.5,-0.5);
+
+        \draw[->,very thick](-1.5,0.25)--(-1,0.25)node[above]{$i_1$};
+        \draw[-,very thick](-1,0.25)--(-0.5,0.25);
+        \draw[-,very thick](-1.5,-0.25)--(-0.5,-0.25);
+        \draw[->](-1.6,-0.25)--(-1.6,0.25)node[midway, left]{$v_1$};
+
+
+        \draw[->,very thick](1.5,0.25)--(1,0.25)node[above]{$i_2$};
+        \draw[-,very thick](1,0.25)--(0.5,0.25);
+        \draw[-,very thick](1.5,-0.25)--(0.5,-0.25);
+        \draw[->](1.6,-0.25)--(1.6,0.25)node[midway, right]{$v_2$};
+    \end{tikzpicture}
+\end{center}
+
+Il due-porte si dice reciproco, se singolarmente soddisfa il teorema di Tellegen. Per cui tra i suoi due lati vale la seguente relazione: 
+\begin{gather*}
+    V_1^aI_1^b+V_2^aI_2^b=V_1^bI_1^a+V_2^bI_2^a
+\end{gather*}
+Per dimostrare questa proprietà si considera la rappresentazione a parametri Z, nei due casi $a$ e $b$:
+\begin{gather*}
+    \begin{cases}
+        V_1=z_{11}I_1+z_{12}I_2\\
+        V_2=z_{21}I_1+z_{22}I_2
+    \end{cases}\\
+    (z_{11}I_1^a+z_{12}I_2^a)I_1^b+(z_{21}I_1^a+z_{22}I_2^a)I^b=(z_{11}I_1^b+z_{12}I_2^b)I^a+(z_{21}I_1^b+z_{22}I_2^b)I^a\\
+    z_{12}I_2^aI_1^b+z_{21}I_1^aI_2^b=z_{12}I_2^bI_1^a+z_{21}I_1^bI_2^a
+\end{gather*}
+Per il principio di identità dei polinomi si ottiene la seguente condizione di reciprocità per i parametri Z:
+\begin{gather*}
+    z_{12}=z_{21}
+\end{gather*}
+Si assume che le altre rappresentazioni possano essere tramutate in parametri Z, poiché se non fosse possibile, non il due-porte non sarebbe reciproco. 
+
+
+
+Il due-porte si dice simmetrico, se invertendo le porte, il resto del circuito non ha conseguenze elettriche, ovvero è presente l'invarianza all'inversione delle porte. 
+Si considerano due casi, dove vengono inseriti due generatori di tensione $E$ e $\mathcal{E}$ al due-porte, con una corrente misurata $I$ e $\mathcal{I}$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0.75,0) to[short](-0.5,0)
+                    to[european voltage source=$E$](-0.5,2)
+                    to[short,i=$I$](0.75,2);
+                    
+        \draw (3.25,0) to[short](4.5,0)
+                    to[european voltage source=$\mathcal{E}$](4.5,2)
+                    to[short,i=$\mathcal{I}$](3.25,2);
+
+        \draw (3.25,2.25)--(0.75,2.25)--(0.75,-0.25)--(3.25,-0.25)--(3.25,2.25);
+    \end{circuitikz}
+\end{center} 
+
+Nella rappresentazione Z si ottiene la seguente espressione in forma matriciale:
+\begin{gather*}
+    \begin{bmatrix}
+        E\\\mathcal{E}
+    \end{bmatrix}\begin{bmatrix}
+        z_{11}&z_{12}\\z_{21}&z_{22}
+    \end{bmatrix}\begin{bmatrix}
+        I\\\mathcal{I}
+    \end{bmatrix}\\
+    E=z_{11}I+z_{12}\mathcal{I}
+\end{gather*}
+Invertendo le porte si ottiene la seguente espressione:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0.75,0) to[short](-0.5,0)
+                    to[european voltage source=$\mathcal{E}$](-0.5,2)
+                    to[short,i=$\mathcal{I}$](0.75,2);
+                    
+        \draw (3.25,0) to[short](4.5,0)
+                    to[european voltage source=$E$](4.5,2)
+                    to[short,i=$I$](3.25,2);
+
+        \draw (3.25,2.25)--(0.75,2.25)--(0.75,-0.25)--(3.25,-0.25)--(3.25,2.25);
+    \end{circuitikz}
+\end{center} 
+
+\begin{gather*}
+    \begin{bmatrix}
+        \mathcal{E}\\E
+    \end{bmatrix}\begin{bmatrix}
+        z_{11}&z_{12}\\z_{21}&z_{22}
+    \end{bmatrix}\begin{bmatrix}
+        \mathcal{I}\\I
+    \end{bmatrix}\\
+    E=z_{21}\mathcal{I}+z_{22}I
+\end{gather*}
+Per il principio di identità dei polinomi si ottiene la seguente condizione per la simmetria a parametri Z:
+\begin{gather*}
+    z_{11}=z_{22}\\
+    z_{12}=z_{21}
+\end{gather*}
+Un due porte è simmetrico, quando è anche reciproco, ma può essere reciproco senza essere simmetrico. 
+
+\subsection{Rappresentazione Stella e Triangolo}
+
+Un due-porte è rappresentabile a bipoli, come modello interno, se è reciproco. Può essere rappresentato come sbilanciato, bilanciato dall'esterno, oppure direttamente 
+bilanciato:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0.5,2) to[short](1,2)
+                    to[generic=$z_a$](3,2)
+                    to[generic=$z_b$](5,2)
+                    to[short](5.5,2);
+        \draw (3,2)node[above]{$0$} to[generic=$z_c$](3,0)
+                    to[short](0.5,0);
+        \draw (3,0) to[short](5.5,0);
+    \end{circuitikz}
+\end{center}
+Questa configurazione viene chiamata stella, o struttura a ipsilon $\psi$.  
+Nella rappresentazione a stella si chiama il punto centrale centro stella $0$. 
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,2) to[generic=$z_{ab}$](4,2);
+        \draw (0,0) to[short](4,0);
+        \draw (1,2) to[generic=$z_{ac}$](1,0);
+        \draw (3,2) to[generic=$z_{bc}$](3,0);
+    \end{circuitikz}
+\end{center}
+Questa configurazione viene chiamata triangolo, o struttura pi greco $\pi$.  
+
+Per passare da una rappresentazione stella ad una a triangolo si considerano due generatori di tensione in entrata alla configurazione stella $V_1$ e $V_2$, misurando 
+correnti $I_1$ e $I_2$:
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0.5,2) to[short](1,2)
+                    to[generic=$z_a$](3,2)
+                    to[generic=$z_b$](5,2)
+                    to[short](5.5,2);
+        \draw (3,2) to[generic=$z_c$](3,0)
+                    to[short](0.5,0);
+        \draw (3,0) to[short](5.5,0);
+
+        \draw (0.5,0) to[short](0,0)
+                    to[european voltage source=$V_1$](0,2)
+                    to[short,i=$I_1$](0.5,2);
+                    
+        \draw (5.5,0) to[short](6,0)
+                    to[european voltage source=$V_2$](6,2)
+                    to[short,i=$I_2$](5.5,2);
+    \end{circuitikz}
+\end{center}
+
+Si applica il metodo delle maglie nella rappresentazione a stella:
+\begin{gather*}
+    \begin{bmatrix}
+        V_1\\-V_2
+    \end{bmatrix}=\begin{bmatrix}
+        z_a+z_c&-z_c\\-z_c&z_b+z_c
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\-I_2
+    \end{bmatrix}
+\end{gather*}
+
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,2) to[generic=$z_{ab}$](4,2);
+        \draw (0,0) to[short](4,0);
+        \draw (1,2) to[generic=$z_{ac}$](1,0);
+        \draw (3,0) to[generic=$z_{bc}$](3,2);
+
+        \draw (0,0) to[short](-0.5,0)
+                    to[european current source=$I_1$](-0.5,2)
+                    to[short](0,2);
+        \draw[->] (0.5,0.25)--(0.5,1.75)node[midway, left]{$V_1$};
+
+        \draw (4,0) to[short](4.5,0)
+                    to[european current source=$I_2$](4.5,2)
+                    to[short](4,2);
+        \draw[->] (3.5,0.25)--(3.5,1.75)node[midway, right]{$V_2$};
+    \end{circuitikz}
+\end{center}
+
+Si applica il metodo dei nodi sulla rappresentazione a triangolo, dopo aver inserito due generatori di tensione $I_1$ e $I_2$, misurando una 
+tensione $V_1$ e $V_2$:
+\begin{gather*}
+    \begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}=\begin{bmatrix}
+        y_{ac}+y_{ab}&-y_{ab}\\-y_{ab}&y_{bc}+y_{ab}
+    \end{bmatrix}\begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}
+\end{gather*}
+
+Per ottenere lo stesso vettore delle grandezze si cambia il segno di $V_2$ e $I_2$ nell'equazione delle maglie:
+\begin{gather*}
+    \begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}=\begin{bmatrix}
+        z_a+z_c&z_c\\z_c&z_b+z_c
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}
+\end{gather*}
+Per cui se le matrici sono invertibili, allora si può passare tra le due rappresentazioni tramite la seguente espressione:
+\begin{gather*}
+    \begin{bmatrix}
+        z_a+z_c&z_c\\z_c&z_b+z_c
+    \end{bmatrix}^{-1}=\begin{bmatrix}
+        y_{ac}+y_{ab}&-y_{ab}\\-y_{ab}&y_{bc}+y_{ab}
+    \end{bmatrix}\\
+    \displaystyle\frac{1}{z_az_b+z_bz_c+z_az_c}\begin{bmatrix}
+        z_b+z_c&-z_c\\-z_c&z_a+z_b
+    \end{bmatrix}=\begin{bmatrix}
+        y_{ac}+y_{ab}&-y_{ab}\\-y_{ab}&y_{bc}+y_{ab}
+    \end{bmatrix}\\
+    \begin{cases}
+        y_{ab}=\displaystyle\frac{z_c}{z_az_b+z_bz_c+z_az_c}\\
+        y_{ac}=\displaystyle\frac{z_b}{z_az_b+z_bz_c+z_az_c}\\
+        y_{bc}=\displaystyle\frac{z_a}{z_az_b+z_bz_c+z_az_c}
+    \end{cases}
+\end{gather*}
+Per la trasformazione da triangolo a stella, si usufruisce la seguente espressione:
+\begin{gather*}
+    \begin{bmatrix}
+        y_{ac}+y_{ab}&-y_{ab}\\-y_{ab}&y_{bc}+y_{ab}
+    \end{bmatrix}^{-1}=\begin{bmatrix}
+        z_a+z_c&z_c\\z_c&z_b+z_c
+    \end{bmatrix}\\
+    \displaystyle\frac{1}{y_{ac}y_{ab}+y_{ac}y_{bc}+y_{ab}y_{bc}}\begin{bmatrix}
+        y_{bc}+y_{ab}&y_{ab}\\y_{ab}&y_{ac}+y_{ab}
+    \end{bmatrix}=\begin{bmatrix}
+        z_a+z_c&z_c\\z_c&z_b+z_c
+    \end{bmatrix}\\
+    \begin{cases}
+        z_a=\displaystyle\frac{y_{bc}}{y_{ac}y_{ab}+y_{ac}y_{bc}+y_{ab}y_{bc}}\\
+        z_b=\displaystyle\frac{y_{ac}}{y_{ac}y_{ab}+y_{ac}y_{bc}+y_{ab}y_{bc}}\\
+        z_c=\displaystyle\frac{y_{ab}}{y_{ac}y_{ab}+y_{ac}y_{bc}+y_{ab}y_{bc}}
+    \end{cases}
+\end{gather*}
+
+
+Quando sono presenti tre impedenze uguali nella rappresentazione a stella, allora nella rappresentazione a triangolo le ammettenze equivalenti si ottengono tramite:
+\begin{gather*}
+    z_a=z_b=z_c=z_{\star}\\
+    y_{ab}=y_{bc}=y_{ac}=y_{\Delta}=\displaystyle\frac{1}{3z_{\star}}
+\end{gather*}
+Questo tipo di trasformazioni sono utili per calcolare la resistenza equivalente, se fosse presente una delle due configurazioni, sarebbe possibile trasformarla 
+nell'altra configurazione, rappresentazione identica per l'esterno, in modo da poter facilitare l'analisi. 
+
+%% circuito resistenza equivalente con rappresentazione stella 
+
+%\begin{center}
+%    \begin{circuitikz}
+%        \draw (0,2) to[short,*-](1,2)
+%                    to[R](3,2)
+%                    to[R](5,2)
+%                    to[short](6,2)
+%                    to[R](6,0);
+%    \end{circuitikz}
+%\end{center}
+
+
+
+Data la rappresentazione a stella, si può ritornare ad una rappresentazione Z di un due-porte considerando le seguenti relazioni:
+\begin{gather*}
+    z_a+z_c=z_{11}\\
+    z_c=z_{12}=z_{21}\\
+    z_b+z_c=z_{22}
+\end{gather*}
+Per cui necessariamente il due-porte corrispondente è reciproco. Per una rete simmetrica si ha che $z_a=z_b$, per cui si ottiene una rappresentazione:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0.5,2) to[short](1,2)
+                    to[generic=$z_a$](3,2)
+                    to[generic=$z_a$](5,2)
+                    to[short](5.5,2);
+        \draw (3,2) to[generic=$z_c$](3,0)
+                    to[short](0.5,0);
+        \draw (3,0) to[short](5.5,0);
+
+        \draw (7,2) to[generic=$z_{ab}$](11,2);
+        \draw (7,0) to[short](11,0);
+        \draw (8,2) to[generic=$z_{ac}$](8,0);
+        \draw (10,2) to[generic=$z_{ac}$](10,0);
+    \end{circuitikz}
+\end{center}
+
+
+Una rappresentazione Y può esistere solo se esiste una rappresentazione Z, se i suoi parametri non sono nulli e la sua matrice è invertibile. 
+Si considera il seguente circuito, analizzato come fosse un due-porte:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[short,i=$I_1$] (1,0)
+                    to[generic=$z$] (3,0);
+        \draw (4,0) to[short,i=$I_2$](3,0);
+        \draw (0,-1)to[short](4,-1);
+        \draw[->](-0.25,-1)--(-0.25,0)node[midway, left]{$V_1$};
+        \draw[->](4.25,-1)--(4.25,0)node[midway, right]{$V_2$};
+        \draw[-,very thick](1,0.25)--(3,0.25)--(3,-1.25)--(1,-1.25)--(1,0.25);
+    \end{circuitikz}
+\end{center}
+Si applicano i principi di Kirchhoff in senso orario:
+\begin{gather*}
+    \begin{cases}
+        V_1=V_2+zI_1\\
+        I_1=-I_2
+    \end{cases}
+\end{gather*}
+In forma matriciale si esprime come:
+\begin{gather*}
+    \begin{bmatrix}
+        1&-1\\0&0
+    \end{bmatrix}\begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}=\begin{bmatrix}
+        z&0\\1&1
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}
+\end{gather*}
+Poiché la matrice non è invertibile, non si può ottenere una rappresentazione Z, per cui non presente parametri Z, invece ha parametri Y, poiché la matrice 
+che moltiplica le correnti è invertibile:
+\begin{gather*}
+    \begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}=\displaystyle\frac{1}{z}\begin{bmatrix}
+        1&0\\-1&z
+    \end{bmatrix}\begin{bmatrix}
+        1&-1\\0&0
+    \end{bmatrix}\begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}\\
+    [y]=\begin{bmatrix}
+        \displaystyle\frac{1}{z}&\displaystyle-\frac{1}{z}\\
+        \displaystyle-\frac{1}{z}&\displaystyle\frac{1}{z}
+    \end{bmatrix}
+\end{gather*}
+La matrice dei parametri Y ottenuti non è invertibile, poiché non esiste una rappresentazione a parametri Z.
 
 
 \end{document}
