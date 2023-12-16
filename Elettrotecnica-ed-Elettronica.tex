@@ -16,6 +16,8 @@
 \usepackage{pgfplots}
 \usepackage{fancyhdr}
 \usepackage{romanbarpagenumber}
+\usepackage{caption}
+\usepackage{subfig}
 \pgfplotsset{compat=1.18}
 
 \setlength{\headheight}{12.0pt}
@@ -30,6 +32,10 @@
 }
 
 \renewcommand{\contentsname}{Indice}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\listoffigures}{Lista delle Figure}
+
+\newsavebox{\tempbox}
 
 \tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
          lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
@@ -63,6 +69,9 @@
 \clearpage
 
 \tableofcontents
+
+%\clearpage
+%\listoffigures
 
 \clearpage
 
@@ -1798,7 +1807,7 @@ La capacità è definita come una grandezza positiva, per cui l'energia è stret
 è sempre positiva il condensatore si comporta come un bipolo passivo. Per cui il condensatore ideale è un bipolo passivo tempo invariante con memoria. 
 
 \subsubsection{Induttore Ideale}
-
+\label{sec:induttore-ideale}
 Il bipolo induttore ideale è il duale del condensatore ideale, presenta uno stato di quasi-stazionarietà elettrica. La dualità permette di mantenere la forma delle equazioni 
 e cambiare solamente le grandezze fisiche usate. L'induttanza $L$ è il duale della capacità $C$. In generale i parametri concentrati vengono definiti tra il rapporto di due 
 grandezze elettro-magnetiche.Considerando la legge costitutiva del mezzo del condensatore, si ottiene la legge costitutiva dell'induttore ideale come la duale alla legge 
@@ -7133,7 +7142,7 @@ Ogni elemento della matrice presenta una sua unità di misura, per cui non può 
 
         \draw (8,2)to[short,i=$I_2$,-*](7,2)
                     to[short](6,2)
-                    to[generic=$h_{22}$](6,0)
+                    to[generic=$\frac{1}{h_{22}}$](6,0)
                     to[short,-*](7,0)
                     to[short](8,0);
         \draw (6,2) to[short](5,2)
@@ -7142,7 +7151,7 @@ Ogni elemento della matrice presenta una sua unità di misura, per cui non può 
 
         \draw[->](8.25,0)--(8.25,2)node[midway, right]{$V_2$};
         \draw[very thick](1.2,2.25)--(1.2,-0.25)--(6.8,-0.25)--(6.8,2.25)--(1.2,2.25);
-        \end{circuitikz}
+    \end{circuitikz}
 \end{center}
 
 \subsubsection{Rappresentazione a Parametri di Trasmissione Diretta}
@@ -7285,7 +7294,7 @@ bilanciato:
         \draw (3,0) to[short](5.5,0);
     \end{circuitikz}
 \end{center}
-Questa configurazione viene chiamata stella, o struttura a ipsilon $\psi$.  
+Questa configurazione viene chiamata stella, o struttura a ipsilon $\psi$ o $T$.  
 Nella rappresentazione a stella si chiama il punto centrale centro stella $0$. 
 
 \begin{center}
@@ -7457,6 +7466,7 @@ Per cui necessariamente il due-porte corrispondente è reciproco. Per una rete s
     \end{circuitikz}
 \end{center}
 
+\subsection{Passaggio a Rappresentazione Z}
 
 Una rappresentazione Y può esistere solo se esiste una rappresentazione Z, se i suoi parametri non sono nulli e la sua matrice è invertibile. 
 Si considera il seguente circuito, analizzato come fosse un due-porte:
@@ -7509,5 +7519,627 @@ che moltiplica le correnti è invertibile:
 \end{gather*}
 La matrice dei parametri Y ottenuti non è invertibile, poiché non esiste una rappresentazione a parametri Z.
 
+Data una rappresentazione H, è possibile trasformarla in una rappresentazione a parametri Z per ottenere le condizioni delle proprietà del due-porte associato:
+%\begin{center}
+%    \begin{circuitikz}
+%        \draw (0,2) to[short,i=$I_1$,-*](1,2);
+%        \draw (3,2) to[generic=$h_{11}$](1,2);
+%        \draw (0,0) to[short,-*](1,0)
+%                    to[short](3,0) 
+%                    to[european controlled voltage source=$h_{12}V_2$](3,2);
+%        \draw[->](-0.25,0)--(-0.25,2)node[midway, left]{$V_1$};
+%
+%        \draw (8,2)to[short,i=$I_2$,-*](7,2)
+%                    to[short](6,2)
+%                    to[generic=$\frac{1}{h_{22}}$](6,0)
+%                    to[short,-*](7,0)
+%                    to[short](8,0);
+%        \draw (6,2) to[short](5,2)
+%                    to[european controlled current source=$h_{21}I_1$](5,0)
+%                    to[short](6,0);
+%
+%        \draw[->](8.25,0)--(8.25,2)node[midway, right]{$V_2$};
+%        \draw[very thick](1.2,2.25)--(1.2,-0.25)--(6.8,-0.25)--(6.8,2.25)--(1.2,2.25);
+%    \end{circuitikz}
+%\end{center}
+
+\begin{gather*}
+    \begin{bmatrix}
+        V_1\\I_2
+    \end{bmatrix}=\begin{bmatrix}
+        h_{11}&h_{12}\\h_{21}&h_{22}
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\V_2
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        1&0\\0&0
+    \end{bmatrix}\begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}+\begin{bmatrix}
+        0&0\\0&1
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}=\begin{bmatrix}
+        0&h_{12}\\0&h_{22}
+    \end{bmatrix}\begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}+\begin{bmatrix}
+        h_{11}&0\\h_{21}&0
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        1&-h_{12}\\0&-h_{22}
+    \end{bmatrix}\begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}=\begin{bmatrix}
+        h_{11}&0\\h_{21}&-1
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}\\
+\end{gather*}
+Esiste una rappresentazione Z se la matrice che moltiplica il vettore delle tensioni è reversibile, per cui il determinante deve essere non nullo:
+\begin{gather*}
+    h_{22}\neq0\\
+    \begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}=\displaystyle-\frac{1}{h_{22}}\begin{bmatrix}
+        -h_{22}&h_{12}\\0&1
+    \end{bmatrix}\begin{bmatrix}
+        h_{11}&0\\h_{21}&-1
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}=\displaystyle-\frac{1}{h_{22}}\begin{bmatrix}
+        -h_{22}h_{11}+h_{21}h_{12}&-h_{12}\\h_{21}&-1
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}
+\end{gather*}
+Si può notare come l'elemento in $1,1$ corrisponde all'opposto del determinante della matrice H. Per diretto confronto con la matrice Z si ottengono le seguenti espressioni 
+per esprimere una rappresentazione H in parametri Z:
+\begin{gather*}
+    z_{11}=\displaystyle\frac{\det[H]}{h_{22}}\\
+    z_{12}=\displaystyle\frac{h_{12}}{h_{22}}\\
+    z_{21}=\displaystyle-\frac{h_{21}}{h_{22}}\\
+    h_{22}=\displaystyle\frac{1}{h_{21}}
+\end{gather*}
+Per cui per una rappresentazione a parametri ibridi la condizione di simmetria viene verificata se i parametri H rispettano le condizioni di reciprocità e di inversione 
+di porta:
+\begin{gather*}
+    \mbox{Simmetria: }z_{12}=z_{21}\to h_{12}=-h_{21}\\
+    \mbox{Inversione di porta: }z_{11}=z_{22}\to\det[H]=1
+\end{gather*}
+
+
+Data una rappresentazione a parametri di trasmissione diretta si converte in una rappresentazione Z:
+\begin{gather*}
+    \begin{bmatrix}
+        V_1\\I_1
+    \end{bmatrix}=\begin{bmatrix}
+        A&-B\\C&-D
+    \end{bmatrix}\begin{bmatrix}
+        V_2\\I_2
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        1&0\\0&0
+    \end{bmatrix}\begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}+\begin{bmatrix}
+        0&0\\1&0
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}=\begin{bmatrix}
+        0&A\\0&C
+    \end{bmatrix}\begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}+\begin{bmatrix}
+        0&-B\\0&-D
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        1&-A\\0&-C
+    \end{bmatrix}\begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}=\begin{bmatrix}
+        0&-B\\-1&-D
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}
+\end{gather*}
+Esiste una rappresentazione Z equivalente se la matrice di destra è invertibile:
+\begin{gather*}
+    C\neq0\\
+    \displaystyle\begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}=-\frac{1}{C}\begin{bmatrix}
+        -A&BC-AD\\-1&-D
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}
+\end{gather*}
+L'elemento in $1,2$ corrisponde all'opposto del determinante della matrice $T$, per cui una rappresentazione Z equivalente si ottiene mediante la seguente espressione:
+\begin{gather*}
+    z_{11}=\displaystyle\frac{A}{C}\\
+    z_{12}=\displaystyle\frac{\det[T]}{C}\\
+    z_{21}=\displaystyle\frac{1}{C}\\
+    z_{22}=\displaystyle\frac{D}{C}
+\end{gather*}
+Le condizioni delle proprietà per una rappresentazione a parametri diretti T sono quindi date dalle seguenti espressioni:
+\begin{gather*}\label{eq:condizioni-parametri-diretti}
+    \mbox{Simmetria: }z_{12}=z_{21}\to \det[T]=1\\
+    \mbox{Inversione di porta: }z_{11}=z_{22}\to A=D
+\end{gather*}
+
+
+Si vuole rappresentare una linea tramite una rappresentazione a stella, per cui si considera il seguente circuito, tramite il metodo delle maglie:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0.5,2) to[short](1,2)
+                    to[generic=$z_a$](3,2)
+                    to[generic=$z_b$](5,2)
+                    to[short](5.5,2);
+        \draw (3,2) to[generic=$z_c$](3,0)
+                    to[short](0.5,0);
+        \draw (3,0) to[short](5.5,0);
+
+        \draw (0.5,0) to[short](0,0)
+                    to[european voltage source=$V_1$](0,2)
+                    to[short,i=$I_1$](0.5,2);
+                    
+        \draw (5.5,0) to[short](6,0)
+                    to[european voltage source=$V_2$](6,2)
+                    to[short,i=$(-I_2)$](5.5,2);
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    \begin{bmatrix}
+        z_a+z_c&-z_c\\-z_c&z_b+z_c
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\-I_2
+    \end{bmatrix}=\begin{bmatrix}
+        V_1\\-V_2
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        z_a+z_c&z_c\\z_c&z_b+z_c
+    \end{bmatrix}\begin{bmatrix}
+        I_1\\I_2
+    \end{bmatrix}=\begin{bmatrix}
+        V_1\\V_2
+    \end{bmatrix}\\
+    z_c=z_{12}=z_{21}=\displaystyle\frac{1}{C}\\
+    z_a+\displaystyle\frac{1}{C}=\frac{A}{C}
+\end{gather*}
+I parametri di una linea si analizzano tramite un'analisi delle grandezze tra la partenza e all'arrivo della linea, mantenendo costante la distanza, tramite l'equazione 
+dei telegrafisti. Si può esprimere quindi in una rappresentazione stella, e l'associata rappresentazione triangolo, tramite i seguenti parametri:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0.5,2) to[short](1,2)
+                    to[generic=$\frac{A-1}{C}$](3,2)
+                    to[generic=$\frac{A-1}{C}$](5,2)
+                    to[short](5.5,2);
+        \draw (3,2) to[generic=$\frac{1}{C}$](3,0)
+                    to[short](0.5,0);
+        \draw (3,0) to[short](5.5,0);
+    \end{circuitikz}
+\end{center}
+
+\subsection{Mutua-Induttanza}
+
+Un oggetto che presenta più di una bobina, presenta una o più mutue-induttanze. Nel caso dei due-porte, si considera un oggetto contenente solo due bobine e quindi una 
+mutua-induttanza. Questo due-porte servirà a definire l'oggetto chiamato trasformatore ideale. 
+
+
+
+Si considerano due solenoidi su un nucleo toroidale, un oggetto realizzato ad alta permeabilità magnetica $\mu$, dove sono avvolte due bobine su lati opposti dell'oggetto. 
+La mutua-induttanza effettivamente si trova nei casi lineari, 
+poiché è un processo che utilizza il principio di sovrapposizione degli effetti, ma per alcuni materiali si può non considerare questa condizione, se non vengono mandati 
+in saturazione. Si considera quindi un materiale ad alta permeabilità ed un innesco di non linearità, sensibili soltanto se sono saturi. 
+Alcuni materiali presentano delle zone interne chiamate domini che presentano una magnetizzazione per lo più uniforme e forniscono dall'interno una magnetizzazione $M$ oltre 
+al campo di induzione magnetica esterno $H$:
+\begin{gather*}
+    B=\mu_0(H+M)
+\end{gather*}
+Questo contributo interno corrisponde ad una permeabilità più elevata, ma può aumentare fino ad un valore limite. Quando un materiale presenta una magnetizzazione interna 
+$M$ massima, si dice saturo, e l'unico componente in grado di aumentare l'intensità del campo magnetico $B$ è il campo $H$ impresso dall'esterno.  
+
+In questo oggetto è possibile quindi approssimare la linearità ed osservare il fenomeno della mutua induttanza. Nella realtà vengono creati delle bobine una dentro l'altra, 
+in modo che il flusso generato da esse possa attraversare completamente l'altra bobina. Inoltre le due bobine vengono ricoperte di un materiale elettricamente isolante per 
+evitare una situazione di cortocircuito. 
+
+Data una singola bobina avvolta attorno al toro, l'oggetto si comporta come un induttore, quindi una singola porta:
+\begin{center}
+    \begin{circuitikz}
+        \draw (-0.5,0)node[above]{$1$} to[short,i=$i$,*-](0.5,0)
+                    to[L=$L$](0.5,-2)
+                    to[short,-*](-0.5,-2)node[below]{$1'$};
+        \draw[->](-0.5,-1.75)--(-0.5,-0.25)node[midway, left]{$v$};
+    \end{circuitikz}
+\end{center}
+
+Si suppone il campo $H$ sia uniforme su tutta la circuitazione $L$, ed il campo magnetico $B$ uniforme su tutta la sezione trasversale dove viene effettuato l'integrale 
+di flusso. Si riportano brevemente i passaggi effettuati precedentemente nella sezione \ref{sec:induttore-ideale} per individuare l'espressione della legge costitutiva 
+dell'induttore ideale: 
+\begin{gather*}
+    H=\displaystyle\frac{Ni}{l}\to B=\mu\displaystyle\frac{Ni}{l}\\
+    \phi=\mu\displaystyle\frac{Ni}{l}\\
+    v=-e=-\left(-N\displaystyle\frac{d\phi}{dt}\right)\\
+    v=\displaystyle\mu\frac{N^2S}{l}\frac{di}{dt}
+\end{gather*}
+Si definisce un nuovo parametro chiamato riduttanza $\mathscr{R}$:
+\begin{equation}
+    \mathscr{R}=\displaystyle\frac{N^2}{L}
+\end{equation}
+
+
+Considerando l'oggetto toroidale avvolto da due bobine, bisogna considerare nel calcolo del campo di induzione magnetico, poiché la circuitazione tiene conto anche delle 
+correnti concatenate passanti per la seconda bobina. Il teorema della circuitazione del campo magnetico considera tutte le correnti concatenate alla linea della circuitazione, 
+poiché si considera una circonferenza passante per il toro come la linea di circuitazione, l'espressione per il campo di induzione magnetica risulta essere:
+\begin{gather*}
+    H=\displaystyle\frac{N_1i_1+N_2i_2}{l}
+\end{gather*}
+Questa relazione è possibile solamente in un caso di linearità, in cui vale il principio di sovrapposizione degli effetti, e si possono sovrapporre i contributi di 
+entrambi le correnti. 
+Per cui anche il campo magnetico si esprime in questa configurazione due-porte come:
+\begin{gather*}
+    B=\mu\displaystyle\frac{N_1i_1+N_2i_2}{l}
+\end{gather*}
+Il flusso si esprime quindi come:
+\begin{gather*}
+    \phi=\mu\displaystyle\frac{N_1i_1}{l}S+\mu\frac{N_2i_2}{l}S
+\end{gather*}
+Poiché non è noto a priori da quale morsetto entri la corrente nella seconda bobina, il suo contributo può essere concorde o discorde alla corrente della prima bobina, per cui 
+formalmente bisogna indicare l'espressione generale nella forma:
+\begin{gather*}
+    H=\displaystyle\frac{N_1i_1\mp N_2i_2}{l}\\
+    B=\mu\displaystyle\frac{N_1i_1\mp N_2i_2}{l}\\
+    \phi=\mu\displaystyle\frac{N_1i_1}{l}S\mp\mu\frac{N_2i_2}{l}S
+\end{gather*}
+Effettuano un processo analogo per la seconda bobina, si ottengono le seguenti espressioni per la tensione ai capi dei morsetti: 
+\begin{gather*}
+    v_1=\displaystyle\mu\frac{N_1^2S}{l}\frac{di_1}{dt}\mp\mu\frac{N_2N_1S}{l}\frac{di_2}{dt}\\
+    v_2=\displaystyle\mu\frac{N_2^2S}{l}\frac{di_2}{dt}\mp\mu\frac{N_1N_2S}{l}\frac{di_1}{dt}
+\end{gather*}
+La riduttanza rimane costante per cui si può esprimere l'induttanza di ogni bobina come:
+\begin{gather*}
+    L_i=\displaystyle\frac{N_i^2}{\mathscr{R}}
+\end{gather*}
+Mentre si definisce il fattore del contributo dell'altra bobina il modulo del coefficiente di mutua induzione $|M|$:
+\begin{equation}
+    |M|=\displaystyle\frac{N_1 N_2}{\mathscr{R}}
+\end{equation}
+Si considera il modulo poiché nell'espressione delle tensioni viene esplicitato il segno tramite il simbolo $\pm$. Si definisce quindi un coefficienti di mutua induzione $M$, 
+che presenta le stesse dimensioni di $L$:
+\begin{gather*}
+    M_{12}=\mp\displaystyle\frac{N_1 N_2}{\mathscr{R}}\\
+    M_{21}=\mp\displaystyle\frac{N_2 N_1}{\mathscr{R}}
+\end{gather*}
+Le mutue induttanze tra la bobina $1$ e la bobina $2$ risultano uguali, per cui si può adoperare un unico simbolo $M$ per definire la mutua induzione tra le due bobine:
+\begin{gather*}
+    M_{12}=M_{21}=M
+\end{gather*}
+
+Si considera ora un oggetto formato da due cicli quadrati uniti tra di loro, chiamato giogo:
+\begin{center}
+    \begin{tikzpicture}[scale=0.8]
+        \draw[-](0,0)--(6,0)--(6,3.5)--(0,3.5)--(0,0);
+        \draw[-](1,1)--(2.5,1)--(2.5,2.5)--(1,2.5)--(1,1);
+        \draw[-](3.5,1)--(5,1)--(5,2.5)--(3.5,2.5)--(3.5,1);
+        \draw[-](0,3.5)--(0.5,4)--(6.5,4)--(6,3.5);
+        \draw[-](6.5,4)--(6.5,0.5)--(6,0);
+        \draw[-](1,1)--(1.5,1.5)--(1.5,2.5);
+        \draw[-](1.5,1.5)--(2.5,1.5);
+        \draw[-](3.5,1)--(4,1.5)--(4,2.5);
+        \draw[-](4,1.5)--(5,1.5);
+    \end{tikzpicture}
+\end{center}
+
+Inserendo degli avvolgimenti attorno ai due lati estremi dell'oggetto si creano due bobine, e non possono effettuare gli stessi calcoli svolti precedentemente poiché si è 
+complicato il percorso della circuitazione. Per cui le mutue induttanze tra le due bobine non necessariamente coincidono tra di loro. Verrà in seguito dimostrato come sia 
+generalmente verificato indipendentemente dal percorso della circuitazione. 
+
+
+In elettronica si ha l'obiettivo di miniaturizzare il più possibile i componenti circuitali. Un oggetto toroidale non è semplice da miniaturizzare, per cui si utilizzano 
+altri oggetti che permettono di mantenere la proprietà di mutua induttanza. 
+Per diminuire le dimensioni di oggetti come un condensatore si utilizza l'elettronica di un componente chiamato giratore, facilmente miniaturizzabile. In questo modo si 
+ottengono degli oggetti che possono essere miniaturizzati. 
+Sono necessarie componenti analogiche nei circuiti, poiché per interagire con l'informazione trasmessa da un circuito sono necessari i sensi, che percepiscono solamente 
+segnali analogici. 
+
+
+
+
+Si descrive ora formalmente questo due-porte. Questo oggetto è composto da due bobine adiacenti che presentano un induttanza $L_1$ e $L_2$. Inoltre 
+bisogna indicare il vero della mutua-induttanza dell'oggetto. Si disegna un simbolo sopra l'induttore, per definire il percorso effettuato dalla corrente nella porta. 
+Se il percorso della corrente è lo stesso per entrambe le porte allora il coefficiente di mutua induzione è di segno positivo, altrimenti è negativo:
+\begin{figure}[h!]%
+    \centering
+    \subfloat[\centering Mutua-Induttanza Positiva]{{
+        \begin{circuitikz}
+            \draw (0,0) to[short,i=$i_1$,*-](1,0);
+            \draw (0,-2)to[short,*-](1,-2)
+                        to[L=$L_1$](1,0);
+            \draw (2.5,0) to[short,i_=$i_2$,*-](1.5,0)
+                        to[L=$L_2$](1.5,-2)
+                        to[short,-*](2.5,-2);
+            \draw[->](0,-1.75)--(0,-0.25)node[midway, left]{$v_1$};
+            \draw[->](2.5,-1.75)--(2.5,-0.25)node[midway, right]{$v_2$};
+
+            \filldraw[red](1.1,-0.1)circle(1pt);
+            \filldraw[orange](1.4,-0.1)circle(1pt);
+        \end{circuitikz}}}%
+    \qquad
+    \subfloat[\centering Mutua-Induttanza Negativa]{{
+        \begin{circuitikz}
+            \draw (0,0) to[short,i=$i_1$,*-](1,0);
+            \draw (0,-2)to[short,*-](1,-2)
+                        to[L=$L_1$](1,0);
+            \draw (2.5,-2) to[short,i_=$i_2$,*-](1.5,-2);
+            \draw (2.5,0)to[short,*-](1.5,0)
+                         to[L=$L_2$](1.5,-2);
+            \draw[->](0,-1.75)--(0,-0.25)node[midway, left]{$v_1$};
+            \draw[<-](2.5,-1.75)--(2.5,-0.25)node[midway, right]{$v_2$};
+
+            \filldraw[red](1.1,-0.1)circle(1pt);
+            \filldraw[orange](1.4,-0.1)circle(1pt);
+        \end{circuitikz}}}%
+    \caption{Modello Circuitale della Mutua Induttanza}
+    \label{fig:mutua-induttanza}
+\end{figure}
+\\
+Si considera la legge costitutiva nel tempo del due-porte mutua-induttanza:
+\begin{gather*}
+    \begin{cases}
+        v_1=L_1\displaystyle\frac{di_1}{dt}+M\frac{di_2}{dt}\\
+        v_2=L_2\displaystyle\frac{di_2}{dt}+M\frac{di_1}{dt}
+    \end{cases}\\
+    \begin{bmatrix}
+        v_1\\v_2
+    \end{bmatrix}=\begin{bmatrix}
+        L_1&M\\M&L_2
+    \end{bmatrix}\begin{bmatrix}
+        \displaystyle\frac{di_1}{dt}\\ \displaystyle\frac{di_2}{dt}
+    \end{bmatrix}
+\end{gather*}
+Si può semplificare l'analisi di questa relazione differenziale esprimendola nel dominio dei fasori oppure nel dominio di Laplace. Si considera quindi una mutua-induttanza 
+a regime permanente sinusoidale:
+\begin{gather*}
+    \begin{bmatrix}
+        \overline{V}_1\\ \overline{V}_2
+    \end{bmatrix}=\begin{bmatrix}
+        j\omega L_1&j\omega M\\j\omega M&j\omega L_2
+    \end{bmatrix}\begin{bmatrix}
+        \overline{I}_1\\ \overline{I}_2
+    \end{bmatrix}
+\end{gather*}
+E nel dominio di Laplace:
+\begin{gather*}
+    \begin{bmatrix}
+        V_1(s)\\ V_2(s)
+    \end{bmatrix}=\begin{bmatrix}
+        s L_1&s M\\s M&s L_2
+    \end{bmatrix}\begin{bmatrix}
+        I_1(s)\\ I_2(s)
+    \end{bmatrix}
+\end{gather*}
+Bisogna però inserire un vettore che tiene conto delle condizioni iniziali di queste grandezze:
+\begin{gather*}
+    -\begin{bmatrix}
+        L_1&M\\M&L_2
+    \end{bmatrix}\begin{bmatrix}
+        i_1(0^-)\\i_2(0^-)
+    \end{bmatrix}
+\end{gather*}
+Da un punto di vista concettuale è possibile usare la memoria contenuta da questo due-porte per sviluppare sensori. Si possono realizzare sensori che misurano quando uno dei 
+due circuiti connessi ad una porta presenta un guasto a terra. Questo fenomeno avviene quando il circuito tocca un oggetto metallico in grado di condurre corrente elettrica. 
+
+Un impianto che presenta un sensore di guasto a terra è formato da una linea di fase $f$, che trasporta la corrente di fase $I_f$ che alimenta l'impianto, avvolta in una 
+bobina $B_f$ attorno ad un oggetto toroidale, prima di entrare nell'impianto; una linea chiamata neutro $n$ che trasporta la corrente di neutro $I_n$, in condizioni nominali 
+coincide alla corrente di fase $I_n=I_g$; ed una connessione a terra in caso di guasto dove può fluire la corrente di guasto $I_g$. 
+Quando l'impianto non è affetto ad un guasto a terra i due flussi generati dalle correnti passanti nelle due bobine sono uguali ed opposti, per cui non viene generata 
+forza elettro motrice: $\phi=0$. Invece se è presente in entrata oltre alla corrente di fase anche una corrente del guasto a terra $I_f+I_g$, questa corrente percorre un 
+altro circuito chiuso, mentre la corrente che fluisce nel neutro dall'impianto corrisponde solamente alla corrente di fase $I_f$. Questo genera un flusso non nullo, 
+alimentando una terza bobina avvolta attorno al nucleo toroidale. Questa corrente generata viene misurata dal sensore che indica la presenza di un guasto nel sistema, e può 
+attivare un interruttore differenziale per evitare danni all'impianto. 
+Questo oggetto si può modellare come un due-porte nonostante abbia tre bobine, poiché quando è presente un guasto la corrente interessata che genera un flusso attraversa 
+solamente la bobina della fase, e la corrente indotta fluisce attraverso la bobina del misuratore. Per cui in entrambi i casi di funzionamento e di guasto si può modellare 
+come un due-porte, considerando diverse coppie di bobine. 
+
+\subsubsection{Trasformatore Ideale}
+
+In generale in un ambiente ideale la tensione nelle due spire si può esprimere rispetto al flusso dalla seguente relazione:
+\begin{gather*}
+    v_1=\displaystyle N_1\frac{d\phi}{dt}\\
+    v_2=\displaystyle N_2\frac{d\phi}{dt}
+\end{gather*}
+Si definisce quindi il rapporto spire o rapporto di trasformazione, come il rapporto tra le due tensioni ai capi delle due porte:
+\begin{equation}
+    \displaystyle\frac{v_1}{v_2}=\frac{N_1}{N_2}=k_n=k_T
+\end{equation}
+Si è realizzato così un trasformatore rudimentale, un oggetto in grado di modificare la tensione tra le due porte. Può essere rappresentato in due modi, con un simbolo 
+specifico formato da due cerchi sovrapposti, oppure come due induttori adiacenti, con indicata il rapporto tra le spire:
+\begin{figure}[h!]%
+    \centering
+    \subfloat[\centering Rappresentazione come Mutua Induttanza]{{
+        \begin{circuitikz}
+            \draw (0,0) to[short,i=$i_1$,*-](1,0);
+            \draw (0,-2)to[short,*-](1,-2)
+                        to[L=$L_1$](1,0);
+            \draw (2.5,0) to[short,i_=$i_2$,*-](1.5,0)
+                        to[L=$L_2$](1.5,-2)
+                        to[short,-*](2.5,-2);
+            \draw[->](0,-1.75)--(0,-0.25)node[midway, left]{$v_1$};
+            \draw[->](2.5,-1.75)--(2.5,-0.25)node[midway, right]{$v_2$};
+            \node[above]at(1.25,0){$n:k_n$};
+        \end{circuitikz}
+    }}%
+    \qquad
+    \subfloat[\centering Rappresentazione come Trasformatore]{{
+        \begin{circuitikz}
+            \draw (0,0) to[short,i=$i_1$,*-](1,0);
+            \draw (0,-2)to[short,*-](1,-2);
+            
+            \draw (1,-1)circle[radius=0.25];
+            \draw (1,-2)--(1,-1.25);
+            \draw (1,-0.75)--(1,0);
+            
+            \draw (1.25,-1)circle[radius=0.25];
+            \draw (1.25,-2)--(1.25,-1.25);
+            \draw (1.25,-0.75)--(1.25,0);
+            
+            \draw (2.25,0) to[short,i_=$i_2$,*-](1.25,0);
+            \draw (1.25,-2)to[short,-*](2.25,-2);
+
+            \draw[->](0,-1.75)--(0,-0.25)node[midway, left]{$v_1$};
+            \draw[->](2.25,-1.75)--(2.25,-0.25)node[midway, right]{$v_2$};
+        \end{circuitikz}
+    }}%
+    \caption{Modello Circuitale di un Trasformatore Ideale}
+    \label{fig:trasformatore-ideale}
+\end{figure}
+\\
+Si indica con $k$ il rapporto spire ed il rapporto di trasformazione. Se il trasformatore è ideale non assorbe, ne eroga potenza, si dice trasparente alla potenza, effettuando 
+il bilancio delle potenza di porte, si ottiene un risultato nullo. Nel caso ideale mantiene una totale indifferenza alla potenza, variando solamente la tensione ai capi delle 
+due porte:
+\begin{gather*}
+    v_1i_1+v_2i_2=0\\
+    \displaystyle\frac{1}{v_2}\left(v_1i_1+v_2i_2\right)=\frac{1}{v_2}0\\
+    ki_1=-i_2\\
+    \displaystyle\frac{i_1}{i_2}=-\frac{1}{k}
+\end{gather*}
+Per cui il rapporto tra le correnti corrisponde all'opposto del reciproco del rapporto di trasformazione. 
+
+Questo oggetto può essere realizzato anche in ambito elettronico. Si considera una rete a regime permanente sinusoidale accessibile da due morsetti $A$ e $B$, nella 
+rappresentazione Thevenin di impedenza $z_{th}$. Per ottenere il massimo trasferimento di potenza bisogna avere un'impedenza di carico $z_C$ pari al coniugato dell'impedenza 
+equivalente. Se non si dispone di un'impedenza tale $z_C\neq z_{th}^*$ si può inserire tra la rete e l'impedenza di carico un trasformatore ideale. 
+\begin{figure}[h!]%
+    \centering
+    \begin{circuitikz}
+        \draw (0,0)node[above]{$A$} to[short,i=$\overline{I}_1$,*-](1,0);
+        \draw (0,-2)node[below]{$B$}to[short,*-](1,-2);
+        
+        \draw (1,-1)circle[radius=0.25];
+        \draw (1,-2)--(1,-1.25);
+        \draw (1,-0.75)--(1,0);
+        
+        \draw (1.25,-1)circle[radius=0.25];
+        \draw (1.25,-2)--(1.25,-1.25);
+        \draw (1.25,-0.75)--(1.25,0);
+        
+        \draw (2.25,0) to[short,i_=$\overline{I}_2$,*-](1.25,0);
+        \draw (1.25,-2)to[short,-*](2.25,-2);
+
+        \draw[->](0,-1.75)--(0,-0.25)node[midway, left]{$\overline{V}_1$};
+        \draw[->](2.25,-1.75)--(2.25,-0.25)node[midway, left]{$\overline{V}_2$};
+
+        \draw (0,-2)to[short](-2,-2)
+                    to[sV=$\overline{E}$](-2,0)
+                    to[generic=$z_{th}$](0,0);
+        \draw (2.25,-2) to[short](3,-2)
+                    to[generic=$z_C$](3,0)
+                    to[short](2.25,0);
+    \end{circuitikz}%
+    \caption{Trasferimento di Potenza Tramite Trasformatore}
+    \label{fig:trasformatore-carico}
+\end{figure}
+\\
+Si applica il metodo delle maglie e si ottengono la seguenti equazioni, nella convenzione dei generatori:
+\begin{gather*}
+    \overline{E}-z_{th}\overline{I}=\overline{V}_1\\
+    \overline{V}_2=-z_C\overline{I}_2
+\end{gather*}
+Per la legge costitutiva del trasformatore ideale:
+\begin{gather*}
+    \displaystyle\frac{\overline{V}_1}{\overline{V}_2}=k\\
+    \displaystyle\frac{\overline{I}_1}{\overline{I}_2}=-\frac{1}{k}
+\end{gather*}
+Sostituendo queste relazioni nelle equazioni di maglia calcolate si ottiene:
+\begin{gather*}
+    \displaystyle\frac{\overline{V}_1}{k}=z_Ck\overline{I}_1\\
+    \overline{V}_1=z_Ck^2\overline{I}_1\\
+    \overline{E}-z_{th}\overline{I}_1=z_Ck^2\overline{I}_1\\
+    \overline{E}=(z_{th}+k^2z_C)\overline{I}_1
+\end{gather*}
+Per cui tramite il quadrato del rapporto di trasformazione si può variare il valore dell'impedenza di carico per renderla simile al valore del coniugato dell'impedenza 
+equivalente:
+\begin{gather*}
+    z_{th}^*\approx k^2z_C
+\end{gather*}
+
+Questo processo permette di ottenere una resistenza equivalente sempre resistiva. Si effettua tramite reti adattatrici, specialmente nei filtri di uscita passiva, come 
+il filtro di Zobbel, adoperato in elettro-acustica. Se l'impedenza equivalente fosse puramente resistiva, allora sarebbe sempre possibile individuare un valore di $k^2$ che 
+verifica la condizione del massimo trasferimento di potenza. 
+
+Si possono esprimere i parametri di questo trasformatore ideale in altre rappresentazioni considerando le relazioni ottenute:
+\begin{gather*}
+    \overline{V}_1=k\overline{V}_2\\
+    \overline{I}_1=-\displaystyle\frac{1}{k}\overline{I}_2
+\end{gather*}
+Questa relazione corrisponde ad una rappresentazione a parametri di trasmissione diretta:
+\begin{gather*}
+    \begin{bmatrix}
+        \overline V_1\\ \overline I_1
+    \end{bmatrix}=\begin{bmatrix}
+        k&0\\0& \displaystyle\frac{1}{k}
+    \end{bmatrix}\begin{bmatrix}
+        \overline{V}_2\\ -\overline{I}_2
+    \end{bmatrix}
+\end{gather*}
+
+Dalle condizioni delle proprietà di una rappresentazione a parametri di trasmissione diretti: \ref{eq:condizioni-parametri-diretti}; si ottiene che il trasformatore ideale è 
+sempre un due-porte reciproco, poiché il determinante è sempre unitario, mentre se $k=1$, allora il trasformatore ideale è anche un due-porte simmetrico. 
+
+\subsection{Operazionale Ideale}
+
+L'operazionale ideale o amplificatore operazionale (Op. Amp) è un due porte, che sembra sbilanciato data la sua rappresentazione circuitale, ma può funzionare solamente se 
+viene polarizzato da due morsetti che vengono omessi dalla sua normale rappresentazione. Poiché è valido il principio di sovrapposizione degli effetti della polarizzazione 
+e del segnale, è possibile studiare solamente il segnale, senza trattare la polarizzazione dell'amplificatore. 
+
+
+In caso si studi anche la sua polarizzazione, l'amplificatore è collegato a due pile alimentate in continuo, connesse ad un piano comune, chiamato anche massa. Quando si analizza 
+solamente il segnale vengono sostituite ad un cortocircuito. 
+In forma circuitale si rappresenta dal simbolo:
+\begin{figure}[!h]
+    \centering
+    \subfloat[\centering Segnale]{{
+        \begin{circuitikz}
+            \draw (0,0) node[op amp] (amp){}
+            (-2,0.5)to[short,i=$i_1$,*-](amp.-)
+            (-2,-0.5)to[short,*-](amp.+)
+            (2,0)to[short,i_=$i_2$,*-](amp.out);
+            \draw[->](-2,-0.4)--(-2,0.4)node[midway, left]{$v_1$};
+            \draw[->](2,-1)node[ground]{}--(2,-0.1)node[midway, right]{$v_2$};
+        \end{circuitikz}
+    }}%
+    \qquad
+    \subfloat[\centering Polarizzazione]{{
+        \begin{circuitikz}
+            \draw (0,0) node[op amp, noinv input up] (amp){}
+            (-2,0.5)to[short,i=$i_1$,*-](amp.+)
+            (-2,-0.5)to[short,*-](amp.-)
+            (amp.out)to[short,-*](1.5,0);
+            \draw[->](-2,-0.4)--(-2,0.4)node[midway, left]{$v_1$};
+
+            \draw (2,0.5)node[ground]{}to[short](2,0.75)
+                    to[battery](0,0.75)
+                    to[short,*-](0,0.5);
+            \draw (0,-0.5) to[short,-*](0,-0.75)
+                    to[battery](2,-0.75)
+                    to[short](2,-1)node[ground]{};
+        \end{circuitikz}
+    }}%
+    \caption{Modello Circuitale Amplificatore Operazionale}
+    \label{fig:op-amp}
+\end{figure}
+\\
+Convenzionalmente la tensione e la corrente entranti nella porta $1$ sono entrambe nulle. Affinché le grandezze in uscita dalla porta $2$ siano non nulle, è necessaria un'amplificazione 
+infinita all'interno, per generare una forma indeterminata. Per cui rappresenta una forma ideale dell'amplificatore ideale. 
+
+
+
+\clearpage
 
 \end{document}
