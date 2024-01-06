@@ -1,0 +1,22 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw (4,0) to[sV=$E$] (0,0)
+                to[short,i=$\overline{I}$](0,1)
+                to[R=$R_2$](2,1)
+                to[C=$C$](4,1);
+    \draw (0,2) to[R=$R_1$] (2,2)
+                to[L=$L$](4,2)
+                to[short](4,0);
+    \draw (0,1) to[short](0,2);
+\end{circuitikz}
+\end{document}

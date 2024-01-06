@@ -1,0 +1,18 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw (7,2) to[generic=$z_{ab}$](11,2);
+    \draw (7,0) to[short](11,0);
+    \draw (8,2) to[generic=$z_{ac}$](8,0);
+    \draw (10,2) to[generic=$z_{ac}$](10,0);
+\end{circuitikz}
+\end{document}

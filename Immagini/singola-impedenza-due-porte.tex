@@ -1,0 +1,21 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw (0,0) to[short,i=$I_1$] (1,0)
+                to[generic=$z$] (3,0);
+    \draw (4,0) to[short,i_=$I_2$](3,0);
+    \draw (0,-1)to[short](4,-1);
+    \draw[->](-0.25,-1)--(-0.25,0)node[midway, left]{$V_1$};
+    \draw[->](4.25,-1)--(4.25,0)node[midway, right]{$V_2$};
+    \draw[-,very thick](1,0.25)--(3,0.25)--(3,-1.25)--(1,-1.25)--(1,0.25);
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,17 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \draw[->](-0.25,0)--(1.5,0)node[above]{$t$};
+    \draw[->](0,-0.25)--(0,1.5)node[right]{$u_{-1}(t)$};
+    \draw (0,1)node[left]{$1$}--(1.4,1);
+\end{tikzpicture}
+\end{document}

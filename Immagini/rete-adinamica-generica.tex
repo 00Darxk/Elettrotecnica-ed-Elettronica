@@ -1,0 +1,20 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw[-](0,-0.5)--(3,-0.5)--(3,2.5)--(0,2.5)--(0,-0.5);
+    \draw(0.5,0)to[R](0.5,2);
+    \draw(1.5,0)to[european voltage source](1.5,2);
+    \draw(2.5,0)to[european current source](2.5,2);
+    \draw(3,0)to[short,-*](3.5,0)node[below right]{$B$};
+    \draw(3,2)to[short,-*](3.5,2)node[above right]{$A$};
+\end{circuitikz}
+\end{document}

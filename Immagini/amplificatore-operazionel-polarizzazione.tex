@@ -1,0 +1,28 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+
+\begin{circuitikz}
+    \draw (0,0) node[op amp, noinv input up] (amp){}
+    (-2,0.5)to[short,i=$i_1$,*-](amp.+)
+    (-2,-0.5)to[short,*-](amp.-)
+    (amp.out)to[short,-*](1.5,0);
+    \draw[->](-2,-0.4)--(-2,0.4)node[midway, left]{$v_1$};
+
+    \draw (2,0.5)node[ground]{}to[short](2,0.75)
+            to[battery](0,0.75)
+            to[short,*-](0,0.5);
+    \draw (0,-0.5) to[short,-*](0,-0.75)
+            to[battery](2,-0.75)
+            to[short](2,-1)node[ground]{};
+\end{circuitikz}
+
+\end{document}

@@ -1,0 +1,59 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \draw[->,very thick]plot[smooth, domain=0:1.5](\x,{0.25*(\x)*(\x-3)});
+    \draw[-,very thick]plot[smooth, domain=1.5:3](\x,{(0.25*\x)*(\x-3)});
+
+    \draw[->,very thick]plot[smooth, domain=0:1.5](\x,{-0.25*(\x)*(\x-3)});
+    \draw[-,very thick]plot[smooth, domain=1.5:3](\x,{-0.25*(\x)*(\x-3)});
+
+    \draw[->,very thick]plot[smooth, domain=0:1.5](\x,{0.5*(\x)*(\x-3)});
+    \draw[-,very thick]plot[smooth, domain=1.5:3](\x,{(0.5*\x)*(\x-3)});
+
+    \draw[->,very thick]plot[smooth, domain=0:1.5](\x,{-0.5*(\x)*(\x-3)});
+    \draw[-,very thick]plot[smooth, domain=1.5:3](\x,{-0.5*(\x)*(\x-3)});
+
+    \draw[<->,very thick](0,-0.5)--(0,0.5);
+    \draw[very thick](0,-0.5)--(0,-1);
+    \draw[very thick](0,0.5)--(0,1);
+
+    \draw[>-<,very thick](3,-0.5)--(3,0.5);
+    \draw[very thick](3,-0.5)--(3,-1);
+    \draw[very thick](3,0.5)--(3,1);        
+
+    \node[sum](+)at(0,0){$+$};
+    \node[sum](-)at(3,0){$-$};
+
+    \filldraw[circle](2,1)node[above]{$P$}circle(1pt);
+    \draw[->,very thick](+.45)--(2,1)node[below]{$\vec{E}_2$};
+    \draw[->,very thick](2,1)node[right]{$\vec{E}_1$}--(-.135);
+    \draw[->,very thick](2,1)--(2.8,0.6)node[above]{$\vec{E}_P$};
+
+    \draw[->, very thick](+.0)--(1.5,0);
+    \draw[-,very thick](1.5,0)--(-.180);
+
+    \draw[->,very thick](+.180)--(-0.5,0);
+    \draw[very thick](-0.5,0)--(-1,0);
+    \draw[-<,very thick](-.0)--(3.5,0);
+    \draw[very thick](3.5,0)--(4,0);
+
+    \draw[->,very thick](+.135)--(-0.375,0.375);
+    \draw[->,very thick](+.225)--(-0.375,-0.375);
+    \draw[-,very thick](-0.375,0.375)--(-0.75,0.75);
+    \draw[-,very thick](-0.375,-0.375)--(-0.75,-0.75);
+
+    \draw[-<,very thick](-.45)--(3.375,0.375);
+    \draw[-<,very thick](-.315)--(3.375,-0.375);
+    \draw[-,very thick](3.375,0.375)--(3.75,0.75);
+    \draw[-,very thick](3.375,-0.375)--(3.75,-0.75);
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,17 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw (0,0) to[R=$R$,*-](2,0)
+                to[C=$C$,i=$\overline{I}$,-*](4,0);
+    \draw[->](3.75,-0.5)--(0.25,-0.5)node[midway, below]{$\overline{V}$};
+\end{circuitikz}
+\end{document}

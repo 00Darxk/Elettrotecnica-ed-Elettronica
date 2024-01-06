@@ -1,0 +1,21 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \draw[->](-1.25,0)--(0.5,0)node[right]{$V$};
+    \draw[->](0,-1)--(0,0.5)node[right]{$I$};
+
+    \draw[red](0,0)--(-1,0)node[above]{$V_Z$}--(-1.125,-1);
+
+    \draw (-0.875,-1.25)to[battery2=$V_Z$,american voltages,-*](-1.25,-1.25);
+    \draw (-0.875,-1.25)to[R=$R_d$,-*](0.125,-1.25);
+\end{tikzpicture}    
+\end{document}

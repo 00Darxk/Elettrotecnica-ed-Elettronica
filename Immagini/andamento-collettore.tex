@@ -1,0 +1,20 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+
+         
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \draw[->](-0.25,0)--(2,0)node[right]{$V_{CE}$};
+    \draw[->](0,-0.25)--(0,1.25)node[right]{$I_C$};
+
+    \draw[blue, smooth, domain=0:2]plot (\x,{0.2*(1-e^(-2*\x))});
+    \draw[blue, smooth, domain=0:2]plot (\x,{0.4*(1-e^(-2*\x))});
+    \draw[blue, smooth, domain=0:2]plot (\x,{0.6*(1-e^(-2*\x))});
+    \draw[blue, smooth, domain=0:2]plot (\x,{0.8*(1-e^(-2*\x))});
+    \draw[blue, smooth, domain=0:2]plot (\x,{(1-e^(-2*\x))});
+
+\end{tikzpicture}
+\end{document}

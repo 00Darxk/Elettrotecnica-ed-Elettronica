@@ -1,0 +1,29 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+
+         
+\begin{document}
+\begin{circuitikz}[voltage dir=old]
+    \draw (0,0) node[npn](Q){};    
+    \draw (Q.E) to[short,i=$I_E$](0,-2)
+                to[short](-5,-2);
+    \draw (0,-2)to[short](0,-2.125)node[ground]{};
+
+    \draw (-5,0)to[battery2=$E_B$,american voltages](-5,-2);
+    \draw (-5,0)to[sV=$v_S(t)$](-3.5,0)
+                to[R=$R_B$,v=$V_B$,i=$I_B$](Q.B);
+    
+    \draw (0,3) to[R=$R_C$,v=$V_C$,i=$I_C$](Q.C);
+    \draw (0,3) to[short](2,3)
+                to[battery2=$E_C$,american voltages](2,-2)
+                to[short](0,-2);
+
+    \draw[->](-0.125,-0.75)to[out=180,in=270](-0.75,-0.125);
+    \node at(-0.75,-0.75){$V_{BE}$};
+    \draw[->](0.125,-0.75)to[out=60,in=300](0.125,0.75);
+    \node at(0.75,0){$V_{CE}$};
+\end{circuitikz}
+\end{document}

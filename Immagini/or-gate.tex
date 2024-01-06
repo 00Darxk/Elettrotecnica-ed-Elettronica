@@ -1,0 +1,16 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+
+         
+\begin{document}
+\begin{circuitikz}
+    \node[ieeestd or port](or)at(0,0){};
+    \draw (or.down)--(0,-0.875)node[below]{GND};
+    \node[right]at(or.out){OUT};
+    \node[left]at(or.in 1){IN1};
+    \node[left]at(or.in 2){IN2};
+\end{circuitikz}
+\end{document}

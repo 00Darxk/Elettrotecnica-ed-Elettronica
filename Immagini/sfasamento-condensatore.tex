@@ -1,0 +1,18 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{tikzpicture}
+    \draw[->](0,-0.25)--(0,1.25)node[above]{$\Im$};
+    \draw[->](-0.5,0)--(2.5,0)node[right]{$\Re$};
+    \draw[->](0,0)--(2,0)node[above]{$\overline V$};
+    \draw[->](0,0)--(0,1)node[right]{$\overline{I}$};
+\end{tikzpicture}
+\end{document}

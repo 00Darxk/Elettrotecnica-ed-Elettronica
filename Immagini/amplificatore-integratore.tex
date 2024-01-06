@@ -1,0 +1,26 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+
+         
+\begin{document}
+    \begin{circuitikz}
+        \ctikzset{bipoles/cuteswitch/thickness=0.5}
+        \draw (0,0) node[op amp] (amp){}
+        (-2,-2)node[ground]{}to[short](-2,-0.5)
+                to[short](-1.5,-0.5)
+                to[short](amp.+)
+        (amp.out)to[short,-*](2.5,0)node[right]{$v_o$}
+        (1.75,0)to[short](1.75,1.5)
+                to[C=$C$](-1.75,1.5)
+                to[short](-1.75,0.5)
+                to[short](amp.-)
+        (-1.75,1.5)to[short](-1.75,2.5)
+                to[cute open switch](-0.75,2.5)
+                to[R=$R_S$](1.75,2.5)
+                to[short](1.75,1.5)
+        (-1.75,0.5)to[R=$R_1$,-*](-3.5,0.5)node[above]{$v_{in}$};
+    \end{circuitikz}
+\end{document}

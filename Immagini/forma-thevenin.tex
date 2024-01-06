@@ -1,0 +1,19 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}[voltage dir=old]
+    \draw (0,0) to[short, *-, i=$i$](1,0)
+                to[R=$R_{th}$,v=$v_R$](3,0);
+    \draw (5.75,0) to[short,*-](5,0)
+                to[european voltage source=$E_{th}$](3,0);
+    \draw[<-](1,-1.25)--(5,-1.25)node[midway, below]{$v$};
+\end{circuitikz}
+\end{document}

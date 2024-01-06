@@ -1,0 +1,28 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{tikzpicture}[scale=2]
+    \draw[->](2.5,0)--(5,0)node[right]{$t$};
+    \draw[->](2.75,-0.25)--(2.75,1.25)node[right]{$R_Li$};
+    \draw[red,smooth, domain=2.75:3]plot (\x,{sin(2*pi*(\x-2.75) r)});    
+    \draw[red,smooth, domain=3:3.4]plot (\x,{2-e^(1/2.809*(\x-3))});
+    \draw[red,smooth, domain=3.41:3.5]plot (\x,{sin(2*pi*(\x-3.25) r)});
+    \draw[red,smooth, domain=3.5:3.9]plot (\x,{2-e^(1/2.809*(\x-3.5))});
+    \draw[red,smooth, domain=3.91:4]plot (\x,{sin(2*pi*(\x-2.75) r)});
+    \draw[red,smooth, domain=4:4.4]plot(\x,{2-e^(1/2.809*(\x-4))});
+    \draw[red,smooth, domain=4.41:4.5]plot (\x,{sin(2*pi*(\x-4.25) r)});
+    \draw[red,smooth, domain=4.5:4.9]plot(\x,{2-e^(1/2.809*(\x-4.5))});
+
+    \draw[dashed](2.75,0.835)--(4.9,0.835);
+    \draw[dashed](2.75,1)--(4.9,1);
+    \draw[|-|](4.95,0.835)--(4.95,1)node[midway, right]{$\Delta V$};
+\end{tikzpicture}
+\end{document}

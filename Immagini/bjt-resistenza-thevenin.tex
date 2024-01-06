@@ -1,0 +1,19 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+        
+\begin{document}
+\begin{circuitikz}[voltage dir=old]
+    \draw(-2,-2)to[short,-*](-1.5,-2)node[above]{GND};
+    \draw (-2,-2.125)node[ground]{}to[short](-2,-2)
+                to[R=$R_1$](-2,0)
+                to[R=$R_2$](-2,2)
+                to[short](0,2);
+    \draw (-2,0)to[short,-*](-1.5,0)node[above]{$B$};
+    
+    \draw (2,-2.125)node[ground]{}to[short](2,2) 
+                to[short](0,2);
+    \draw (0,2) to[short,-*](0,1.5)node[right]{$C$};
+\end{circuitikz}
+\end{document}

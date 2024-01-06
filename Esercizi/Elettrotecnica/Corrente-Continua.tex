@@ -66,7 +66,7 @@
 \section{Esercitazione del 27 Novembre: Circuiti del Primo Ordine}
 
 \subsection{Esercizio 6.3}
-Determinare l'espressione della tensione a vuoto $v_0(t)$ del seguente circuito:
+Determinare l'espressione della tensione a vuoto $v_o(t)$ del seguente circuito:
 \begin{center}
     \begin{circuitikz}
         \draw (6,0)node[right]{$-$} to[short,*-] (0,0)
@@ -78,7 +78,7 @@ Determinare l'espressione della tensione a vuoto $v_0(t)$ del seguente circuito:
         \draw (2,2)node[above left]{$A$} to[short,*-] (2,3)
                     to[C=$C$](5.8,3)node[above]{$v_C(0^-)=4\,V$}
                     to[short,-*](5.8,2)node[above right]{$B$};
-        \draw[->] (6,0.25)--(6,1.75)node[midway, right]{$v_0(t)$};
+        \draw[->] (6,0.25)--(6,1.75)node[midway, right]{$v_o(t)$};
     \end{circuitikz}
 \end{center}
 \begin{gather*}
@@ -138,13 +138,13 @@ in questo specifico caso. Si ottiene quindi:
 Dopo aver sostituito il condensatore con un generatore di tensione equivalente si considera una maglia dove sia presente la tensione incognita, per applicare il 
 secondo principio di Kirchhoff:
 \begin{gather*}
-    E-v_C(t)=v_0(t)\\
-    10-v_C(t)=v_0(t)\\
-    10+\displaystyle\frac{8}{3}e^{-\frac{3}{8}t}-\frac{20}{3}\,V=v_0(t)
+    E-v_C(t)=v_o(t)\\
+    10-v_C(t)=v_o(t)\\
+    10+\displaystyle\frac{8}{3}e^{-\frac{3}{8}t}-\frac{20}{3}\,V=v_o(t)
 \end{gather*}
 La tensione a vuoto è quindi:
 \begin{gather}
-    v_0(t)=\displaystyle\frac{8}{3}e^{-\frac{3}{8}t}+\frac{10}{3}\,V
+    v_o(t)=\displaystyle\frac{8}{3}e^{-\frac{3}{8}t}+\frac{10}{3}\,V
 \end{gather}
 
 \subsection{Esercizio 6.4}
@@ -323,7 +323,7 @@ La corrente non cambia per il resistore in parallelo al lato dove fluisce $i_0$.
 \end{gather}
 
 \subsection{Esercizio 6.2}
-Calcolare la tensione a vuoto $v_0(t)$ della seguente rete:
+Calcolare la tensione a vuoto $v_o(t)$ della seguente rete:
 \begin{center}
     \begin{circuitikz}
         \draw (8,0)node[right]{$-$} to[short,*-](0,0)
@@ -334,7 +334,7 @@ Calcolare la tensione a vuoto $v_0(t)$ della seguente rete:
         \draw (4,2) to[short] (6,2)
                     to[R=$R_2$](6,0);
         \draw (6,2) to[short,-*](8,2)node[right]{$+$};   
-        \draw[->] (8,0.25)--(8,1.75)node[midway, right]{$v_0(t)$};
+        \draw[->] (8,0.25)--(8,1.75)node[midway, right]{$v_o(t)$};
     \end{circuitikz}
 \end{center}
 \begin{gather*}
@@ -356,7 +356,7 @@ La tensione ai capi del condensatore è quindi:
 \end{gather*}
 Il condensatore è montato in parallelo ai morsetti in entrata al circuito, per cui l'espressione della tensione a vuoto coincide con l'espressione del condensatore:
 \begin{gather*}
-    v_0(t)=5(1-e^{-2t})\,V
+    v_o(t)=5(1-e^{-2t})\,V
 \end{gather*}
 
 \subsection{Esercizio 6.1}

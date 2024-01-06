@@ -1,0 +1,21 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw (2,0)node[below]{$in_2$} to[short,*-](0,0)
+                to[european voltage source=$E_{th}$](0,1.5)
+                to[R=$R_{eq}$](0,3)
+                to[short,-*](2,3)node[above]{$in_1$};
+    \draw(2.5,0)to[R=$R_5$](2.5,3);
+    \draw[->](2.5,0)--(2.25,0);
+    \draw[->](2.5,3)--(2.25,3);
+\end{circuitikz}
+\end{document}

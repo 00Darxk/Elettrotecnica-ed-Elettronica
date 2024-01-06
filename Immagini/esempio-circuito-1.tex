@@ -1,0 +1,22 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw (5,0)node[right]{$-$} to[short,*-](0,0)
+                to[european voltage source=$e(t)$](0,4)
+                to[R=$R_1$](2,4)
+                to[R=$R_3$](4,4)
+                to[short,-*](5,4)node[right]{$+$};
+    \draw (4,0) to[C=$C$](4,4);
+    \draw (2,0) to[closing switch](2,2)
+                to[R=$R_2$](2,4);
+\end{circuitikz}
+\end{document}

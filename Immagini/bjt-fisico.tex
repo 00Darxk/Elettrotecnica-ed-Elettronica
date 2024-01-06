@@ -1,0 +1,29 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+
+         
+\begin{document}
+\begin{circuitikz}[voltage dir=RP]
+    \draw[very thick] (0,0)--(8,0)--(8,3)--(0,3)--(0,0);
+
+    \draw(3,0)node[below]{$J_E$}--(3,3);
+    \draw(5,3)--(5,0)node[below]{$J_C$};
+
+    \draw(8,1.5)to[short,-*](8.5,1.5)node[right]{$C$}
+                to[short,i=$I_C$](8.5,-1.5)
+                to[battery2=$V_{CB}$,american voltages,-*](4,-1.5)node[below]{$B$}
+                to[battery2=$V_{EB}$,american voltages](-0.5,-1.5)
+                to[short,i=$I_E$,-*](-0.5,1.5)node[left]{$E$}
+                to[short](0,1.5);
+    \draw (4,0) to[short,i=$I_B$](4,-1.5);
+    \node at(1.45,1.9){P};
+    \node at(6.55,1.9){P};
+    \node at(4,0.5){N};
+    \draw[->] (1.75,2)node[above]{$I_E$}--(6.25,2)node[above]{$\alpha I_E$};
+    \draw[->] (1.75,1.875)to[out=0,in=90](3.875,0.75)node[left]{$(1-\alpha)I_E$};
+    %\draw[->] (4.125,0.75)to[out=90,in=180](6.25,1.875)node[below]{$I_{CBO}$};
+\end{circuitikz}
+\end{document}

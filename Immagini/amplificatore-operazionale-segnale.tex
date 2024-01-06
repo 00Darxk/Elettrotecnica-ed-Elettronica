@@ -1,0 +1,20 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+    \begin{circuitikz}
+        \draw (0,0) node[op amp] (amp){}
+        (-2,0.5)to[short,i=$i_1$,*-](amp.-)
+        (-2,-0.5)to[short,*-](amp.+)
+        (2,0)to[short,i_=$i_2$,*-](amp.out);
+        \draw[->](-2,-0.4)--(-2,0.4)node[midway, left]{$v_1$};
+        \draw[->](2,-1)node[ground]{}--(2,-0.1)node[midway, right]{$v_2$};
+    \end{circuitikz}
+\end{document}

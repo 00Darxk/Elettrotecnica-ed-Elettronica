@@ -1,0 +1,34 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw(-1,0)to[short, *-,i_=$i$](0,0)
+        to[european voltage source](2,0)
+        to[european voltage source](4,0);
+    \draw[dashed](4,0)--(5,0);
+    \draw(5,0)to[european voltage source](7,0)
+        to[short,-*](8,0);
+
+    \draw[->, thick]plot[smooth, domain=4.30:4.70](\x,{-1+(0.04-(\x-4.5)^2)^0.5});
+    \draw[-, thick]plot[smooth, domain=4.30:4.60](\x,{-1-(0.04-(\x-4.5)^2)^0.5});  
+    \draw[dashed](-1,0)--(-1,-2);
+    \draw[dashed](8,0)--(8,-2);
+
+    \draw[->](8,-2)--(-1,-2)node[midway, below]{$v$};
+    \draw[<-](0.5,-0.5)--(1.5,-0.5)node[midway, below]{$v_1$};
+    \draw[<-](2.5,-0.5)--(3.5,-0.5)node[midway, below]{$v_2$};
+    \draw[<-](5.5,-0.5)--(6.5,-0.5)node[midway, below]{$v_n$};
+
+    \draw[->](0.5,0.5)--(1.5,0.5)node[midway, above]{$e_{g1}$};
+    \draw[<-](2.5,0.5)--(3.5,0.5)node[midway, above]{$e_{g2}$};
+    \draw[->](5.5,0.5)--(6.5,0.5)node[midway, above]{$e_{gn}$};
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,24 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+
+         
+\begin{document}
+    \begin{circuitikz}
+        \draw (0,0) node[op amp] (amp){}
+        (amp.out)to[short](1.75,0)
+        (1.75,0)to[short](1.75,1.5)
+                to[generic=$z$](-1.75,1.5)
+                to[short](-1.75,0.5)
+                to[short](amp.-)
+        (1.75,0)to[short](1.75,-1.5)
+            to[R=$R$](-1.75,-1.5)
+            to[short](-1.75,-0.5)
+            to[short](amp.+)
+        (-1.75,-1.5)to[R=$R$](-1.75,-3.5)node[ground]{}
+        (-1.75,-3.25)to[short,-*](-2.25,-3.25)node[left]{IN1'}
+        (-2.25,0.5)node[above]{$v_{in}$}node[left]{IN1}to[short,*-](-1.75,0.5);
+    \end{circuitikz}
+\end{document}

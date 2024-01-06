@@ -1,0 +1,16 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw (0,0)node[left]{IN2} to[empty diode=$D_2$,*-](3,0)
+                to[short,-*](4.5,0)node[right]{OUT};
+    \draw (0,1.5)node[left]{IN1} to[empty diode=$D_1$,*-](3,1.5)
+                to[short](3,-0.25)        
+                to[R=$R$](3,-1.5)node[ground]{};
+\end{circuitikz}
+\end{document}

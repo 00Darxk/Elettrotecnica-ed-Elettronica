@@ -1,0 +1,29 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+
+         
+\begin{document}
+    \begin{circuitikz}
+        \draw (0,0) node[op amp] (amp){}
+        (-2,-2)node[ground]{}to[short](-2,-0.5)
+                to[short](-1.5,-0.5)
+                to[short](amp.+)
+        (amp.out)to[short,-*](2.5,0)node[right]{$v_o$}
+        (1.75,0)node[above left]{$B$}to[short,d-](1.75,1.5)
+                to[R=$R$](-1.75,1.5)
+                to[short,-d](-1.75,0.5)node[above right]{$A$}
+                to[short](amp.-)
+        (-3.5,-4)node[ground]{}to[european voltage source=$v_{in,n}$](-3.5,-2)
+                to[R=$R_n$](-3.5,0.5)
+                to[short](-1.75,0.5)
+        (-7,-4)node[ground]{}to[european voltage source=$v_{in,1}$](-7,-2)
+                to[R=$R_1$](-7,0.5)
+                to[short](-6.5,0.5);
+
+        \draw[dashdotted](-6.5,0.5)--(-3.5,0.5);
+        \draw[dashed](-6.75,-2)--(-3.75,-2);
+    \end{circuitikz}
+\end{document}

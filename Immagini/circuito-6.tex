@@ -1,0 +1,24 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw (0,0) to[short] (2,0)
+                to[short] (4,0)
+                to[R=$G_3$](4,2)node[right]{$B$}
+                to[short](4,4)
+                to[R=$G_2$](2,4)
+                to[short](2,2)node[above left]{$A$}
+                to[short](0,2);
+    \draw (0,0) to[european current source=$I_g$](0,2);
+    \draw (2,2) to[R=$G_1$,i=$I_x$](2,0)node[below]{$C$};
+    \draw (2,2) to[european controlled current source=$2I_x$](4,2);
+\end{circuitikz}
+\end{document}

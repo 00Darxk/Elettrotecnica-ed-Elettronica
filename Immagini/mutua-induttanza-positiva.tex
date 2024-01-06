@@ -1,0 +1,25 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw (0,0) to[short,i=$i_1$,*-](1,0);
+    \draw (0,-2)to[short,*-](1,-2)
+                to[L=$L_1$](1,0);
+    \draw (2.5,0) to[short,i_=$i_2$,*-](1.5,0)
+                to[L=$L_2$](1.5,-2)
+                to[short,-*](2.5,-2);
+    \draw[->](0,-1.75)--(0,-0.25)node[midway, left]{$v_1$};
+    \draw[->](2.5,-1.75)--(2.5,-0.25)node[midway, right]{$v_2$};
+
+    \filldraw[red](1.1,-0.1)circle(1pt);
+    \filldraw[orange](1.4,-0.1)circle(1pt);
+\end{circuitikz}
+\end{document}

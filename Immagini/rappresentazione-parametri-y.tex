@@ -1,0 +1,36 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw (1,2)to[short,i=$I_1$,-*](2,2)
+                to[short](3,2);
+    \draw (3,0) to[generic=$y_{11}$](3,2);
+    \draw (3,0) to[short,-*](2,0)
+                to[short](1,0);
+    \draw (3,2) to[short](4,2)
+                to[european controlled current source=$y_{12}V_2$](4,0)
+                to[short](3,0);
+
+    \draw (9,2)to[short,i_=$I_2$,-*](8,2)
+                to[short](7,2)
+                to[generic=$y_{22}$](7,0)
+                to[short,-*](8,0)
+                to[short](9,0);
+    \draw (7,2) to[short](6,2)
+                to[european controlled current source=$y_{21}V_1$](6,0)
+                to[short](7,0);
+
+    \draw[very thick](2.2,2.25)--(2.2,-0.25)--(7.8,-0.25)--(7.8,2.25)--(2.2,2.25);
+
+    \draw[->](0.75,0)--(0.75,2)node[midway, left]{$V_1$};
+    \draw[->](9.25,0)--(9.25,2)node[midway, right]{$V_2$};
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,21 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw(-0.5,0)to[short, *-, i=$i$](0.5,0);
+    \draw[-](0.5,-0.75)--(0.5,0.75);
+    \draw(0.5,0.75)to[R=$G_{no}$,i=$i_{G}$](4,0.75);
+    \draw(4,-0.75)to[european current source=$I_{no}$](0.5,-0.75);
+    \draw[-](4,-0.75)--(4,0.75);
+    \draw(4,0)to[short,-*](5,0);
+    \draw[->](4,-1.5)--(0.5,-1.5)node[midway, below]{$v$};
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,21 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw (0,0)node[left]{IN2} to[empty diode=$D_2$,*-](3,0);
+    \draw (5.5,0) node[npn](Q){};
+    \draw (3,0) to[R=$R_2$](Q.B);
+    \draw (Q.E) to[short](5.5,-1.5)node[ground]{};
+    \draw (Q.C) to[short](5.5,1.5)
+                to[short,-*](6.5,1.5)node[right]{OUT};
+    \draw (5.5,1.5)to[R=$R_3$](5.5,3.25)node[vcc]{VCC};
+    \draw (0,1.5)node[left]{IN1} to[empty diode=$D_1$,*-](3,1.5)
+                to[short](3,-0.25)        
+                to[R=$R_1$](3,-1.5)node[ground]{};
+\end{circuitikz}
+\end{document}

@@ -1,0 +1,23 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw (-0.5,0) to[short,*-,i=$i_k$](0.5,0)
+                to[short](0.5,-0.5)
+                to[european current source=$i_{gk}$](2.5,-0.5)
+                to[short](2.5,0)
+                to[short,-*](3.5,0);
+    \draw(0.5,0)to[short](0.5,0.5) 
+                to[R=$G_k$](2.5,0.5)
+                to[short](2.5,0);
+    \draw[->](0.5,1.25)--(2.5,1.25)node[midway, above]{$v_k$};
+\end{circuitikz}
+\end{document}
