@@ -1,0 +1,17 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+        
+\begin{document}
+\begin{circuitikz}[voltage dir=old]
+    \draw 
+    (0,2)node[left]{$B$}to[R=$R_x$,i=$i_B$,*-](2,2)
+        to[R=$R_\pi$,v=$v$,i=$i_B$](2,0)
+        to[short](3,0)
+        to[short,-*](3,-0.5)node[below]{$E$}
+    (5,2)node[right]{$C$}to[short,*-](4,2)
+        to[european current source=${\beta i_B=G_mv}$](4,0)
+        to[short](3,0);
+\end{circuitikz}
+\end{document}

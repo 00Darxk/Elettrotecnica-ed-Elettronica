@@ -1,0 +1,30 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+
+\tikzset{block/.style = {draw, fill=white, very thick, rectangle, minimum height=1cm, minimum width=2cm},
+         lblock/.style={draw,fill=white,very thick, rectangle, minimum height=3cm, minimum width=1cm},
+         sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
+
+         
+\begin{document}
+\begin{circuitikz}
+    \draw (1,2)node[above]{$B$} to[R=$h_{ie}$,i=$i_B$,*-](3.5,2)
+          (1,0)node[left]{$E$} to[short,*-](3.5,0)
+          (3.5,0)to[european controlled voltage source=$h_{re}v_C$](3.5,2);
+    \draw[->](1,0.25)--(1,1.75)node[midway, left]{$v_B$};
+    \draw (3.5,0)to[short](5,0)
+          (4.25,0)to[short](4.25,-0.25)node[ground]{}
+          (8,2)node[above]{$C$}to[short,*-](7,2)
+                to[short](6,2)
+          (6.5,2) to[R=$\displaystyle\frac{1}{h_{oe}}$](6.5,0)
+          (6,0) to[short](7,0)
+                to[short,-*](8,0)node[right]{$E$}
+          (6,2) to[short](5,2)
+                to[european controlled current source=$h_{fe}i_B$](5,0)
+                to[short](6,0);
+
+    \draw[->](8,0.25)--(8,1.75)node[midway, right]{$v_C$};
+\end{circuitikz}
+\end{document}

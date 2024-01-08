@@ -19,7 +19,6 @@
 \setlength{\headheight}{12.0pt}
 \addtolength{\topmargin}{-12.0pt}
 
-%% segnati con un doppio segno percentuale ("%%") le correzioni o inserimenti da apportare al testo
 
 \hypersetup{
     colorlinks=true,
@@ -33,7 +32,7 @@
          sum/.style= {draw, fill=white, very thick, circle, node distance=0.5cm}}
 
 
-\title{Esercizi Svolti su Reti Dinamiche nel Dominio di Laplace}
+\title{Esercizi Svolti sul Dominio di Laplace}
 \author{Giacomo Sturm}
 \date{AA: 2023/2024 - Ing. Informatica}
 
@@ -67,7 +66,7 @@
 
 \subsection{Esercizio 2.5}
 
-Calcolare la tensione ai capi dei morsetti $v_o(t)$ del seguente cirucito, dopo la commutazione da $A$ e $B$: 
+Calcolare la tensione ai capi dei morsetti $v_o(t)$ del seguente circuito, dopo la commutazione da $A$ e $B$: 
 
 \begin{center}
     \begin{circuitikz}
@@ -158,6 +157,105 @@ Corrisponde alla tensione ai capi del condensatore, e coincide alla tensione ai 
 espressione è valida solo per un tempo $t\geq0^+$:
 \begin{equation}
     v_o(t)=(36e^{-\frac{2}{3}t}-24e^{-t})u_{-1}(t)
+\end{equation}
+
+\section{Esercizi Svolti l'8 Gennaio}
+
+\subsection{Esercizio 2.7}
+
+Determinare l'espressione della corrente $i_L(t)$, dopo la commutazione, del seguente circuito:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)to[european voltage source=$12\,V$](0,2)node[above right]{${t=0}$}
+        to[closing switch](2,2)
+        to[R=$1\,\Omega$](4,2)
+        to[R=$1\,\Omega$](6,2)
+        to[L=$1\,H$,i=$i_L(t)$](6,0)
+        to[short](0,0)
+        (4,0)to[C=$1\,F$](4,2);
+    \end{circuitikz}
+\end{center}
+\begin{gather*}
+    i_L(0^-)=4\,A\\
+    v_C(0^-)=8\,V
+\end{gather*}
+
+Si rappresenta il circuito equivalente nel dominio di Laplace:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) to[european voltage source=$\displaystyle\frac{12}{s}$](0,4)
+        to[R=$1$](2,4)
+        (0,0)to[short](2,0)
+        to[european voltage source=$\displaystyle\frac{8}{s}$](2,2)
+        to[C=$-\displaystyle\frac{1}{s}$](2,4)
+        to[R=$1$](4,4)
+        to[L=$s$](4,2)
+        to[european voltage source=$4$](4,0)
+        to[short](2,0);
+        \draw[->](2.5,0.25)--(2.5,3.75)node[midway, left]{$V_C(s)$};
+    \end{circuitikz}
+\end{center}
+Si risolve mediante il metodo dei nodi per avere direttamente la trasformata di $i_L(t)$:
+\begin{gather*}
+    \begin{bmatrix}
+        1+\displaystyle\frac{\strut 1}{\strut s}&\displaystyle-\frac{\strut 1}{\strut s}\\ \displaystyle-\frac{\strut 1}{\strut s}&\displaystyle\frac{\strut 1}{\strut s}+s+1
+    \end{bmatrix}\begin{bmatrix}
+        I_{m_1}(s)\\I_{m_2}(s)
+    \end{bmatrix}=\begin{bmatrix}
+        \displaystyle\frac{\strut 12}{\strut s}-\frac{\strut 8}{\strut s}\\ \displaystyle\frac{\strut 8}{\strut s}+4
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        \displaystyle\frac{\strut s+1}{\strut s}&\displaystyle-\frac{\strut 1}{\strut s}\\ \displaystyle-\frac{\strut 1}{\strut s}&\displaystyle\frac{\strut 1+s(s+1)}{\strut s}
+    \end{bmatrix}\begin{bmatrix}
+        I_{m_1}(s)\\I_{m_2}(s)
+    \end{bmatrix}=\begin{bmatrix}
+        \displaystyle\frac{\strut 4}{\strut s}\\ \displaystyle\frac{\strut 4(s+2)}{\strut s}
+    \end{bmatrix}
+\end{gather*}
+Si ricava la corrente della seconda maglia tramite il metodo di Cramer:
+\begin{gather*}
+    I_{m_2}(s)=\displaystyle\frac{s^2}{(s+1)+s(s+1)^2-1}\begin{vmatrix}
+        \displaystyle\frac{\strut s+1}{\strut s}&\displaystyle\frac{\strut 4}{\strut s}\\ \displaystyle-\frac{\strut 1}{\strut s}
+        &\displaystyle\frac{\strut 4(s+2)}{\strut s}
+    \end{vmatrix}\\
+    I_{m_2}(s)=\displaystyle\frac{s^2}{(s+1)+s(s+1)^2-1}\frac{4+(8s+8+4s^2+4s)}{s^2}=\frac{4s^2+12s+12}{s(s^2+2s^1+2)}=I_L(s)
+\end{gather*}
+
+Si individuano ora i poli al finito di $I_L(s)$:
+\begin{gather*}
+    s_{p_1}=0\\
+    s_{p_{2,3}}=-{-1\pm\sqrt{1-2}}=-1\pm j\\
+    s_{p_2}=-1+j=s_{p_3}^*
+\end{gather*}
+Si calcolano i residui $A$ e $B$, poiché il residuo di $s_{p_3}$ è pari al coniugato del suo coniugato $B^*$, usando la formula per i residui:
+\begin{gather*}
+    I_L(s)=\displaystyle\frac{A}{s-s_{p_1}}+\frac{B}{s-s_{p_2}}+\frac{B^*}{s-s_{p_2}^*}\\
+    A=\lim_{s\to 0}\displaystyle\cancel{\frac{s}{s}}\frac{4s^2+12s+12}{s^2+2s+2}=\frac{12}{2}=6\\
+    B=\lim_{s\to -1+j}\displaystyle\cancel{\frac{s+1-j}{s+1-j}}\frac{4s^2+12s+12}{s(s+1+j)}=\frac{4(-1+j)^2+12(-1+j)+12}{(-1+j)(-1+j+1+j)}\\
+    \displaystyle\frac{1}{2j}\frac{4-4-8j-12+12j+12}{-1+j}=\frac{1}{2j}\frac{4j}{-1+j}\frac{-1-j}{-1-j}=\frac{1}{2j}\frac{4j(-1-j)}{2}\\    
+    \displaystyle\frac{1}{2j}(-2j+2)=\frac{1}{2j}\left(2\sqrt{2}e^{-j\frac{\pi}{4}}\right)
+\end{gather*}
+Ricordando l'espressione in fasori di un'entrata sinusoidale:
+\begin{gather*}
+    I_M\sin(\omega t+\beta)=\displaystyle\frac{I_M}{2j}e^{j\beta}e^{\omega t}-\frac{I_M}{2j}e^{-j\beta}e^{-\omega t}
+\end{gather*}
+La trasformata di Laplace di un esponenziale si esprime come:
+\begin{gather*}
+    \mathcal{L}\{Ae^{\sigma t}\}=\displaystyle\frac{A}{s-\sigma}
+\end{gather*}
+Per cui la trasformata di Laplace di una sinusoide smorzata si ottiene come:
+\begin{gather*}
+    \mathcal{L}\{e^{j\sigma t}I_M\sin(\omega t+\beta)\}=\mathcal{L}\left\{e^{j\sigma t}\left[\displaystyle\frac{I_M}{2j}e^{j\beta}e^{j\omega t}-\frac{I_M}{2j}e^{-j\beta}e^{-j\omega t}\right]\right\}\\
+    \mathcal{L}\left\{\displaystyle\frac{I_M}{2j}e^{j\beta}e^{(j\omega+\sigma) t}-\frac{I_M}{2j}e^{-j\beta}e^{-(j\omega+\sigma) t}\right\}=\frac{I_M}{2j}e^{\alpha t}\frac{1}{s-(j\omega +\sigma)}-\frac{I_M^*}{2j}e^{-\alpha t}\frac{1}{s-(-j\omega +\sigma)}
+\end{gather*}
+I residui ottenuti da $I_L(s)$ corrispondono quindi ad una funzione sinusoidale nel domino del tempo:
+\begin{gather*}
+    I_L(s)=\displaystyle\frac{6}{s}+\frac{2\sqrt{2}e^{-j\frac{\pi}{4}}}{2j}\frac{1}{s-(-1+j)}-\frac{2\sqrt{2}e^{j\frac{\pi}{4}}}{2j}\frac{1}{s-(-1-j)}\\
+    i_L(t)=6+2\sqrt{2}^{-t}\sin\left(\omega-\displaystyle\frac{\pi}{4}\right)
+\end{gather*}
+Poiché il circuito si chiude per $t=0$, si moltiplica l'espressione ottenuta per il segnale gradino:
+\begin{equation}
+    i_L(t)=\left[6+2\sqrt{2}^{-t}\sin\left(\omega-\displaystyle\frac{\pi}{4}\right)\right]u(t)
 \end{equation}
 
 

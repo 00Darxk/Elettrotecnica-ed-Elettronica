@@ -88,7 +88,7 @@ Determinare l'espressione della tensione a vuoto $v_o(t)$ del seguente circuito:
     C=1\,F
 \end{gather*}
 
-Per risolvere il circuito bisogna isolare l'elemento con memoria ed applciare il teorema di Thevenin o Northon sul circuito, considerando l'elemento con memoria esterno al 
+Per risolvere il circuito bisogna isolare l'elemento con memoria ed applicare il teorema di Thevenin o Norton sul circuito, considerando l'elemento con memoria esterno al 
 circuito. Dopo aver calcolato la tensione ai capi del condensatore, considerandolo in entrata ad un circuito nei morsetti $A$ e $B$, si può sostituire l'elemento con un 
 generatore di tensione equivalente. Per calcolare la tensione a vuoto tra i morsetti $A$ e $B$ si può riscrivere il circuito come:
 
@@ -180,13 +180,13 @@ La resistenza equivalente corrisponde a:
 \begin{gather*}
     R_{eq}=\displaystyle\frac{R_1R_2}{R_1+R_2}+R_3=8\,\Omega
 \end{gather*}
-Per cui la tensione ai capi del condesnatore corrisponde a:
+Per cui la tensione ai capi del condensatore corrisponde a:
 \begin{gather}
     v_C(t)=[v_C(0^-)]e^{-\frac{t}{R_{eq}C}}+E_{th}=2+e^{-2.5\,t}\,V
 \end{gather}
 
 \subsection{Esercizio 6.5}
-Determinare la tensione a vuoto del seguente cirucito:
+Determinare la tensione a vuoto del seguente circuito:
 \begin{center}
     \begin{circuitikz}
         \draw (8,0)node[right]{$-$} to[short,*-](0,0)
@@ -213,7 +213,7 @@ A regime l'induttore contiene tutta la carica erogata dal generatore:
 \begin{gather*}
     i_L(0^-)=2\,A
 \end{gather*}
-Si risovle mediante il metodo dei nodi:
+Si risolve mediante il metodo dei nodi:
 \begin{gather*}
     \begin{bmatrix}
         2&-1\\-1&2
@@ -238,12 +238,12 @@ Per cui la tensione equivalente della rappresentazione di Thevenin si ottiene co
 \begin{gather*}
     E_{th}=V_{A0}-V_{B0}=\displaystyle\frac{4}{3}\,V
 \end{gather*}
-Si misura la resistenza equivalente rendedno passiva la rete, si ottiene quindi:
+Si misura la resistenza equivalente rendendo passiva la rete, si ottiene quindi:
 \begin{gather*}
     R_{eq}=\displaystyle\frac{(R+R)R}{(R+R)+R}=\frac{4}{3}\,\Omega
 \end{gather*}
 
-La corrente di cortocircuito di una forma Thevenin collegata a vuoto corrispone alla corrente del generatore di una forma Northon equivalente:
+La corrente di cortocircuito di una forma Thevenin collegata a vuoto corrisponde alla corrente del generatore di una forma Norton equivalente:
 \begin{gather*}
     I_{no}=\displaystyle\frac{E_{th}}{R_{eq}}=1\,A
 \end{gather*}

@@ -1,0 +1,29 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+        
+\begin{document}
+\begin{circuitikz}[voltage dir=noold]
+    \draw (0,0) node[npn](Q){};    
+    \draw (Q.E) to[short](0,-2.5)node[above right]{$E$}
+    to[short,*-](0,-2.625)node[ground]{};
+
+    \draw (0,-2.5)to[short](-2,-2.5)
+                to[R=$R_1$](-2,0)
+                to[R=$R_2$](-2,2.5)
+                to[short](0,2.5);
+    \draw (-2,0)node[above right]{$B$}to[short,*-](Q.B);
+    \draw (-2,-2.5)to[short](-4,-2.5)
+                to[sV=$v_i$](-4,-0)
+                to[R=$R_i$](-2,0);
+    
+    \draw (0,2.5) to[R=$R_C$](Q.C);
+    \draw (0,2.5) to[short](2,2.5)
+                to[short](2,2)node[ground]{};
+    \draw (0,-2.5)to[short](2,-2.5)
+                to[R=$R_L$,v=$v_o$](2,0.5)
+                to[short,-*](0,0.5)node[above right]{$C$};
+
+\end{circuitikz}
+\end{document}

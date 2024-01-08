@@ -1,0 +1,28 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+        
+\begin{document}
+\begin{circuitikz}[voltage dir=old]
+    \draw (-1.5,0) to[sV=$v_i$](-1.5,3)
+        to[R=$R_i$](0.5,3)
+        to[R=${R_B=\displaystyle\frac{1}{R_1}+\frac{1}{R_2}}$](0.5,0)
+    (0.5,3)to[short,-*](2,3)node[above]{$B$}
+    to[R=$R_x$,i=$i_B$](4,3)
+    to[R=$R_\pi$,v=$v$,i=$i_B$](4,1)
+    to[short](5,1)
+    to[short,-*](5,0.5)node[right]{$E$}
+    to[short](5,-0.5)node[ground]{}
+    (5,0)to[short](8.5,0)
+    to[R=$R_C$](8.5,3)
+    to[short,-*](7.25,3)node[above]{$C$}
+    to[short](6,3)
+    to[european current source=${\beta i_B=G_mv}$](6,1)
+    to[short](5,1)
+    (8.5,3)to[short](10,3)
+    to[R=$R_L$,v=$v_o$](10,0)
+    to[short](8.5,0)
+    (-1.5,0)to[short](5,0);
+\end{circuitikz}
+\end{document}

@@ -3,7 +3,7 @@
 \usepackage{tikz}
 
 \begin{document}
-\begin{tikzpicture}[scale=1.75]
+\begin{tikzpicture}[scale=1.7]
     \draw[->](-0.25,0)--(2,0)node[above]{$V_{BE}$};
     \draw[->](0,-0.25)--(0,1.5)node[right]{$I_B$};
 
@@ -38,8 +38,8 @@
     \draw[blue, smooth, domain=3.5:4.5]plot (\x,{1.7*(1-e^(-2*(\x-3.5)))});
     \draw[magenta](3.5,1.25)node[left,black]{$\displaystyle\frac{E_C}{R_C}$}--(5,0)node[below,black]{$E_C$};
     \node[right]at(5.5,0.884){$I_B^*$};
-    \node[right]at(5.5,1.276){$I_B^*+\Delta I_B$};
-    \node[right]at(5.5,0.491){$I_B^*-\Delta I_B$};
+    \node[right]at(5.5,1.276){$I_B^*+\Delta I_B/2$};
+    \node[right]at(5.5,0.491){$I_B^*-\Delta I_B/2$};
 
 
     \filldraw[black](4.191,0.674)circle(0.5pt);    
