@@ -1,0 +1,519 @@
+\documentclass{article}
+
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{amsmath}
+\usepackage[includehead,nomarginpar]{geometry}
+\usepackage{graphicx}
+\usepackage{amsfonts} 
+\usepackage{verbatim}
+\usepackage{mathrsfs}  
+\usepackage{lmodern}
+\usepackage{braket}
+\usepackage{bookmark}
+\usepackage{circuitikz}
+\usepackage[italian]{babel}
+\usepackage{fancyhdr}
+\usepackage{romanbarpagenumber}
+
+\setlength{\headheight}{12.0pt}
+\addtolength{\topmargin}{-12.0pt}
+
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+}
+
+\renewcommand{\contentsname}{Indice}
+
+\title{Esercizi Svolti su Amplificatori Operazionali}
+\author{Giacomo Sturm}
+\date{AA: 2023/2024 - Ing. Informatica}
+
+
+\begin{document}
+
+\pagenumbering{Roman}
+
+\pagestyle{fancy}
+\fancyhead{}\fancyfoot{}
+\fancyhead[C]{Elettrotecnica ed Elettronica - Giacomo Sturm}
+\fancyfoot[C]{\thepage}
+
+\maketitle
+
+\vspace{10mm}
+
+\begin{center}
+    Sorgente del file LaTeX disponibile su \url{https://github.com/00Darxk/Elettrotecnica-ed-Elettronica}
+\end{center}
+
+\clearpage
+
+\tableofcontents
+
+\clearpage
+
+\pagenumbering{arabic}
+
+\section{Esercizi Svolti il 10 Gennaio}
+
+\subsection{Esercizio 1.1}
+
+Determinare la tensione in uscita $V_o$ dal seguente circuito:
+\begin{center}
+    \begin{circuitikz}[voltage dir=old]
+        \draw (0,0) node[op amp](amp){}
+        (amp.down)to[short]++(0,-1)node[ground]{}
+        (amp.out)to[short,-d](3,0)node[right]{$O$}
+        to[short,-o](3,-0.5)node[right]{$+$}node[below]{$v_o$}
+        (3,-2)node[right]{$-$}to[short,o-](3,-2.25)node[tlground]{}
+        (-2,-2.5)node[ground]{}to[european voltage source=$V_2$](-2,-0.5)
+        to[short](amp.+)
+        (-4,-1.5)node[ground]{}to[european voltage source=$V_1$](-4,0.5)
+        to[R=$R_1$,-d](-1,0.5)node[above left]{$A$}
+        to[short](amp.-)
+        (-1,0.5)to[short](-1,2.5)
+        to[R=$R_2$,-d](1,2.5)node[above]{$B$}
+        to[R=$R_4$](1,1)node[ground]{}
+        (1,2.5)to[R=$R_3$](3,2.5)
+        to[short](3,0);
+    \end{circuitikz}
+\end{center}
+
+Il generatore $V_2$ connesso all'ingresso non invertente del circuito non verrà considerato nel calcolo dei nodi, poiché il suo contributo in corrente è 
+nullo. 
+Per la legge costitutiva di un operazionale ideale si ricava l'equazione di vincolo, ovvero il nodo $A$, all'ingresso invertente, si trova allo 
+stesso potenziale dell'ingresso non invertente, ovvero ha una tension $V_2$, nota. 
+Si risolve mediante il metodo dei nodi:
+\begin{gather*}
+    \begin{bmatrix}
+        \displaystyle\frac{\strut 1}{\strut R_1}+\frac{\strut 1}{\strut R_2}&-\displaystyle\frac{\strut 1}{\strut R_2}&0\\
+        -\displaystyle\frac{\strut 1}{\strut R_2}&\displaystyle\frac{\strut 1}{\strut R_2}+\frac{\strut 1}{\strut R_3}+\frac{\strut 1}{\strut R_4}&-\displaystyle\frac{\strut 1}{\strut R_3}\\
+        0&-\displaystyle\frac{\strut 1}{\strut R_3}&\displaystyle\frac{\strut 1}{\strut R_3}
+    \end{bmatrix}\begin{bmatrix}
+        V_A=V_2\\V_B\\V_O
+    \end{bmatrix}=\begin{bmatrix}
+        V_1\displaystyle\frac{\strut 1}{\strut R_1}\\0\\-i_x
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        0&-\displaystyle\frac{\strut 1}{\strut R_2}&0\\
+        0&\displaystyle\frac{\strut 1}{\strut R_2}+\frac{\strut 1}{\strut R_3}+\frac{\strut 1}{\strut R_4}&-\displaystyle\frac{\strut 1}{\strut R_3}\\
+        1&-\displaystyle\frac{\strut 1}{\strut R_3}&\displaystyle\frac{\strut 1}{\strut R_3}
+    \end{bmatrix}\begin{bmatrix}
+        i_x\\V_B\\V_O
+    \end{bmatrix}=\begin{bmatrix}
+        -\displaystyle\frac{\strut 1}{\strut R_1}-\frac{\strut 1}{\strut R_2}V_2+\frac{\strut 1}{\strut R_1}V_1\\
+        \displaystyle\frac{\strut 1}{\strut R_2}V_2\\
+        0
+    \end{bmatrix}
+\end{gather*}
+Si applica il metodo di Cramer per ottenere la tensione in uscita:
+\begin{gather*}
+    V_o=R_2R_3\begin{vmatrix}
+        0 &-\displaystyle\frac{\strut1}{\strut R_2}&-\displaystyle\frac{\strut 1}{\strut R_1}-\frac{\strut 1}{\strut R_2}V_2+\frac{\strut 1}{\strut R_1}V_1\\
+        0&\displaystyle\frac{\strut 1}{\strut R_2}+\frac{\strut 1}{\strut R_3}+\frac{\strut 1}{\strut R_4}&\displaystyle\frac{\strut 1}{\strut R_2}V_2\\
+        1&-\displaystyle\frac{\strut1}{\strut R_3}&0
+    \end{vmatrix}\\
+    V_o=\displaystyle V_2R_2R_3\left[-\frac{1}{R_2^2}V_2+\frac{1}{R_1}\left(\frac{1}{R_2}+\frac{1}{R_3}+\frac{1}{R_4}\right)+\frac{1}{R_2}\left(\frac{1}{R_2}+\frac{1}{R_3}+\frac{1}{R_4}\right)\right]\\
+    +V_1R_2R_3\left[-\frac{1}{R_1}\left(\frac{1}{R_2}+\frac{1}{R_3}+\frac{1}{R_4}\right)\right]
+\end{gather*}
+\begin{equation}
+    V_o=\displaystyle\frac{(R_1+R_2)(R_3+R_4)+R_3R_4}{R_1R_3}V_2-\frac{R_2(R_3+R_3)+R_3R_4}{R_1R_4}V_1
+\end{equation}
+
+\subsection{Esercizio 1.2}
+
+Determinare la potenza assorbita dal resistore $R_L$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) node[op amp](amp){}
+        (-3,-2.75)node[ground]{}to[short](-3,-2.5)
+        to[european voltage source=$1\,V$](-3,0.5)
+        to[R=$3\mathrm{k\Omega}$,-d](-1,0.5)node[above left]{$A$}
+        to[short](amp.-)
+        (amp.+)to[short](-1.5,-0.5)
+        to[short](-1.5,-2.5)
+        to[short](-3,-2.5)
+        (amp.down)to[short]++(0,-0.25)node[ground]{}
+        (amp.out)to[short]++(5,0)
+        to[R=${R_L={2}\mathrm{k\Omega}}$]++(0,-2.5)
+        to[short]++(-2,0)coordinate(a)
+        to[R=$15\mathrm{k\Omega}$]++(0,2.5)
+        (a)to[short](-1.5,-2.5)
+        (2,-2.5)to[R=$12\mathrm{k\Omega}$,-d](2,0)node[above right]{$B$}
+        to[short](2,2)
+        to[R=$6\mathrm{k\Omega}$](-1,2)
+        to[short](-1,0.5);
+    \end{circuitikz}
+\end{center}
+Per le leggi costitutive dell'amplificatore operazionale si ha $V_A=0$, per cui si può direttamente esprimere l'equazione risolutiva del metodo dei nodi, 
+con già sostituita la corrente $i_x$ in uscita al posto di $V_A$:
+\begin{gather*}
+    \begin{bmatrix}
+        0&-\displaystyle\frac{\strut1}{\strut6}\\1&\displaystyle\frac{\strut1}{\strut2}+\frac{\strut1}{\strut6}+\frac{\strut1}{\strut12}+\frac{\strut1}{\strut15}+
+    \end{bmatrix}\begin{bmatrix}
+        i_x\\V_B
+    \end{bmatrix}=\begin{bmatrix}
+        \displaystyle\frac{\strut1}{\strut3}\\0
+    \end{bmatrix}
+\end{gather*}
+Si applica il metodo di Cramer:
+\begin{gather*}
+    V_B=6\begin{vmatrix}
+        0&\displaystyle\frac{\strut1}{\strut3}\\1&0
+    \end{vmatrix}=6\left(-\frac{1}{3}\right)=-2
+\end{gather*}
+La potenza si ottiene quindi come:
+\begin{equation}
+    P_{R_L}=\displaystyle\frac{V_B^2}{R_L}=\frac{4\mathrm{V}^2}{2\mathrm{k\Omega}}=2\mathrm{mW}
+\end{equation}
+
+\subsection{Esercizio 1.3}
+
+Determinare il valore di $V_o$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0)node[op amp](amp1){}
+        (amp1.-)to[short,-d](-1.5,0.5)node[above left]{$A$}
+        to[R=$1\mathrm{k\Omega}$](-3.5,0.5)
+        (-3.5,-2.75)node[ground]{}to[short](-3.5,-2.5)
+        to[european voltage source=$0.2\mathrm{V}$](-3.5,0.5)
+        (amp1.+)to[short]++(-1,0)
+        to[short]++(0,-2)
+        (-1.5,0.5)to[short](-1.5,1.5)
+        to[R=$10\mathrm{k\Omega}$](1,1.5)
+        (amp1.out)to[short]++(0.25,0)
+        to[short]++(0,1.5)
+        (3,1)node[op amp, noinv input up](amp2){}
+        (amp2.out)to[short,-o]++(0.5,0)node[above]{$V_o$}node[below]{$O$}
+        (amp2.+)node[above]{$B$}to[short,d-](0.5,1.5)
+        (-1.5,1.5)to[short](-1.5,2.5)
+        to[R=$50\mathrm{k\Omega}$](4,2.5)
+        to[short](4,-0.5)
+        to[R=$1.33\mathrm{k\Omega}$](4,-2.5)
+        to[short](-3.5,-2.5)
+        (amp2.-)to[short,-*]++(0,-1)coordinate(a)node[left]{$P$}
+        to[R=$1\mathrm{k\Omega}$]++(0,-2)
+        (a)to[R=$4\mathrm{k\Omega}$](4,-0.5);
+    \end{circuitikz}
+\end{center}
+
+La tensione in uscita al secondo operazionale $V_o$ è indipendente da ciò che entra nella sua entrata invertente. Passa una stessa corrente attraverso 
+le due resistenze connesse al nodo $P$, poiché la corrente in entrata all'amplificatore è nulla, quindi non si biforca la corrente. Poiché la tensione di 
+uscita $V_o$ è fissata, e misurata rispetto alla massa comune, si può determinare la tensione del nodo $P$ per la legge dei partitori di tensione, 
+dato che le due resistenze sono virtualmente in serie:
+\begin{gather*}
+    V_P=1\mathrm{k\Omega}\displaystyle\frac{V_o}{5\mathrm{k\Omega}}=\frac{V_o}{5}
+\end{gather*}
+Per la legge costitutiva degli amplificatori operazionali, la tensione misurata in $P$ coincide alla tensione misurata sul nodo $B$, l'ingresso 
+non invertente dell'amplificatore. 
+
+Quindi è possibile risolvere questo circuito utilizzando solo tre nodi $A$, $B$ e $O$:
+\begin{gather*}
+    \begin{bmatrix}
+        1+\displaystyle\frac{\strut1}{\strut 10}+\frac{\strut 1}{\strut 50}&-\displaystyle\frac{\strut 1}{\strut 10}&-\displaystyle\frac{\strut 1}{\strut 50}\\
+        -\displaystyle\frac{\strut 1}{\strut 10}&\displaystyle\frac{\strut1}{\strut10}&0\\
+        -\displaystyle\frac{\strut 1}{\strut 50}&0&G_o\\
+    \end{bmatrix}\begin{bmatrix}
+        V_A\\V_B\\V_o
+    \end{bmatrix}=\begin{bmatrix}
+        0.2\\-i{x_1}\\-i_{x_2}
+    \end{bmatrix}
+\end{gather*}
+Si inseriscono i vincoli ottenuti precedentemente:
+\begin{gather*}
+    V_A=0\\
+    V_B=\displaystyle\frac{V_o}{5}
+\end{gather*}
+L'equazione risolutiva diventa:
+\begin{gather*}
+    \begin{bmatrix}
+        0&0&-\displaystyle\frac{\strut 1}{\strut 50}-\frac{\strut 1}{\strut 50}\\
+        1&0&-\displaystyle\frac{\strut 1}{\strut 50}+0\\
+        0&1&G_o\\
+    \end{bmatrix}\begin{bmatrix}
+        i_{x_1}\\i_{x_2}\\V_o
+    \end{bmatrix}=\begin{bmatrix}
+        0.2\\0\\0
+    \end{bmatrix}
+\end{gather*}
+Si ricava la tensione in uscita tramite il metodo di Cramer:
+\begin{gather}
+    V_o=-25\begin{vmatrix}
+        0&0&0.2\\
+        1&0&0\\
+        0&1&0\\
+    \end{vmatrix}=-25\cdot0.2=-5\mathrm{V}
+\end{gather}
+
+\subsection{Esercizio 1.4}
+
+Determinare l'espressione della corrente $i_x$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) node[op amp](amp){}
+        (amp.out)to[short,-d](1.5,0)node[right]{$B$}
+        to[short](1.5,1.5)
+        to[R=$R_2$](-1.5,1.5)
+        to[R=$R_1$](-3.5,1.5)
+        to[short](-3.5,1)node[ground]{}
+        (amp.-)to[short](-1.5,0.5)
+        to[short,-d](-1.5,1.5)node[above]{$A$}
+        (amp.+)to[short](-1.5,-0.5)
+        to[short](-1.5,-1.5)
+        to[R=$R_2$](1.5,-1.5)
+        to[short](1.5,0)
+        (-1.5,-1.5)node[above left]{$C$}to[R=$R_3$, i>_=$i_x$,d-](-1.5,-3.5)node[ground]{}
+        (-3.5,-3.5)node[ground]{}to[european voltage source=$v_g$](-3.5,-1.5)
+        to[R=$R_1$](-1.5,-1.5);
+    \end{circuitikz}
+\end{center}
+Per la legge costitutiva degli amplificatori operazionali, si ha che $V_A=V_C$. 
+Si risolve mediante il metodo dei nodi:
+\begin{gather*}
+    \begin{bmatrix}
+        \displaystyle\frac{\strut1}{\strut R_1}+\displaystyle\frac{\strut1}{\strut R_2}&-\displaystyle\frac{\strut1}{\strut R_2}&0\\
+        -\displaystyle\frac{\strut1}{\strut R_2}&\displaystyle\frac{\strut2}{\strut R_2}&-\displaystyle\frac{\strut1}{\strut R_2}\\
+        0&-\displaystyle\frac{\strut1}{\strut R_2}&\displaystyle\frac{\strut1}{\strut R_1}+\displaystyle\frac{\strut1}{\strut R_2}+\displaystyle\frac{\strut1}{\strut R_3}
+    \end{bmatrix}\begin{bmatrix}
+        V_A\\V_B\\V_C=V_A
+    \end{bmatrix}=\begin{bmatrix}
+        0\\-i_{xo}\\\displaystyle\frac{\strut v_g}{\strut R_1}
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        \displaystyle\frac{\strut1}{\strut R_1}+\displaystyle\frac{\strut1}{\strut R_2}&-\displaystyle\frac{\strut1}{\strut R_2}&0\\
+        -\displaystyle\frac{\strut1}{\strut R_2}-\displaystyle\frac{\strut1}{\strut R_2}&\displaystyle\frac{\strut2}{\strut R_2}&1\\
+        \displaystyle\frac{\strut1}{\strut R_1}+\displaystyle\frac{\strut1}{\strut R_2}+\displaystyle\frac{\strut1}{\strut R_3}&-\displaystyle\frac{\strut1}{\strut R_2}&0
+    \end{bmatrix}\begin{bmatrix}
+        V_A\\V_B\\i_{xo}
+    \end{bmatrix}=\begin{bmatrix}
+        0\\0\\\displaystyle\frac{v_g}{R_1}
+    \end{bmatrix}
+\end{gather*}
+Utilizzando il metodo di Cramer, si ottiene la seguente espressione per la tensione $V_A$:
+\begin{gather*}
+    V_A=V_C=\displaystyle\frac{1}{\displaystyle\frac{1}{R_2}\left(\frac{1}{R_1}+\frac{1}{R_2}\right)+\frac{1}{R_2}\left(-\frac{1}{R_1}-\frac{1}{R_2}-\frac{1}{R_3}\right)}
+    \begin{vmatrix}
+        0&-\displaystyle\frac{\strut1}{\strut R_2}&0\\
+        0&\displaystyle\frac{\strut2}{\strut R_2}&1\\
+        \displaystyle\frac{\strut v_g}{\strut R_1}&-\displaystyle\frac{\strut1}{\strut R_2}&0
+    \end{vmatrix}\\
+    \displaystyle\frac{\displaystyle\frac{1}{R_2}\left(-\frac{v_g}{R_1}\right)}{\displaystyle\frac{1}{R_2}\left(\frac{1}{R_1}+\frac{1}{R_2}\right)+\frac{1}{R_2}\left(-\frac{1}{R_1}-\frac{1}{R_2}-\frac{1}{R_3}\right)}\\
+    V_A=\displaystyle\frac{v_gR_3}{R_1}
+\end{gather*}
+La corrente $i_x$ risulta quindi essere:
+\begin{equation}
+    i_x=\displaystyle\frac{V_A}{R_3}=\frac{v_g}{R_1}
+\end{equation}
+
+\subsection{Esercizio 1.5}
+
+Determinare il valore di $v_o$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) node[op amp](amp){}
+        (amp.+)to[short]++(-0.5,0)
+        to[short]++(0,-1)
+        (-5,-1.5)to[european voltage source=$12\mathrm{V}$](-5,0.5)
+        to[R=$4\mathrm{k\Omega}$,-d](-3,0.5)
+        (-5,-1.5)to[short,-o](1.5,-1.5)
+        (-3,-1.5)to[european current source=$2\mathrm{mA}$,-d](-3,0.5)node[above right]{$A$}
+        to[short](amp.-)
+        (amp.out)to[short,-o](1.5,0)node[right]{$O$}
+        (-3,0.5)to[short](-3,1.5)
+        to[R=$3\mathrm{k\Omega}$](1,1.5)
+        to[short](1,0);
+        \draw[->](1.5,-1.25)--(1.5,-0.25)node[midway, right]{$v_o$};
+    \end{circuitikz}
+\end{center}
+Poiché $V_A=0$, si indica come incognita la corrente in uscita dall'amplificatore $i_x$:
+\begin{gather*}
+    \begin{bmatrix}
+        0&-\displaystyle\frac{\strut1}{\strut3}\\
+        1&\displaystyle\frac{\strut1}{\strut3}
+    \end{bmatrix}\begin{bmatrix}
+        i_x\\V_o
+    \end{bmatrix}=\begin{bmatrix}
+        \displaystyle\frac{\strut12}{\strut4}+2\\0
+    \end{bmatrix}
+\end{gather*}
+\begin{equation}
+    V_o=3\begin{vmatrix}
+        0&5\\1&0
+    \end{vmatrix}=-15\mathrm{V}
+\end{equation}
+
+\subsection{Esercizio 1.6}
+
+Determinare il valore di $v_o$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) node[op amp, noinv input up](a){}
+        (a.out)to[short,-o](2,0)node[right]{$+$}node[below]{$v_o$}
+        (1.5,0)to[R=$8\mathrm{k\Omega}$,-d](1.5,-2)node[right]{$A$}
+        to[R=$4\mathrm{k\Omega}$](1.5,-4)
+        to[short,-o](2,-4)node[right]{$-$}
+        (a.-)to[short]++(0,-1.5)
+        to[R=$6\mathrm{k\Omega}$](1.5,-2)
+        (1.5,-4)to[short](-3,-4)
+        to[european voltage source=$2.5\mathrm{V}$](-3,0.5)
+        to[R=$6\mathrm{k\Omega}$](a.+);
+    \end{circuitikz}
+\end{center}
+Poiché la corrente in entrata all'ingresso non invertente è nulla, per la legge costitutiva degli amplificatori, la tensione allo stesso 
+ingresso coincide con la tensione erogata dal generatore a valle. 
+Poiché anche la corrente in entrata all'ingresso invertente è nulla, la tensione che si trova al morsetto di ingresso, coincide alla tensione 
+sul nodo $A$, poiché la resistenza che li collega non provoca una caduta di tensione, essendo attraversata da una corrente nulla. 
+A questo punto per la legge del partitore di tensione inversa si ricava la tensione $v_o$, poiché la tensione $V_A$ è fissa:
+\begin{gather*}
+    V_A=\displaystyle\frac{4\mathrm{k\Omega}}{(8+4)\mathrm{k\Omega}}v_o\\
+    v_o=3V_A=3\cdot2.5\mathrm{V}=7.5\mathrm{V}
+\end{gather*}
+
+\subsection{Esercizio 1.7}
+
+Determinare il valore di corrente $i_o$: %%1:23:35
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,6) node[op amp, noinv input up](a1){A1}
+        (0,0)node[op amp](a2){A2}
+        (-3,-2.5)node[tlground]{}to[european voltage source=$5.8\mathrm{V}$](-3,-0.5)
+        to[european voltage source=$2\mathrm{V}$](-3,6.5)
+        to[R=$6\mathrm{k\Omega}$](a1.+)
+        (-3,-0.5)to[R=$6\mathrm{k\Omega}$](a2.+)
+        (a1.out)to[short](4,6)
+        to[R=$4\mathrm{k\Omega}$,i>_=$i_o$](4,0)
+        to[short](a2.out)
+        (a1.-)to[short]++(0,-1.5)
+        to[R=$6\mathrm{k\Omega}$,-d](1.5,4)node[right]{$A$}
+        to[R=$8\mathrm{k\Omega}$,](1.5,6)
+        (a2.-)to[short]++(0,1.5)
+        to[R=$6\mathrm{k\Omega}$,-d](1.5,2)node[right]{$B$}
+        to[R=$4\mathrm{k\Omega}$](1.5,4)
+        (1.5,2)to[R=$8\mathrm{k\Omega}$,](1.5,0);
+    \end{circuitikz}
+\end{center}
+Per la legge costitutiva degli amplificatori, il potenziale sulla porta in entrata di A1 è pari alla somma delle tensioni erogate tra i generatori:
+\begin{gather*}
+    v_{1,in}=7.8\mathrm{V}
+\end{gather*}
+Mentre il potenziale in entrata al secondo operazionale equivale alla tensione erogata dal generatore più a valle:
+\begin{gather*}
+    v_{2,in}=5.8\mathrm{V}
+\end{gather*}
+Poiché le correnti in entrata sono nulle, le resistenze di $6\mathrm{k\Omega}$ non provocano una caduta di tensione, per cui sui nodi $A$ e $B$ sono 
+presenti rispettivamente i potenziali $v_{1,in}$ e $v_{2,in}$. Per cui la tensione sul resistore da $4\mathrm{k\Omega}$ si ottiene come la differenza 
+tra i potenziali di $A$ e $B$:
+\begin{gather*}
+    V_{4\mathrm{k\Omega}}=V_A-V_B=v_{1,in}-v_{2,in}=2\mathrm{V}
+\end{gather*}
+La corrente che fluisce per la resistenza $4\mathrm{k\Omega}$ è la stessa che attraversa le due resistenza da $8\mathrm{k\Omega}$, 
+per cui si può ricavare la tensione ai capi della tre resistenze in serie:
+\begin{gather*}
+    i_{4\mathrm{k\Omega}}=\displaystyle\frac{2\mathrm{V}}{4\mathrm{k\Omega}}=\frac{1}{2}\mathrm{mA}\\
+    V_x=(8+8+4)\mathrm{k\Omega}\cdot\frac{1}{2}\mathrm{mA}=10\mathrm{V}
+\end{gather*}
+La corrente $i_o$ si ottiene quindi come:
+\begin{equation}
+    i_x=\displaystyle\frac{V_x}{4\mathrm{k\Omega}}=\frac{10}{4}\mathrm{mA}=2.5\mathrm{mA}
+\end{equation}
+
+\subsection{Esercizio 1.8}
+
+Determinare il valore di $v_o$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) node[op amp, noinv input up](a){}
+        (a.out)to[short,-o](2,0)
+        (a.-)to[short]++(0,-1.5)
+        to[short](1.5,-2)node[right]{$O$}
+        to[R=$9\mathrm{k\Omega}$,d-](1.5,0)
+        (1.5,-4)to[R=$1\mathrm{k\Omega}$](1.5,-2)
+        (-1.5,-4)to[short,-o](2,-4)
+        (1.5,-4)to[short](-6,-4)
+        to[european voltage source=$2\mathrm{V}$](-6,0.5)
+        to[R=$20\mathrm{k\Omega}$,-d](-2,0.5)node[above]{$A$}
+        to[short](a.+)
+        (-2,0.5)to[short](-2,-2)
+        to[R=$40\mathrm{k\Omega}$](-2,-4)
+        (-4,-4)to[european voltage source=$-5\mathrm{V}$](-4,-2)
+        to[R=$40\mathrm{k\Omega}$](-2,-2);
+        \draw[->](2,-3.75)--(2,-0.25)node[midway, right]{$v_o$};
+    \end{circuitikz}
+\end{center}
+
+Questo circuito rappresenta un inseguitore di tensione, poiché l'amplificatore è connesso in modo tale che il potenziale inserito nel morsetto non invertente 
+viene trasferito sul nodo $O$. Poiché la corrente in entrata è nulla, non è presente una retroazione, può essere risolto separatamente dall'amplificatore 
+il circuito di sinistra per calcolare il potenziale del nodo $A$, in seguito si applica al nodo $O$ e tramite la legge dei partitori di tensione si ottiene 
+la tensione in uscita dalla rete. 
+Si calcola mediante il metodo dei nodi il potenziale $V_A$:
+\begin{gather*}
+    V_A=\displaystyle\frac{\displaystyle\frac{2}{20}-\frac{5}{40}}{\displaystyle\frac{1}{20}+\frac{1}{40}+\frac{1}{40}}\mathrm{V}=-\frac{1}{4}\mathrm{V}
+\end{gather*}
+La tensione in uscita si ottiene come:
+\begin{gather*}
+    V_o=\displaystyle\frac{(1+9)\mathrm{k\Omega}}{1\mathrm{k\Omega}}V_A=-2.5\mathrm{V}
+\end{gather*}
+
+\subsection{Esercizio 1.9}
+
+Determinare la tensione in uscita $v_o$:
+\begin{center}
+    \begin{circuitikz}
+        \draw (0,0) node[op amp](a){}
+        (a.out)to[short,-o]++(1,0)node[right]{$v_o$}
+        (a.-)to[short](-1.5,0.5)
+        to[short,-d](-1.5,2.5)node[above]{$A$}
+        to[R=$24\mathrm{k\Omega}$](1,2.5)
+        to[short,-d](1,0)node[above right]{$O$}
+        to[short](1,-0.5)
+        to[R=$10\mathrm{k\Omega}$](1,-2.5)
+        to[short](1,-2.75)node[tlground]{}
+        (1,-2.5)to[short](-1.5,-2.5)
+        to[european current source=$2\mathrm{mA}$,-d](-1.5,-0.5)node[above]{$B$}
+        to[short](a.+)
+        (-3.5,-0.5)to[R=$4\mathrm{k\Omega}$](-1.5,-0.5)
+        (-3.5,-0.5)to[european voltage source=$4\mathrm{V}$](-3.5,-2.5)
+        to[short](-5.5,-2.5)
+        to[european voltage source=$3\mathrm{V}$](-5.5,2.5)
+        to[R=$8\mathrm{k\Omega}$](-1.5,2.5)
+        (-3.5,-2.5)to[short](-1.5,-2.5);
+    \end{circuitikz}
+\end{center}
+Si calcola il potenziale sul nodo $B$, morsetto non invertente dell'operazionale, tramite la legge dei partitori di tensione:
+\begin{gather*}
+    V_B=\displaystyle\frac{\displaystyle-\frac{4}{4}+2}{\displaystyle\frac{1}{4}}\mathrm{V}=4\mathrm{V}
+\end{gather*}
+I potenziali ad entrambi i morsetti dell'operazionale sono uguali, per cui $V_A=V_B$, si inserisce questa equazione di vincolo direttamente nell'equazione 
+risolutiva mediante il metodo dei nodi:
+\begin{gather*}
+    \begin{bmatrix}
+        \displaystyle\frac{\strut1}{\strut8}+\frac{\strut1}{\strut24}&-\displaystyle\frac{\strut1}{\strut24}\\
+        -\displaystyle\frac{\strut1}{\strut24}&\displaystyle\frac{\strut1}{\strut24}+\frac{\strut1}{\strut10}
+    \end{bmatrix}\begin{bmatrix}
+        4\\v_o
+    \end{bmatrix}=\begin{bmatrix}
+        \displaystyle\frac{\strut3}{\strut8}\\-i_x
+    \end{bmatrix}\\
+    \begin{bmatrix}
+        0&-\displaystyle\frac{\strut1}{\strut24}\\
+        1&G_o
+    \end{bmatrix}\begin{bmatrix}
+        i_x\\v_o
+    \end{bmatrix}=\begin{bmatrix}
+        \displaystyle\frac{\strut3}{\strut8}-\frac{\strut4}{\strut6}\\\displaystyle\frac{\strut1}{\strut6}
+    \end{bmatrix}
+\end{gather*}
+Si calcola la tensione in uscita tramite il metodo di Cramer:
+\begin{equation}
+    v_o=24\begin{vmatrix}
+        0&\displaystyle\frac{\strut9-16}{25}\\
+        1&\displaystyle\frac{\strut1}{\strut6}
+    \end{vmatrix}=7\mathrm{V}
+\end{equation}
+
+\clearpage
+
+\end{document}

@@ -40,7 +40,7 @@
 \newcommand{\df}{\mathrm{d}}
 
 
-\newsavebox{\tempbox} %{\raisebox{\dimexpr.5\ht\tempbox-.5\height\relax}
+\newsavebox{\tempbox} %{\raisebox{\dimexpr.5\ht\tempbox-.5\height\relax}}
 
 
 \numberwithin{equation}{subsection}
@@ -6814,6 +6814,8 @@ In questo modo è possibile miniaturizzare un induttore, fino a dove è permesso
 Se invece è necessario un induttore, come generatore di campo magnetico, allora sarà necessario costruire un componente capace di generarlo, invece 
 di utilizzare una rete in grado di comportarsi come un induttore. 
 
+\subsubsection{Amplificatore Operazionale Reale}
+
 \clearpage
 
 \section{Semiconduttori, Diodi e Transistor}
@@ -7610,8 +7612,8 @@ resistenza ai contatti di ingresso della base $R_x$.
 Il flusso di cariche interno si ottiene moltiplicando la corrente in entrata alla base per un fattore di amplificazione $\beta$: $\beta i_B$, 
 viene modellato come un generatore controllato, dalla tensione interna tra la base e l'emettitore, ed una conduttanza $G_m$, determinata dalla fisica 
 dello stato solido. 
-Il circuito quindi diventa
-\begin{figure}
+Il circuito quindi diventa:
+\begin{figure}[H]%
     \centering
     \includegraphics{bjt-piccoli-segnali-due-porte.pdf}%
     \label{fig:bjt-piccoli-segnali-due-porte}

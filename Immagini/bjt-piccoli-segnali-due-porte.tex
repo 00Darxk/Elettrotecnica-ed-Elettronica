@@ -7,7 +7,7 @@
 \begin{circuitikz}[voltage dir=old]
     \draw (-1.5,0) to[sV=$v_i$](-1.5,3)
         to[R=$R_i$](0.5,3)
-        to[R=${R_B=\displaystyle\frac{1}{R_1}+\frac{1}{R_2}}$](0.5,0)
+        to[R=${R_B=\displaystyle\frac{1}{R_1}+\frac{1}{R_2}}$,v=$v_B$](0.5,0)
     (0.5,3)to[short,-*](2,3)node[above]{$B$}
     to[R=$R_x$,i=$i_B$](4,3)
     to[R=$R_\pi$,v=$v$,i=$i_B$](4,1)
