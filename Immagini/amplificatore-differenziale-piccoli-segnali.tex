@@ -1,0 +1,29 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usepackage{circuitikz}
+        
+\begin{document}
+\begin{circuitikz}
+    \draw node[npn](t1)at(0,0){$\mathrm{T_1}$}
+    node[npn,xscale=-1](t2)at(3,0){\ctikzflipx{$\mathrm{T_2}$}}
+    (-3,-2)node[ground]{}to[european voltage source=$v_1$](-3,0)
+    to[R=$R_{S}$,-*](-1,0)node[above]{$\mathrm{in_1}$}node[below]{$\mathrm{B_1}$}
+    to[short](t1.B)
+    (6,-2)node[ground]{}to[european voltage source=$v_2$](6,0)
+    (4,0)to[R=$R_{S}$,*-](6,0)
+    (4,0)node[above]{$\mathrm{in_2}$}node[below]{$\mathrm{B_2}$}
+    to[short](t2.B)
+    (t1.E)to[short](0,-1)
+    to[short,-*](1.5,-1)node[above]{E}
+    to[short](3,-1)
+    to[short](t2.E)
+    (1.5,-1)to[R=$R_E$](1.5,-3)node[ground]{}
+    (t1.C)to[R=$R_C$](0,3)
+    (t2.C)to[R=$R_C$](3,3)
+    to[short](0,3)
+    (1.5,3)to[short](1.5,4)node[ground,rotate=180]{}
+    (t1.C)to[short,-*]++(0.5,0)node[above]{$\mathrm{out_1}$}node[below]{$\mathrm{C_1}$}
+    (t2.C)to[short,-*]++(0.5,0)node[above]{$\mathrm{out_2}$}node[below]{$\mathrm{C_2}$};
+\end{circuitikz}
+\end{document}

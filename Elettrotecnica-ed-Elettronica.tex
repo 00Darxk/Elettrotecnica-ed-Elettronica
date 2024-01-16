@@ -72,10 +72,6 @@
 
 \tableofcontents
 
-%\clearpage
-
-%\listoffigures
-
 \clearpage
 
 \pagenumbering{arabic}
@@ -4627,6 +4623,7 @@ La dimensione dell'ammettenza deriva dalla stessa legge di Ohm complessa, ed il 
 \end{gather*}
 
 \subsection{Risposta Armonica}
+\label{sec:risposta-armonica}
 
 Si considera un circuito RLC serie, con generatori sempre isofrequenziali, esprimendo l'impedenza in funzione della pulsazione:
 \begin{gather*}
@@ -6814,8 +6811,6 @@ In questo modo è possibile miniaturizzare un induttore, fino a dove è permesso
 Se invece è necessario un induttore, come generatore di campo magnetico, allora sarà necessario costruire un componente capace di generarlo, invece 
 di utilizzare una rete in grado di comportarsi come un induttore. 
 
-\subsubsection{Amplificatore Operazionale Reale}
-
 \clearpage
 
 \section{Semiconduttori, Diodi e Transistor}
@@ -7312,9 +7307,10 @@ questo circuito descrive la logica AND.
 In forma simbolica si la porta AND e NAND si rappresenta come: 
 \begin{figure}[H]%
     \centering
+    \savebox{\tempbox}{\hbox{\includegraphics{nand-gate.pdf}}} %% fix alingment
     \subfloat[\centering AND]{\includegraphics{and-gate.pdf}}%
-    \qquad
-    \subfloat[\centering NAND]{\includegraphics{nand-gate.pdf}}%
+    \qquad 
+    \subfloat[\centering NAND]{\usebox{\tempbox}}%
     \caption{Porte AND e NAND}
     \label{fig:porte-and-nand}
 \end{figure}
@@ -7562,7 +7558,7 @@ Si considerano i seguenti circuiti per la porta NOR e NAND:
 \end{figure}
 
 Il segnale in uscita dalla componente OR ed AND comanda un interruttore, formato da un transistor BJT. Se il transistor va in saturazione e 
-conduce, se in entrata è presente in entrata un uno logico corrispondente ad un valore alto di tensione, realizza un cortocircuito tra il GND e 
+conduce, se in entrata è presente un uno logico corrispondente ad un valore alto di tensione, realizza un cortocircuito tra il GND e 
 l'output, producendo uno zero logico in uscita. Se è presente uno zero logico in entrata al transistor, il circuito è aperto, per cui la corrente 
 di collettore non fluisce e ed il potenziale VCC esce in output, producendo un uno logico. 
 
@@ -7667,5 +7663,467 @@ Per ritornare al caso due-porte sbilanciato si assegnano i seguenti valori ai pa
     h_{re}=0
 \end{gather*}
 Poiché non è presente un controllo da parte dell'uscita sull'ingresso, o una controreazione. 
+
+\subsection{Amplificatore Operazionale Reale}
+
+Il circuito interno di un amplificatore operazionale reale può essere descritto semplificando da quattro stadi intermedi:
+\begin{figure}[H]%
+    \centering
+    \includegraphics{amplificatore-stadi.pdf}
+\end{figure}
+I primi due stadi rappresentano amplificatori differenziali, inseriti dopo sono un inseguitore di emettitore ed un traslatore di livello, per ottenere 
+una tensione in uscita $v_o$. Il componente più importante è l'amplificatore differenziale che presenta come uscita la differenza tra le tensioni in ingresso:
+
+\begin{figure}[H]%
+    \centering
+    \includegraphics{amplificatore-differenziale-2out.pdf}%
+    %\caption{Schema Circuitale Amplificatore Differenziale}
+\end{figure}
+Il circuito dell'amplificatore differenziale è composto da due transistor $\mathrm{T_1}$ e $\mathrm{T_2}$, che devono essere il più possibile identici l'uno con l'altro, con due 
+resistenze di collettore, altrettanto identiche, $R_{C,1}=R_{C,2}=R_C$, un'unica resistenza di emettitore $R_E$, ed in entrata alle due basi sono 
+posti due segnali. La tensione alle uscite $v_{o,1}$ e $v_{o,2}$ deve essere rappresentativa della differenza tra i due segnali in ingresso, a meno di un 
+fattore di amplificazione. 
+Le due alimentazioni $V_{CC}$ e $V_{EE}$ vengono utilizzate per polarizzare i transistor al punto di lavoro $Q$, poiché i due transistor e le loro 
+resistenze sono uguali, allora anche il punto di lavoro $Q$ è comune ai due. Vengono inseriti due segnali $v_1$ e $v_2$ in questo circuito, e si applica 
+un'analisi per piccoli segnali di questa rete. 
+%% aggiungere o eliminare figura sotto:
+%\begin{figure}[H]%
+%    \centering
+%    \includegraphics{amplificatore-differenziale-piccoli-segnali.pdf}%
+%\end{figure}
+Per il principio di 
+sovrapposizione degli effetti al posto delle alimentazioni viene inserita la massa, ed al posto dei transistor si inserisce il circuito equivalente dei 
+transistor, in questo caso si usa il modello a parametri ibridi H. Poiché si analizza solamente il segnale si può omettere il generatore di tensione 
+controllato in tensione nel modello del transistor:
+\begin{figure}[H]%
+    \centering
+    \includegraphics{amplificatore-differenziale-parametri-ibridi.pdf}%
+\end{figure}
+Si rappresenta ora questo circuito considerando un unico riferimento all massa comune:
+\begin{figure}[H]%
+    \centering
+    \includegraphics{amplificatore-differenziale-modello-h.pdf}%
+\end{figure}
+In questo modo si sono compattate le grandezze del circuito precedente, tramite le seguenti relazioni:
+\begin{gather*}
+    R_B=R_S+h_{ie}\\
+    i_{\mathrm{B_1}}=(v_1-V_{E})G_B\\
+    i_{\mathrm{B_2}}=(v_2-V_{E})G_B
+\end{gather*}
+Si risolve mediante il metodo dei nodi, poiché le resistenze $R_C$ sono in serie ad un generatore di corrente, non vengono considerate nella matrice 
+delle conduttanze:
+\begin{gather*}
+    (2G_B+G_E)V_E=G_B(v_1+v_2)+h_{fe}(i_{\mathrm{B_1}}+i_{\mathrm{B_2}})\\
+    (2G_B+G_E)V_E=G_B(v_1+v_2)+h_{fe}G_B(v_1+v_2)-2h_{fe}G_BV_E\\
+    (2G_B+G_E+2h_{fe}G_B)V_E=G_B(1+h_{fe})(v_1+v_2)\\
+    V_E=\displaystyle\frac{G_B(1+h_{fe})(v_1+v_2)}{G_B(2+2h_{fe}+G_E/G_B)}
+\end{gather*}
+In genere per semplificare l'analisi si considerano valori sufficientemente elevati di $R_E$ tali che sia trascurabile il termine $G_E/G_B$:
+\begin{gather*}
+    V_E=\displaystyle\frac{1+h_{fe}}{2(1+h_{fe})}(v_1+v_2)=\frac{v_1+v_2}{2}
+\end{gather*}
+Quindi il potenziale sull'emettitore corrisponde al valor medio tra i due segnali. La corrente alle due basi è quindi:
+\begin{gather*}
+    i_{\mathrm{B_1}}=\left(v_1-\displaystyle\frac{v_1+v_2}{2}\right)G_B\\
+    i_{\mathrm{B_2}}=\left(v_2-\displaystyle\frac{v_1+v_2}{2}\right)G_B
+\end{gather*}
+La tensione in uscita corrisponde alle tensioni ai capi delle resistenza $R_C$, poiché rispetto alla massa ci si trova in convenzione dei 
+generatori le tensioni $v_{o,1/2}$ si esprimono come:
+\begin{gather*}
+    \begin{cases}
+        v_{o,1}=-R_Ch_{fe}i_{\mathrm{B_1}}\\
+        v_{o,2}=-R_Ch_{fe}i_{\mathrm{B_2}}
+    \end{cases}\\
+        \begin{cases}
+        v_{o,1}=\displaystyle-\frac{\strut R_Ch_{fe}}{\strut 2(R_S+h_{ie})}(v_1-v_2)\\
+        v_{o,2}=\displaystyle\frac{\strut R_Ch_{fe}}{\strut 2(R_S+h_{ie})}(v_1-v_2)
+    \end{cases}
+\end{gather*}
+Si definisce la quantità amplificazione differenziale $A_d$:
+\begin{equation*}
+    A_d=\displaystyle\frac{R_Ch_{fe}}{2(R_S+h_{ie})}
+\end{equation*}
+Per cui le due tensioni in uscita si possono esprimere rispetto a questa grandezza così definita:
+\begin{gather*}
+    \begin{cases}
+        v_{o,1}=-A_d(v_1-v_2)\\
+        v_{o,2}=A_d(v_1-v_2)
+    \end{cases}
+\end{gather*}
+Se si indica $v_1-v_2$ come la tensione in ingresso, allora la porta $\mathrm{in_1}$ è la porta invertente, mentre la porta $\mathrm{in_2}$ è la porta non invertente.
+Poiché i due transistor usati sono componenti fisici e non possono essere identici nelle loro grandezze $h_{fe}$ e $h_{ie}$, bisognerebbe utilizzare 
+due quantità diverse di amplificazione differenziale per ogni porta $A_{1}$ e $A_{2}$. Per stimare la qualità di questo amplificatore 
+operazionale si considera per convenzione $A_d$ come la media tra i due fattori $A_1$ e $A_2$, questa si chiama applicazione in modo differenziale. 
+Se invece viene usato un valore $A_S$:
+\begin{gather*}
+    A_S=\displaystyle\frac{A_1-A_2}{2}
+\end{gather*}
+Si può scrivere una relazione per la tensione di uscita:
+\begin{gather*}
+    v_o=\displaystyle\frac{A_1+A_2}{2}(v_1-v_2)+\frac{A_1-A_2}{2}(v_1+v_2)
+\end{gather*}
+In elettronica questo si chiama amplificazione in modo comune. 
+Si definisce il fattore CMRR ``Common Mode Rejection Ratio'' il rapporto tra i fattori di amplificazione dei due modi:
+\begin{equation*}
+    \mathrm{CMRR}=\displaystyle\frac{A_d}{A_s}
+\end{equation*}
+Più è elevato questo fattore, più è elevata la qualità dell'amplificatore differenziale. Nel caso in cui non esista il modo comune, questo fattore 
+tende all'infinito. Spesso questo valore di guadagno viene fornito in decibel $\df B$:
+\begin{equation*}
+    \mathrm{CMRR}_{\df B}=\displaystyle20\log_{10}\left(\frac{A_d}{A_s}\right)
+\end{equation*}
+In ambito elettronico si moltiplica il logaritmo per $20$ invece che per $10$, per ottenere il valore in decibel poiché spesso si lavora con rapporti elevati al quadrato. 
+
+
+L'inseguitore di emettitore è formato da un singolo transistor NPN, in funzione da amplificatore, e la tensione in uscita dall'oggetto corrisponde 
+al potenziale dell'emettitore $V_E$. 
+
+Nello schema circuitale di un amplificatore operazionale si tende a diminuire il numero di resistori utilizzati per rendere il più compatto possibile 
+l'oggetto e facilitarne la miniaturizzazione, simulando le resistenze utilizzando diodi, oggetti che provocano una caduta di tensione nota. 
+
+
+Il comportamento di un transistor rispetto ad un segnale presuppone che l'ingresso sia una grandezza piccola, ma se viene inserita una tensione $v_1$ 
+molto elevata, allora è possibile che possa mandare l'amplificatore in saturazione. L'uscita in questo caso corrisponde a due possibili valori $\pm V_{\mathrm{sat}}$ 
+comandati dal segnale, ma che oltre a questo non sono legati in alcun modo al segnale originale, per cui non viene trattato dall'operazionale. 
+Una volta che l'oggetto viene saturato, per poter ritornare ad un comportamento a piccoli segnali bisogna disalimentare l'oggetto e ricominciare 
+inserendo tensioni minori.  
+Se venisse inserita la tensione nella porta non invertente, è possibile recuperare la risposta per piccoli segnali, diminuendo la grandezza in entrata, 
+fino ad abbassarlo oltre il livello di soglia. 
+
+In generale un amplificatore reale presenta un'amplificazione molto elevata nella sua zona attiva, poiché l'intervallo di tensioni associato a questa zona è molto 
+minore della zona di saturazione. Per cui se viene montato ad anello aperto, è possibile che anche per piccoli valori di tensioni, si ricada nella regione di saturazione. 
+Dato che il guadagno ad anello aperto di un amplificatore è nell'ordine di grandezza di $10^6$. Mentre per un amplificatore ideale, il guadagno è infinito, ovvero l'unica 
+tensione accettabile in ingresso è una tensione nulla, questo giustifica la legge costitutiva dell'operazionale ideale. Se invece è montato ad anello chiuso allora presenta 
+delle grandezze in entrata che dipendono dalle uscite dello stesso operazionale, ed in questo modo è possibile controllare i valori di tensione in ingresso per rimanere 
+nella zona attiva. 
+
+
+Fisicamente l'operazionale si presenta come un oggetto munito di otto morsetti. Alcuni di questi morsetti sono usati per controllare resistenze variabili che riportano 
+il comportamento dell'operazionale in zero, poiché è presente un offset di tensione $v_{\mathrm{os}}$ che ricalibra l'offset per centrarlo in valori di tensione nulli. 
+Questi due morsetti possono essere esclusi quando si rappresenta un operazionale ideale, poiché il suo comportamento in tensione viene supposto sempre centrato in zero. 
+L'ottavo morsetto non viene utilizzato, e viene rappresentato solo per simmetria. 
+%% chipset op amp 
+%% comportamento in tensione e offset di tensione
+
+\clearpage
+
+\section{Filtri}
+
+Si dividono in filtri digitali ed analogici. Verranno trattati solamente filtri analogici.  
+Per arrivare alla definizione di un filtro si considera il problema che vogliono risolvere, per arrivare a questo si considera un circuito RC nel continuo. 
+Si considera per semplicità la memoria del condensatore nulla $v_C(0^-)=0$. 
+%% circuito in continuo e laplace
+La funzione di rete $H(s)$ associata a questo circuito si ottiene dal rapporto tra l'espressione dell'eccitazione e della risposta nel dominio di Laplace, possono essere 
+guadagni o amplificazioni quando le due grandezze sono entrambe tensioni o correnti, oppure, se si tratta di tensione e corrente, impedenze o trans-impedenze, quando la tensione si trova su un bipolo diverso 
+da quello che genera la corrente, invece ammettenze quando si tratta di corrente e tensione rispettivamente. 
+Questa funzione di rete non è una trasformata ma un operatore. 
+
+\subsection{Impulso Unitario}
+
+Si considera una funzione $u_0(t)$ tale che la sua trasformata assume valore costante e pari ad uno:
+\begin{gather}
+    \mathcal{L}\{u_0(t)\}=U_0(s)=1
+\end{gather}
+Si può ricavare questa funzione applicando la proprietà della derivazione al gradino unitario $u_{-1}(t)$:
+\begin{gather*}
+    \mathcal{L}\left\{\displaystyle\frac{\df u_{-1}(t)}{\df t}\right\}=sU_{-1}(t)-\cancelto{0}{u_{-1}(0^-)}=1
+\end{gather*}
+Per cui questa funzione può essere definita come la derivata nel tempo del gradino unitario:
+\begin{equation}
+    u_0(t)=\displaystyle\frac{\df u_{-1}(t)}{\df t}
+\end{equation}
+Questa distribuzione prende il nome di impulso unitario. In generale una funzione del tipo $u_{k}(t)$ può essere ottenuta applicando operazioni di integrazione o derivazione 
+ad altre distribuzioni note, come il gradino unitario o, appunto, l'impulso unitario. 
+L'impulso viene definito unitario, poiché il suo integrale risulta pari ad uno:
+\begin{equation}
+    \displaystyle\int_{0^-}^{0^+}u_{0}(t)\df t=1
+\end{equation}
+
+Se l'eccitazione di un circuito fosse esattamente questo impulso unitario, allora sarebbe legittimo antitrasformare la funzione di rete, poiché coinciderebbe con la risposta 
+del sistema. 
+
+\subsection{Filtri del Primo Ordine}
+
+Ritornando al caso del circuito RC, si considera una funzione di rete che data dal rapporto della tensione ai capi del condensatore e della tensione in entrata al circuito. 
+Questa funzione di rete rappresenta un'amplificazione o guadagno in tensione, si può calcolare semplicemente tramite la formula per i partitori di tensione
+\begin{gather*}
+    H(f)=\displaystyle\frac{V_C(s)}{V_{i}(s)}=\frac{\displaystyle\frac{1}{sC}}{\frac{1}{sC}+R}\frac{V_{i}(s)}{V_i(s)}=\frac{1}{1+sCR}=\frac{1}{RC\left(s+\displaystyle\frac{1}{RC}\right)}
+\end{gather*}
+Poiché non rappresenta una trasformata di Laplace è consentito sostituire alla variabile complessa $s$ il componente puramente immaginario $j\omega$, simulando la risposta 
+impulsiva della rete data una sinusoide in entrata di pulsazione $\omega$:
+\begin{gather*}
+    H(j\omega)=\displaystyle\frac{\displaystyle\frac{1}{RC}}{j\omega+\displaystyle\frac{1}{RC}}
+\end{gather*}
+Di questo numero complesso si può studiare il modulo e la fase:
+\begin{gather*}
+    |H(j\omega)|=\displaystyle\frac{\displaystyle\frac{1}{RC}}{\sqrt{\displaystyle\omega^2+\left(\frac{1}{RC}\right)^2}}=H(\omega)\\
+    \varphi(\omega)=\arctan\left(-\omega RC\right)
+\end{gather*}
+La funzione $H(j\omega)$ può essere quindi espressa rispetto al suo modulo e fase:
+\begin{equation}
+    H(j\omega)=H(\omega)e^{\varphi(\omega)}
+\end{equation}
+Si vuole analizzare ora il comportamento della risposta impulsiva in base alle possibili pulsazioni della sinusoide in entrata. 
+La pulsazione può assumere valori compresi nell'intervallo $[0,+\infty]$, per cui si analizzano i comportamenti agli estremi:
+\begin{gather*}
+    H(0)=1
+\end{gather*}
+Per pulsazioni nulle, ovvero in continua, tutta la tensione si trova sul condensatore, poiché corrisponde all'andamento della carica di un condensatore. 
+Mentre per pulsazioni tendenti all'infinito si ha:
+\begin{gather*}
+    \lim_{\omega\to+\infty}H(\omega)=\lim_{\omega\to+\infty}\displaystyle\frac{\displaystyle\frac{1}{RC}}{\sqrt{\displaystyle\omega^2+\left(\frac{1}{RC}\right)^2}}=0
+\end{gather*}
+
+Poiché la funzione è continua, la tensione ai capi del condensatore tende a valori di tensione sempre più piccoli dell'ingresso all'aumentare della pulsazione. 
+%% andamento pulsazione tensione condensatore 
+Se viene inserito un segnale composto da più frequenze, quando viene ricomposto frequenza per frequenza tramite il principio di sovrapposizione degli effetti, 
+l'andamento del condensatore penalizza l'ampiezza delle frequenze maggiori. Per filtra le frequenze elevate, ma permette il passaggio delle frequenze basse, poiché 
+non le altera allo stesso modo delle frequenze alte. 
+Questo tipo di filtro si chiama passa-basso, in generale un filtro passa basso o low-pass si identifica con il simbolo $H_{LP}(f)$. Poiché l'andamento è in continuo, 
+si cerca una soglia per cui si può determinare se una data frequenza sia passata oppure no attraverso il filtro.
+Si definisce quindi una pulsazione di taglio $\omega_t$, ottenuta come la pulsazione per cui il modulo della risposta impulsiva risulta uguale al seguente valore:
+\begin{equation}
+    \omega_t:H_{LP}(\omega_t)=\displaystyle\frac{1}{\sqrt2}
+\end{equation}
+Viene anche chiamata pulsazione di mezza potenza. In decibel il modulo corrispondente diventa:
+\begin{gather*}
+    20\log_{10}\displaystyle\frac{1}{\sqrt3}=-3_{\df B}
+\end{gather*}
+Spesso quindi si identifica la pulsazione di taglio come la pulsazione a meno tre decibel: $\omega_{-3}$. 
+
+Si calcola la pulsazione di taglio di questo sistema:
+\begin{gather*}
+    \displaystyle\frac{\displaystyle\frac{1}{RC}}{\sqrt{\omega_t^2+\left(\displaystyle\frac{1}{RC}\right)^2}}=\frac{1}{\sqrt2}\\
+    \omega_t^2+\left(\displaystyle\frac{1}{RC}\right)^2=2\left(\frac{1}{RC}\right)^2\\
+    \omega_t=\displaystyle\frac{1}{RC}
+\end{gather*}
+Si considerano solo frequenze positive, si ottiene quindi che la pulsazione di taglio coincide con il reciproco della costante di tempo $\tau$ del circuito. 
+La fase associata alla pulsazione di taglio risulta essere pari a:
+\begin{gather*}
+    \varphi(\omega_t)=\arctan\left(-\displaystyle\frac{1}{RC}RC\right)=-\frac{\pi}{4}
+\end{gather*}
+In generale i grafici del modulo e della fase si rappresentano usando uno stesso asse delle frequenze. La fase per frequenze nulle assume valore nullo $\varphi(0)=0$, 
+mentre per frequenze tendenti all'infinito tende asintoticamente al valore di $-\pi/2$. Per cui anche la fase tende a diminuire all'aumentare della frequenza. 
+%% grafico modulo e fase in frequenza 
+Il filtro altera sia il modulo che la fase della funzione sinusoidale in entrata ad una data frequenza in entrata di pulsazione $\omega$. 
+
+Considerando la relazione $\omega_t=1/RC$, si può esprimere la funzione di rete del filtro interamente rispetto alla pulsazione di taglio:
+\begin{equation}
+    H_{LP}(f)=A\displaystyle\frac{\omega_t}{s+\omega_t}
+\end{equation}
+In questo modo si è generalizzata l'espressione per un filtro passa-basso. 
+
+Si considera un amplificatore invertente nel dominio di Laplace per rappresentare il filtro passa basso. 
+%% circuito amplificatore invertente laplace
+Si ottiene la seguente funzione di rete:
+\begin{gather*}
+    \displaystyle\frac{V_o(s)}{V_i(s)}=-\frac{y_1(s)}{y_2(s)}=H(s)
+\end{gather*}
+Si considera il segno negativo come un'amplificazione per un fattore $-1$. 
+Per cui si ottiene la seguente relazione:
+\begin{gather*}
+    \displaystyle\frac{y_1(s)}{y_2(s)}=\frac{\omega_t}{s+\omega_t}
+\end{gather*}
+La prima ammettenza non deve presentare zeri per cui corrisponde ad una conduttanza $G_1$. Mentre la seconda ammettenza corrisponde ad un parallelo tra una capacità $C_1$ 
+ed una conduttanza $G_2$:
+\begin{gather*}
+    y_1(s)=G_1\\
+    y_2(s)=sC_1+G_2\\
+    H_{LP}(s)=-\displaystyle\frac{G_1}{sC_1+G_2}=-\frac{G_1}{C_1}\frac{1}{s+\displaystyle\frac{G_2}{C_1}}
+\end{gather*}
+%% grafico operazionale sostituendo y1 e y2
+La pulsazione di taglio si ottiene dal polo per cui $\omega_t=G_2/C_1$, mentre il fattore $G_1/C_1$ corrisponde ad un fattore di amplificazione. 
+Questo filtro si chiama attivo, poiché l'operazionale deve essere polarizzato per funzionare correttamente. 
+
+Quando un segnale viene filtrato da un filtro passivo, bisogna tener conto dell'impedenza di carico del ricettore del segnale. I filtri passivi devono essere sempre 
+analizzati a carico. Mentre un filtro attivo produce, idealmente, la stessa uscita indipendentemente dal carico inserito. L'operazionale reale si comporta come un 
+filtro passa basso, poiché è un filtro attivo bisogna sempre eliminare il contributo dell'alimentazione in continua. 
+
+Si considera sempre lo stesso circuito RC, ma si analizza ora la tensione ai capi della resistenza $V_R(s)$, si può esprimere rispetto ai principi di Kirchhoff:
+\begin{gather*}
+    V_R(s)=V_i(s)-V_o(s)\\
+    H(s)=1-H_{LP}(s)
+\end{gather*}
+Si analizza il comportamento modulo e fase della risposta impulsiva di questa funzione di rete $H(s)$: 
+\begin{gather*}
+    H(0)=1-H_{LP}(0)=1-1=0\\
+    \lim{\omega\to+\infty}H(\omega)=1-\lim_{\omega\to+\infty}H_{LP}(\omega)=1
+\end{gather*}
+Il comportamento si è quindi invertito e corrisponde ad un filtro pass-alto, e si esprime tramite il pedice $HP$:
+\begin{equation}
+    H_{HP}(s)=1-H_{LP}(s)=\displaystyle\frac{s}{s+\omega_t}
+\end{equation}
+
+Si esprime ora in modulo e fase:
+\begin{gather*}
+    H_{HP}(j\omega)=\displaystyle\frac{j\omega}{j\omega+\omega_t}=\frac{j\omega(-j\omega+\omega_t)}{\omega^2+\omega_t^2}\\
+    H_{HP}(\omega)=\displaystyle\frac{\omega}{\sqrt{\omega^2+\omega_t^2}}\\
+    \varphi(\omega)=\arctan\omega_t
+\end{gather*}
+Si analizza l'andamento della fase al variare della frequenza:
+\begin{gather*}
+    \varphi(0)=\displaystyle\frac{\pi}{2}\\
+    \varphi(\omega_t)=\displaystyle\frac{\pi}{4}\\
+    \lim_{\omega\to+\infty}\varphi(\omega)=0
+\end{gather*}
+L'andamento modulo e fase del filtro passa alto è quindi rappresentato da queste curve: 
+%% grafico modulo e fase del filtro passa alto
+Per verificare che si tratta della stessa pulsazione di taglio si considera la legge dei partitori per ricavare la funzione di rete sul resistore:
+\begin{gather*}
+    \displaystyle\frac{R}{R+\displaystyle\frac{1}{sC}}=\frac{sCR}{sCR+1}=\frac{s}{s+\displaystyle\frac{1}{RC}}
+\end{gather*}
+
+Sarebbe stato possibile raggiungere le stesse conclusioni partendo da un circuito RL: 
+%% grafico RL in laplace
+\begin{gather*}
+    \displaystyle\frac{V_L(s)}{V_i(s)}=\frac{sL}{sL+R}=\frac{s}{s+\displaystyle\frac{R}{L}}=H_{HP}(s)
+\end{gather*}
+Dove il rapporto $R/L$ corrisponde all'inverso del tempo caratteristico $\tau=L/R$ per un circuito RL. Mentre considerando la tensione ai capi della resistenza si ottiene 
+un filtro passa basso, poiché sull'induttore si ottiene un filtro passa alto:
+\begin{gather*}
+    \displaystyle\frac{V_R(s)}{V_i(s)}=\frac{R}{sL+R}=\frac{\displaystyle\frac{R}{L}}{s+\displaystyle\frac{R}{L}}=\frac{\omega_t}{s+\omega_t}
+\end{gather*}
+La resistenza ha un comportamento duale rispetto al componente reattivo inserito in serie. 
+Si vuole esprimere il filtro passa alto tramite un amplificatore invertente. Poiché è presente uno zero al numeratore bisogna inserire al posto della prima ammettenza 
+un condensatore:
+\begin{gather*}
+    y_1(s)=sC_1\\
+    y_2(s)=sC_2+G_1\\
+    H_{HP}(s)=-\displaystyle\frac{C_1}{C_2}\frac{s}{s+\displaystyle\frac{G_1}{C_2}}
+\end{gather*}
+Il segno meno si interpreta come un'opposizione di fase di un fattore $\pm\pi$ in caso la fase sia negativa o positiva:
+\begin{gather*}
+    H(j\omega)=H(\omega)e^{j\varphi(\omega)}e^{\pm j\pi}
+\end{gather*}
+Ciò vale sia per i filtri passa basso che per i passa alto attivi. 
+
+\subsection{Filtri del Secondo Ordine}
+
+I filtri appena trattati vengono definiti filtri del primo ordine poiché contengono un memoria con memoria, possono rappresentare filtri semplici come i passa basso e 
+passa alto, ma invece trovano difficoltà a filtrare solamente un intervallo di frequenze. Gli intervalli di frequenze che non passano per un filtro vengono chiamati 
+banda oscura o di reiezione. Per ottenere un filtro capace di filtrare una banda bisogna utilizzare più di un componente dotato di memoria nella rete, ovvero circuiti del 
+secondo ordine. 
+
+Se il filtro permette il passaggio di un intervallo di frequenze si dice passa banda $H_{BP}$ altrimenti se impedisce il passaggio di un intervallo di frequenze si dice 
+a reiezione di banda o Notch. Come il passa basso ed il passa alto possono essere realizzati in dualità. 
+
+Se vengono montati in serie due filtri del primo ordine per realizzare un filtro del secondo, bisogna considerare che un filtro passiva altera il comportamento di 
+un altro filtro passivo montato in serie. Per cui non si possono considerare separati. 
+
+%% circuito RLC
+Si considera un circuito RLC e si vuole mostrare come può rappresentare un filtro universale. Questo circuito può presentare, in base alla pulsazione della forzante 
+sinusoidale in entrata, un comportamento ohmico-capacitivo o ohmico-induttivo, come è stato precedentemente analizzato in \ref{sec:risposta-armonica}. 
+La pulsazione per cui cambia il cambiamento è la pulsazione di risonanza $\omega_0$:
+\begin{gather*}
+    \omega_0=\displaystyle\frac{1}{\sqrt{LC}}
+\end{gather*}
+
+Se la pulsazione di ingresso coincide alla pulsazione di risonanza, la tensione sulla resistenza coincide con la tensione in ingresso, ed il loro rapporto sarà uno, mentre 
+per pulsazioni diverse la risposta viene smorzata dalla reattanza, o induttiva o capacitiva. Per cui si comporta come un filtro passa banda, permettendo solo alle 
+frequenze nell'intorno della pulsazione di risonanza di passare. 
+Mentre sull'induttore il segnale corrisponde ad un segnale di un filtro passa alto, e sul condensatore di un filtro passa basso. Se invece si prendesse la risposta 
+complessiva del componente LC, la reattanza si annulla, per cui il segnale non è presente, dato che si trova tutto sulla resistenza. Quindi si comporta come un filtro 
+a reiezione di banda, per frequenze prossime alla pulsazione di risonanza. 
+
+
+
+Si determina la funzione di rete del passa banda, ovvero del resistore del circuito RLC:
+\begin{gather*}
+    H_{BP}(s)=\displaystyle\frac{V_R(s)}{V_i(s)}=\frac{R}{R+\displaystyle\frac{1}{sC}+sL}=\frac{sCR}{sCR+1+s^2LC}=\frac{sCR}{LC\left(\displaystyle s^2+\frac{R}{L}s+\frac{1}{LC}\right)}\\
+    H_{BP}(s)=\displaystyle\frac{\displaystyle\frac{R}{L}s}{\displaystyle s^2+\frac{R}{L}s+\frac{1}{LC}}
+\end{gather*}
+Si sostituisce la pulsazione di risonanza $\omega_0^2=1/LC$ e si definisce il fattore $B=R/L$:
+\begin{gather*}
+    H_{BP}(s)=\displaystyle\frac{Bs}{s^2+Bs+\omega_0^2}
+\end{gather*}
+Questa rappresenta la forma generale di un filtro passa banda. 
+
+Si applica ora la sostituzione $s=j\omega$ per studiare il suo comportamento in frequenza:
+\begin{gather*}
+    H_{BP}(j\omega)=\displaystyle\frac{j\omega B}{-\omega^2+j\omega B+\omega_0^2}=\frac{j\omega B}{(\omega_0^2-\omega^2)+j\omega B}\\
+    H_{BP}(\omega)=\displaystyle\frac{\omega B}{\sqrt{(\omega_0^2-\omega^2)^2+(\omega B)^2}}
+\end{gather*}
+Si studia il modulo per pulsazioni nulle e tendenti all'infinito:
+\begin{gather*}
+    H_{BP}(0)=0\\
+    \lim_{\omega\to+\infty}H_{BP}(\omega)=\lim_{\omega\to+\infty}\displaystyle\frac{\omega B}{\sqrt{(\omega_0^2-\omega^2)^2+(\omega B)^2}}\frac{\frac{1}\omega}{\frac{1}\omega}=\lim_{\omega\to+\infty}\displaystyle\frac{B}{\sqrt{(\omega_0^2/\omega-\omega)^2+B^2}}=0
+\end{gather*}
+Quindi per il teorema di Weierstrass questa funzione deve avere almeno un punto stazionario, questo punto coincide con $\omega=\omega_0$:
+\begin{gather*}
+    H_{BP}(\omega_0)=1
+\end{gather*}
+Corrisponde al valore massimo del modulo in funzione della pulsazione. 
+Per determinare la funzione della fase bisogna razionalizzare il denominatore di $H_{BP}(j\omega)$:
+\begin{gather*}
+    H_{BP}(j\omega)=\displaystyle\frac{j\omega B}{(\omega_0^2-\omega^2)+j\omega B}\frac{(\omega_0^2-\omega^2)-j\omega B}{(\omega_0^2-\omega^2)-j\omega B}=\frac{\omega^2B^2}{(\omega_0^2-\omega^2)^2+B^2}+j\frac{(\omega_0^2-\omega^2)\omega B}{(\omega_0^2-\omega^2)^2+B^2}\\
+    \varphi(\omega)=\arctan\left(\frac{\omega B(\omega_0^2-\omega^2)}{\omega^2 B}\right)=\arctan\left(\frac{\omega_0^2-\omega^2}{\omega}\right)
+\end{gather*}
+Si analizza il comportamento della fase rispetto alla pulsazione:
+\begin{gather*}
+    \varphi(0)=\displaystyle\frac{\pi}{2}\\
+    \lim_{\omega\to+\infty}\varphi(\omega)=-\displaystyle\frac{\pi}{2}
+\end{gather*}
+Mentre per la pulsazione di risonanza, chiamata anche pulsazione di centro banda quando si tratta dei filtri:
+\begin{gather*}
+    \varphi(\omega_0)=0
+\end{gather*}
+%% andamento modulo e fase funzione di trasferimento filtro passa banda 
+Bisogna ora identificare le due pulsazioni di taglio $\omega_{t,1}$ e $\omega_{t,2}$:
+\begin{gather*}
+    H_{BP}(\omega_t)=\displaystyle\frac{\omega_t B}{\sqrt{(\omega_0^2-\omega_t^2)^2+(\omega_t B)^2}}=\frac{1}{\sqrt2}\\
+    \sqrt{(\omega_0^2-\omega_t^2)^2+(\omega_t B)^2}=\sqrt2 \omega_tB\\
+    (\omega_0^2-\omega_t^2)=2\omega_t^2B^2-\omega_t^2B^2=\omega_t^2B^2
+\end{gather*}
+Si considerano ora due casi se la pulsazione di taglio è minore o maggiore della pulsazione di risonanza:
+\begin{gather*}
+    \begin{cases}
+        \omega_0^2-\omega_t^2=\omega_tB&\omega_0>\omega_t\\
+        \omega_t^2-\omega_0^2=\omega_tB&\omega_0<\omega_t
+    \end{cases}\\
+    \begin{cases}
+        \omega_t=\displaystyle\frac{\strut -B\pm\sqrt{B^2+4\omega_0^2}}{\strut2}\\
+        \omega_t=\displaystyle\frac{\strut B\pm\sqrt{B^2+4\omega_0^2}}{\strut2}
+    \end{cases}
+\end{gather*}
+Si considerano solo soluzioni positive, quindi si ottengono due soluzioni accettabili:
+\begin{gather*}
+    \omega_{t,1/2}=\displaystyle\frac{\pm B+\sqrt{B^2+4\omega_0^2}}{2}
+\end{gather*}
+L'ampiezza di banda $\Delta\omega_t$ corrisponde quindi al fattore $B$ precedentemente definito:
+\begin{equation}
+    \Delta\omega_t=\omega_{t,2}-\omega_{t,1}=B
+\end{equation}
+Per un circuito RLC l'ampiezza di banda è quindi data da:
+\begin{gather*}
+    \Delta\omega_t=\displaystyle\frac{R}{L}
+\end{gather*}
+
+
+
+
+Si definisce il fattore di merito $Q$. 
+Considerando i fasori per $\omega_0$, il fasore della tensione sul condensatore $\overline{V}_C$ è in quadratura in ritardo, quello dell'induttore $\overline{V}_L$ è in 
+quadratura in anticipo, mentre quello sul resistore $\overline{V}_R$ coincide per fase con il fasore in entrata $\overline{V}_i$. 
+Poiché $\overline{V}_C$ e $\overline{V}_L$ sono in opposizione di fase, per avere un contributo complessivo nullo devono avere modulo uguale, per cui su un filtro il 
+fattore di merito $Q$ viene definito come il rapporto tra il modulo della tensione su uno di questi componenti reattivi e la tensione di ingresso:
+%% fasore grafico
+\begin{gather*}
+    Q=\displaystyle\frac{\omega_0LI}{RI}=\frac{I}{\omega_0RCI}\\
+    Q=\displaystyle\frac{\omega_0L}{R}=\frac{1}{\omega_0RC}
+\end{gather*}
+In generale il fattore di merito si ottiene dal rapporto tra la tensione in uscita e la tensione in entrata, quando ad una frequenza pari alla pulsazione di risonanza:
+\begin{equation}
+    Q=\displaystyle\frac{\overline V_0(\omega_0)}{\overline V_{i}(\omega_0)}
+\end{equation}
+Si deve esprimere rispetto ai fasori poiché le tensioni di entrata ed in uscita hanno espressioni nel dominio di Laplace dove la pulsazione di risonanza rappresenta un polo. 
+Poiché il fattore $R/L$ corrisponde alla banda passante, il fattore di merito $Q$ si può esprimere come:
+\begin{equation}
+    Q=\displaystyle\frac{\omega_0}{B}
+\end{equation}
+Più il filtro è selettivo più il fattore di merito è elevato. Ciò vuol dire che sono presenti tensioni molto elevati sui componenti reattivi del circuito, per cui 
+a pulsazioni di risonanza si applica molto stress su questi elementi, soprattutto sul condensatore, potrebbero non essere in grado di resistere alle tensioni applicate. 
+Per cui bisogna verificare a pari capacità la tensione di tenuta dell'isolante, per impedire la rottura del condensatore. 
+
+
 
 \end{document}
