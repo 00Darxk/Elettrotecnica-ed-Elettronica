@@ -10,21 +10,21 @@
          
 \begin{document}
 \begin{circuitikz}
-    \draw (0,0) to[empty diode=$D_d$,-*](0,2.25)
+    \draw (0,0) to[empty diode=$D_d$,-*](0,2)
                 to[empty diode=$D_a$](0,4)
                 to[short](3,4)
                 to[C=$C$](3,0)
                 to[short](1.5,0)
-                to[empty diode=$D_c$,-*](1.5,1.75)
+                to[empty diode=$D_c$,-*](1.5,2)
                 to[empty diode=$D_b$](1.5,4);
     \draw (0,0) to[short](1.5,0);
     \draw (3,4) to[short](4.5,4)
                 to[R=$R_L$](4.5,0)
                 to[short](3,0);
-    \draw (1.5,1.75) to[short](-1.75,1.75)
-                to[sV=$v(t)$](-1.75,4)
-                to[short](-1,4)
-                to[short](-1,2.25)
-                to[short](0,2.25);
+    \draw(1.5,2)to[short](2,2)
+                to[short](2,-0.5)
+                to[short](-1.5,-0.5)
+                to[sV=$v(t)$](-1.5,2)
+                to[short](0,2);
 \end{circuitikz}
 \end{document}

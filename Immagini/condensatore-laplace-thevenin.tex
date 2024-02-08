@@ -12,7 +12,7 @@
 \begin{circuitikz}
 \draw (3,0) to[short,i=$I(s)$,*-](3.5,0)
 to[generic=$\frac{1}{sC}$] (5.5,0)
-to[european voltage source=$\frac{v(0^-)}{s}$,-*](7.5,0);
+(7.5,0)to[european voltage source=$\frac{v(0^-)}{s}$,*-](5.5,0);
 \draw[->] (7.25,-0.5)--(3.25,-0.5)node[midway, below]{$V(s)$};
 \end{circuitikz}
 \end{document}

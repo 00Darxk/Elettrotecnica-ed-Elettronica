@@ -10,13 +10,13 @@
          
 \begin{document}
 \begin{circuitikz}
-    \draw (0,0) to[short,i=$I_{x_2}$](2,0)
+    \draw (0,0) to[short,i=$I_{x_1}$](2,0)
                 to[short](6,0)
-                to[european current source=$2\,A$](6,2)
-                to[short,-*](4,2)node[above]{$c$}
-                to[european voltage source=$8\,V$,i=$-I_{x_1}$,-*](2,2)node[above]{$b$}
-                to[R=$G_1$,-*](0,2)node[above]{$a$}
-                to[european voltage source=$4\,V$](0,0);
+                to[european current source=$2\,\mathrm{A}$](6,2)
+                to[short,-*](4,2)node[above]{$C$}
+                to[european voltage source=$8\,\mathrm{V}$,i=$-I_{x_2}$,-*](2,2)node[above]{$B$}
+                to[R=$G_1$,-*](0,2)node[above]{$A$}
+                to[european voltage source=$4\,\mathrm{V}$](0,0);
     \draw (2,0) to[R=$G_2$](2,2);
     \draw (4,0) to[R=$G_3$](4,2);
     \draw (3,0)node[below right]{$0$}to (3,-0.5)node[ground]{};

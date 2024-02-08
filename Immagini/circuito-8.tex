@@ -10,19 +10,19 @@
          
 \begin{document}
 \begin{circuitikz}
-    \draw (0,0) to[european voltage source=$10\,V$](0,3)node[left]{$b$}
+    \draw (0,0) to[european voltage source=$10\,\mathrm{V}$](0,3)node[left]{$b$}
                 to[R=$4\,\Omega$](2,3)
                 to[R=$2\,\Omega$](2,1.5)
-                to[european voltage source=$20\,V$](2,0)
+                to[european voltage source=$20\,\mathrm{V}$](2,0)
                 to[R=$1\,\Omega$](0,0);
     \draw (2,3) to[short](2,4.5)
-                to[european current source=$2\,A$](0,4.5)
+                to[european current source=$2\,\mathrm{A}$](0,4.5)
                 to[short](0,3);
-    \draw (2,0) to[short,-*](6,0)node[right]{$in_2$};
+    \draw (2,0) to[short,-*](6,0)node[right]{$\mathrm{in}_2$};
     \draw (2,3) to[short](4,3)node[above left]{$a$}
-                to[R=$10\,\Omega$,-*](6,3)node[right]{$in_1$};
+                to[R=$10\,\Omega$,-*](6,3)node[right]{$\mathrm{in}_1$};
     \draw (4,0) to[R=$8\,\Omega$](4,3);
     \draw (4,0)node[below right]{$0$}to (4,-0.5)node[ground]{};
-    \draw[->](6,0.25)--(6,2.75)node[midway, right]{$V_{in}$};
+    \draw[->](6,0.25)--(6,2.75)node[midway, right]{$V_\mathrm{in}$};
 \end{circuitikz}
 \end{document}

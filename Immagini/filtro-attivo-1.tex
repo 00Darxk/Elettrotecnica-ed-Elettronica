@@ -1,0 +1,25 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{circuitikz}
+\begin{document}
+\begin{circuitikz}
+    \draw(0,0)node[op amp](a){}
+    (a.+)to[short]++(-0.25,0)
+    to[short]++(0,-1)
+    to[short]++(-4,0)
+    to[sV=$V_i$]++(0,2)
+    to[generic=$y_1$,-d]++(2,0)coordinate(A)node[above right]{$A$}
+    to[generic=$y_2$,-d]++(2,0)coordinate(B)node[above right]{$B$}
+    to[short](a.-)
+    (A)to[generic=$y_3$]++(0,-2)
+    to[short]++(0,-0.5)node[tlground]{}
+    (B)to[short]++(0,1)
+    to[generic=$y_5$]++(2.5,0)
+    to[short,-d]++(0,-1.5)node[above right]{$u$}
+    (A)to[short]++(0,2)
+    to[generic=$y_4$]++(4.5,0)
+    to[short]++(0,-1)
+    (a.out)to[R=$G_{L}$]++(2,0)
+    to[short]++(0,-0.5)node[tlground]{};
+\end{circuitikz}
+\end{document}

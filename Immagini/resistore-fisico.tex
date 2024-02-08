@@ -11,10 +11,10 @@
 \begin{document}
 \begin{tikzpicture}[scale=1.5]
     \draw[->,very thick](-0.75,0)--(-0.25,0)node[above]{$i$};
-    \draw[->,very thick](0,0)--(0.5,0)node[right]{$\hat{n}$};
+    \draw[->,very thick](0,0)--(0.5,0)node[right]{$\hat{\mathbf{n}}$};
     \filldraw[black](0,0)circle(0.5pt);
-    \draw[->,very thick](0.9,0)--(1.4,0)node[right]{$\vec{J}$};
-    \draw[->,very thick](0.5,0.4)--(1.5,0.4)node[above right]{$\vec{E}$};
+    \draw[->,very thick](0.9,0)--(1.4,0)node[right]{$\mathbf{J}$};
+    \draw[->,very thick](0.5,0.4)--(1.5,0.4)node[midway,above]{$\mathbf{E}$};
 
     \draw[-,very thick]plot[smooth, domain=-0.1:0.1](\x,{(0.04-4*(\x)^2)^0.5});
     \draw[-,very thick]plot[smooth, domain=-0.1:0.1](\x,{-(0.04-4*(\x)^2)^0.5});

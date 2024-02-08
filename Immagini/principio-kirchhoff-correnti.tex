@@ -10,8 +10,7 @@
          
 \begin{document}
 \begin{tikzpicture}[scale=2]
-    \draw[-, very thick]plot[smooth, domain=-1:1](\x, {(1-(\x)^2)^0.5});
-    \draw[-, very thick]plot[smooth, domain=-1:1](\x, {-(1-(\x)^2)^0.5});
+    \draw[very thick](0,0)circle(1);
     \draw[-, very thick]plot[smooth, domain=0.5:1](\x,{(0.25-(\x-0.5)^2)^0.5});
     \draw[-, very thick]plot[smooth, domain=-1:-0.5](\x,{-(0.25-(\x+0.5)^2)^0.5});
     \draw[-, very thick]plot[smooth, domain=-1:0.5](\x,{1/3*(2.25-(\x-0.5)^2)^0.5});
@@ -21,10 +20,10 @@
     \draw[-,very thick]plot[smooth, domain=0:0.5](\x,{(0.25-(\x)^2)^0.5+0.5});
     \draw[-,very thick]plot[smooth, domain=-0.5:0](\x,{-(0.25-(\x)^2)^0.5-0.5});
     
-    \draw[<-,very thick](0.75,0.75)--(1,1)node[midway, right]{$\vec{J}$};
-    \draw[<-,very thick](-0.75,-0.75)--(-1,-1)node[midway, right]{$\vec{J}$};
-    \draw[<-, very thick](0.75,-0.75)--(1,-1)node[midway, right]{$\vec{J}$};
-    \draw[<-, very thick](-0.75,0.75)--(-1,1)node[midway, above]{$\vec{J}$};
+    \draw[<-,very thick](0.75,0.75)--(1,1)node[midway, right]{$\mathbf{J}$};
+    \draw[<-,very thick](-0.75,-0.75)--(-1,-1)node[midway, right]{$\mathbf{J}$};
+    \draw[<-, very thick](0.75,-0.75)--(1,-1)node[midway, right]{$\mathbf{J}$};
+    \draw[<-, very thick](-0.75,0.75)--(-1,1)node[midway, above]{$\mathbf{J}$};
 
     \filldraw[black](1,0)circle(0.75pt);
     \filldraw[black](-1,0)circle(0.75pt);

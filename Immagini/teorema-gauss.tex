@@ -10,19 +10,18 @@
          
 \begin{document}
 \begin{tikzpicture}[scale=2]
-    \draw[-, very thick]plot[smooth, domain=-1:1](\x, {(1-(\x)^2)^0.5});
-    \draw[-, very thick]plot[smooth, domain=-1:1](\x, {-(1-(\x)^2)^0.5});
-    \draw[-, very thick]plot[smooth, domain=0.5:1](\x,{(0.25-(\x-0.5)^2)^0.5});
-    \draw[-, very thick]plot[smooth, domain=-1:-0.5](\x,{-(0.25-(\x+0.5)^2)^0.5});
-    \draw[-, very thick]plot[smooth, domain=-1:0.5](\x,{1/3*(2.25-(\x-0.5)^2)^0.5});
-    \draw[-, very thick]plot[smooth, domain=-0.5:1](\x,{-1/3*(2.25-(\x+0.5)^2)^0.5});
+    \draw(0,0)circle(1);
+    \draw(1,0)arc(0:90:0.5);
+    \draw(-1,0)arc(180:270:0.5);
+    \draw[-]plot[smooth, domain=-1:0.5](\x,{1/3*(2.25-(\x-0.5)^2)^0.5});
+    \draw[-]plot[smooth, domain=-0.5:1](\x,{-1/3*(2.25-(\x+0.5)^2)^0.5});
 
     \filldraw[black](0,0)circle(0.5pt);
 
-    \draw[->, very thick](0,0)node[above]{$Q$}--(0.6,0.8)node[below]{$\vec{E}$};
-    \draw[->,very thick](0,0)--(0.2,0.267)node[below right]{$\hat{r}$};
+    \draw[->, very thick](0,0)node[left]{$Q$}--(0.6,0.8)node[midway, below]{$\mathbf{E}$};
+    \draw[->,very thick](0,0)--(0.2,0.267)node[midway, below]{$\hat{\mathbf{r}}$};
 
-    \draw[-, ultra thick](0.4,0.95)node[right]{$\mathrm{d}S$}--(0.8,0.65);
-    \draw[->,very thick](0.6,0.8)--(0.8,1.067)node[right]{$\hat{n}$};
+    \draw[-,very thick](0.4,0.95)node[above]{$\mathrm{d}S$}--(0.8,0.65);
+    \draw[->,very thick](0.6,0.8)--(0.8,1.067)node[right]{$\hat{\mathbf{n}}$};
 \end{tikzpicture}
 \end{document}

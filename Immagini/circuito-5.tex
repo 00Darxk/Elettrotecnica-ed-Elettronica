@@ -12,12 +12,12 @@
 \begin{circuitikz}
     \draw (6,2) to[R=$6\,\Omega$](6,0)node[below]{$+$}
                 to[R=$8\,\Omega$,*-](4,0)node[below]{$-$}
-                to[european voltage source=$8\,V$,*-](2,0)node[below]{$+$}
+                to[european voltage source=$8\,\mathrm{V}$,*-](2,0)node[below]{$+$}
                 to[R=$11\,\Omega$,*-](0,0)node[below]{$-$} 
-                to[european voltage source=$12\,V$,*-](0,2)
+                to[european voltage source=$12\,\mathrm{V}$,*-](0,2)
                 to[R=$10\,\Omega$](2,2)
                 to[R=$15\,\Omega$](4,2);
-    \draw (6,2) to[european voltage source=$5\,V$](4,2);
+    \draw (6,2) to[european voltage source=$5\,\mathrm{V}$](4,2);
     \draw[->](0,-0.75)--(2,-0.75)node[midway, below]{$V_y$};
     \draw[->](4,-0.75)--(6,-0.75)node[midway, below]{$V_x$};
 \end{circuitikz}

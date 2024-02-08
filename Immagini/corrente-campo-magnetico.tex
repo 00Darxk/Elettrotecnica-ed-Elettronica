@@ -10,13 +10,11 @@
          
 \begin{document}
 \begin{tikzpicture}[scale=2]
-    \draw[-,very thick]plot[smooth, domain=-1:1](\x,{(1-(\x)^2)^0.5});
-    \draw[->,very thick]plot[smooth, domain=-1:1](\x,{-(1-(\x)^2)^0.5});
-    \node[right]at(1,0){$\vec{H}$};
+    \draw[->](1,0)arc(0:358:1);
+    \node[right]at(1,0){$\mathbf{H}$};
     \node[left]at(1,0){$S$};
 
-    \draw[-, very thick]plot[smooth, domain=-0.25:0.25](\x,{(0.0625-(\x)^2)^0.5});
-    \draw[-, very thick]plot[smooth, domain=-0.25:0.25](\x,{-(0.0625-(\x)^2)^0.5});
+    \draw(0,0)circle(0.25);
     \node[right]at(0,0){$i$}node[above]{$S'$};
     \filldraw[black](0,0)circle(0.5pt);
 \end{tikzpicture}
