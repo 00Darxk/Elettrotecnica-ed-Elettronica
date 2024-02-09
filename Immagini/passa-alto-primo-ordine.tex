@@ -10,6 +10,6 @@
     \node[left]at(0,1.3207){$\displaystyle\frac{\pi}{2}$};
     \draw[very thick, smooth, domain=0:3.9]plot(\x,{pi/180*atan(-\x)-0.25+pi/2});
     \draw[->](0,-0.25)--(4,-0.25)node[above]{$\omega$};
-    \draw[dashed](0,2.505)node[left]{$-3_{\mathrm{d}B}$}--(1,2.505)--(1,0.535)--(0,0.535)node[left]{$\displaystyle\frac{\pi}{4}$};
+    \draw[dashed](0,2.505)node[left]{$-3_{\mathrm{d}B}$}--(1,2.505)--(1,2)node[above right]{$\omega_t$}--(1,0.535)--(0,0.535)node[left]{$\displaystyle\frac{\pi}{4}$};
 \end{tikzpicture}
 \end{document}
